@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./src/style/frontpage.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+    <div id="mama_div">
+        <div id="wholeform">
+            <div id="form">
+                <label id="login">Log In</label>
+
+                <div id="user_name_and_password">
+
+                    <div id="user_name">
+                        <label id="username_text">Username</label>
+                        <input class="user_name_and_password_tbox" type="text" placeholder="      Username">
+                    </div>
+
+                    <div id="password">
+                        <label id="password_text">Password</label>
+                        <input class="user_name_and_password_tbox" type="password" placeholder="      Password">
+                    </div>
+
+                    <label><input id="login_checkbox" type="checkbox">Remember me next time</label>
+                    <button id="login_but" value="Log In">Log In</button>
+                    <label id="n_registered">Not yet Registered?<span id="not_reg"> Click here</span></label>
+
+                </div>
+
+            </div>
+        </div>
+
+    <div id="register_modal">
+
+        <div id="sdn_register_title">
+            <label id="title">Service Delivery Network</label>
+            <label id="reg_close_but">X</label>
+            
+        </div>
+
+        <div id="registration_auth">
+            <div id="registration">
+                    REGISTRATION
+
+            </div>
+
+            <div id="auth"> 
+                AUTHORIZATION
+
+            </div>
+
+        </div>
+
+        <div id="reminder"> 
+            <p>This is a one-time registration ONLY. If you already have an account, no need to register again.</p>
+            <p id="rem_otp">A one-time password and authorization key will be send to your registered mobile no.</p>
+
+        </div>
+
+        <div id="registration_form">
+            <div class="informations">
+
+                <label>Hospital Name</label>
+                <input class="informations_tbs" class="informations_tbs" type="text">
+
+            </div>
+
+            <div class="informations">
+
+                <label>Hospital Code</label>
+                <input class="informations_tbs" type="text">
+
+            </div>
+
+            <div class="informations">
+
+                <label>Adress: Region</label>
+                <Select class="informations_drp" >
+
+                    <option value="" selected disabled>Choose a Region</option>
+
+                    <option value="Region 1">Region 1</option>
+                    <option value="Region 2">Region 2</option>
+                    <option value="Region 3">Region 3</option>
+                    <option value="Region 4">Region 4</option>
+                    <option value="Region 5">Region 5</option>
+                    <option value="Region 6">Region 6</option>
+                    <option value="Region 7">Region 7</option>
+                    <option value="Region 8">Region 8</option>
+                    <option value="Region 9">Region 9</option>
+                    <option value="Region 10">Region 10</option>
+                    <option value="Region 11">Region 11</option>
+                    <option value="Region 12">Region 12</option>
+                    <option value="NCR">NCR</option>
+                    <option value="CAR">CAR</option>
+                    <option value="ARMM">ARMM</option>
+                    <option value="CARAGA">CARAGA</option>
+                    <option value="Region 4B">Region 4B</option>
+
+                </Select>
+
+            </div>
+
+            <div class="informations">
+
+                <label>Address: Province</label>
+                <Select class="informations_drp">
+                    
+                    <option value=""selected disabled>Choose a Province</option>
+
+                    <option value="Region 1">Region 1</option>
+                    <option value="Region 2">Region 2</option>
+                    <option value="Region 3">Region 3</option>
+                    <option value="Region 4">Region 4</option>
+                    <option value="Region 5">Region 5</option>
+                    <option value="Region 6">Region 6</option>
+                    <option value="Region 7">Region 7</option>
+                    <option value="Region 8">Region 8</option>
+                    <option value="Region 9">Region 9</option>
+                    <option value="Region 10">Region 10</option>
+                    <option value="Region 11">Region 11</option>
+                    <option value="Region 12">Region 12</option>
+                    <option value="NCR">NCR</option>
+                    <option value="CAR">CAR</option>
+                    <option value="ARMM">ARMM</option>
+                    <option value="CARAGA">CARAGA</option>
+                    <option value="Region 4B">Region 4B</option>
+
+                </Select>
+
+            </div>
+
+            <div class="informations">
+
+                <label>Address: Municipality</label>
+                <Select class="informations_drp">
+
+                    <option value="" selected disabled>Choose a Municipality</option>
+
+                    <option value="Region 1">Region 1</option>
+                    <option value="Region 2">Region 2</option>
+                    <option value="Region 3">Region 3</option>
+                    <option value="Region 4">Region 4</option>
+                    <option value="Region 5">Region 5</option>
+                    <option value="Region 6">Region 6</option>
+                    <option value="Region 7">Region 7</option>
+                    <option value="Region 8">Region 8</option>
+                    <option value="Region 9">Region 9</option>
+                    <option value="Region 10">Region 10</option>
+                    <option value="Region 11">Region 11</option>
+                    <option value="Region 12">Region 12</option>
+                    <option value="NCR">NCR</option>
+                    <option value="CAR">CAR</option>
+                    <option value="ARMM">ARMM</option>
+                    <option value="CARAGA">CARAGA</option>
+                    <option value="Region 4B">Region 4B</option>
+
+                </Select>
+
+            </div>
+
+            <div class="informations">
+
+                <label>Address: Barangay</label>
+                <Select class="informations_drp" >
+
+                    <option value=""selected disabled>Choose a Barangay</option>
+
+                    <option value="Region 1">Region 1</option>
+                    <option value="Region 2">Region 2</option>
+                    <option value="Region 3">Region 3</option>
+                    <option value="Region 4">Region 4</option>
+                    <option value="Region 5">Region 5</option>
+                    <option value="Region 6">Region 6</option>
+                    <option value="Region 7">Region 7</option>
+                    <option value="Region 8">Region 8</option>
+                    <option value="Region 9">Region 9</option>
+                    <option value="Region 10">Region 10</option>
+                    <option value="Region 11">Region 11</option>
+                    <option value="Region 12">Region 12</option>
+                    <option value="NCR">NCR</option>
+                    <option value="CAR">CAR</option>
+                    <option value="ARMM">ARMM</option>
+                    <option value="CARAGA">CARAGA</option>
+                    <option value="Region 4B">Region 4B</option>
+
+                </Select>
+
+            </div>
+
+
+            <div class="informations">
+
+                <label>Email Address</label>
+                <input class="informations_tbs" type="email" placeholder="youexample@gmail.com">
+
+            </div>
+
+            <div class="informations">
+
+                <label>Hospital Landline No.</label>
+                <input class="informations_tbs" placeholder="XXX-XXXXXX"  type="text" oninput="formatLandline(this)">
+
+            </div>
+
+            <div class="informations">
+
+                <label>Hospital Mobile No.</label>
+                <input class="informations_tbs" type="text" maxlength="11" pattern="[0-9]*" oninput="validateNumericInput(this)">
+
+            </div>
+
+            <div class="informations">
+
+                <label>Hospital Director</label>
+                <input class="informations_tbs" type="text">
+
+            </div>
+
+            <div class="informations">
+
+                <label>Hospital Director Mobile No.</label>
+                <input class="informations_tbs" type="text" maxlength="11" oninput="validateNumericInput(this)" pattern="[0-9]*" >
+
+            </div>
+
+            <div class="informations">
+
+                <label>Point Person</label>
+                <input class="informations_tbs" type="text" >
+
+            </div>
+
+            <div class="informations">
+
+                <label>Point Person Mobile No.</label>
+                <input class="informations_tbs" type="text" maxlength="11" oninput="validateNumericInput(this)"  pattern="[0-9]*">
+
+            </div>
+
+            <button id="register_but" type="button" class="btn btn-success">Success</button>
+            
+        </div>
+
+        <div id="otp_modal">
+
+            <div id="otp_header">
+
+                <label id="otp_label">OTP Email sent</label>
+                <label id="otp_close_but">X</label>
+
+            </div>
+
+            <label id="inpt_label">INPUT THE OTP</label>
+            
+            <div id="otp_numbers">
+                <div id="otp_1">
+                    <input type="text" class="number_cont" placeholder="-" maxlength="1">
+                </div>
+
+                <div id="otp_2">
+                    <input type="text" class="number_cont" placeholder="-">
+                </div>
+
+                <div id="otp_3">
+                    <input type="text" class="number_cont" placeholder="-">
+                </div>
+
+                <div id="otp_4">
+                    <input type="text" class="number_cont" placeholder="-">
+                </div>
+
+                <div id="otp_5">
+                    <input type="text" class="number_cont" placeholder="-">
+                </div>
+
+                <div id="otp_6">
+                    <input type="text" class="number_cont" placeholder="-">
+                </div>
+            </div>
+
+            <div id="resend_timer_otp">
+
+                <label id="resend_otp">Resend OTP</label>
+                <label>Resend OTP after: 0m 35s</label>
+
+            </div>
+
+                <button id="otp_verify_but">Verify</button>
+
+
+        </div>
+
+
+            <div id="authorization_form">
+
+                <div class="auth_box">
+                    <label>Hospital Code</label>
+                    <input class="auth_tbox" type="text">
+
+                </div>
+
+
+                <div class="auth_box">
+                    <label>Cipher Key</label>
+                    <input class="auth_tbox" type="text">
+
+                </div>
+
+
+                <div class="auth_box">
+                    <label>Last Name</label>
+                    <input class="auth_tbox" type="text">
+
+                </div>
+
+
+                <div class="auth_box">
+                    <label>First Name</label>
+                    <input class="auth_tbox" type="text">
+
+                </div>
+
+
+                <div class="auth_box">
+                    <label>Middle Name</label>
+                    <input class="auth_tbox" type="text">
+
+                </div>
+
+                <div class="auth_box">
+                    <label>Extension Name</label>
+                    <input class="auth_tbox" type="text">
+
+                </div>
+
+                <div class="auth_box">
+                    <label>Username</label>
+                    <input class="auth_tbox" type="text">
+
+                </div>
+
+                <div class="auth_box">
+                    <label>Password</label>
+                    <input class="auth_tbox" type="text">
+
+                </div>
+
+                <div class="auth_box">
+                    <label>Confirm Password</label>
+                    <input class="auth_tbox" type="password">
+
+                </div>
+
+ 
+
+                <button id="register_but" type="button" class="btn btn-success">Success</button>
+
+                
+
+            </div>
+
+    </div>
+
+    <div id="overlay" class="overlay"></div>
+    
+    <div id="overlay2" class="overlay2  "></div>
+
+   
+
+</div>
+
+
+
+<script  src="./src/login_page.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>`

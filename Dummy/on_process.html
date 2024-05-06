@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="h-screen">
+
+    <header class="w-[100%] h-[50px] bg-slate-900 flex flex-row justify-between items-center">
+        <div class="w-[20%] h-[45%] flex flex-row  items-center justify-start">
+            <i class="fa-solid fa-bars text-white text-4xl ml-5 cursor-pointer "></i>
+
+        </div>
+            <div class="w-[20%] h-[45%] flex flex-row justify-between  items-center">
+                <i class="fa-solid fa-user text-white text-sm ml-32 "></i>
+                <h1 class="text-lg text-white font-bold cursor-pointer mr-2">John Marvin Nepomuceno</h1>
+            </div>
+    </header>   
+
+    <div class="w-[100%] h-[95%] flex flex-row">
+        <aside class="w-[17%] h-[100%] bg-slate-700 ">
+            <div class="w-[100%] h-[40%] flex flex-col justify-start items-start">
+                <div class="w-[100%] h-[20%] flex flex-row hover:bg-slate-900 ">
+                    <label class="text-xl text-white ml-7 mt-5 cursor-pointer  ">
+                        Patient Registration
+                    </label>
+                </div>
+
+                <div class="w-[100%] h-[20%] flex flex-row hover:bg-slate-900 ">
+                    <label class="text-xl text-white ml-7 mt-5 cursor-pointer">
+                        Online Referral
+                    </label>
+                </div> 
+            </div>
+        </aside>
+
+        <div id="myModal" class="fixed inset-0 flex items-center justify-center z-10  delay-100 ">
+            <!-- Modal background -->
+            <div class="modal-background fixed inset-0 bg-black opacity-50   "></div>
+            
+            <!-- Modal content -->
+            <div class="bg-black p-4 rounded shadow-md z-20  w-[1000px] h-[900px] flex flex-col justify-start items-center overflow-y-auto ">
+               <button class="bg-sky-700 -ml-[90%] w-[10%] flex  justify-center text-white rounded-sm">Print</button>
+                <div class=" w-full h-[100px] mt-[1.5%] rounded-sm bg-white flex flex-col items-start justify-start">
+                    <div class=" w-[100%] h-[40%] bg-green-300 rounded-sm -mt-[0.1%] text-black font-semibold text-md flex flex-row justify-start items-center">
+                        <label class="ml-[1%]">Status</label>
+                    </div>
+                   <label class="text-green-600 font-bold ml-[1%]  text-3xl">On-Process</label>
+                </div>
+
+                <div class="bg-white w-full h-[300px] max-h-[300px] min-h-[300px]   mt-[1.5%] rounded-sm flex flex-col ">
+                    <div class=" w-[100%] h-[18%] bg-red-400 rounded-sm -mt-[0.1%] text-black font-bold text-md flex flex-col justify-center items-start">
+                        <label class="text-black ml-[1%]">Cancellation Form</label>
+                        
+                    </div>
+                        <label class="text-black ml-[1%] mt-[1%] font-semibold">Cancellation Note:</label>
+                 
+                        <textarea class="border border-slate-900 w-[95%] h-[70%] ml-[2%] mt-[1%] rounded-sm"></textarea>
+
+                        <div class="flex flex-col justify-center items-start w-full  h-[45%] mt-[1%] ">
+                        <label class="ml-[2%] font-semibold">Action</label>
+                        <select class="border border-slate-800 w-[95%] ml-[2%] rounded-sm">
+                            <option>Select</option>
+                            <option>Refer Back</option>
+                        
+                        </select>
+                        <button class="bg-green-400 font-semibold w-[10%] mt-[2%] ml-[87%] mb-[1%] rounded-sm text-black"> Submit </button>
+
+                    </div>
+                        
+                    </div>
+
+
+
+                <div class="bg-white w-full  mt-[1.5%] rounded-sm  flex flex-col">
+                    <div class="bg-blue-400 rounded-sm text-black font-bold text-md p-2">
+                        <label class="text-black">Referral Details</label>
+                    </div>
+                
+                    <div class= "mt-2 p-2 flex flex-col">
+                        <ul class="list-none flex flex-col space-y-2">
+                            <li><label class="font-bold">Referring Agency:</label><span class="break-words"></span></li>
+                            <li><label class="font-bold">Reason for Referral:</label><span class="break-words"></span></li><br>
+                
+                            <li><label class="font-bold">Name:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Birthday:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Age:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Sex:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Civil Status:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Religion:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Address:</label><span class="break-words">This is where you put the data</span></li><br>
+                
+                            <li><label  class="font-bold">Parent/Guardian:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">PHIC Member:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Mode of Transport:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Date/Time Admitted:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Referring Doctor:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Contact #:</label><span class="break-words">This is where you put the data</span></li><br>
+                
+                            <li><label  class="font-bold">Chief Complaint and History:</label><span class="break-words">This is where you put the data</span></li><br>
+                
+                            <li><label  class="font-bold">Physical Examination</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Blood Pressure:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Heart Rate:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Respiratory Rate:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Temperature:</label><span class="break-words">This is where you put the data</span></li>
+                            <li><label  class="font-bold">Weight:</label><span class="break-words">This is where you put the data</span></li><br>
+                
+                            <li><label  class="font-bold">Pertinent PE Findings:</label><span class="break-words">This is where you put the data</span></li><br>
+                
+                            <li><label  class="font-bold">Impression / Diagnosis:</label><span class="break-words">This is where you put the data</span></li>
+                        </ul>
+                    </div>
+                </div>
+                
+             </div>
+        </div>
+    </div>
+</body>
+</html>

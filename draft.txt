@@ -1,0 +1,609 @@
+
+https://drive.google.com/file/d/1pTVTsv_n7ZTU12jk7WgGSeSZTpUIu3rF/view?usp=drivesdk
+http://192.168.42.10:8025/#
+
+https://chat.openai.com/c/44ee06cd-630a-4c64-9e3a-1668b3f5c579
+
+id, last_name, first_name, middle_name, birthday, mobile_no, username, password
+
+
+
+SDN
+hospital -> the whos gonna register
+username and password -> hospital upon register
+
+GENERAL FLOW = register -> OTP saved sa database -> send mail -> loading screen -> OTP modal -> confirmation -> "AUTHORIZATION KEY?"
+|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+visual validation = confirmation na navalidate na = prompt/modal NOT SURE IF MODAL OR SIMPLE WINDOW PROMPT????
+
+mobile number , ####-####-### = DONE
+tele number , ###-#### = DONE
+email, #####@gmail.com = DONE
+pag na close yung modal -> destroy or delete the whole row = DONE
+pag mali OTP -> update OTP sa DB ->  cked the RESEND OTP -> update OTP sa DB -> resend OTP = DONE
+set VERIFIED in DB after checking the OTP from user and from DB = DONE
+
+START SESSION - REGISTER - END SESSION
+
+9/18/23
+ZIP CODE -> length = DONE
+HOSPITAL DIRECTOR -> ONLY LETTERS = DONE
+POINT PERSON -> ONLY LETTERS = DONE
+
+VERIFICATION SUCCESS MODAL OR PROMPT
+VERIFICATION NOT SUCCESS MODAL OR PROMPT
+
+//after verification -> back to home page -> SDN main login form
+
+---------------------------------
+admin module -> LoI -> verification
+---------------------------------
+CRCF , OTP
+2 users inside the hospital registered acc
+history log sa SDN
+tutorial view on how to use SDN on first logged
+
+9/19/2023
+change the OTP generation code = DONE
+fix the OTP modal input fields = DONE
+implemenet the CSRF = SOON
+authorization form = DONE
+
+9/20/2023
+AUTHORIZATION -> INTO DATABASE -> DRAFT UNTIL CIPHER KEY IS NOT OFFICIATED.
+UI/UX main/home page
+implementation ng UI/UX main/home page
+admin module sa navbar or side bar, para makapag send ng cipher key
+
+mini to do list
+icon/home button = clicked = close all = refresh page
+
+ISNTALL GITHUB :)))
+
+
+
+9/23/2023
+authorization form insert into database
+TABLE sdn_hospital - hospital_ID -> PRIMARY KEY = di pa sure if tama po yung idea namin hahaha
+TABLE sdn_users - user_ID -> PRIMARY KEY ,  hospital_ID -> FOREIGN KEY 
+
+ADD the preview/default/home view for SDN page upon logging in
+
+ADJUSTING AND IMPROVING THE UI IN PATIENT REGISTRATION FORM
+resize the form fields and divs in patient registration form to have breathing room
+add the search bar for patient 
+make the search bar functionable 
+
+
+
+
+
+
+<?php for ($x = 0; $x < count($sdn_fields); $x++) { ?>
+                                <div class="w-11/12 flex flex-row justify-evenly items-center mt-3">
+                                    <div class="w-full flex flex-row justify-start items-center p-1">
+                                        <?php if($x == 2 || $x == 2 || $x == 2 || $x == 2){ ?>
+                                            <label class="text-xs sm:text-xl  ml-3" for=<?php echo $sdn_id[$x] ?> > <span class="text-red-600"></span> <?php echo $sdn_fields[$x] ?> </label>
+                                        <?php } else { ?>   
+                                            
+                                        <?php }?> 
+                                    </div>
+                                    <?php if($x == 7){ ?>
+                                        <input type="email" id=<?php echo $sdn_id[$x] ?> name=<?php echo $sdn_input_names[$x] ?> class="border-2 border-sdnRegistraionColor w-[115%] sm:w-[95%] h-[40px] sm:h-[60px] border-2 outline-none p-2" required autocomplete="off">
+                                    <?php }else if($x == 10){ ?>
+                                        <input type="text" id=<?php echo $sdn_id[$x] ?> name=<?php echo $sdn_input_names[$x] ?> class="border-2 border-sdnRegistraionColor w-[115%] sm:w-[95%] h-[40px] sm:h-[60px] border-2 outline-none p-2" required autocomplete="off" onkeydown="return /[a-zA-Z]/i.test(event.key)">
+                                    <?php }else if($x == 12){ ?>
+                                        <input type="text" id=<?php echo $sdn_id[$x] ?> name=<?php echo $sdn_input_names[$x] ?> class="border-2 border-sdnRegistraionColor w-[115%] sm:w-[95%] h-[40px] sm:h-[60px] border-2 outline-none p-2" required autocomplete="off" onkeydown="return /[a-zA-Z]/i.test(event.key)">
+                                    <?php }else if($x == 6){ ?>
+                                        <input type="number" id=<?php echo $sdn_id[$x] ?> name=<?php echo $sdn_input_names[$x] ?> class="pointer-events-none border-2 border-sdnRegistraionColor w-[115%] sm:w-[95%] h-[40px] sm:h-[60px] border-2 outline-none p-2 text-center" required autocomplete="off">
+                                    <?php }else if($x == 2){ ?>
+                                        
+                                        <select id="sdn-region-select" required onchange="getLocations('region')" name="region" class="text-xs sm:text-base w-full h-full text-center border-2 border-sdnRegistraionColor cursor-pointer outline-none" autocomplete="off">
+                                            <option value="" class="">Choose a Region</option>
+                                            <?php 
+                                                $stmt = $pdo->query('SELECT region_code, region_description from region');
+                                                while($data = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                                    echo '<option value="' , $data['region_code'] , '">' , $data['region_description'] , '</option>';
+                                                }                                        
+                                            ?>
+                                        </select>
+                                    <?php }else if($x == 3){ ?>
+                                        
+                                        <select id="sdn-province-select" required onchange="getLocations('province')" name="province" class="text-xs sm:text-base w-full h-full text-center border-2 border-sdnRegistraionColor cursor-pointer outline-none">
+                                            <option value="" class="">Choose a Province</option>
+                                        </select>
+                                    <?php }else if($x == 4){ ?>
+                                       
+                                        <select id="sdn-city-select" required onchange="getLocations('city')" name="municipality" class="text-xs sm:text-base w-full h-full text-center border-2 border-sdnRegistraionColor cursor-pointer outline-none">
+                                            <option value="" class="">Choose a Municipality</option>
+                                        </select>
+
+                                    <?php }else if($x == 5){ ?>
+                                        
+                                        <select id="sdn-brgy-select" name="barangay" class="text-xs sm:text-base w-full h-full text-center border-2 border-sdnRegistraionColor cursor-pointer outline-none">
+                                            <option value="" class="">Choose a Barangay</option>
+                                        </select>
+                                    <?php } else { ?>
+                                        <input type="text" id=<?php echo $sdn_id[$x] ?> name=<?php echo $sdn_input_names[$x] ?> class=" border-2 border-sdnRegistraionColor uppercase w-[115%] sm:w-[95%] h-[40px] sm:h-[60px] border-2 outline-none p-2" required autocomplete="off">
+                                    <?php } ?> 
+                                    <!-- <input type="text" id=<?php echo $sdn_id[$x] ?> name=<?php echo $sdn_input_names[$x] ?> class=" border-2 border-sdnRegistraionColor uppercase w-[115%] sm:w-[95%] h-[40px] sm:h-[60px] border-2 outline-none p-2" required autocomplete="off"> -->
+                                </div>
+                            <?php } ?>
+
+
+hpercode
+patbplace
+patsex
+patcstat
+
+pat_bldg
+pat_email
+pat_homephone_no
+pat_region
+pat_province
+pat_municipality
+pat_barangay
+
+pat_curr_workplace
+pat_work_region
+pat_work_province
+pat_work_municipal
+
+
+Monday = silver grey
+T = dark/navy blue
+W = PINK
+TH = cream / light orangey browny
+F = ANY
+
+
+1. limit the search query to at least 2 characters. _/
+2. modals _/
+3. cleaning again
+4. gl hf
+
+<!-- <?php echo $type; ?> Referral Form -->
+
+auto focus on otp prompt
+passport number = 
+home phone number
+mobile number
+
+clear ng mga fields after registration
+edit button mga fields
+
+mondy 0
+wednesday 3
+friday 5
+
+index arrangement ng session[process timer]
+0 VM5488:577 {interval_0: 33, interval_1: 34} 'interval_1' 'string'
+
+add_referral_form
+pending modal sa different na mga pc upon referring
+restriction part sa mga input sa patient registration
+create a table for outgoing patients same with incoming patients
+
+
+    
+Referred:12/07/2023 - 19:09:48       Processing: 00:00:26
+Processed:12/07/2023 - 19:10:14      Approval/Deferral: 00:18:57
+Deferred:12/07/2023 - 19:29:11       Total: 00:19:23	
+
+
+
+// Your array
+$myArray = array("apple", "banana", "orange", "grape");
+
+// Element to check
+$elementToCheck = "banana";
+
+// Check if the element is in the array
+if (in_array($elementToCheck, $myArray)) {
+    echo "$elementToCheck is in the array.";
+} else {
+    echo "$elementToCheck is not in the array.";
+}
+
+
+<!-- <input type="hidden" id="total-processed-refer-inp" value=<?php echo $data['COUNT(*)'] ?>> -->
+
+1. upon referring, di nag a update yung sa hperson na type and status ng patient = DONE (?)
+2. OTP may case na 5 digits lang yung na r random = DONE (?)
+3. wrong OTP input - modal = DONE (?)
+4. Exisiting Referred Patient -> thou shall not referred again - disable refer button = DONE (?)
+5. Status not automatically changing = DONE (?)
+6. Timer input color should change. = DONE (?)
+
+Flow - Admitted - Discharged - For Follow Up - Referred Back
+
+note: 
+1. pag ka click ng lapis, dat mag r run na yung timer
+2. pag di pa nagagawa yung unang referral na dumating, dat di pa nila pwede gawin yung mga sumunod na referral, first in first out.
+
+.-
+-.--
+.-
+-.--
+.-
+
+// if (!validateCsrfToken($_POST['csrf_token'])) {
+        //     // CSRF token is invalid, handle accordingly (e.g., show an error, log the incident)
+        //     die("CSRF token validation failed!");
+        // }else{
+        //     $sdn_username = $_POST['sdn_username'];
+        //     $sdn_password = $_POST['sdn_password'];
+        //     $account_validity = false;
+        //     // //query to check if the user is already logged in.
+        //     // if($sdn_username != "" && $sdn_password != ""){
+        //     //     $_SESSION['user_name'] = "John Marvin Nepomuceno";
+        //     //     $_SESSION['user_password'] = "password";
+        //     //     header('Location: ./main.php');
+        //     // }
+
+        //     // login verifaction for the outside users
+        //     if($sdn_username != "admin" && $sdn_password != "admin"){
+        //         try{
+        //             $stmt = $pdo->prepare('SELECT * FROM sdn_users WHERE username = ? AND password = ?');
+        //             $stmt->execute([$sdn_username , $sdn_password]);
+        //             $data_child = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //             // echo '<pre>'; print_r($data_child); echo '</pre>';
+
+        //             if(count($data_child) == 1){
+        //                 $account_validity = true;
+        //             }
+
+        //             // echo '<pre>'; print_r($data_child); echo '</pre>';
+        //             // echo $data_child[0]['hospital_code'];
+
+
+        //             // $stmt_all_data = $pdo->prepare("SELECT sdn_hospital.*
+        //             //                                 FROM sdn_hospital
+        //             //                                 JOIN sdn_users ON sdn_hospital.hospital_code = sdn_users.hospital_code
+        //             //                                 WHERE sdn_users.hospital_code = 6574");
+
+        //             // $stmt_all_data->execute();
+        //             // $data_all_data = $stmt_all_data->fetchAll(PDO::FETCH_ASSOC);
+                    
+        //             if($account_validity == true){
+        //                 $stmt = $pdo->prepare('SELECT * FROM sdn_hospital WHERE hospital_code = ?');
+        //                 $stmt->execute([$data_child[0]['hospital_code']]);
+        //                 $data_parent = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        
+        //                 // echo '<pre>'; print_r($data_parent); echo '</pre>';
+
+        //                 $_SESSION['hospital_code'] = $data_parent[0]['hospital_code'];
+        //                 $_SESSION['hospital_name'] = $data_parent[0]['hospital_name'];
+        //                 $_SESSION['hospital_email'] = $data_parent[0]['hospital_email'];
+        //                 $_SESSION['hospital_landline'] = $data_parent[0]['hospital_landline'];
+        //                 $_SESSION['hospital_mobile'] = $data_parent[0]['hospital_mobile'];
+        //                 $_SESSION['hospital_name'] = $data_parent[0]['hospital_name'];
+
+        //                 $_SESSION['user_name'] = $data_child[0]['username'];
+        //                 $_SESSION['user_password'] = $data_child[0]['password'];
+        //                 $_SESSION['first_name'] = $data_child[0]['user_firstname'];
+        //                 $_SESSION['last_name'] = $data_child[0]['user_lastname'];
+        //                 $_SESSION['middle_name'] = $data_child[0]['user_middlename'];
+        //                 $_SESSION['user_type'] = 'outside';
+
+        //                 $_SESSION['post_value_reload'] = 'false';
+        //                 $_SESSION["sub_what"] = "";
+
+        //                 // Get the current date and time
+        //                 $timezone = new DateTimeZone('Asia/Manila'); // Replace 'Your/Timezone' with your actual time zone
+        //                 $currentDateTime = new DateTime("",$timezone);
+
+        //                 // Format date components
+        //                 $year = $currentDateTime->format('Y');
+        //                 $month = $currentDateTime->format('m');
+        //                 $day = $currentDateTime->format('d');
+
+        //                 $hours = $currentDateTime->format('H');
+        //                 $minutes = $currentDateTime->format('i');
+        //                 $seconds = $currentDateTime->format('s');
+
+        //                 $final_date = $year . "/" . $month . "/" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
+        //                 $normal_date = $year . "-" . $month . "-" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
+
+        //                 $_SESSION['login_time'] = $final_date;
+
+        //                 $sql = "UPDATE incoming_referrals SET login_time = '". $final_date ."' , login_user='". $sdn_username ."' ";
+        //                 $stmt = $pdo->prepare($sql);
+        //                 $stmt->execute();
+
+        //                 $sql = "UPDATE sdn_users SET user_lastLoggedIn='online' , user_isActive='1' WHERE username=:username AND password=:password";
+        //                 $stmt = $pdo->prepare($sql);
+        //                 $stmt->bindParam(':username', $data_child[0]['username'], PDO::PARAM_STR);
+        //                 $stmt->bindParam(':password', $data_child[0]['password'], PDO::PARAM_STR);
+        //                 $stmt->execute();
+
+        //                 // for history log
+        //                 $act_type = 'user_login';
+        //                 $pat_name = " ";
+        //                 $hpercode = " ";
+        //                 $action = 'online';
+        //                 $user_name = $data_child[0]['username'];
+        //                 $sql = "INSERT INTO history_log (hpercode, hospital_code, date, activity_type, action, pat_name, username) VALUES (?,?,?,?,?,?,?)";
+        //                 $stmt = $pdo->prepare($sql);
+
+        //                 $stmt->bindParam(1, $hpercode, PDO::PARAM_STR);
+        //                 $stmt->bindParam(2, $_SESSION['hospital_code'], PDO::PARAM_INT);
+        //                 $stmt->bindParam(3, $normal_date, PDO::PARAM_STR);
+        //                 $stmt->bindParam(4, $act_type, PDO::PARAM_STR);
+        //                 $stmt->bindParam(5, $action, PDO::PARAM_STR);
+        //                 $stmt->bindParam(6, $pat_name, PDO::PARAM_STR);
+        //                 $stmt->bindParam(7, $user_name, PDO::PARAM_STR);
+
+        //                 $stmt->execute();
+
+        //                 header('Location: ./main.php');
+        //             }else{
+        //                 echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        //                         <script type="text/javascript">
+        //                             var jQuery = $.noConflict(true);
+        //                             jQuery(document).ready(function() {
+        //                                 jQuery("#modal-title").text("Warning")
+        //                                 jQuery("#modal-icon").addClass("fa-triangle-exclamation")
+        //                                 jQuery("#modal-icon").removeClass("fa-circle-check")
+        //                                 jQuery("#modal-body").text("Invalid username and password!")
+        //                                 jQuery("#ok-modal-btn").text("Close")
+        //                                 jQuery("#myModal").modal("show");
+        //                             });
+        //                         </script>';
+        //             }
+                    
+        //         }catch(PDOException $e){
+        //             echo "Error: " . $e->getMessage();
+        //         }
+
+        //     }
+        //     //verification for admin user logged in
+        //     else if($sdn_username == "admin" && $sdn_password == "admin"){
+        //         // $_SESSION['user_name'] = "Bataan General Hospital and Medical Center";
+        //         $_SESSION['hospital_code'] = '1437';
+        //         $_SESSION['hospital_name'] = "Bataan General Hospital and Medical Center";
+        //         $_SESSION['hospital_landline'] = '333-3333';
+        //         $_SESSION['hospital_mobile'] = '3333-3333-333';
+        //         // $_SESSION['user_name'] = "Administrator";
+        //         // $_SESSION['user_password'] = $sdn_password;
+
+        //         $_SESSION['user_name'] = 'admin';
+        //         $_SESSION['user_password'] = 'admin';
+        //         $_SESSION['last_name'] = 'Administrator';
+        //         $_SESSION['first_name'] = '';
+        //         $_SESSION['middle_name'] = '';
+        //         $_SESSION['user_type'] = 'admin';
+        //         // $_SESSION["process_timer"] = [];
+        //         $_SESSION['post_value_reload'] = 'false';
+        //         $_SESSION["sub_what"] = "";
+                
+        //         // Get the current date and time
+        //         $timezone = new DateTimeZone('Asia/Manila'); // Replace 'Your/Timezone' with your actual time zone
+        //         $currentDateTime = new DateTime("",$timezone);
+
+        //         // Format date components
+        //         $year = $currentDateTime->format('Y');
+        //         $month = $currentDateTime->format('m');
+        //         $day = $currentDateTime->format('d');
+
+        //         $hours = $currentDateTime->format('H');
+        //         $minutes = $currentDateTime->format('i');
+        //         $seconds = $currentDateTime->format('s');
+
+        //         $final_date = $year . "/" . $month . "/" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
+        //         $temp_date = $year . "-" . $month . "-" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
+                
+        //         $_SESSION['login_time'] = $final_date;
+
+        //         $sql = "UPDATE incoming_referrals SET login_time = :final_date, login_user = :sdn_username";
+        //         $stmt = $pdo->prepare($sql);
+
+        //         // Bind parameters
+        //         $stmt->bindParam(':final_date', $final_date, PDO::PARAM_STR);
+        //         $stmt->bindParam(':sdn_username', $sdn_username, PDO::PARAM_STR);
+
+        //         // Execute the statement
+        //         $stmt->execute();
+
+        //         $sql = "UPDATE sdn_users SET user_lastLoggedIn='online' , user_isActive='1' WHERE username='admin' AND password='admin'";
+        //         $stmt = $pdo->prepare($sql);
+        //         $stmt->execute();
+
+        //         // for history log
+        //         $act_type = 'user_login';
+        //         $pat_name = " ";
+        //         $hpercode = " ";
+        //         $action = 'online';
+        //         $user_name = 'admin';
+        //         $sql = "INSERT INTO history_log (hpercode, hospital_code, date, activity_type, action, pat_name, username) VALUES (?,?,?,?,?,?,?)";
+        //         $stmt = $pdo->prepare($sql);
+
+        //         $stmt->bindParam(1, $hpercode, PDO::PARAM_STR);
+        //         $stmt->bindParam(2, $_SESSION['hospital_code'], PDO::PARAM_INT);
+        //         $stmt->bindParam(3, $temp_date, PDO::PARAM_STR);
+        //         $stmt->bindParam(4, $act_type, PDO::PARAM_STR);
+        //         $stmt->bindParam(5, $action, PDO::PARAM_STR);
+        //         $stmt->bindParam(6, $pat_name, PDO::PARAM_STR);
+        //         $stmt->bindParam(7, $user_name, PDO::PARAM_STR);
+
+        //         $stmt->execute();
+
+        //         header('Location: ./main.php');
+        //     } 
+
+        //     else if($sdn_username != 'admin' || $sdn_password != 'admin'){
+        //         echo '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        //                 <script type="text/javascript">
+        //                     var jQuery = $.noConflict(true);
+        //                     jQuery(document).ready(function() {
+        //                         jQuery("#modal-title").text("Warning")
+        //                         jQuery("#modal-icon").addClass("fa-triangle-exclamation")
+        //                         jQuery("#modal-icon").removeClass("fa-circle-check")
+        //                         jQuery("#modal-body").text("Invalid username and password!")
+        //                         jQuery("#ok-modal-btn").text("Close")
+        //                         jQuery("#myModal").modal("show");
+        //                     });
+        //                 </script>';
+        //     }
+        // }   
+
+13.43
+23.87
+
+
+<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['_csrf_token']; ?>">
+
+9:20
+
+<td class="border-r border-[#b3b3b3]"> <?php echo $number_users ?></td>
+
+// if($data_sdn_hospitals[$i]['hospital_code'] === $data_sdn_users[$i]['hospital_code']){
+//     array_push($users_curr_hospitals, $data_sdn_users_count2[$i]['hospital_code']);
+// }
+for($k = 0; $k < count($data_sdn_users); $k++){
+    if($data_sdn_hospitals[$i]['hospital_code'] === $data_sdn_users[$k]['hospital_code']){
+        array_push($users_curr_hospitals, $data_sdn_users[$k]);
+    }
+}
+
+
+
+1437Array ( [0] => Array ( [user_ID] => 54 [hospital_code] => 1437 [user_lastname] => admin [user_firstname] => admin [user_middlename] => admin [user_extname] => N/A [username] => admin [password] => admin [user_type] => admin [user_count] => 1 [user_isActive] => 0 [user_created] => 2023-12-22 08:14:46 [user_lastLoggedIn] => 2024-02-01 10:13:28 ) ) 6574Array ( [0] => Array ( [user_ID] => 30 [hospital_code] => 6574 [user_lastname] => Nepo [user_firstname] => JM [user_middlename] => Gomez [user_extname] => N/A [username] => morong [password] => rhu [user_type] => [user_count] => 1 [user_isActive] => 0 [user_created] => [user_lastLoggedIn] => 2024-01-24 09:24:32 ) [1] => Array ( [user_ID] => 41 [hospital_code] => 6574 [user_lastname] => Jm [user_firstname] => Nepo [user_middlename] => Gomez [user_extname] => N/A [username] => morong2 [password] => rhu [user_type] => Sample [user_count] => 2 [user_isActive] => 0 [user_created] => 2023-10-10 09:12:52 [user_lastLoggedIn] => ) ) 9312Array ( [0] => Array ( [user_ID] => 42 [hospital_code] => 9312 [user_lastname] => Dela Cruz [user_firstname] => Juan [user_middlename] => Garcia [user_extname] => N/A [username] => limay [password] => mc [user_type] => Sample [user_count] => 1 [user_isActive] => 1 [user_created] => 2023-10-10 10:07:57 [user_lastLoggedIn] => online ) [1] => Array ( [user_ID] => 55 [hospital_code] => 9312 [user_lastname] => Goku [user_firstname] => Vegeta [user_middlename] => Gogeta [user_extname] => N/A [username] => limay2 [password] => mc [user_type] => Sample [user_count] => 2 [user_isActive] => 0 [user_created] => 2023-12-22 15:26:39 [user_lastLoggedIn] => 2024-01-19 15:37:55 ) ) 5493Array ( ) 8931Array ( ) 5364Array ( [0] => Array ( [user_ID] => 53 [hospital_code] => 5364 [user_lastname] => Mags [user_firstname] => Jam [user_middlename] => Yo [user_extname] => N/A [username] => pot [password] => pot [user_type] => Sample [user_count] => 1 [user_isActive] => 0 [user_created] => 2023-12-05 08:14:46 [user_lastLoggedIn] => ) ) 4827Array ( ) 9780Array ( [0] => Array ( [user_ID] => 44 [hospital_code] => 9780 [user_lastname] => Dela Cruz [user_firstname] => Juan [user_middlename] => Santos [user_extname] => N/A [username] => orani [password] => mc [user_type] => Sample [user_count] => 1 [user_isActive] => 0 [user_created] => 2023-10-18 09:08:39 [user_lastLoggedIn] => 2024-01-12 16:56:41 ) [1] => Array ( [user_ID] => 45 [hospital_code] => 9780 [user_lastname] => Dela Cruz [user_firstname] => Juan [user_middlename] => Santos [user_extname] => N/A [username] => orani2 [password] => mc [user_type] => Sample [user_count] => 2 [user_isActive] => 0 [user_created] => 2023-10-18 09:09:05 [user_lastLoggedIn] => ) ) 9845Array ( ) 8305Array ( ) 9787Array ( ) 4297Array ( ) 6782Array ( ) 4865Array ( ) 1243Array ( [0] => Array ( [user_ID] => 43 [hospital_code] => 1243 [user_lastname] => Delos Reyes [user_firstname] => Julius [user_middlename] => Estrada [user_extname] => N/A [username] => pep [password] => qweqwe123 [user_type] => Sample [user_count] => 1 [user_isActive] => 0 [user_created] => 2023-10-16 10:04:35 [user_lastLoggedIn] => ) ) 6669Array ( [0] => Array ( [user_ID] => 46 [hospital_code] => 6669 [user_lastname] => Dela Cruz [user_firstname] => Juana [user_middlename] => Santos [user_extname] => N/A [username] => womens [password] => mc [user_type] => Sample [user_count] => 1 [user_isActive] => 0 [user_created] => 2023-10-18 10:41:49 [user_lastLoggedIn] => ) ) 9468Array ( [0] => Array ( [user_ID] => 48 [hospital_code] => 9468 [user_lastname] => Isaac [user_firstname] => Catalina [user_middlename] => G. [user_extname] => N/A [username] => icmc [password] => mc [user_type] => Sample [user_count] => 1 [user_isActive] => 1 [user_created] => 2023-10-19 14:03:24 [user_lastLoggedIn] => online ) [1] => Array ( [user_ID] => 52 [hospital_code] => 9468 [user_lastname] => Jollibee [user_firstname] => McDonalds [user_middlename] => Greenwich [user_extname] => N/A [username] => icmc2 [password] => mc [user_type] => Sample [user_count] => 2 [user_isActive] => 0 [user_created] => 2023-12-04 09:33:16 [user_lastLoggedIn] => 2023-12-21 9:07:49 ) ) 1258Array ( [0] => Array ( [user_ID] => 47 [hospital_code] => 1258 [user_lastname] => Wazaoski [user_firstname] => Mike [user_middlename] => Parker [user_extname] => N/A [username] => qwe [password] => qwe [user_type] => Sample [user_count] => 1 [user_isActive] => 0 [user_created] => 2023-10-19 14:03:07 [user_lastLoggedIn] => ) [1] => Array ( [user_ID] => 51 [hospital_code] => 1258 [user_lastname] => Horsey [user_firstname] => Petra [user_middlename] => Meow [user_extname] => N/A [username] => cavite [password] => mc [user_type] => Sample [user_count] => 2 [user_isActive] => 0 [user_created] => 2023-12-04 09:25:37 [user_lastLoggedIn] => ) ) 9008Array ( [0] => Array ( [user_ID] => 49 [hospital_code] => 9008 [user_lastname] => Santos [user_firstname] => Jimmy [user_middlename] => Neutron [user_extname] => N/A [username] => fiesta [password] => mabuhay [user_type] => Sample [user_count] => 1 [user_isActive] => 0 [user_created] => 2023-12-02 08:56:32 [user_lastLoggedIn] => ) [1] => Array ( [user_ID] => 50 [hospital_code] => 9008 [user_lastname] => Sotto [user_firstname] => Vic [user_middlename] => Vlad [user_extname] => N/A [username] => eat [password] => bulaga [user_type] => Sample [user_count] => 2 [user_isActive] => 0 [user_created] => 2023-12-02 08:59:15 [user_lastLoggedIn] => ) ) 4098Array ( [0] => Array ( [user_ID] => 60 [hospital_code] => 4098 [user_lastname] => Trunks [user_firstname] => Goten [user_middlename] => Gotenks [user_extname] => N/A [username] => alauli [password] => mc [user_type] => Sample [user_count] => 1 [user_isActive] => 0 [user_created] => 2024-01-09 09:11:59 [user_lastLoggedIn] => 2024-01-12 16:50:13 ) [1] => Array ( [user_ID] => 61 [hospital_code] => 4098 [user_lastname] => ABC [user_firstname] => DEF [user_middlename] => GHI [user_extname] => N/A [username] => alauli2 [password] => mc [user_type] => Sample [user_count] => 2 [user_isActive] => 1 [user_created] => 2024-01-18 16:01:35 [user_lastLoggedIn] => ) ) 3990Array ( [0] => Array ( [user_ID] => 62 [hospital_code] => 3990 [user_lastname] => Sample [user_firstname] => Sample [user_middlename] => Sample [user_extname] => N/A [username] => 4lanes [password] => mc [user_type] => Sample [user_count] => 1 [user_isActive] => 0 [user_created] => 2024-01-19 08:35:55 [user_lastLoggedIn] => 2024-01-19 13:35:09 ) )
+
+
+<!-- <tr class="table-tr h-[40px] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
+                                                            <td class="border-r border-[#b3b3b3]">Johnson</td>
+                                                            <td class="border-r border-[#b3b3b3]">Mary</td>
+                                                            <td class="border-r border-[#b3b3b3]">B</td>
+                                                            <td class="border-r border-[#b3b3b3]">mjohnson</td>
+                                                            <td class="border-r border-[#b3b3b3]">********</td>
+                                                            <td class="border-r border-[#b3b3b3]">No</td>
+                                                        </tr> -->
+
+
+
+$(document).ready(function () {
+      $('.clickable-div').click(function () {
+        var index = $('.clickable-div').index(this);
+        console.log('Clicked on div with index:', index);
+        // Perform actions based on the index
+      });
+    });
+
+
+
+$.ajax({
+        url: '../php/edit_user_acc.php',
+        method: "POST",
+        data : data,
+        success: function(response) {
+            console.log(response)
+            
+
+            $('#myModal-hospitalAndUsers').modal('close');
+          }
+      });
+
+
+
+// di na dapat ma pipindot yung refer button kapag already referred na
+// error kapag may same na username
+
+1. notification bar
+2. dashboard real time, date limit
+    ///////////////////////////////////////////////////////////////
+    $dateTime = new DateTime('2024-01-29');
+    // Format the DateTime object to get the year, month, and day
+    $formattedDate = $dateTime->format('Y-m-d') . '%';
+    // echo $formattedDate;
+
+    $sql = "SELECT * FROM incoming_referrals WHERE (status!='Pending' OR status!='On-Process' OR status!='Deferred' OR status!='Deferred') AND approved_time LIKE :proc_date AND refer_to = '" . $_SESSION["hospital_name"] . "'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':proc_date', $formattedDate, PDO::PARAM_STR);
+    $stmt->execute();
+    $dataDate = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // echo '<pre>'; print_r($dataDate); echo '</pre>';
+    $data['COUNT(*)'] = count($dataDate);
+
+
+
+3. history function sa admin
+4. enter keybutton
+5. minus sa dropdown
+6. mute sound pa asa incoming table
+7. traversal from dashboards
+
+(
+    [0] => Array
+        (
+            [reception_time] => 2024-02-08 13:26:20
+            [date_time] => 2024-02-06 09:17:41
+            [final_progressed_timer] => 00:01:10
+        )
+
+)
+
+631
+fetch_update_interdept.php
+stat_interdept == approve{
+    echo approve
+}
+
+incoming_pat.js
+review_id.textContent('Confirm Approval')
+cancel_id.css('display', 'none')
+
+0: {status_interdept: 'Approved', currentDateTime: '2024-03-25 14:24:47'}
+1: {curr_time: '00:29:30', department: 'surgery'}
+
+later-ru
+<label>
+    Username: <input type="text" id="username">
+</label>
+<label for="username">Username:</label>
+<input type="text" id="username">
+
+//040824
+//https://chat.openai.com/c/ec84b2e5-a31c-4b7c-9559-08df6536ae9a
+
+041224
+automatic lagay ng seen_by and seen_date kapag nirektang click sa mismong sdn itnerdept referral
+reset the value of the Case Category Select, and eraa
+
+
+main2.php = 116
+
+041624
+interdept fetch updated table after the Approval //
+automatic on process for some reason
+dashboard incoming
+
+error in searching //
+add toxicology sa dashboard table
+
+on-process status, pag ka final approved sa pang unang referral. check the On-Process
+nawawala sa datatable yung na approved na referral after galing sa interdept.
+incoming_form 237
+
+Referred: 2024-02-20 15:00:02
+Reception: 2024-04-15 10:41:16
+SDN Processed: 00:00:00
+Interdept Processed: 00:00:40 
+Total Processed: 00:00:00 
+Approval: 0000-00-00 00:00:00 
+Deferral: 0000-00-00 00:00:00
+
+https://onlinetools.com/time/calculate-average-clock-time
+
+for($i = 0; $i < count($class_code); $i++){
+    echo '
+        <td class="add border-2 border-slate-700">'. $class_code['ER_primary'] .'</td>
+    ';
+}
+
+[0] => 01:47:44
+[1] => 01:40:18
+[2] => 01:30:34
+[3] => 01:29:31
+01:37:22

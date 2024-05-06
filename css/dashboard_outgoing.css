@@ -1,0 +1,520 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: black;
+    /* color:white; */
+}
+
+.header-div{
+    width:100%;
+    height: 50px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #1f292e;
+}
+
+.header-div .header-sub-div-1{
+    width: 30%;
+    height: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.header-div .header-sub-div-1 #side-bar-mobile-btn{
+    width: 10%;
+    height: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-div .header-sub-div-1 #side-bar-mobile-btn i{
+    color:white;
+    font-size: 2.25rem;
+}
+
+.header-div .header-sub-div-1 h1{
+    color:white;
+    font-size: 1.5rem;
+    margin-left: .5rem;
+    cursor: pointer;
+}
+
+.header-div .account-header-div{
+    width: 35%;
+    height: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    margin-right: 0.5rem;
+
+}
+
+.header-div .account-header-div .notification-sub-div{
+    width:auto;
+    height: 83.333333%;
+    display:flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    margin-right: 0.5rem;
+
+}
+
+.header-div .account-header-div .notification-sub-div #notif-div{
+    width:30px;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    cursor: pointer;
+    position:relative;
+    margin-right:1.2rem;
+}
+
+.header-div .account-header-div .notification-sub-div #notif-div #notif-circle{
+    position: absolute;
+    top:0.2rem;
+    text-align: center;
+    width:17px;
+    height: 17px;
+    border-radius: 100%;
+    background: red;
+    margin-left: 1.25rem;
+    color:white;
+    font-size: 0.75rem;
+
+}
+
+.header-div .account-header-div .notification-sub-div #notif-div #notif-circle span{
+    z-index: 30;
+}
+
+.header-div .account-header-div .notification-sub-div #notif-div i{
+    color:white;
+    font-size: 1.4rem;
+    margin-bottom:10px;
+}
+
+.header-div .account-header-div .notification-sub-div #notif-div #notif-sub-div{
+    position:absolute;
+    top:85%;
+    width: 200px;
+    height: 90px;
+    background: #1f292e;
+    border-radius: 0.25rem;
+    overflow-y: scroll;
+    display:none;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.header-div .account-header-div .notification-sub-div #notif-div #notif-sub-div div:nth-child(even){
+    height: 30px;
+    width: 90%;
+    border:1px solid black;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 0.25rem;
+    background: transparent;
+    color:white;
+    opacity: 0.3;
+}
+
+.header-div .account-header-div .notification-sub-div #notif-div #notif-sub-div div:nth-child(odd){
+    height: 30px;
+    width: 90%;
+    border:1px solid black;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 0.25rem;
+    background: transparent;
+    color:black;
+    opacity: 0.3;
+}
+
+.header-div .account-header-div .notification-sub-div #notif-div #notif-sub-div div:hover{
+    opacity: 1;
+}
+
+.header-div .account-header-div .header-username-div{
+    width: auto;
+    height: 83.333333%;
+    display:flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+
+.header-div .account-header-div .header-username-div .user-icon-div{
+    width: 15%;
+    height: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    margin-right: 0.25rem;
+}
+
+.header-div .account-header-div .header-username-div .user-icon-div i{
+    color:white;
+    font-size: 1.25rem;
+}
+
+.header-div .account-header-div .header-username-div .user-name-div{
+    width: auto;
+    height: 100%;
+    white-space: nowrap;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header-div .account-header-div .header-username-div .user-name-div h1{
+    color:white;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+
+}
+
+.header-div .account-header-div .header-username-div .caret-div{
+    width: 5%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+}
+
+.header-div .account-header-div .header-username-div .caret-div i{
+    font-size: 1.2rem;
+    margin-top: 10px;
+    cursor: pointer;
+    color:white;
+}
+
+#nav-drop-account-div{
+    display:none;
+    z-index: 10;
+    position: absolute;
+    right:0;
+    top:50px;
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    background: #1f292e;
+    color:white;
+    position:fixed;
+    width: 15%;
+    height: 400px;
+
+    display:none;
+
+}
+
+#nav-drop-account-div div{
+    width: 66.666667%;
+    height: 50px;
+    border-bottom: 2px solid #29363d;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0.3;
+    transition-duration: 150ms;
+
+}
+
+#nav-drop-account-div div:hover{
+    opacity: 1;
+}
+
+#nav-drop-account-div div h2{
+    font-size: 1rem;
+}
+
+.main-div{
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    height: 100%;
+    background: #eceff1;
+}
+
+.main-div .main-title-div{
+    width:100%;
+    height: auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-top:0;
+    margin-top: 1%;
+    /* border-radius: 5px; */
+}
+
+.main-div .main-title-div > label{
+    font-size: 3rem;
+    color:#333333;
+    margin-left: 3.5rem;
+}
+
+.main-div .main-title-div div{
+    display: flex;
+    flex-direction: column;
+    margin-right: 3.5rem;
+}
+
+.main-div .main-title-div div #curr-month-lbl{
+    font-size: 1.875rem;
+    font-weight: 600;
+}
+
+.main-div .main-title-div div #curr-date-lbl{
+    font-weight: 600;
+}
+
+.main-div .main-filter-div{
+    width: 25%;
+    height: 5%;
+    margin-left: 3%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+
+    background: #1f292e;
+}
+
+.main-div .main-filter-div label{
+    font-size: 1.25rem;
+    margin-left:2%;
+    color:#d1dbe0;
+}
+
+.main-div .main-filter-div div{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width:90%;
+}
+
+.main-div .main-filter-div div label input{
+    width: 150px;
+    outline: none;
+    background: white;
+    font-size: 1.2rem;
+    text-align: center;
+    border:none;
+    background: transparent;
+    border-bottom: 1px solid white;
+    color:#d1dbe0;
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Invert the color to change icon color */
+  }
+
+.main-div .main-filter-div #filter-date-btn{
+    width: 70px;
+    height: 30px;
+    border:none;
+    outline:none;
+    background: #198754;
+    border-radius: 0.5rem;
+    color:white;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    margin-left:2%;
+}
+
+.main-div .main-filter-div #filter-date-btn:hover{
+    background: #146c43;
+}
+
+.main-div .main-turnaround-div{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 93%;
+    height: 15%;
+    margin-left: 3%;
+    margin-top: 2%;
+    /* border:1px solid red; */
+    /* flex-wrap: wrap; */
+}
+
+.main-div .main-turnaround-div div{
+    width: 12%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2%;
+    background: #1f292e;
+    color:white;
+    border-radius: 15px;
+}
+
+.main-div .main-turnaround-div div #average-interdept-approve-lbl{
+    text-align: center;
+}
+
+.main-div .main-turnaround-div div label:nth-child(1){
+    font-weight: 600;
+    font-size: 1.875rem;
+}
+
+.main-div .main-turnaround-div div label:nth-child(2){
+    font-size: 1rem;
+}
+
+.main-div .main-graph-div{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 93%;
+    height: 23%;
+    margin-left: 3%;
+    margin-top: 2%;
+}
+
+.main-div .main-graph-div div{
+    width: 20%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    /* border:1px solid black; */
+}
+
+.main-div .main-graph-div div label{
+    font-weight: 600;
+    width:200px;
+    text-align: center;
+    font-size: 1rem;
+    color:white;
+    background: #1f292e;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.main-div .main-graph-div div canvas{
+    width:100%;
+    height: 210px !important;
+    /* margin-bottom:3px; */
+}
+
+.main-div .main-data-div{
+    width: 100%;
+    height: auto !important;
+    margin-top: 1%;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: top;
+
+}
+
+.main-div .main-data-div table{
+    border: 2px solid #1f292e;
+    width: 95%;
+    height: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.main-div .main-data-div table thead{
+    width: 100%;
+}
+
+.main-div .main-data-div table thead tr th{
+    border: 2px solid #0a0e0f;
+}
+
+.main-div .main-data-div table thead tr .pat-class{
+    background: #1f292e;
+    color:white;
+}
+
+.modal-header, .modal-title-div{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header .modal-title-div #modal-icon{
+    margin-left: .5rem;
+    margin-bottom:5%;
+}
+
+.modal-header button{
+    font-size: 1.875rem; 
+    line-height: 2.25rem;
+    border:none;
+    background: transparent;
+}
+
+
+.modal-body-main{
+    margin-left: 1.75rem;
+}
+
+.modal-content #modal-body{
+    margin-left: 1.75rem;
+}
+
+.modal-footer button{
+    background: #3a82f6;
+    color:white;
+    font-weight: bold;
+    padding-top: 0.5rem; /* 8px */
+    padding-bottom: 0.5rem; /* 8px */
+    padding-left: 1rem; /* 16px */
+    padding-right: 1rem; /* 16px */
+    border-radius: 0.25rem;
+    margin-right: 0.5rem;
+    border:none;
+}
+
+.modal-footer #yes-modal-btn-main{
+    /* display:none; */
+}

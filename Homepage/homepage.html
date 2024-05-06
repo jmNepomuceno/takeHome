@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./src/style/homepage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-" crossorigin="anonymous" />
+
+</head>
+<body>
+
+    <div id="mama_div">
+
+        <nav>
+
+            <i class="fa-solid fa-bars"></i>
+            <label id="home_but">Service Delivery Network</label>    
+               
+            <div id="user_and_notification">
+
+                <i class="fa-solid fa-circle" style="color: #FF0000; display: flex;"></i>
+                <i class="fa-regular fa-bell"></i>
+               
+                
+                <i class="fa-solid fa-user"></i>
+                <label id="username">Pedro Penduko</label>
+                <i class="fa-solid fa-caret-down"></i>
+                
+             
+            </div>
+
+                <div id="user_settings">
+
+                    <div id="admin_but">
+
+                       Admin
+
+                    </div>
+
+                    
+                    <div id="dashboard_inc_but">
+
+                      Dashboard (Incoming)
+
+                    </div>
+
+                    
+                    <div id="dashboard_outc_but">
+
+                       Dashboard (Outgoing)
+
+                    </div>
+
+                    
+                    <div id="dashboard_er_opd_but">
+
+                      Dashboard (ER/OPD)
+
+                    </div>
+
+                    
+                    <div id="history_log_but">
+
+                       History Log
+
+                    </div>
+
+                    
+                    <div id="settings_but">
+
+                       Settings
+
+                    </div>
+
+                    
+                    <div id="help_but">
+
+                       Help
+
+                    </div>
+
+                    
+                   
+                </div>
+        </nav>
+
+
+    <div id="everything_under_nav">
+        <aside id="sidebar">
+
+            <div id="side_bar_mama">
+                <div id="side_bar_logo">
+
+                    <img id="bghmc_logo" src="./imgs/BGHMC Logo.png" alt="BGHMC LOGO">
+                    <label id="pat_reg_label">Bataan General Hospital and Medical Center</label>
+
+                </div>
+
+               <div id="side_bar_tab"> 
+                <div id="patient_reg">
+
+                    <div id="sub_menu1">
+
+                        <i class="fa-solid fa-hospital-user"></i>
+                        <label id="pat_label">Patient Registration</label>
+
+                    </div>
+                    <div id="sub_menu2">
+
+                        <i class="fa-solid fa-table-list"></i>
+                        <label id="pat_form_label">Patient Registration Form</label>
+
+                    </div>
+                    
+                </div>
+
+
+                <div id="online_referral">
+
+                    <div id="online_ref_tab">
+
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        <label id="online_ref_label">Online Referral</label>
+
+                    </div>
+
+                    <div id="incoming">
+                        
+                        <i class="fa-solid fa-location-arrow fa-rotate-180"> </i>
+                        <label class="inc_out_label">Incoming</label>
+    
+                    </div>
+    
+                    <div id="outgoing">
+    
+                        <i class="fa-solid fa-hospital-user"> </i>
+                        <label class="inc_out_label">Outgoing</label>
+    
+                    </div>
+                    
+                </div>
+
+                
+                </div>
+
+            </div>
+
+            <div id="logout_container">
+
+                <div id="logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <label id="logout_label">Log out</label>
+                </div>
+
+            </div>
+
+        </aside>
+
+        <div id="home">
+
+            <img id="bghmc_logo2" src="./imgs/BGHMC Logo.png" alt="BGHMC LOGO">
+
+            <div id="title">
+                <label id="sdn_label">Service Delivery Network</label>
+                <label id="bghmc_label">Bataan General Hospital and Medical Center</label>
+            </div>
+
+
+            <div id="home_footer">
+
+                <label id="edit_footer_label">Philippine Copyright © 2018 Dr. Glory V. Baltazar</label>
+    
+                <p> This software program is protected by the Republic of the Philippines copyright laws. Reproduction and distribution of the software without prior written permission of the author is prohibited.</p>
+    
+                <p>If you wish to use the software for commercial or other purposes, please contact us at bgh_bataan2005@yahoo.com.ph.</p>
+    
+            </div>
+
+        </div>
+
+
+        <div id="patient_registration_form">
+
+            <div id="search">
+
+                <button id="search_but">
+
+                  <label class="fa fa-magnifying-glass"></label>    
+                  <label id="check_reg_label">Check if the patient is already registered</label>
+
+                </button>
+
+                <div id="search_form">
+
+                    <div id="search_label_container">
+
+                        <label id="search_last_name">Last Name</label>
+                        <label id="search_first_name">First Name</label>
+                        <label id="search_middle_name">Middle Name</label>
+
+
+                    </div>
+
+                    <div id="search_textbox_container">
+
+                        <input class="search_textbox" type="text">
+                        <input class="search_textbox" type="text">
+                        <input class="search_textbox" type="text">
+
+                    </div>
+
+                    <button id="search_main_button">Search</button>
+
+                    <div id="name_birthday_search_label_container">
+
+                        <label id="name_label">Name</label>
+                        <label id="bday_label">Birthday</label>
+
+                    </div>
+
+                    <div id="search_patient_list">
+
+                        <div class="patient">
+
+                            <div class="patient_id_date">
+
+                                <label>Patient ID:</label>
+                                <label class="date"></label>
+
+                            </div>
+
+                            <div class="patient_name_status">
+
+                                <label>Delos Reyes, Julius E.</label>
+                                <label>Status: Aprroved</label>
+                            
+                            </div>
+                            
+                        </div>                
+                    </div>
+               
+
+                </div>
+
+            </div>
+
+            <div id="form">
+               
+                <div id="first_column">
+
+                    <p id="personal_inf_label">Personal Information</p>
+
+                    <div id="personal_information">
+
+                        <p id="last_name_label">Last Name</p>
+                        <input type="text" id="last_name_textbox" placeholder=" Delos Cruz"> 
+
+                        <p class="long_textboxes_label">First Name</p>
+                        <input type="text" id="first_name_textbox" placeholder=" Pepe">
+
+                        <div class ="two_textboxes_section">
+                        
+                            <div class="inside_two_textboxes_section_one">
+    
+                                <p id="medium_textboxes_label_one">Middle Name</p>
+                                <input type="text" id="middle_name_textbox" placeholder=" Bautista">
+
+                                <p id="medium_textboxes_label_one">Birthdate</p>
+                                <input type="date" id="birthdate_textbox">
+    
+                            </div>
+
+                            <div class="inside_two_textboxes_section_two">
+
+                                <p class="m_name_birthday_labels">Name Ext.</p>
+                                <input id="name_ext" type="text" placeholder=" Jr.">
+
+                                <p class="m_name_birthday_labels">Age</p>
+                                <input  id="age" type="text">
+    
+                            </div>
+    
+                        </div>
+
+                        <div id="gen_civstat_label_container">
+
+                            <label id="gender_label">Gender</label>
+                            <label id="civilstat_label">Civil Status</label>
+
+                        </div>
+
+                        <div id="gender_civiltat_container">
+
+                           
+
+                            <select id="gender">
+
+                                <option selected disabled>Choose</option>
+                                <option>asdasdas</option>
+                                <option>asdasdas</option>
+                            
+                            </select>
+
+                            
+                            <select id="civilstat">
+
+                                <option selected disabled>Choose</option>
+                                <option>asdasdasd</option>
+                                <option>asdasdasd</option>
+
+                            </select>
+
+                        </div> 
+
+                        <div id="religion_occupation_container">
+                            
+                            <label id="religion_label">Religion</label>
+                            <input type="text" id="religion_textbox" placeholder=" ex. Roman Catholic">
+
+                            <label id="occupation_label">Occupation</label>
+                            <input type="text" id="occupation_textbox" placeholder=" ex. Doctor">
+
+                        </div>
+
+
+                        <div id="nationality_passport_container_label">
+
+                            <label id="nationality_label">Nationality</label>
+                            <label id="passport_label">Passport No.</label>
+
+
+                        </div>
+
+                        <div id="nationality_passport_container">
+
+                            <input id="nationality_textbox" type="text" placeholder=" ex. Filipino">
+                            <input id="passport_no_textbox" type="text">
+
+                        </div>
+
+                    </div>
+
+                   
+
+                    <p id="others_label">Others</p>
+
+                    <div id="others">
+
+                        <div id="others_label_container">
+
+                            <label id="hospital_no_label">Hospital No.</label>
+                            <label id="PHIC_label">PHIC</label>
+
+                        </div>
+
+                        <div id="others_textbox_container">
+                            <input id="hospital_no_textbox" type="text">
+                            <input id="phic_textbox" type="text" placeholder=" Philhealth Number">
+                        </div>
+
+                    </div>
+
+                    <div id="classification">
+
+                        <button id="er_button">ER</button>
+                        <button id="ob_button">OB</button>
+                        <button id="opd_button">OPD</button>
+                        <button id="pcr_button">PCR</button>
+
+                    </div>
+
+                </div>
+
+                <div id="second_column">
+
+                    <p id="permanent_address_label">Permanent Address</p>
+
+                    <div id="permanent_address">
+
+
+                        <div id="house_no_street_label">
+
+                            <label id="house_no_label">House No./Lot/Bldg</label>
+                            <label id="street_block_label">Street/Block</label>
+
+                        </div>
+
+                        <div id="house_no_street_textbox_container">
+
+                            <input id="house_no_textbox" type="text">
+                            <input id="street_textbox" type="text">
+
+
+                        </div>
+
+                        <div id="region_province_label_container">
+
+                            <label id="region_label">Region</label>
+                            <label id="province_label">Province</label>
+
+                        </div>
+
+                        <div id="region_province_selection_container">
+
+                         <select id="region_selection">
+
+                            <option selected disabled>Choose</option>      
+                            <option>Region 3</option>
+                            <option>Region 4</option>
+                            <option>Region 5</option>
+
+                         </select>
+
+                         <select id="province_selection">
+
+                            <option selected disabled>Choose</option>
+                            <option>Bataan</option>
+                            <option>Batanes</option>
+                            <option>Cavite</option>
+
+                         </select>
+
+                        </div>
+
+
+                        <div id="city_baranggay_label_container">
+
+                            <label id="city_label">Municipality/City</label>
+                            <label id="baranggay_label">Baranggay</label>
+
+                        </div>
+
+                        <div id="city_baranggay_selection_container">
+
+                         <select id="city_selection">
+
+                            <option selected disabled>Choose</option>      
+                            <option>Abucay</option>
+                            <option>Samal</option>
+                            <option>Orani</option>
+
+                         </select>
+
+                         <select id="baranggay_selection">
+
+                            <option selected disabled>Choose</option>
+                            <option>Salian</option>
+                            <option>Gabon</option>
+                            <option>Capitangan</option>
+
+                         </select>
+
+                        </div>
+
+                        <div id="hphone_mobile_no_label_container">
+
+                            <label id="hphone_no_label">Home Phone No.</label>
+                            <label id="mobile_phone_no_label">Mobile Phone No.</label>
+
+                        </div>
+
+                        <div id="hphone_mobile_no_textbox_container">
+
+                            <input id="home_phone_textbox" type="text">
+                            <input id="mobile_no_textbox" type="text">
+
+
+                        </div>
+
+                        <div id="email_label_container">
+
+                            <label id="email_label">Email Address</label>
+
+                        </div>
+
+                        <div id="email_textbox_container">
+
+                            <input id="email_add_textbox" type="email">
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div id="curradd_same_as_perm_container">
+
+                        <p id="current_address_label">Current Address</p>
+
+                        <label id="same_as_perm_add_label"> Same as permanent </label>
+
+                    </div>
+
+                    <div id="current_address">
+
+                        
+
+                        <div id="house_no_street_label">
+
+                            <label id="house_no_label">House No./Lot/Bldg</label>
+                            <label id="street_block_label">Street/Block</label>
+
+                        </div>
+
+                        <div id="house_no_street_textbox_container_ca">
+
+                            <input id="house_no_textbox_ca" type="text">
+                            <input id="street_textbox_ca" type="text">
+
+
+                        </div>
+
+                        <div id="region_province_label_container_ca">
+
+                            <label id="region_label">Region</label>
+                            <label id="province_label">Province</label>
+
+                        </div>
+
+                        <div id="region_province_selection_container">
+
+                         <select id="region_selection_ca">
+
+                            <option selected disabled>Choose</option>      
+                            <option>Region 3</option>
+                            <option>Region 4</option>
+                            <option>Region 5</option>
+
+                         </select>
+
+                         <select id="province_selection_ca">
+
+                            <option selected disabled>Choose</option>
+                            <option>Bataan</option>
+                            <option>Batanes</option>
+                            <option>Cavite</option>
+
+                         </select>
+
+                        </div>
+
+
+                        <div id="city_baranggay_label_container">
+
+                            <label id="city_label">Municipality/City</label>
+                            <label id="baranggay_label">Baranggay</label>
+
+                        </div>
+
+                        <div id="city_baranggay_selection_container">
+
+                         <select id="city_selection_ca">
+
+                            <option selected disabled>Choose</option>      
+                            <option>Abucay</option>
+                            <option>Samal</option>
+                            <option>Orani</option>
+
+                         </select>
+
+                         <select id="baranggay_selection_ca">
+
+                            <option selected disabled>Choose</option>
+                            <option>Salian</option>
+                            <option>Gabon</option>
+                            <option>Capitangan</option>
+
+                         </select>
+
+                        </div>
+
+                        <div id="hphone_mobile_no_label_container">
+
+                            <label id="hphone_no_label">Home Phone No.</label>
+                            <label id="mobile_phone_no_label">Mobile Phone No.</label>
+
+                        </div>
+
+                        <div id="hphone_mobile_no_textbox_container">
+
+                            <input id="hphone_textbox_ca" type="text">
+                            <input id="mobile_no_textbox_ca" type="text">
+
+
+                        </div>
+
+                        <div id="email_label_container">
+
+                            <label id="email_label">Email Address</label>
+
+                        </div>
+
+                        <div id="email_textbox_container">
+
+                            <input id="email_add_textbox_ca" type="email">
+
+                        </div>
+
+
+                    </div> 
+
+                    <div id="confirmation">
+
+                        <button id="add_button">ADD</button>
+                        <button id="clear_button">CLEAR</button>
+
+                    </div>
+
+                </div>
+
+
+
+
+                <div id="third_column">
+
+                    <p id="curr_workplace_label">Current Workplace Address</p>
+
+                    <div id="current_workplace_address">
+
+
+                        <div id="house_no_street_label_curr_work">
+
+                            <label id="house_no_label_curr_work">House No./Lot/Bldg</label>
+                            <label id="street_block_label_curr_work">Street/Block</label>
+
+                        </div>
+
+                        <div id="house_no_street_textbox_container_curr_work">
+
+                            <input id="house_no_textbox_curr_work" type="text">
+                            <input id="street_textbox_curr_work" type="text">
+
+
+                        </div>
+
+                        <div id="region_province_label_container_curr_work">
+
+                            <label id="region_label_curr_work">Region</label>
+                            <label id="province_label_curr_work">Province</label>
+
+                        </div>
+
+                        <div id="region_province_selection_container_curr_work">
+
+                         <select id="region_selection_curr_work">
+
+                            <option selected disabled>Choose</option>      
+                            <option>Region 3</option>
+                            <option>Region 4</option>
+                            <option>Region 5</option>
+
+                         </select>
+
+                         <select id="province_selection_curr_work">
+
+                            <option selected disabled>Choose</option>
+                            <option>Bataan</option>
+                            <option>Batanes</option>
+                            <option>Cavite</option>
+
+                         </select>
+
+                        </div>
+
+
+                        <div id="city_baranggay_label_container_curr_work">
+
+                            <label id="city_label_curr_work">Municipality/City</label>
+                            <label id="baranggay_label_curr_work">Baranggay</label>
+
+                        </div>
+
+                        <div id="city_baranggay_selection_container_curr_work">
+
+                         <select id="city_selection_curr_work">
+
+                            <option selected disabled>Choose</option>      
+                            <option>Abucay</option>
+                            <option>Samal</option>
+                            <option>Orani</option>
+
+                         </select>
+
+                         <select id="baranggay_selection_curr_work">
+
+                            <option selected disabled>Choose</option>
+                            <option>Salian</option>
+                            <option>Gabon</option>
+                            <option>Capitangan</option>
+
+                         </select>
+
+                        </div>
+
+                        <div id="name_of_workplace_mobile_no_label_container">
+
+                            <label id="name_of_workplace_label">Name of Workplace</label>
+                            <label id="mobile_phone_landline_no_label">Landline / Mobile Phone No.</label>
+
+                        </div>
+
+                        <div id="name_of_workplace_mobile_no_textbox_container">
+
+                            <input id="name_of_workplace_textbox" type="text">
+                            <input id="mobile_no_textbox" type="text">
+
+
+                        </div>
+
+                        <div id="email_label_container_curr_work">
+
+                            <label id="email_label_curr_work">Email Address</label>
+
+                        </div>
+
+                        <div id="email_textbox_container_curr_work">
+
+                            <input id="email_add_textbox_curr_work" type="email">
+
+                        </div>
+
+                        
+
+                    </div>
+
+
+                    <label id="for_ofw_label">Address Outside the Philippines (for OFW only) </label>
+
+                    <div id="for_ofw">
+
+                        <div class="all_label_container_in_ofw">
+                            <label id="employers_label">Employers Name</label>
+                        </div>
+
+                        <div id="employers_textbox_container">
+                            <input id="employers_textbox" type="text">
+                        </div>
+
+                        <div class="all_label_container_in_ofw">
+
+                            <label id="_ofw_occupation_label">Occupation</label>
+                            <label id="place_of_work_label">Place of Work</label>
+
+                        </div>
+
+                        <div  class="all_textbox_container_in_ofw">
+
+                            <input class="all_textbox_in_ofw" type="text">
+                            <input class="all_textbox_in_ofw" type="text">
+
+                        </div>
+
+                        <div class="all_label_container_in_ofw">
+
+                            <label id="house_no_ofw_label">House No./Lot/Bldg</label>
+                            <label id="street_ofw_label">Street/Block</label>
+
+                        </div>
+
+                        <div  class="all_textbox_container_in_ofw">
+
+                            <input class="all_textbox_in_ofw" type="text">
+                            <input class="all_textbox_in_ofw" type="text">
+
+                        </div>
+
+                        <div class="all_label_container_in_ofw">
+
+                            <label id="region_ofw_label">Region</label>
+                            <label id="province_ofw_label">Province</label>
+
+                        </div>
+
+                        <div  class="all_textbox_container_in_ofw">
+
+                            <input class="all_textbox_in_ofw" type="text">
+                            <input class="all_textbox_in_ofw" type="text">
+
+                        </div>
+
+                        <div class="all_label_container_in_ofw">
+
+                            <label id="municipality_label">Municipality / City</label>
+                            <label id="country_label">Country</label>
+
+                        </div>
+
+                        <div  class="all_textbox_container_in_ofw">
+
+                            <input class="all_textbox_in_ofw" type="text">
+                            <input class="all_textbox_in_ofw" type="text">
+
+                        </div>
+
+                        <div class="all_label_container_in_ofw">
+
+                            <label id="office_phone_label">Office Phone No</label>
+                            <label id="mobile_phone_ofw_label">Mobile Phone No.</label>
+
+                        </div>
+
+                        <div  class="all_textbox_container_in_ofw">
+
+                            <input class="all_textbox_in_ofw" type="text">
+                            <input class="all_textbox_in_ofw" type="text">
+
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="empty_modal_alert">
+            <div id="empty_modal">
+
+                <div id="warning_x">
+
+                    <label id="warning_label">Warning</label>
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <i class="fa-regular fa-x"></i>
+
+                </div>
+
+                <div id="message_container">
+
+                    <label id="message_label">Please fill out the required fields.</label>
+
+                </div>
+
+                <div id="buttons_container">
+
+                    <button id="no_but">No</button>
+                    <button id="register_but">Register</button>
+                    <button id="ok_button">OK</button>
+
+                </div>
+
+
+                <div id="buttons_container_2">
+
+                    <button id="no_button">No</button>
+                    <button id="yes_button">Yes</button>
+             
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="incoming_tab">
+
+            <div id="incoming_tab_upper_part_label">
+
+                <label id="referral_no_label">Referral No.</label>
+                <label id="incoming_tab_lname_label">Last Name</label>
+                <label id="incoming_tab_fname_label">First Name</label>
+                <label id="incoming_tab_mname_label">Middle Name</label>
+                <label id="case_type_label">Case Type</label>
+                <label id="agency_label">Agency</label>
+                <label id="Status">Status</label>
+
+            </div>
+
+            <div id="incoming_tab_upper_part">
+
+                <input id="referral_no_textbox" type="text">
+                <input id="incoming_tab_lname" type="text">
+                <input id="incoming_tab_fname" type="text">
+                <input id="incoming_tab_mname" type="text">
+
+                <select id="small_select_box">
+
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+
+                </select>
+
+
+                <select id="long_select_box">
+
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+
+                </select>
+
+                <select id="medium_select_box">
+
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+
+                </select>
+
+                <button class="incoming_tab_upper_button">Clear</button>
+                <button class="incoming_tab_upper_button">Search</button>
+
+            </div>
+
+        </div> 
+
+        </div>
+
+
+       
+
+    </div>
+
+    </div>
+
+
+    <script src="./src/homepage.js"></script>
+    <script>
+
+        const date = document.querySelectorAll('.date');
+        const currentDate = new Date();
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        const formattedHours = (hours % 12) || 12; // Convert 0 to 12
+        const formattedMinutes = minutes.toString().padStart(2, '0');
+
+        // The date that the referral deatils has been added
+        const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')} ${currentDate.getFullYear()} `;
+
+        console.log(formattedDate);
+
+        const month = document.getElementById('month');
+        const currentmonth = new Date();
+        const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+        ];
+        const monthName = months[currentDate.getMonth()];
+
+        console.log(`Current month: ${monthName}`);
+       
+
+
+        date[0].textContent = monthName +","+ formattedDate + "";
+        date[1].textContent = monthName +","+ formattedDate + "";
+
+</script>
+</body>
+</html>

@@ -1,0 +1,611 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container{
+    width:95%;
+    height: 90%;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    /* padding: 2rem; */
+    border-radius: 0.5rem;
+    background: transparent;
+    
+}
+
+.container .referral-title{
+    width:100%;
+    height: 70px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container .referral-title label{
+    font-weight: 500;
+    font-size: 1.3rem; /* 24px */
+    line-height: 3rem; /* 32px */
+    margin-left: 0.5rem;
+    background: #1f292e;
+    border-radius: 5px;
+    height: 100%;
+    color:white;
+    width:250px;
+    height: 50px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.container .referral-title button{
+    color:white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    margin-right: 0.5rem;
+    border:none;
+}
+
+.container .referral-title #submit-referral-btn-id{
+    background: #0e748f;
+}
+
+.container .referral-title #submit-referral-btn-id:hover{
+    background: #0891b2;
+}
+
+.container .referral-title #cancel-referral-btn-id{
+    background: #b81c1c;
+
+}
+
+.container .referral-title #cancel-referral-btn-id:hover{
+    background: #da2727;
+}
+
+.container .referral-body{
+    width:100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border:2px solid #bfbfbf;
+    border-radius: 15px;
+}
+
+.container .referral-body .first-part{
+    width:100%;
+    height: 15%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    margin-top: 5px;
+}
+
+.container .referral-body .first-part .first-sub-div-part{
+    width: 70%;
+    height: 100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container .referral-body .first-part .first-sub-div-part .refer-to-div{
+    width:50%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    margin-left: 1.25rem;
+
+}
+
+.container .referral-body .first-part .first-sub-div-part .refer-to-div label{
+    font-weight: bold;
+    margin-left: -1%;
+    font-size: 0.8rem;
+}
+
+.container .referral-body .first-part .first-sub-div-part .refer-to-div label span{
+    color:red;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1.5rem; /* 28px */
+}
+
+.container .referral-body .first-part .first-sub-div-part .refer-to-div select{
+    border-radius: 0.375rem; /* 6px */
+    width:90%;
+    border:2px solid #bfbfbf;
+    padding: 0.25rem;
+    margin-left: -1%;
+    height: 30px;
+    font-size: 0.8rem;
+}
+
+.container .referral-body .first-part .first-sub-div-part .sensitive-case-div{
+    width:23%;
+    height: 90px;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 1.25rem;
+    background: #1f292e;
+    border-radius: 10px;
+}
+
+.container .referral-body .first-part .first-sub-div-part .sensitive-case-div .sensitive-div,
+.container .referral-body .first-part .first-sub-div-part .sensitive-case-div .sensitive-rbs{
+    width:100%;
+    height: 30px;
+    /* margin-left: 0.25rem; */
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: bold;
+    margin-top: 1.1rem;
+    color:white;
+}
+
+.container .referral-body .first-part .first-sub-div-part .sensitive-case-div .sensitive-rbs{
+    margin-top: 0;
+}
+
+.container .referral-body .first-part .first-sub-div-part .sensitive-case-div .sensitive-div h1{
+    font-size: 0.9rem;
+}
+
+.container .referral-body .first-part .first-sub-div-part .sensitive-case-div .sensitive-div h1 span{
+    color:red;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.container .referral-body .first-part .first-sub-div-part .sensitive-case-div .sensitive-div button{
+    margin-left: 0.25rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+    background: #3a81f5;
+    cursor: pointer;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border:none;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color:white;
+}
+
+.container .referral-body .first-part .first-sub-div-part .sensitive-case-div .sensitive-rbs label{
+    margin-bottom: 0.3%;
+    margin-left: 0.2%;
+    font-size: 1rem;
+}
+
+.container .referral-body .first-part .first-sub-div-part .sensitive-case-div .sensitive-rbs input:nth-child(3){
+    margin-left:8%;
+}
+
+.container .referral-body .first-part a{
+    color:#3b82f5;
+    font-weight: bold;
+    margin-left: 10%;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.container .referral-body .first-part a:hover{
+    text-decoration: underline;
+}
+
+.container .referral-body .second-part{
+    width:100%;
+    height: 11%;
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: space-between;
+}
+
+.container .referral-body .second-part .second-part-divs{
+    display:flex;
+    flex-direction: column;
+}
+
+.container .referral-body .second-part .second-part-divs:nth-child(1){
+    margin-left: 1.4%;
+    width:25%;
+}
+
+.container .referral-body .second-part .second-part-divs:nth-child(1){
+    width:15%;
+}
+
+.container .referral-body .second-part .second-part-divs:nth-child(1){
+    width:15%;
+}
+
+.container .referral-body .second-part .second-part-divs:nth-child(1){
+    width:23%;
+}
+
+.container .referral-body .second-part .second-part-divs label{
+    margin-left: -2%;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-left: 2px;
+    font-size: 0.8rem;
+
+}
+
+.container .referral-body .second-part .second-part-divs label span{
+    color:red;
+    font-weight: bold;
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+}
+
+.container .referral-body .second-part .second-part-divs select{
+    border-radius: 0.5rem;
+    margin-left: 0.5%;
+    width:100%;
+    border: 2px solid #bfbfbf;
+    outline: none;
+    font-size: 0.9rem;
+
+}
+
+.container .referral-body .second-part .second-part-divs #parent-guard-input{
+    border-radius: 0.5rem;
+    width:98%;
+    border:2px solid #bfbfbf;
+    outline: none;
+    font-size: 0.9rem;
+
+}
+
+.container .referral-body .second-part .second-part-divs #date-input{
+    border-radius: 0.5rem;
+    width:90%;
+    border:2px solid #bfbfbf;
+    /* margin-left: -2%; */
+    outline: none;
+    pointer-events: none;
+    background: #61758c;
+    color:white;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.container .referral-body .third-part{
+    width:100%;
+    height: 78%;
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+
+}
+
+.container .referral-body .third-part .left-side,
+.container .referral-body .third-part .right-side{
+    width:50%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content:flex-start; 
+    align-items: center;
+}
+
+.container .referral-body .third-part .right-side{
+    justify-content: flex-start;
+    align-items: left;
+
+}
+
+.container .referral-body .third-part .left-side .left-sub-div-1{
+    width:97%;
+    height: 12%;
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.container .referral-body .third-part .left-side .left-sub-div-1 label{
+    font-weight: bold;
+    font-size: 0.8rem;
+    width:80%;
+}
+
+.container .referral-body .third-part .left-side .left-sub-div-1 label span{
+    color:red;
+    font-weight: bold;
+    font-size: 1rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+}
+
+.container .referral-body .third-part .left-side .left-sub-div-1 input{
+    border-radius: 0.375rem;
+    width:80%;
+    border:2px solid #bfbfbf;
+    outline:none;
+}
+
+.container .referral-body .third-part .left-side .left-sub-div-2{
+    width:97%;
+    height: 87%;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container .referral-body .third-part .left-side .left-sub-div-2 label{
+    width:80%;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.container .referral-body .third-part .left-side .left-sub-div-2 label span{
+    color:red;
+    font-weight: bold;
+    font-size: 1rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
+}
+
+.container .referral-body .third-part .left-side .left-sub-div-2 textarea{
+    border:2px solid #bfbfbf;
+    width:80%;
+    height: 33.3%;
+    resize: none;
+    outline:none;
+    border-radius: 5px;
+}
+
+.container .referral-body .ob-part{
+    width:97%;
+    height: 15%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: left;
+    margin-bottom: 5px;
+
+}
+
+.container .referral-body .ob-part .ob-first,
+.container .referral-body .ob-part .ob-second,
+.container .referral-body .ob-part .ob-third,
+.container .referral-body .ob-part .ob-fourth{
+    width:20%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: left;
+}
+
+.container .referral-body .ob-part .ob-first label,
+.container .referral-body .ob-part .ob-second label,
+.container .referral-body .ob-part .ob-third label,
+.container .referral-body .ob-part .ob-fourth label{
+    width:100%;
+    font-weight: bold;
+    font-size: 0.7rem;
+}
+
+.container .referral-body .ob-part .ob-first label span,
+.container .referral-body .ob-part .ob-second label span,
+.container .referral-body .ob-part .ob-third label span,
+.container .referral-body .ob-part .ob-fourth label span{
+    color:red;
+    font-weight: bold;
+    font-size: 1rem; /* 20px */
+}
+
+.container .referral-body .ob-part .ob-first input,
+.container .referral-body .ob-part .ob-second input,
+.container .referral-body .ob-part .ob-third input,
+.container .referral-body .ob-part .ob-fourth input{
+    border:2px solid #bfbfbf;
+    width:100%;
+    height: 50%;
+    resize:none;
+    outline:none;
+}
+
+.container .referral-body .third-part .right-side #phy-exam-lbl{
+    width:100%;
+    height: 30px;
+    font-weight: bold;
+    margin-left: 10px;
+    font-size: 0.8rem;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div{
+    width:100%;
+    height: 95%;
+    border-radius: 0.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border:2px solid #bfbfbf;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-right: 15px;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:98%;
+    height: 34%;
+    margin-left: 6px;
+    margin-top: .5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-1,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-2,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-3,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-4,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-5{
+    width:200px;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-1 div,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-2 div,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-3 div,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-4 div,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-5 div{
+    display:flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    font-weight: bold;
+    margin-top: 0.75rem;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-1 div h1,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-2 div h1,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-3 div h1,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-4 div h1,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-5 div h1{
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-1 div h1 span,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-2 div h1 span,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-3 div h1 span,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-4 div h1 span,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-5 div h1 span{
+    color:red;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-1 div button,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-2 div button,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-3 div button,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-4 div button,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-5 div button{
+    margin-left: 0.25rem;
+    width:16px;
+    height: 16px;
+    border-radius: 100%;
+    background: #3a81f5;
+    cursor: pointer;
+    color:white;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.6rem;
+    border:none;
+    text-align: center;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-1 input,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-2 input,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-3 input,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-4 input,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-1 .right-side-main-div-1-sub-5 input{
+    border:2px solid #bfbfbf;
+    width: 98%;
+    outline: none;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-2{
+    width:100%;
+    height: 70%;
+    margin-top: 1%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-2 label{
+    margin-left: 10%;
+    font-weight: bold;
+    font-size: 0.8rem;
+    width:88%;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-2 label span{
+    color:red;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-2 textarea{
+    border:2px solid #bfbfbf;
+    width:80%;
+    outline:none;
+    height: 88%;
+    margin-left: 1%;
+    border-radius: 0.5rem;
+    resize: none;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-3{
+    display:flex;
+    flex-direction: row;
+    width:90%;
+    height: 14%;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-3 div:nth-child(1),
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-3 div:nth-child(2){
+    width:20%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: left;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-3 div:nth-child(2){
+    width:65%;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-3 div label{
+    width: 100%;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-3 div label span{
+    color:red;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-3 div input,
+.container .referral-body .third-part .right-side .right-side-main-div .right-side-main-div-3 div textarea{
+    border:2px solid #bfbfbf;
+    width:100%;
+    height: 50%;
+    resize:none;
+    outline:none;
+}

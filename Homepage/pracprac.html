@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+<body class="overflow-visible h-screen bg-slate-900">
+    
+    <nav class="w-full h-[50px] bg-sky-800 flex flex-row justify-between items-center fixed   text-white   top-0 left-0 right-0 z-50 opacity-100">
+
+        <div class="w-[5%] h-[80%]  ml-[0.7%]">
+
+        <button id="menu" class="fa-solid fa-bars text-4xl " style="color: #ffffff;"></button>
+
+        </div>
+
+
+        <div class="w-[17%] h-full text-white flex flex-row justify-between items-center mr-[2%] ">
+            <label onclick ="scrollToContent()" id="home" class="cursor-pointer  hover:scale-125 transform transition-transform duration-300 ease-in-out">Home</label>
+            <label id="about" class="cursor-pointer hover:scale-125 transform transition-transform duration-300 ease-in-out ">About</label>
+            <label id="portfolio" class="cursor-pointer hover:scale-125 transform transition-transform duration-300 ease-in-out">Sign Up</label>
+
+        </div>
+    </nav>
+
+
+<!-- <aside id="aside" class="w-[15%] h-[197.5%] bg-sky-800 opacity-90 flex flex-col justify-start items-center border border-slate-800 absolute  transition-opacity duration-700 ease-in-out">
+
+    <div class="w-[80%] h-[30%] flex flex-col justify-center items-center border-slate-700 ">
+        <ul class="social-links flex flex-col justify-between items-center w-[50%] border border-slate-400">
+            <li class="cursor-pointer"><a href="#">Twitter</a></li>
+            <li class="cursor-pointer"><a href="#">Facebook</a></li>
+            <li class="cursor-pointer"><a href="">Instagram</a></li>
+        </ul>
+    </div>
+
+</aside> -->
+
+
+
+
+ 
+
+
+    <div id="homescroll" class="w-full h-full flex flex-col justify-start items-center overflow-visible" >
+         
+        <div class="w-full h-[800px]  bg-cover flex mt-[100px]" style="background-image: url('imgs/animangascenery.gif'); opacity: 0.1;">
+            
+        </div>
+        
+
+        <div class="w-full h-[1000px]  flex flex-col justify-start items-center   p-8 absolute text-white mt-[100px] ">
+            <h1 class="text-4xl font-bold mb-4 ">Welcome to [Your Website Name]!</h1>
+            <p class="text-xl mb-8 ">🏡 Home Sweet Home</p>
+        
+            <p class="text-lg mb-6 ">At [Your Website Name], we believe in creating a digital space that feels just like home. Whether you're here for inspiration, information, or just to explore, we're thrilled to have you.</p>
+        
+            <div class="flex flex-col justify-center items-center backdrop-brightness-150 backdrop-blur-3xl rounded-3xl">
+                <div class="flex flex-col items-center">
+                    <h2 class="text-2xl font-bold mb-4">What We Offer</h2>
+                    <p class="text-lg mb-4">Inspiration Galore: Dive into a world of creativity and inspiration. From articles to galleries, we've curated content to spark your imagination.</p>
+                    <p class="text-lg mb-4">Knowledge Hub: Explore our vast knowledge base on [Your Website's Niche]. Learn something new or deepen your understanding of topics you're passionate about.</p>
+                    <p class="text-lg">Connect with Us: Join our community! Engage with like-minded individuals, share your thoughts, and be a part of the [Your Website Name] family.</p>
+                </div>
+        
+                <div class="col-span-2 ">
+                    <h2 class="text-2xl font-bold mb-4">Featured Content</h2>
+                    <ul class="list-disc pl-6 mb-6">
+                        <li class="text-lg mb-2">🌟 Article of the Week: [Title of the Featured Article]</li>
+                        <li class="text-lg mb-2">🎨 Gallery Showcase: Explore stunning visuals and artistic creations.</li>
+                        <li class="text-lg">📚 Educational Spotlight: Discover our featured educational resource.</li>
+                    </ul>
+
+                    <div class="felx items-center">
+            
+                    
+                    
+                    </div>
+                </div>
+            </div>
+        
+            <div class="mb-[5px] mt-[15px]">
+                <h2 class="text-2xl font-bold mb-4">Stay Updated</h2>
+                <p class="text-lg mb-4">Don't miss out on the latest updates and exciting content. Subscribe to our newsletter for a monthly dose of [Your Website's Niche] goodness delivered straight to your inbox.</p>
+            </div>
+        
+            <p class="text-lg flex flex-col">Ready to embark on a journey of discovery? <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700">Start exploring now!</button></p>
+        </div>  
+    </div>
+
+ 
+    <div id="myModal" class="w-[50%] h-[70%] absolute inset-0 flex items-center justify-center  delay-100  mt-[7%] ml-[25%] bg-white z-30">
+        <!-- Modal background -->
+        <div class="modal-background fixed inset-0  bg-black opacity-30 z-0"></div>
+
+        <div class="w-[100%] h-[100%] border border-slate-100 bg-white z-20">
+
+            <div class="w-[98%] h-[60%] -mb-[1000px]">
+
+            <picture class="w-30% h-full ml-[1%] mt-[27.2%]  bg-cover   flex " style="background-image: url('imgs/jw-5d1448566f5612.30151118.jpeg'); "></picture>
+
+            </div>
+
+            <div class="w-full h-[40%] bg-black flex flex-row ">
+              
+            <picture class="w-[30%] h-[90%] ml-[1%] mt-[40%]  bg-cover   flex " style="background-image: url('imgs/jw-5d1448566f5612.30151118.jpeg'); "></picture>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="w-full h-full flex flex-col justify-start items-center overflow-visible ">
+
+
+        <div class="w-full h-[800px]  bg-cover bg-no-repeat bg-center  flex mt-[100px]  transform transition-transform duration-300 ease-in-out  " style="background-image: url('imgs/l3ovl3k91j101.gif'); opacity: 0.2;">
+
+            
+            
+        </div>
+        
+    </div>
+
+</body>
+
+
+    <script src="src/prac.js"></script>
+
+   
+
+</html>

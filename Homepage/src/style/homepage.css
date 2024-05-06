@@ -1,0 +1,2817 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#edit_footer_label{
+
+    font: bold;
+    color: white;
+
+}
+
+#home_but{
+
+    margin-left: 1%;
+    font-size: 16pt;
+    cursor: pointer;
+    width: 30%;
+
+}
+
+body {
+
+    height: 100vh;
+    background-color: whitesmoke;
+    overflow: hidden;
+
+}
+
+#mama_div{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+}
+
+#everything_under_nav{
+
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.fa-circle{
+
+    display: none;
+    position: fixed;
+    margin-right: 10.6%;
+    font-size: 9pt;
+    cursor: pointer;
+    
+
+}
+
+.fa-bell{
+
+    margin-right: 2%;
+    margin-top: 0.1%;
+    font-size: 17pt;
+    cursor: pointer;
+
+}
+
+nav{
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 5%;
+    background-color:#304D30;
+    justify-content: start;
+    align-items: center;
+    z-index: 2;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+
+}
+
+.fa-bars {
+
+    z-index: 10;
+    color: white;
+    width: 2%;
+    height: 60%;
+    font-size: 20pt;
+    margin-left: 1%;
+    cursor: pointer;
+   
+
+}
+
+.fa-user{
+
+    margin-left: 1%;
+    color: white;
+
+
+}
+
+#user_and_notification{
+
+    width: 30%;
+    margin-left: 35%;
+    justify-content: end;
+    display: flex;
+    flex-direction: row;
+    font-size: 16pt;
+
+}
+
+#username{
+
+    margin-left: 0.5%;
+    margin-right: 2%;
+    cursor: pointer;
+
+}
+
+#admin_but:hover,
+#dashboard_inc_but:hover,
+#dashboard_outc_but:hover,
+#dashboard_er_opd_but:hover,
+#history_log_but:hover,
+#settings_but:hover,
+#help_but:hover,
+#logout_but:hover{
+    
+    background-color: #cc9966;
+    cursor: pointer;
+
+}
+
+#admin_but,
+#dashboard_inc_but,
+#dashboard_outc_but,
+#dashboard_er_opd_but,
+#history_log_but,
+#settings_but,
+#help_but,
+#logout_but{
+
+
+    cursor: pointer;
+    width: 90%;
+    height: 10%;
+    text-align:center;
+    justify-content: center;
+    align-items: center;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    color: black;
+    border-bottom: 2px solid black;
+
+}
+
+#user_settings{
+
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 20%;
+    height: 50%;
+    top: 0;
+    left: 0;
+    margin-left: 78%;
+    margin-top: 2.5%;
+    position: absolute;
+    background: linear-gradient(135deg, rgba(250, 0, 0, 0.1), rgba(255, 1, 1, 0));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+}
+
+
+#sidebar{
+
+    position: fixed;
+    display: none;
+    width: 16%;
+    height: 100%;
+    flex-direction: column;
+    background-color: rgba(3, 126, 91, 0.5); 
+    backdrop-filter: blur(10px);
+    z-index: 10;
+
+
+}
+
+#logout_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 6%;
+    bottom: 0%;
+    font-size: 20pt;
+    margin-bottom: 20%;
+    margin-left: 7%;
+    position: fixed;
+
+
+}
+
+#logout{
+
+    width: 80%;
+    height: 80%;
+    margin-right: 20%;
+    color: white;
+
+
+}
+
+#logout_label{
+
+    cursor: pointer;
+
+}
+
+#logout_label:hover{
+
+    color: black;
+
+}
+
+.fa-right-from-bracket{
+
+    padding-right: 6%;
+
+}
+
+#side_bar_mama{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+
+}
+
+#side_bar_logo{
+
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top:1%;
+
+}
+
+#side_bar_tab{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    transition: width 0.5s, margin-left 0.5s;
+
+}
+
+#pat_reg_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+   
+
+}
+
+
+#bghmc_logo{
+
+    width: 30%;
+
+}
+
+
+#patient_reg{
+
+    width: 100%;
+    height: 7%;
+    font-size: 16pt;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    cursor: pointer;
+
+}
+
+
+#online_referral{
+
+    width: 100%;
+    height: 15%;
+    font-size: 16pt;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+
+}
+
+
+
+
+
+#sub_menu1{
+
+    width: 95%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-left: 4% ; 
+    color: white;
+   
+
+
+}
+
+#sub_menu2{
+
+    width: 100%;
+    height: 50%;
+    display: none;
+    background-color: #087a4c;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+
+}
+
+#online_ref_tab{
+
+    width: 100%;
+    height: 34%;
+    display: flex;
+    align-items: center;
+    margin-left: 3%;
+    color: white;
+    cursor: pointer;
+
+}
+
+#incoming{
+
+    display: none;
+    width: 100%;
+    height: 39%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #087a4c ;
+    color: white;
+    cursor: pointer;
+
+}
+
+
+#outgoing{
+
+    display: none;
+    width: 100%;
+    height: 39%;
+    background-color: #087a4c ;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+
+}
+
+
+.inc_out_label{
+
+    margin-right: 15%;
+    margin-left: 1%;
+    cursor: pointer;
+
+}
+
+.inc_out_label:hover{
+
+ color: black;
+
+}
+
+#incoming_tab{
+
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+}
+
+#incoming_tab_upper_part_label{
+
+    width: 90%;
+    display: flex;
+    margin-top: 1%;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center ;
+
+}
+
+#incoming_tab_upper_part{
+
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 3.5%;
+    margin-top: 0.3%;
+    justify-content:start;
+    align-items: center;
+
+}
+
+#referral_no_label{
+
+    margin-left: 1.2%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#incoming_tab_lname_label{
+
+    
+    margin-left: 6.5%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#incoming_tab_fname_label{
+
+    margin-left: 7%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#incoming_tab_mname_label{
+
+    margin-left: 6.9%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#case_type_label{
+    
+    margin-left: 5.7%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#agency_label{
+
+    margin-left: 3%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#Status{
+
+    margin-left: 13%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#small_select_box{
+
+    margin-left: 1%;
+    width: 6%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#long_select_box{
+
+    margin-left: 1%;
+    width: 15%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#medium_select_box{
+
+    margin-left: 1%;
+    width: 10%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+
+}
+
+#referral_no_textbox{
+
+    margin-left: 1%;
+    width: 10%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#incoming_tab_lname{
+
+
+    margin-left: 1%;
+    width: 10%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+
+}
+
+#incoming_tab_fname{
+
+    margin-left: 1%;
+    width: 10%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+
+}
+
+#incoming_tab_mname{
+
+    margin-left: 1%;
+    width: 10%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+
+.incoming_tab_upper_button{
+
+    margin-left: 1%;
+    width: 8%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+
+
+
+
+#pat_form_label{
+
+    margin-right: 5%;
+    margin-left: 1%;
+    cursor: pointer;
+
+}
+
+#pat_form_label:hover{
+
+color: black;
+
+}
+
+#pat_label{
+
+    margin-left: 2.5%;
+    cursor: pointer;
+
+}
+
+#pat_label:hover{
+
+    color: black;
+
+}
+
+#online_ref_label{
+
+    margin-left: 3%;
+    cursor: pointer;
+
+}
+
+#online_ref_label:hover{
+
+   color: black;
+
+}
+
+
+#home{
+
+    display: flex;
+    width:100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+#bghmc_logo2{
+
+    position: fixed;
+    width: 25%;
+    opacity: 0.15;
+
+}
+
+
+#sdn_label{
+
+    font-size: 80pt;
+    color: black;
+
+}
+
+#title{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#bghmc_label{
+
+    font-size: 25pt;
+    color: black;
+
+}
+
+#search{
+
+    width: 30%;
+    height: 90%;
+    margin-left: 66%;
+    top: 0;
+    margin-top: 2.5%;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: start;
+    align-items: end;
+
+
+}
+
+.fa-magnifying-glass{
+
+    display: none;
+    flex-direction: row;
+    text-align: center;
+
+}
+
+#check_reg_label{
+
+    display: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+}
+
+
+#search_but{
+    width: 10%;
+    height: 6%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #7FC7D9;
+    color: white;
+    cursor: pointer;
+    font-size: 15pt;
+    text-align: center;
+    transition: width 0.1s, margin-left 0.3s; /* Reduced duration to 0.3s */
+    border-radius: 8px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#search_form {
+
+    display: none;
+    flex-direction: column;
+    width: 100%; /* Start with a width of 0 */
+    height: 95%;
+    justify-content: start;
+    align-items: start;
+    background-color: white;
+    transition: width 0.6s; /* Set transition only for width */
+    border-radius: 1%;
+    background-color: khaki;
+    border-radius: 1%;
+    z-index: 10;
+    background: linear-gradient(135deg, rgba(200, 221, 9, 0.1), rgba(230, 215, 5, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+}
+
+#search_form.active {
+    width: 100%; /* Expand to full width when active */
+    transition: width 0.5s;
+    transition-delay: 0.1s;
+}
+
+#search_label_container{
+
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 2%;
+    justify-content: start;
+    align-items: center;
+    font-size: 13pt;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#search_last_name{
+
+    margin-left: 2.2%;
+
+
+}
+
+#search_first_name{
+
+    margin-left: 19.6%;
+
+}
+
+#search_middle_name{
+
+    margin-left: 19%;
+
+}
+
+#search_main_button{
+
+    width: 15%;
+    height: 4%;
+    margin-top: 2%;
+    margin-left: 43%;
+    border-radius: 8px ;
+    background-color: skyblue;
+
+}
+
+
+#search_textbox_container{
+
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 3.5%;
+    justify-content: space-around;
+
+}
+
+.search_textbox{
+
+    width: 29%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#name_birthday_search_label_container{
+
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    border: 2px solid black;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+    margin-left: 1%;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+
+}
+
+#name_label{
+
+    margin-left: 10%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#bday_label{
+
+
+    margin-right: 10%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#search_patient_list{
+
+    width: 100%;
+    height: 83.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    overflow: auto;
+
+
+}
+
+
+
+.patient{
+
+
+    display: flex;
+    width: 97.6%;
+    height: 10%;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    border: 2px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+
+
+}
+
+.patient_id_date{
+
+
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 95%;
+    margin-left: 2%;
+    margin-top: 1%;
+    font-size: 14pt;
+
+}
+
+.patient_name_status{
+
+
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    width: 95%;
+    margin-left: 2%;
+    margin-top: 1%;
+    font-size: 14pt;
+
+}  
+
+
+#home_footer{
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #232D3F ;
+    color: white;
+
+}
+
+
+#patient_registration_form {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: whitesmoke;
+    background-image: url('build/praprac/main_bg3.jpg');
+    background-size: cover; /* This ensures the background image covers the entire element */
+    background-repeat: no-repeat; /* Prevents the background image from repeating */
+    /* Add other background properties as needed */
+}
+
+#form{
+
+    width: 99%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items:  center;
+
+}
+
+#first_column{
+
+    width: 32%;
+    height: 98%;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+}
+
+#personal_information{
+ 
+    width: 97%;
+    height: 75%;
+    border: 2px solid #444444;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    border-radius: 1%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+
+}
+
+#personal_inf_label{
+
+    width: 50%;
+    font-size: 18pt;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-right: 46%;
+
+}
+
+#others_label{
+
+    font-size: 18pt;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-right: 84%;
+
+}
+
+#others{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 97%;
+    height: 16%;
+    margin-left: 1%;
+    margin-top: 1%;
+    border: 2px solid #444444;
+    border-radius: 1%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+}
+
+#others_textbox_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    height: 23%;
+
+}
+
+#others_label_container{
+
+    display: flex;
+    width: 84%;
+    justify-content: space-between;
+    margin-bottom: 1%;
+
+}
+
+#hospital_no_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+
+}
+
+#PHIC_label{
+
+    margin-right: 37.5%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+
+}
+
+#hospital_no_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#phic_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+
+
+#second_column{
+
+
+    width: 32%;
+    height: 98%;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+}
+
+
+#third_column{
+
+
+    width: 32%;
+    height: 100%;
+    margin-top: 0.8%;
+    margin-left: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+
+}
+
+#last_name_textbox{
+
+    width: 70%;
+    height: 6%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#first_name_textbox{
+
+    width: 70%;
+    height: 6%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+.long_textboxes_label{
+
+    margin-right: 57%;
+    padding-bottom: 0.7%;
+    margin-top: 1%;
+    margin-left: 1%;
+    font-size: 13pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+
+#last_name_label{
+
+    margin-right: 57%;
+    padding-bottom: 0.7%;
+    margin-top: 2%;
+    margin-left: 1%;
+    font-size: 13pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+
+.two_textboxes_section{
+
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    justify-content: space-between;
+    align-items: center;
+    height: 21%;
+    margin-top: 2%;
+
+}
+
+.inside_two_textboxes_section_one{
+
+    width: 60%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    display: flex;
+
+}
+
+.inside_two_textboxes_section_two{
+
+    display: flex;
+    flex-direction: column;
+    width: 31%;
+    height: 100%;
+    justify-content: start;
+    align-items: start;
+    margin-right: 4%;
+    margin-top: 4%;
+
+}
+
+#middle_name_textbox{
+
+    width: 95%;
+    height: 26%;
+    border-radius: 5px;
+    margin-left: 4.7%;
+    border: 2px solid #B6BBC4;
+
+}
+
+#birthdate_textbox{
+
+    width: 95%;
+    height: 26%;
+    border-radius: 5px;
+    margin-left: 4.7%;
+    border: 2px solid #B6BBC4;
+
+}
+
+#medium_textboxes_label_one{
+
+    margin-top: 1%;
+    margin-bottom: 1.5%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+
+}
+
+#Birthdate{
+
+    margin-bottom: 1.5%;
+    margin-right: 75%;
+    margin-left: 3%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-bottom: 1%;
+
+}
+
+#name_ext{
+
+    width: 95%;
+    height: 26%;
+    border-radius: 5px;
+    margin-left: 4.7%;
+    border: 2px solid #B6BBC4;
+    margin-bottom: 9% ;
+
+}
+
+
+#age{
+
+    width: 95%;
+    height: 26%;
+    border-radius: 5px;
+    margin-left: 4.7%;
+    border: 2px solid #B6BBC4;
+    margin-bottom: 9%;
+
+}
+
+.m_name_birthday_labels{
+
+    margin-bottom: 1.5%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    width: 90%;
+
+}
+
+
+#gen_civstat_label_container{
+
+    display: flex;
+    flex-direction: row;
+    width: 75%;
+    margin-top: 2%;
+}
+
+#gender_civiltat_container{
+
+    display: flex;
+    flex-direction: row;
+    width: 71%;
+    justify-content: space-between;
+    align-items: center;
+    height: 7%; 
+    
+
+}
+
+#gender_label{
+
+    width: 90%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-left: 3%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+
+}
+
+#civilstat_label{
+
+    width: 90%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-right: 25%;
+    margin-left: 3%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+   
+
+}
+
+#gender{
+
+    width: 35%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#civilstat{
+
+    width: 60%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+    margin-right: 0.8%;
+
+}
+
+
+#religion_occupation_container{
+    
+    display: flex;
+    flex-direction: column;
+    width: 71%;
+    justify-content: start;
+    align-items: start;
+    height: 20%;
+    margin-top: 1%;
+
+
+}
+
+
+
+#religion_textbox{
+
+    width: 98%;
+    height: 26%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+    margin-right: 0.8%;
+    margin-top: 1%;
+
+}
+
+#occupation_textbox{
+
+    width: 98%;
+    height: 26%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+    margin-right: 0.8%;
+    margin-top: 1%;
+
+}
+
+
+
+#religion_label{
+
+    width: 90%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-right: 25%;
+    margin-left: 1%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+
+}
+
+
+#occupation_label{
+
+    width: 90%;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-right: 25%;
+    margin-left: 1%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-top: 1%;
+    
+}
+
+
+#nationality_passport_container_label{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    margin-top: 1%;
+
+}
+
+#nationality_passport_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70.7%;
+    height: 5%;
+    margin-right: 0.6%;
+
+}
+
+#nationality_textbox{
+
+    width: 47%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+    margin-right: 0.8%;
+    margin-top: 1%;
+
+}
+
+#passport_no_textbox{
+
+    width: 47%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+    margin-right: 0.8%;
+    margin-top: 1%;
+
+}
+
+
+#passport_label{
+
+
+    margin-right: 24%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+
+}
+
+#nationality_label{
+
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+
+}
+
+
+#classification{
+
+    
+    display: none;
+    width: 97.2%;
+    height: 5%;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3%;
+    margin-left: 0.8%;
+    border: 1px solid red;
+
+}
+
+
+
+#er_button{
+
+    width: 23%;
+    height: 70%;
+    background-color: red;
+
+}
+
+
+#ob_button{
+
+    width: 23%;
+    height: 70%;
+    background-color: purple;
+
+}
+
+#opd_button{
+
+    width: 23%;
+    height: 70%;
+    background-color: green;
+
+}
+
+#pcr_button{
+
+    width: 23%;
+    height: 70%;
+    background-color: blue;
+
+}
+
+/* Second Collumn */
+
+#permanent_address_label{
+
+    width: 50%;
+    font-size: 18pt;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-right: 46%;
+
+}
+
+#permanent_address{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 97%;
+    height: 45%;
+    border: 2px solid #444444;
+    border-radius: 1%;
+    border-radius: 1%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+}
+
+#house_no_street_label{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    width: 84%;
+    margin-bottom: 0.7%;
+}
+
+#house_no_street_textbox_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+
+#house_no_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+}
+
+#street_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+}
+
+#house_no_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#street_block_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-right: 25%;
+}
+
+#region_province_label_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 84%;
+    margin-top: 1%;
+    margin-bottom: 0.7%;
+    
+
+}
+
+#region_province_selection_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+#region_selection{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#province_selection{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#region_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#province_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 44%;
+
+}
+
+#city_baranggay_label_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 84%;
+    margin-top: 1%;
+    margin-bottom: 0.7%;
+
+}
+
+#city_baranggay_selection_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+#city_selection{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#baranggay_selection{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#city_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#baranggay_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 28%;
+
+}
+
+
+#hphone_mobile_no_label_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    width: 84%;
+    margin-bottom: 0.7%;
+}
+
+#hphone_mobile_no_textbox_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+
+#home_phone_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#mobile_no_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+
+#hphone_no_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#mobile_phone_no_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-right: 18%;
+}
+
+#email_label_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    width: 84%;
+    margin-bottom: 0.7%;
+
+}
+
+#email_textbox_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+#email_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-bottom: 0.6%;
+    margin-left: 0.5%;
+
+}
+
+#email_add_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#email_add_textbox_ca{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+
+#current_address_label{
+
+    width: 100%;
+    font-size: 18pt;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+
+}
+
+#current_address{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 97%;
+    height: 45%;
+    border: 2px solid #444444;
+    border-radius: 1%;
+    border-radius: 1%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+
+}
+
+
+#house_no_street_textbox_container_ca{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+
+#house_no_textbox_ca{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#street_textbox_ca{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+
+#region_province_label_container_ca{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 84%;
+    margin-top: 1%;
+    margin-bottom: 0.7%;
+    
+
+}
+
+#region_province_selection_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+#region_selection_ca{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#province_selection_ca{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+
+#region_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#province_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 44%;
+
+}
+
+#city_baranggay_label_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 84%;
+    margin-top: 1%;
+    margin-bottom: 0.7%;
+
+}
+
+#city_baranggay_selection_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+#city_selection_ca{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#baranggay_selection_ca{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#city_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#baranggay_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 28%;
+
+}
+
+
+#hphone_mobile_no_label_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    width: 84%;
+    margin-bottom: 0.7%;
+}
+
+#hphone_mobile_no_textbox_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+
+#hphone_textbox_ca{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#mobile_no_textbox_ca{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#hphone_no_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#mobile_phone_no_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-right: 18%;
+}
+
+#email_label_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    width: 84%;
+    margin-bottom: 0.7%;
+
+}
+
+#email_textbox_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+#email_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-bottom: 0.6%;
+    margin-left: 0.5%;
+
+}
+
+#email_add_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+
+
+#curradd_same_as_perm_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 97%;
+    margin-top: 1%;
+}
+
+#same_as_perm_add_label{
+
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    font-size: 11pt;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align:start;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 35%;
+
+}
+
+#confirmation{
+
+    
+    display: flex;
+    width: 30%;
+    height: 7%;
+    justify-content: space-between;
+    align-items: center;
+    
+
+}
+
+#add_button{
+
+    width: 40%;
+    height: 70%;
+    background-color: green;
+    border-radius: 10%;
+
+}
+
+#clear_button{
+
+    width: 40%;
+    height: 70%;
+    background-color: red;
+    border-radius: 10%;
+
+}
+
+#curr_workplace_label{
+
+    width: 100%;
+    font-size: 18pt;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-right: 46%;
+    margin-left: 50%;
+
+}
+
+#current_workplace_address{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 97%;
+    height: 42.4%;
+    border: 2px solid #444444;
+    border-radius: 1%;
+    border-radius: 1%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+}
+
+#house_no_street_label_curr_work{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    width: 84%;
+    margin-bottom: 0.7%;
+}
+
+#house_no_label_curr_work{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#street_block_label_curr_work{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-right: 25%;
+}
+
+#house_no_street_textbox_container_curr_work{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+#house_no_textbox_curr_work{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+}
+
+#street_textbox_curr_work{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+}
+
+
+
+#region_province_label_container_curr_work{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 84%;
+    margin-top: 1%;
+    margin-bottom: 0.7%;
+    
+}
+
+#region_label_curr_work{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#province_label_curr_work{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 44%;
+
+}
+
+
+#region_province_selection_container_curr_work{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    height: 10%;
+
+}
+
+#region_selection_curr_work{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#province_selection_curr_work{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+
+
+#city_baranggay_label_container_curr_work{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 84%;
+    margin-top: 1%;
+    margin-bottom: 0.7%;
+
+}
+
+#city_label_curr_work{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#baranggay_label_curr_work{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 28%;
+
+}
+
+#city_baranggay_selection_container_curr_work{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    height: 10%;
+
+}
+
+#city_selection_curr_work{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#baranggay_selection_curr_work{
+
+    width: 46%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#name_of_workplace_mobile_no_label_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    width: 84%;
+    margin-bottom: 0.7%;
+
+}
+
+#name_of_workplace_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#mobile_phone_landline_no_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-right: 1%;
+}
+
+#name_of_workplace_mobile_no_textbox_container{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+#name_of_workplace_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+}
+
+#mobile_no_textbox{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+}
+
+#email_label_container_curr_work{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    width: 84%;
+    margin-bottom: 0.7%;
+
+}
+
+#email_textbox_container_curr_work{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+#email_label_curr_work{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-bottom: 0.6%;
+    margin-left: 0.5%;
+
+}
+
+#email_add_textbox_curr_work{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#for_ofw_label{
+
+    width: 100%;
+    font-size: 18pt;
+    margin-left: 3%;
+    margin-top: 1%;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#for_ofw{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 97%;
+    height: 52%;
+    border: 2px solid #444444;
+    border-radius: 1%;
+    border-radius: 1%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+
+}
+
+
+#employers_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+
+}
+
+#employers_textbox_container{
+
+    width: 84%;
+    height: 7%;
+
+}
+
+#employers_textbox{
+
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+.all_label_container_in_ofw{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 84%;
+    margin-top: 1%;
+    margin-bottom: 0.7%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+
+}
+
+#_ofw_occupation_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#place_of_work_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 37%;
+ 
+}
+
+
+.all_textbox_container_in_ofw{
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 84%;
+    height: 8%;
+
+}
+
+.all_textbox_in_ofw{
+
+    width: 45%;
+    height: 100%;
+    border-radius: 5px;
+    border: 2px solid #B6BBC4;
+
+}
+
+#house_no_ofw_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#street_ofw_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 23%;
+
+}
+
+#region_ofw_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#province_ofw_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 43.5%;
+
+}
+
+#municipality_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#country_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 25.5%;
+
+}
+
+#office_phone_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 0.5%;
+
+}
+
+#mobile_phone_ofw_label{
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 13pt;
+    margin-left: 29.5%;
+
+}
+
+#empty_modal_alert{
+
+    display: none;
+    width: 100%;
+    justify-content: center;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+#empty_modal{
+
+    display: none;
+    flex-direction: column;
+    width: 30%;
+    height: 30%;
+    margin-left: 0%; 
+    border-radius: 2%;
+    border: 1px solid black;
+    background-color: whitesmoke;
+    z-index: 10;
+    
+}
+
+
+#warning_x{
+
+    display: flex;
+    width: 100%;
+    height: 10%;
+    margin-top:3% ;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+
+}
+
+
+.fa-triangle-exclamation{
+
+
+    color: black;
+    font-size: 15pt;
+    margin-left: 1%;
+
+}
+
+.fa-x{
+
+    color: black;
+    margin-left: 73%;
+    cursor: pointer;
+
+
+}
+
+#warning_label{
+
+    color: black;
+    margin-left: 3%;
+    font-size: 15pt;
+
+}
+
+#message_container{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+    width: 99.7%;
+    height: 20%;
+    border: 1px solid black;
+    color: black;
+    border-right: none;
+    border-left: none;
+
+}
+
+
+#message_label{
+
+    font-size: 15pt;
+
+}
+
+#buttons_container{
+
+    display: flex;
+    width: 90%;
+    height: 20%;
+    margin-top: 4%;
+    margin-left: 8% ;
+    flex-direction: row;
+    justify-content: end;
+    align-items: end;
+
+
+}
+
+#buttons_container_2{
+
+    display: none;
+    width: 90%;
+    height: 20%;
+    margin-bottom: 4%;
+    margin-left: 8% ;
+    flex-direction: row;
+    justify-content: end;
+    align-items: end;
+
+}
+
+#no_button{
+
+    display: flex;
+    width: 25%;
+    height: 70%;
+    margin-right: 1%;
+    border-radius: 6%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid black;
+    font-size: 12pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: skyblue;
+    
+
+}
+
+#yes_button{
+
+    display: flex;
+    width: 25%;
+    height: 70%;
+    border-radius: 6%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid black;
+    font-size: 12pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: skyblue;
+    
+
+}
+
+#ok_button{
+
+    display: none;
+    width: 25%;
+    height: 70%;
+    border-radius: 6%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid black;
+    color: black;
+    font-size: 12pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: skyblue;
+    
+}
+
+#no_but{
+
+    display: none;
+    width: 25%;
+    height: 70%;
+    margin-right: 1%;
+    border-radius: 6%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid black;
+    font-size: 12pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: skyblue;
+    
+}
+
+#register_but{
+
+    display: none;
+    width: 25%;
+    height: 70%;
+    border-radius: 6%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid black;
+    font-size: 12pt;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: skyblue;
+    
+}
+
+#invalid_border{
+
+    border: 1px solid #ff0000; /* Red border color */
+ 
+}
