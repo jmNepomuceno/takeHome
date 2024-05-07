@@ -295,11 +295,11 @@ $(document).ready(function(){
         validateElement($(this));
     });
 
-    $('#sdn-autho-confirm-password').blur(function() {
-        validateElement($(this));
-    });
+    // $('#sdn-autho-confirm-password').blur(function() {
+    //     validateElement($(this));
+    // });
 
-    $('#authorization-confirm-btn').blur(function() {
-        validateElement($(this));
-    });
+    // $('#authorization-confirm-btn').blur(function() {
+    //     validateElement($(this));
+    // });
 })

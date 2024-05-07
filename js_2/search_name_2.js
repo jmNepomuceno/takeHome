@@ -320,7 +320,8 @@ $(document).ready(function(){
                     }
 
                     search_query_result.innerHTML += response;
-
+                    search_query_result.style.color = 'white'
+                    search_query_result.style.fontWeight = 'bold'
                     searchSubDiv();
                 }
             })

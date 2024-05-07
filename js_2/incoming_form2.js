@@ -256,6 +256,7 @@ $(document).ready(function(){
                 document.querySelector('.ul-div').innerHTML = ''
                 document.querySelector('.ul-div').innerHTML += response
                 if(document.querySelectorAll('.pat-status-incoming')[index].textContent == 'Pending'){
+                    console.log(259)
                     runTimer(index, 0, 0, 0) // secs, minutes, hours
                     let data = {
                         hpercode : document.querySelectorAll('.hpercode')[index].value,
@@ -281,14 +282,12 @@ $(document).ready(function(){
                         console.log(typeof response.status_interdept)
 
                         if(response.status_interdept){
-                            console.log(279)
                             $('#approval-form').css('display','none')
                             $('.interdept-div-v2').css('display','flex')
                             $('#cancel-btn').css('display','block')
                 
                             updateInterdeptFunc()
                         }else{
-                            console.log(286)
                             $('#approval-form').css('display','flex')
                             $('.approval-main-content').css('display','block')
                             $('.interdept-div-v2').css('display','none')
@@ -382,7 +381,6 @@ $(document).ready(function(){
             }
             runTimer(parseInt($('#running-index').val()), seconds, minutes, hours)
         }
-
     }
 
     function runTimer(index, sec, min, hrs){
@@ -488,6 +486,10 @@ $(document).ready(function(){
                 }
 
                 if(pat_stat[i].textContent === 'On-Process'){
+                    hpercode_arr.push(document.querySelectorAll('.hpercode')[i].value)
+                }
+
+                if(pat_stat[i].textContent === 'Pending'){
                     hpercode_arr.push(document.querySelectorAll('.hpercode')[i].value)
                 }
             }

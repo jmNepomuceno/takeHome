@@ -387,6 +387,13 @@ $(document).ready(function(){
 
                     const myModal = new bootstrap.Modal(document.getElementById('myModal_pat_reg'));
                     myModal.show();
+
+                    for(let i = 0; i < all_input_arr.length; i++){
+                        if(all_input_arr[i].id !== 'hperson-hospital-no'){
+                            all_input_arr[i].value = ""
+                            all_input_arr[i].textContent = ""
+                        }
+                    }
                 }
             })
 

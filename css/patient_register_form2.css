@@ -67,16 +67,13 @@
     background: #3a82f5;
     color:white;
     font-weight: bold;
-    padding-top: 0.5rem; 
-    padding-bottom: 0.5rem; 
-    padding-left: 1rem; 
-    padding-right: 1rem;
     border-radius: 0.5rem;
     outline: 2px solid transparent;
     outline-offset: 2px;
     transition-delay: 150ms;
     transition-duration: 150ms;
     border:none;
+
 }
 
 #patient-reg-form-div #upper-part-div #check-if-registered-btn i{

@@ -609,3 +609,25 @@
     resize:none;
     outline:none;
 }
+
+#myModal-referral .modal-header{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#myModal-referral .modal-header .modal-header-sub{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#myModal-referral .modal-header .modal-header-sub #modal-icon{
+    margin-left:5px;
+}
+
+#myModal-referral .modal-footer #yes-modal-btn{
+    display:none;
+}

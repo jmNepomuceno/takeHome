@@ -54,7 +54,7 @@
 
             <div class="refer-form-btns-div">
                 <button id="submit-referral-btn-id" class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded mr-2" data-bs-toggle="modal" data-bs-target="#myModal-referral">Submit</button>
-                <button id="cancel-referral-btn-id" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-[40px]">Cancel</button>
+                <button id="cancel-referral-btn-id" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-[40px]" data-bs-toggle="modal" data-bs-target="#myModal-referral">Cancel</button>
             </div>
         </div>
 
@@ -275,8 +275,6 @@
 
                 
             </div>
-
-            
         </div>
     </div>
 
@@ -284,13 +282,13 @@
     <div class="modal fade" id="myModal-referral" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header flex flex-row justify-between items-center">
-                    <div class="flex flex-row justify-between items-center">
+                <div class="modal-header">
+                    <div class="modal-header-sub">
                         <h5 id="modal-title" class="modal-title" id="exampleModalLabel">Warning</h5>
-                        <i id="modal-icon" class="fa-solid fa-triangle-exclamation ml-2"></i>
+                        <!-- <i id="modal-icon" class="fa-solid fa-triangle-exclamation"></i> -->
                         <!-- <i class="fa-solid fa-circle-check"></i> -->
                     </div>
-                    <button type="button" class="close text-3xl" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -298,8 +296,8 @@
                     Please fill out the required fields.
                 </div>
                 <div class="modal-footer">
-                    <button id="ok-modal-btn" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" data-bs-dismiss="modal">OK</button>
-                    <button id="yes-modal-btn" type="button" class="hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" data-bs-dismiss="modal">Yes</button>
+                    <button id="ok-modal-btn" type="button" data-bs-dismiss="modal">OK</button>
+                    <button id="yes-modal-btn" type="button" data-bs-dismiss="modal" style="display:none;">Yes</button>
                 </div>
             </div>
         </div>

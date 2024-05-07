@@ -15,7 +15,7 @@
         }
     }
 
-    $sql = "SELECT COUNT(*) FROM incoming_referrals WHERE status='Pending' AND refer_to='Bataan General Hospital and Medical Center'";
+    $sql = "SELECT COUNT(*) FROM incoming_referrals WHERE status='Pending' AND refer_to='". $_SESSION['hospital_name'] ."'";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $incoming_num = $stmt->fetch(PDO::FETCH_ASSOC);

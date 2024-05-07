@@ -95,7 +95,7 @@ $('#notif-sub-div').on('click' , function(event){
   $('#history-log-btn').on('click' , function(event){
     event.preventDefault();
     console.log('here')
-    window.location.href = "../php/history_log.php";
+    window.location.href = "../php_2/history_log.php";
   })
 
   const loadContent = (url) => {
@@ -217,7 +217,8 @@ $('#notif-sub-div').on('click' , function(event){
         success: function(response) {
             // response = JSON.parse(response);  
             console.log(response , " here")
-            window.location.href = "http://192.168.42.222:8035/index.php" 
+            // window.location.href = "http://192.168.42.222:8035/index.php" 
+            window.location.href = "http://10.10.90.14:8079/index.php" 
         }
     });
 })

@@ -9,8 +9,8 @@ $(document).ready(function(){
             // $('#sdn-autho-password, #sdn-autho-confirm-password').removeClass('border-red-600');
             // $('#sdn-autho-password, #sdn-autho-confirm-password').addClass('border-[#666666]');
 
-            sdn_autho_password.style.border = '2px solid #666666'
-            sdn_autho_confirm_password.style.border = '2px solid #666666'
+            sdn_autho_password.style.border = '3px solid #4fe34f'
+            sdn_autho_confirm_password.style.border = '3px solid #4fe34f'
 
         }else{
             // $('#sdn-autho-password, #sdn-autho-confirm-password').addClass('border-red-600');

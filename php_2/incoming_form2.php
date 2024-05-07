@@ -92,13 +92,13 @@
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
 
-    // $sql = "UPDATE hperson SET status=NULL, type=NULL WHERE hpercode='BGHMC-0045' ";
+    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, reception_time=NULL, final_progressed_timer=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0046' ";
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
 
-    // $sql = "DELETE FROM incoming_referrals WHERE hpercode='BGHMC-0045'";
+    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, reception_time=NULL, final_progressed_timer=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0047' ";
     // $stmt = $pdo->prepare($sql);
-    // $stmt->execute(); 
+    // $stmt->execute();
 
     //************************************************************************ */
 

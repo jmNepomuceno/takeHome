@@ -324,8 +324,6 @@
             </div>
 
             <form class="sub-content-registration-form">
-                
-
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Hospital Name</label>
                     <input id="sdn-hospital-name" type="text" class="reg-inputs" required autocomplete="off">

@@ -49,28 +49,12 @@
         $others = true;
     } 
 
-    if(!empty($status)){
+    if(!empty($status) && $status!="All"){
+        $conditions[] = "status = '" . $status . "'";
         $others = false;
     }
 
-    if ($others === false) {
-        if($status === 'All' || $status === 'default'){
-            $conditions[] = "(status='Pending' OR status='On-Process' OR status='Deferred' OR status='Approved' OR status='Cancelled'
-            OR status='Arrived' OR status='Checked' OR status='Admitted' OR status='Discharged' OR status='For Follow Up' OR status='Referred Back')";
-        }
-        else if($status === 'default'){
-            $conditions[] = "status='Pending' OR status='On-Process'";
-        }
-        else{
-            // $conditions[] = "(status='Pending' OR status='On-Process')";
-            $conditions[] = "status = '" . $status . "' OR status='On-Process'";
-        }
-    }
-
-    if($others === true){
-        $conditions[] = "(status='Pending' OR status='On-Process' OR status='Deferred' OR status='Approved' OR status='Cancelled'
-            OR status='Arrived' OR status='Checked' OR status='Admitted' OR status='Discharged' OR status='For Follow Up' OR status='Referred Back')";
-    }
+    
 
     if (count($conditions) > 0) {
         $sql .= implode(" AND ", $conditions);
@@ -148,7 +132,7 @@
                         $row['approved_time'] = "0000-00-00 00:00:00";
                     }
 
-                    $sql = "SELECT final_progress_time FROM incoming_interdept WHERE hpercode='BGHMC-0049'";
+                    $sql = "SELECT final_progress_time FROM incoming_interdept WHERE hpercode='".$row['hpercode']."'";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute();
                     $interdept_time = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -180,6 +164,9 @@
                     if($interdept_time[0]['final_progress_time'] == ""){
                         $interdept_time[0]['final_progress_time'] = "00:00:00";
                     }
+
+                    // immediate approval
+                    
 
                     echo '<tr class="tr-incoming" style="'. $style_tr .'">
                             <td id="dt-refer-no"> ' . $row['reference_num'] . ' - '.$index.' </td>
@@ -219,7 +206,6 @@
                             
                             <td id="dt-status">
                                 <div> 
-                                    
                                     <label class="pat-status-incoming">' . $row['status'] . '</label>
                                     <i class="pencil-btn fa-solid fa-pencil"></i>
                                     <input class="hpercode" type="hidden" name="hpercode" value= ' . $row['hpercode'] . '>
@@ -235,7 +221,6 @@
     
 
     foreach ($data as $row) {
-    
         if(isset($_POST['hpercode_arr'])){
             if(in_array($row['hpercode'], $_SESSION['fifo_hpercode']) && $row['status'] != 'Approved'){
                 continue;
@@ -329,6 +314,11 @@
         }else{
             $interdept_time[0]['final_progress_time'] = "00:00:00";
             $row['sent_interdept_time'] = "00:00:00";
+
+            // calculate for immediate approval
+            if($row['final_progressed_timer'] != NULL){
+                $total_time = $row['final_progressed_timer'];
+            }
         }
 
 
@@ -340,9 +330,11 @@
             $interdept_time[0]['final_progress_time'] = "00:00:00";
         }
 
-        if($row['sent_interdept_time'] == ""){
-            $row['sent_interdept_time'] = "00:00:00";
-        }
+        
+        // if($row['sent_interdept_time'] == NULL){
+        //     $row['sent_interdept_time'] = "00:00:00";
+        //     // $sdn_processed_val = $row['final_progressed_timer'];
+        // }
 
         $stopwatch = "00:00:00";
         if($row['sent_interdept_time'] == "00:00:00"){
@@ -351,6 +343,10 @@
             }
         }else{
             $stopwatch  = $row['sent_interdept_time'];
+        }
+
+        if($row['sent_interdept_time'] == "00:00:00"){
+            $sdn_processed_val = $row['final_progressed_timer'];
         }
 
         echo '<tr class="tr-incoming" style="'. $style_tr .'">
@@ -367,7 +363,7 @@
 
                     <label class="referred-time-lbl"> Referred: ' . $row['date_time'] . ' </label>
                     <label class="reception-time-lbl"> Reception: '. $row['reception_time'] .'</label>
-                    <label class="sdn-proc-time-lbl"> SDN Processed: '. $row['sent_interdept_time'] .'</label>
+                    <label class="sdn-proc-time-lbl"> SDN Processed: '. $sdn_processed_val .'</label>
                     
                     <div class="breakdown-div">
                         <label class="interdept-proc-time-lbl"> Interdept Processed: '. $interdept_time[0]['final_progress_time'].'</label>
