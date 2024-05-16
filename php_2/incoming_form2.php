@@ -76,27 +76,7 @@
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute(); 
 
-    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, status_interdept=NULL, reception_time=NULL, final_progressed_timer=NULL, sent_interdept_time=NULL, last_update=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0050' ";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, status_interdept=NULL, reception_time=NULL, final_progressed_timer=NULL, sent_interdept_time=NULL, last_update=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0048' ";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, status_interdept=NULL, reception_time=NULL, final_progressed_timer=NULL, sent_interdept_time=NULL, last_update=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0051' ";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, status_interdept=NULL, reception_time=NULL, final_progressed_timer=NULL, sent_interdept_time=NULL, last_update=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0062' ";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, reception_time=NULL, final_progressed_timer=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0046' ";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, reception_time=NULL, final_progressed_timer=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0047' ";
+    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, status_interdept=NULL, reception_time=NULL, final_progressed_timer=NULL, sent_interdept_time=NULL, last_update=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0061' ";
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
 
@@ -375,9 +355,17 @@
                                     $stopwatch  = $row['sent_interdept_time'];
                                 }
 
+                                // for sensitive case
+                                $pat_full_name = "";
+                                if($row['sensitive_case'] === 'true'){
+                                    $pat_full_name = "<button id='sensitive-case-btn'> Sensitive Case </button>";
+                                }else{
+                                    $pat_full_name = $row['patlast'] . ", " . $row['patfirst'] . " " . $row['patmiddle'];
+                                }
+
                                 echo '<tr class="tr-incoming" style="'. $style_tr .'">
                                         <td id="dt-refer-no"> ' . $row['reference_num'] . ' - '.$index.' </td>
-                                        <td id="dt-patname">' . $row['patlast'] , ", " , $row['patfirst'] , " " , $row['patmiddle']  . '</td>
+                                        <td id="dt-patname">' . $pat_full_name . '</td>
                                         <td id="dt-type" style="background:' . $type_color . ' ">' . $row['type'] . '</td>
                                         <td id="dt-phone-no">
                                             <label> Referred: ' . $row['referred_by'] . '  </label>
@@ -413,7 +401,6 @@
                                         
                                         <td id="dt-status">
                                             <div> 
-                                                
                                                 <label class="pat-status-incoming">' . $row['status'] . '</label>
                                                 <i class="pencil-btn fa-solid fa-pencil"></i>
                                                 <input class="hpercode" type="hidden" name="hpercode" value= ' . $row['hpercode'] . '>
@@ -632,7 +619,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->

@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    const myModal = new bootstrap.Modal(document.getElementById('myModal-referral'));
+
     const loadContent = (url) => {
         $.ajax({
             url:url,
@@ -38,12 +40,11 @@ $(document).ready(function(){
                 reason_referral_input : $('#reason-referral-input').val(),
                 diagnosis : $('#diagnosis').val(),
 
-
-                bp_input : parseInt($('#bp-input').val()),
+                bp_input : $('#bp-input').val(),
                 hr_input : $('#hr-input').val(),
                 rr_input : $('#rr-input').val(),
                 temp_input : $('#temp-input').val(),
-                weight_input : parseInt($('#weight-input').val()),
+                weight_input : $('#weight-input').val(),
                 pe_findings_input : $('#pe-findings-input').val(),
 
                 // pre-empt data
@@ -53,7 +54,7 @@ $(document).ready(function(){
                 // parent_guardian : "N/A",
                 // phic_member : 'true',
                 // transport : "Ambulance",
-                // referring_doc : "Juan",
+                // referring_doc : "",
 
                 // complaint_history_input : "asdf",
                 // reason_referral_input : "asdf",
@@ -73,7 +74,6 @@ $(document).ready(function(){
                 // parent_guardian : "Potassium",
                 // phic_member : "true",
                 // transport : "Commute",
-                // referring_doc : "Potassium",
 
                 // complaint_history_input : "Potassium",
                 // reason_referral_input : "Potassium",
@@ -87,7 +87,7 @@ $(document).ready(function(){
                 // weight_input : parseInt(12),
                 // pe_findings_input : "Potassium",
             }
-
+            console.log(data)
             if($('#type-input').val() === "OB"){
                 data['fetal_heart_inp'] = $('#fetal-heart-inp').val()
                 data['fundal_height_inp'] = $('#fundal-height-inp').val()
@@ -97,24 +97,21 @@ $(document).ready(function(){
                 data['others_ob_inp'] = $('#others-ob-inp').val()
             }
 
-            for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    console.log(key + " -> " + data[key] + " -> " + typeof data[key]);
-                }
-            }
+            
 
-            function checkValues(obj) {
-                for (var key in obj) {
-                    if (obj[key] === null || obj[key] === "" || isNaN(obj[key]) || typeof obj[key] === 'undefined') {
-                        return false;
+            function areAllValuesFilled(obj) {
+                for (const key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        if (typeof obj[key] === 'string' && !obj[key].trim()) {
+                            return false;
+                        }
                     }
                 }
                 return true;
             }
 
-            var isValid = checkValues(data);
-
-            if(isValid){
+            if (areAllValuesFilled(data)) {
+                console.log('den')
                 $.ajax({
                     url: '../php_2/add_referral_form.php',
                     method: "POST",
@@ -122,25 +119,17 @@ $(document).ready(function(){
                     success: function(response){
                         // response = JSON.parse(response); 
                         console.log(response)
-                        // if(response === "success" && $('#hospital_code').val() == '1437'){
-                        //     $('#notif-circle').removeClass('hidden')
-                        //     // let value = parseInt($('#notif-span').text())
-                        //     // $('#notif-span').text(value + 1)
-                        //     document.getElementById("notif-sound").play()
-                        // }else{
-                        //     //labas ng modal
-                        // }
 
                         $('#modal-title').text('Successed')
                         $('#modal-icon').removeClass('fa-triangle-exclamation')
                         $('#modal-icon').addClass('fa-circle-check')
                         $('#modal-body').text('Successfully Referred')
-
+    
                         $('#yes-modal-btn').css('display' , 'none')
                         $('#ok-modal-btn').text('OK')
                         // $('#myModal').modal('show');
                         
-
+                        
                         $('#ok-modal-btn').on('click' , function(event){
                             if($('#ok-modal-btn').text() == 'OK'){
                                 loadContent('../php_2/default_view2.php')
@@ -148,10 +137,12 @@ $(document).ready(function(){
                         })
                     }
                 })
-            }else{
-                console.log("invalid")
+            } else {
+                myModal.show();
+                console.log('invalid')
             }
 
+            
         }
         
     })

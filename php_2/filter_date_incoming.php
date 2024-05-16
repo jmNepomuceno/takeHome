@@ -29,14 +29,14 @@
 
     // $sql = "SELECT  reception_time, date_time, final_progressed_timer, hpercode FROM incoming_referrals WHERE (status!='Pending' OR status!='On-Process' OR status!='Deferred' OR status!='Deferred' OR status!='Cancelled' OR status!='Discharged' OR status!='Referred Back') AND approved_time BETWEEN :start_date AND :end_date AND refer_to = '" . $_SESSION["hospital_name"] . "'";
 
-    $sql = "SELECT  hpercode, reception_time, date_time, final_progressed_timer, sent_interdept_time FROM incoming_referrals WHERE refer_to = 'Bataan General Hospital and Medical Center' AND date_time >= '$start_date' AND date_time < '$end_date_adjusted'";
+    $sql = "SELECT  hpercode, reception_time, date_time, final_progressed_timer, sent_interdept_time FROM incoming_referrals WHERE refer_to = 'Bataan General Hospital and Medical Center' AND date_time >= :start_date AND date_time <= :end_date_adjusted";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute(['start_date' => $start_date , 'end_date_adjusted' => $end_date_adjusted]);
     $dataRecep = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT hpercode, final_progress_time FROM incoming_interdept WHERE final_progress_date >= '$start_date' AND final_progress_date < '$end_date_adjusted'";
+    $sql = "SELECT hpercode, final_progress_time FROM incoming_interdept WHERE final_progress_date >= :start_date AND final_progress_date < :end_date_adjusted";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute(['start_date' => $start_date , 'end_date_adjusted' => $start_date]);
     $dataRecep_interdept = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // $finalJsonString = json_encode($dataRecep);
@@ -64,30 +64,33 @@
         array_push($recep_arr, $formattedDifference);
     }
 
-     // INTERDEPT REFERRAL AVERAGE
-     $totalSeconds_interdept = 0;
-     foreach ($dataRecep_interdept as $item) {
-         // Extract hours, minutes, and seconds from final_progress_time
-         list($hours, $minutes, $seconds) = explode(':', $item['final_progress_time']);
-         // Convert hours and minutes to seconds and add to total
-         $totalSeconds_interdept += $hours * 3600 + $minutes * 60 + $seconds;
-     }
+    //  // INTERDEPT REFERRAL AVERAGE
+    //  $totalSeconds_interdept = 0;
+    //  foreach ($dataRecep_interdept as $item) {
+    //      // Extract hours, minutes, and seconds from final_progress_time
+    //      list($hours, $minutes, $seconds) = explode(':', $item['final_progress_time']);
+    //      // Convert hours and minutes to seconds and add to total
+    //      $totalSeconds_interdept += $hours * 3600 + $minutes * 60 + $seconds;
+    //  }
 
-     // Calculate the average in seconds
-     $averageSeconds_interdept = (int) ($totalSeconds_interdept / count($dataRecep_interdept));
+    //  // Calculate the average in seconds
+    //  $averageSeconds_interdept = (int) ($totalSeconds_interdept / count($dataRecep_interdept));
 
-     // Optionally, convert the average back to hh:mm:ss format
-     $averageTime_interdept = gmdate("H:i:s", $averageSeconds_interdept);
+    //  // Optionally, convert the average back to hh:mm:ss format
+    //  $averageTime_interdept = gmdate("H:i:s", $averageSeconds_interdept);
 
-    //  echo "Average final_progress_time: $averageTime_interdept";
+    // //  echo "Average final_progress_time: $averageTime_interdept";
 
      // SDN REFERRAL AVERAGE
      $sum_sdn_average = 0;
 
      foreach ($dataRecep as $item) {
-         $sum_sdn_average += strtotime($item['sent_interdept_time']) - strtotime('00:00:00');
+        if($item['sent_interdept_time'] === NULL || $item['sent_interdept_time'] === ""){
+            $sum_sdn_average += strtotime($item['final_progressed_timer']) - strtotime('00:00:00');
+        }else{
+            $sum_sdn_average += strtotime($item['sent_interdept_time']) - strtotime('00:00:00');
+        }
      }
-
      $count_sdn_average = count($dataRecep);
      $average_sdn_average = $sum_sdn_average / $count_sdn_average;
      $average_seconds_sdn_average = (int)$average_sdn_average;
@@ -160,7 +163,9 @@
         'averageSeconds_total' => $averageSeconds_total,
         'averageDuration_total' => $averageDuration_total,
         'fastest_response_final' => $fastest_response_final,
-        'slowest_response_final' => $slowest_response_final
+        'slowest_response_final' => $slowest_response_final,
+        'average_sdn_average' => $formatted_average_sdn_average,
+        'averageTime_interdept' => $averageTime_interdept
     );
 
     // print_r($associativeArray);

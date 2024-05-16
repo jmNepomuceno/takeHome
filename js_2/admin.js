@@ -103,7 +103,7 @@ $(document).ready(function(){
     
     function fetchMySQLData() {
       $.ajax({
-          url: '../php/fetch_interval.php',
+          url: '../php_2/fetch_interval.php',
           method: "POST",
           data : {
               from_where : 'bell'
@@ -193,7 +193,7 @@ $(document).ready(function(){
   
     $('#sdn-title-h1').on('click' , function(event){
       event.preventDefault();
-      window.location.href = "../main.php";
+      window.location.href = "../php_2/main2.php";
     })
   
     $('#incoming-sub-div-id').on('click' , function(event){

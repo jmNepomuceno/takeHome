@@ -880,3 +880,7 @@ for($i = 0; $i < count($class_code); $i++){
         // echo $response;
     }
 ?>
+
+0514
+1. reset the data of the eraa and select value
+2. kapag may laman yung incoming referral, tas naubos na, naaiiwan yung 0 na value sa bell, need i reset and ihide

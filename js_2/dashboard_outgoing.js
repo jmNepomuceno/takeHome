@@ -111,7 +111,7 @@ $('#notif-sub-div').on('click' , function(event){
   
   function fetchMySQLData() {
     $.ajax({
-      url: '../php/fetch_interval.php',
+      url: '../php_2/fetch_interval.php',
       method: "POST",
       data : {
           from_where : 'bell'

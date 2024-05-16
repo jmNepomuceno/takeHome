@@ -163,7 +163,7 @@
     $stmt->bindParam(31, $pat_barangay_ca, PDO::PARAM_STR);
     $stmt->bindParam(32, $pat_email_ca, PDO::PARAM_STR);
     $stmt->bindParam(33, $pat_homephone_no_ca, PDO::PARAM_STR);
-    $stmt->bindParam(34, $pat_mobile_no_ca, PDO::PARAM_INT);
+    $stmt->bindParam(34, $pat_mobile_no_ca, PDO::PARAM_STR);
 
     $stmt->bindParam(35, $pat_bldg_cwa, PDO::PARAM_STR);
     $stmt->bindParam(36, $hperson_street_block_pa_cwa, PDO::PARAM_STR);
@@ -172,7 +172,7 @@
     $stmt->bindParam(39, $pat_municipality_cwa, PDO::PARAM_STR);
     $stmt->bindParam(40, $pat_barangay_cwa, PDO::PARAM_STR);
     $stmt->bindParam(41, $pat_namework_place, PDO::PARAM_STR);
-    $stmt->bindParam(42, $pat_landline_no, PDO::PARAM_INT);
+    $stmt->bindParam(42, $pat_landline_no, PDO::PARAM_STR);
     $stmt->bindParam(43, $pat_email_ca, PDO::PARAM_STR);
 
     $stmt->bindParam(44, $pat_emp_name, PDO::PARAM_STR);

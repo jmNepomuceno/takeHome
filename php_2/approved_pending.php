@@ -80,14 +80,13 @@
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // echo '<pre>'; print_r($data); echo '</pre>';
-
     if($_POST['action'] === "Approve"){
         $sql = "UPDATE hperson SET status='Approved', type='". $data['type'] ."' WHERE hpercode=:hpercode ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':hpercode', $global_single_hpercode, PDO::PARAM_STR);
         $stmt->execute();
-    }else{
+    }
+    else{
         $sql = "UPDATE hperson SET status='Deferred', type='". $data['type'] ."' WHERE hpercode=:hpercode ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':hpercode', $global_single_hpercode, PDO::PARAM_STR);
@@ -267,4 +266,5 @@
     
         $_SESSION['approval_details_arr'] = array_values($_SESSION['approval_details_arr']);
     }
+    
 ?>

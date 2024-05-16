@@ -227,7 +227,7 @@ $(document).ready(function(){
 
     document.addEventListener('mousemove', handleUserActivity);
 
-    const inactivityInterval = 5000; 
+    const inactivityInterval = 115000; 
 
     function startInactivityTimer() {
         inactivityTimer = setInterval(() => {
@@ -701,7 +701,13 @@ $(document).ready(function(){
                 for(let i = 0; i < length_curr_table; i++){
                     toggle_accordion_obj[i] = true
                 }
-                
+
+                // reset the prev value of the eraa and the select element
+                const selectElement = document.getElementById('approve-classification-select');
+                selectElement.value = '';
+                selectElement.value = selectElement.options[0].value;
+                $('#eraa').val("")
+
                 const pencil_elements = document.querySelectorAll('.pencil-btn');
                     pencil_elements.forEach(function(element, index) {
                     element.addEventListener('click', function() {
@@ -865,4 +871,22 @@ $(document).ready(function(){
             }
          })
     });
+
+    // sensitive case
+    $('#sensitive-case-btn').on('click',()=>{
+        console.log('869')
+
+        $('#modal-title-incoming').text('Verification')
+
+        // <input id="sensitive-pw" type="password" placeholder="Input Password">
+        $('#modal-body-incoming').text('')
+        let sensitive_btn = document.createElement('input')
+        sensitive_btn.id = 'sensitive-pw'
+        sensitive_btn.type = 'password'
+        sensitive_btn.placeholder = 'Input Password'
+
+        $('#modal-body-incoming').append(sensitive_btn)
+
+        defaultMyModal.show()
+    })
 })

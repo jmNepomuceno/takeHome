@@ -119,7 +119,7 @@ $(document).ready(function(){
                 }
             }
 
-            zero_inputs = 0;
+            // zero_inputs = 0;
             if(zero_inputs >= 1){
                 console.log('here')
                 $('#modal-body').text('Please fill out the required fields.')
@@ -197,18 +197,18 @@ $(document).ready(function(){
 
             $('#classification-dropdown').css('display', 'none');
 
-            for(let i = 0; i < all_input_arr.length; i++){
-                if($(all_input_arr[i]).prop('id') !== 'hperson-hospital-no'){
-                    $(all_input_arr[i]).val('')
-                    $(all_input_arr[i]).css('pointer-events' , 'auto')
-                    $(all_input_arr[i]).css('background' , 'white')
+        
+            for (var i = 0; i < all_input_arr.length; i++) {
+                // Check if the current element's ID is not equal to 'hperson-hospital-no' and is in the targetIDs array
+                if (all_input_arr[i].id !== 'hperson-hospital-no') {
+                    $(all_input_arr[i]).val('');
+                    $(all_input_arr[i]).css('pointer-events', 'auto');
+                    $(all_input_arr[i]).css('background', 'white');
                 }
-                
-
             }
-
-        }else if($('#yes-modal-btn').text() == 'Register'){
-
+        }
+        else if($('#yes-modal-btn').text() == 'Register'){
+            console.log('asdf')
             const currentDateTime = new Date();
             const year = currentDateTime.getFullYear();
             const month = currentDateTime.getMonth() + 1; // Month is zero-based, so add 1 to get the correct month.
@@ -218,121 +218,49 @@ $(document).ready(function(){
             const seconds = currentDateTime.getSeconds();
             let created_at = (`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`)
 
-            data = {
-                //PERSONAL INFORMATIONS
-                //initial idea is to fetch the last patient hpatcode from the database whenever the patient registration form clicked
-                //16
-                // hpercode : (Math.floor(Math.random() * 1000) + 1).toString(),
-                hpatcode : $('#hpatcode-input').val(),
-                patlast : $('#hperson-last-name').val(),
-                patfirst : $('#hperson-first-name').val(),
-                patmiddle : $('#hperson-middle-name').val(),
-                patsuffix : ($('#hperson-ext-name').val()) ? $('#hperson-ext-name').val() : "N/A",
-                pat_bdate : $('#hperson-birthday').val(),
-                pat_age : $('#hperson-age').val(),
-                patsex : $('#hperson-gender').val(),
-                patcstat : $('#hperson-civil-status').val(), //accepts null = yes
-                relcode : $('#hperson-religion').val(),
-                
-                pat_occupation :($('#hperson-occupation').val()) ? $('#hperson-occupation').val() : "N/A",
-                natcode : $('#hperson-nationality').val(),
-                pat_passport_no : ($('#hperson-passport-no').val()) ? $('#hperson-passport-no').val() : "N/A",
-                hospital_code : $('#hpatcode-input').val(),
-                phicnum : $('#hperson-phic').val(),
-    
-                //PERMANENT ADDRESS
-                pat_bldg_pa : $('#hperson-house-no-pa').val(),
-                hperson_street_block_pa: $('#hperson-street-block-pa').val(),
-                pat_region_pa : $('#hperson-region-select-pa').val(),
-                pat_province_pa : $('#hperson-province-select-pa').val(),
-                pat_municipality_pa : $('#hperson-city-select-pa').val(),
-                pat_barangay_pa : $('#hperson-brgy-select-pa').val(),
-                pat_email_pa :($('#hperson-email-pa').val()) ? $('#hperson-email-pa').val() : "N/A",
-                pat_homephone_no_pa : parseInt(($('#hperson-home-phone-no-pa').val())) ? $('#hperson-home-phone-no-pa').val() : 0,
-                pat_mobile_no_pa : $('#hperson-mobile-no-pa').val(),
-    
-                //CURRENT ADDRESS
-                pat_bldg_ca : $('#hperson-house-no-ca').val(),
-                hperson_street_block_ca: $('#hperson-street-block-ca').val(),
-                pat_region_ca : $('#hperson-region-select-ca').val(),
-                pat_province_ca : $('#hperson-province-select-ca').val(),
-                pat_municipality_ca : $('#hperson-city-select-ca').val(),
-                pat_barangay_ca : $('#hperson-brgy-select-ca').val(),
-                pat_email_ca :($('#hperson-email-ca').val()),
-                pat_homephone_no_ca : parseInt(($('#hperson-home-phone-no-ca').val())) ? $('#hperson-home-phone-no-ca').val() : 0,
-                pat_mobile_no_ca : $('#hperson-mobile-no-ca').val(),
-    
-                // CURRENT WORKPLACE ADDRESS
-                pat_bldg_cwa : $('#hperson-house-no-cwa').val() ? $('#hperson-house-no-cwa').val() : "N/A",
-                hperson_street_block_pa_cwa: $('#hperson-street-block-cwa').val() ? $('#hperson-street-block-cwa').val() : "N/A",
-                pat_region_cwa : $('#hperson-region-select-cwa').val() ? $('#hperson-region-select-cwa').val() : "N/A",
-                pat_province_cwa : $('#hperson-province-select-cwa').val() ? $('#hperson-province-select-cwa').val() : "N/A",
-                pat_municipality_cwa : $('#hperson-city-select-cwa').val() ? $('#hperson-city-select-cwa').val() : "N/A",
-                pat_barangay_cwa : $('#hperson-brgy-select-cwa').val() ? $('#hperson-brgy-select-cwa').val() : "N/A",
-                pat_namework_place : $('#hperson-workplace-cwa').val() ? $('#hperson-workplace-cwa').val() : "N/A",
-                pat_landline_no : parseInt($('#hperson-ll-mb-no-cwa').val()) ? $('#hperson-ll-mb-no-cwa').val() : "N/A",
-                pat_email_cwa : $('#hperson-email-cwa').val() ? $('#hperson-email-cwa').val() : "N/A",
-    
-    
-                // FOR OFW ONLY
-                pat_emp_name : $('#hperson-emp-name-ofw').val() ? $('#hperson-emp-name-ofw').val() : "N/A",
-                pat_occupation_ofw: $('#hperson-occupation-ofw').val() ? $('#hperson-occupation-ofw').val() : "N/A",
-                pat_place_work : $('#hperson-place-work-ofw').val()? $('#hperson-place-work-ofw').val() : "N/A",
-                pat_bldg_ofw : $('#hperson-house-no-ofw').val() ? $('#hperson-house-no-ofw').val() : "N/A",
-                hperson_street_block_ofw : $('#hperson-street-ofw').val() ? $('#hperson-street-ofw').val() : "N/A",
-                pat_region_ofw : $('#hperson-region-select-ofw').val() ? $('#hperson-region-select-ofw').val() : "N/A",
-                pat_province_ofw : $('#hperson-province-select-ofw').val() ? $('#hperson-province-select-ofw').val() : "N/A",
-                pat_city_ofw : $('#hperson-city-select-ofw').val() ? $('#hperson-city-select-ofw').val() : "N/A",
-                pat_country_ofw : $('#hperson-country-select-ofw').val() ? $('#hperson-country-select-ofw').val() : "N/A",
-                pat_office_mobile_no_ofw : parseInt($('#hperson-office-phone-no-ofw').val()) ? $('#hperson-office-phone-no-ofw').val() : 0,
-                pat_mobile_no_ofw : parseInt($('#hperson-mobile-no-ofw').val()) ? $('#hperson-mobile-no-ofw').val() : 0,
-
-                created_at : created_at,
-            }   
-
             // data = {
             //     //PERSONAL INFORMATIONS
             //     //initial idea is to fetch the last patient hpatcode from the database whenever the patient registration form clicked
             //     //16
             //     // hpercode : (Math.floor(Math.random() * 1000) + 1).toString(),
             //     hpatcode : $('#hpatcode-input').val(),
-            //     patlast : "Test 0319",
-            //     patfirst : "Test 0319",
-            //     patmiddle : "Test 0319",
-            //     patsuffix : "N/A",
-            //     pat_bdate : '03/05/2000',
-            //     pat_age : 23,
-            //     patsex : 'Male',
-            //     patcstat :"Test 0319", //accepts null = yes
-            //     relcode : "Test 0319",
+            //     patlast : $('#hperson-last-name').val(),
+            //     patfirst : $('#hperson-first-name').val(),
+            //     patmiddle : $('#hperson-middle-name').val(),
+            //     patsuffix : ($('#hperson-ext-name').val()) ? $('#hperson-ext-name').val() : "N/A",
+            //     pat_bdate : $('#hperson-birthday').val(),
+            //     pat_age : $('#hperson-age').val(),
+            //     patsex : $('#hperson-gender').val(),
+            //     patcstat : $('#hperson-civil-status').val(), //accepts null = yes
+            //     relcode : $('#hperson-religion').val(),
                 
-            //     pat_occupation: "Test 0319",
-            //     natcode : "Test 0319",
-            //     pat_passport_no : "N/A",
+            //     pat_occupation :($('#hperson-occupation').val()) ? $('#hperson-occupation').val() : "N/A",
+            //     natcode : $('#hperson-nationality').val(),
+            //     pat_passport_no : ($('#hperson-passport-no').val()) ? $('#hperson-passport-no').val() : "N/A",
             //     hospital_code : $('#hpatcode-input').val(),
-            //     phicnum : 34252522535,
+            //     phicnum : $('#hperson-phic').val(),
     
             //     //PERMANENT ADDRESS
-            //     pat_bldg_pa : "Test 0319",
-            //     hperson_street_block_pa: "Test 0319",
-            //     pat_region_pa : '3',
-            //     pat_province_pa : "308",
-            //     pat_municipality_pa : '30804',
-            //     pat_barangay_pa : '30804015',
-            //     pat_email_pa :"N/A",
-            //     pat_homephone_no_pa : 0,
-            //     pat_mobile_no_pa : '09823425253',
+            //     pat_bldg_pa : $('#hperson-house-no-pa').val(),
+            //     hperson_street_block_pa: $('#hperson-street-block-pa').val(),
+            //     pat_region_pa : $('#hperson-region-select-pa').val(),
+            //     pat_province_pa : $('#hperson-province-select-pa').val(),
+            //     pat_municipality_pa : $('#hperson-city-select-pa').val(),
+            //     pat_barangay_pa : $('#hperson-brgy-select-pa').val(),
+            //     pat_email_pa :($('#hperson-email-pa').val()) ? $('#hperson-email-pa').val() : "N/A",
+            //     pat_homephone_no_pa : parseInt(($('#hperson-home-phone-no-pa').val())) ? $('#hperson-home-phone-no-pa').val() : 0,
+            //     pat_mobile_no_pa : $('#hperson-mobile-no-pa').val(),
     
             //     //CURRENT ADDRESS
-            //     pat_bldg_ca : "Test 0319",
-            //     hperson_street_block_ca: "Test 0319",
-            //     pat_region_ca : '3',
-            //     pat_province_ca : "308",
-            //     pat_municipality_ca : '30804',
-            //     pat_barangay_ca : '30804015',
-            //     pat_email_ca :"N/A",
-            //     pat_homephone_no_ca : 0,
-            //     pat_mobile_no_ca : '09823425253',
+            //     pat_bldg_ca : $('#hperson-house-no-ca').val(),
+            //     hperson_street_block_ca: $('#hperson-street-block-ca').val(),
+            //     pat_region_ca : $('#hperson-region-select-ca').val(),
+            //     pat_province_ca : $('#hperson-province-select-ca').val(),
+            //     pat_municipality_ca : $('#hperson-city-select-ca').val(),
+            //     pat_barangay_ca : $('#hperson-brgy-select-ca').val(),
+            //     pat_email_ca :($('#hperson-email-ca').val()),
+            //     pat_homephone_no_ca : parseInt(($('#hperson-home-phone-no-ca').val())) ? $('#hperson-home-phone-no-ca').val() : 0,
+            //     pat_mobile_no_ca : $('#hperson-mobile-no-ca').val(),
     
             //     // CURRENT WORKPLACE ADDRESS
             //     pat_bldg_cwa : $('#hperson-house-no-cwa').val() ? $('#hperson-house-no-cwa').val() : "N/A",
@@ -360,7 +288,79 @@ $(document).ready(function(){
             //     pat_mobile_no_ofw : parseInt($('#hperson-mobile-no-ofw').val()) ? $('#hperson-mobile-no-ofw').val() : 0,
 
             //     created_at : created_at,
-            // }
+            // }   
+
+            data = {
+                //PERSONAL INFORMATIONS
+                //initial idea is to fetch the last patient hpatcode from the database whenever the patient registration form clicked
+                //16
+                // hpercode : (Math.floor(Math.random() * 1000) + 1).toString(),
+                hpatcode : $('#hpatcode-input').val(),
+                patlast : "Test 0516E",
+                patfirst : "Test 0516E",
+                patmiddle : "Test 0516E",
+                patsuffix : "N/A",
+                pat_bdate : '2000-05-16',
+                pat_age : 23,
+                patsex : 'Male',
+                patcstat :"Test 0516E", //accepts null = yes
+                relcode : "Test 0516E",
+                
+                pat_occupation: "Test 0516E",
+                natcode : "Test 0516E",
+                pat_passport_no : "N/A",
+                hospital_code : $('#hpatcode-input').val(),
+                phicnum : 34252522535,
+    
+                //PERMANENT ADDRESS
+                pat_bldg_pa : "Test 0516E",
+                hperson_street_block_pa: "Test 0516E",
+                pat_region_pa : '3',
+                pat_province_pa : "308",
+                pat_municipality_pa : '30804',
+                pat_barangay_pa : '30804015',
+                pat_email_pa :"N/A",
+                pat_homephone_no_pa : 0,
+                pat_mobile_no_pa : '09823425253',
+    
+                //CURRENT ADDRESS
+                pat_bldg_ca : "Test 0516E",
+                hperson_street_block_ca: "Test 0516E",
+                pat_region_ca : '3',
+                pat_province_ca : "308",
+                pat_municipality_ca : '30804',
+                pat_barangay_ca : '30804015',
+                pat_email_ca :"N/A",
+                pat_homephone_no_ca : 0,
+                pat_mobile_no_ca : '09823425253',
+    
+                // CURRENT WORKPLACE ADDRESS
+                pat_bldg_cwa : $('#hperson-house-no-cwa').val() ? $('#hperson-house-no-cwa').val() : "N/A",
+                hperson_street_block_pa_cwa: $('#hperson-street-block-cwa').val() ? $('#hperson-street-block-cwa').val() : "N/A",
+                pat_region_cwa : $('#hperson-region-select-cwa').val() ? $('#hperson-region-select-cwa').val() : "N/A",
+                pat_province_cwa : $('#hperson-province-select-cwa').val() ? $('#hperson-province-select-cwa').val() : "N/A",
+                pat_municipality_cwa : $('#hperson-city-select-cwa').val() ? $('#hperson-city-select-cwa').val() : "N/A",
+                pat_barangay_cwa : $('#hperson-brgy-select-cwa').val() ? $('#hperson-brgy-select-cwa').val() : "N/A",
+                pat_namework_place : $('#hperson-workplace-cwa').val() ? $('#hperson-workplace-cwa').val() : "N/A",
+                pat_landline_no : parseInt($('#hperson-ll-mb-no-cwa').val()) ? $('#hperson-ll-mb-no-cwa').val() : "N/A",
+                pat_email_cwa : $('#hperson-email-cwa').val() ? $('#hperson-email-cwa').val() : "N/A",
+    
+    
+                // FOR OFW ONLY
+                pat_emp_name : $('#hperson-emp-name-ofw').val() ? $('#hperson-emp-name-ofw').val() : "N/A",
+                pat_occupation_ofw: $('#hperson-occupation-ofw').val() ? $('#hperson-occupation-ofw').val() : "N/A",
+                pat_place_work : $('#hperson-place-work-ofw').val()? $('#hperson-place-work-ofw').val() : "N/A",
+                pat_bldg_ofw : $('#hperson-house-no-ofw').val() ? $('#hperson-house-no-ofw').val() : "N/A",
+                hperson_street_block_ofw : $('#hperson-street-ofw').val() ? $('#hperson-street-ofw').val() : "N/A",
+                pat_region_ofw : $('#hperson-region-select-ofw').val() ? $('#hperson-region-select-ofw').val() : "N/A",
+                pat_province_ofw : $('#hperson-province-select-ofw').val() ? $('#hperson-province-select-ofw').val() : "N/A",
+                pat_city_ofw : $('#hperson-city-select-ofw').val() ? $('#hperson-city-select-ofw').val() : "N/A",
+                pat_country_ofw : $('#hperson-country-select-ofw').val() ? $('#hperson-country-select-ofw').val() : "N/A",
+                pat_office_mobile_no_ofw : parseInt($('#hperson-office-phone-no-ofw').val()) ? $('#hperson-office-phone-no-ofw').val() : 0,
+                pat_mobile_no_ofw : parseInt($('#hperson-mobile-no-ofw').val()) ? $('#hperson-mobile-no-ofw').val() : 0,
+
+                created_at : created_at,
+            }
 
 
             for(let i = 0; i < all_non_req_input_arr.length; i++){
@@ -388,8 +388,29 @@ $(document).ready(function(){
                     const myModal = new bootstrap.Modal(document.getElementById('myModal_pat_reg'));
                     myModal.show();
 
+                    let targetSelectIDs = [
+                        'hperson-region-select-pa',
+                        'hperson-province-select-pa',
+                        'hperson-city-select-pa',
+                        'hperson-brgy-select-pa',
+                        'hperson-region-select-ca',
+                        'hperson-province-select-ca',
+                        'hperson-city-select-ca',
+                        'hperson-brgy-select-ca',
+                        'hperson-region-select-cwa',
+                        'hperson-province-select-cwa',
+                        'hperson-city-select-cwa',
+                        'hperson-brgy-select-cwa',
+                        'hperson-region-select-ofw',
+                        'hperson-province-select-ofw',
+                        'hperson-city-select-ofw',
+                        'hperson-brgy-select-ofw'
+                    ];
+
                     for(let i = 0; i < all_input_arr.length; i++){
-                        if(all_input_arr[i].id !== 'hperson-hospital-no'){
+                        if(all_input_arr[i].id === "hperson-gender" || all_input_arr[i].id === "hperson-civil-status" || targetSelectIDs.includes(all_input_arr[i].id)){
+                            all_input_arr[i].selectedIndex = 0;
+                        }else if(all_input_arr[i].id !== 'hperson-hospital-no'){
                             all_input_arr[i].value = ""
                             all_input_arr[i].textContent = ""
                         }
@@ -413,6 +434,7 @@ $(document).ready(function(){
             
         }
         else if($('#yes-modal-btn').text() == 'Confirm'){
+            console.log($('#tertiary-case').val())
             loadContent('../php_2/referral_form.php?type=' + $('#tertiary-case').val() + "&code=" + $('#hpercode-input').val())
         }
     })
@@ -463,6 +485,7 @@ $(document).ready(function(){
             case 'er' : chosen_case = "ER"; break;
             case 'ob' : chosen_case = "OB"; break;
             case 'opd' : chosen_case = "OPD"; break;
+            case 'pcr' : chosen_case = "PCR"; break;
             case 'toxicology' : chosen_case = "Toxicology"; break;
             // case 'er' : chosen_case = "ER";
         }

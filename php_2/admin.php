@@ -77,7 +77,6 @@
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-QLqnKz6C9OrRGIWwA6Hph2JVBA5Mz0lU4AJU5dzXXCfb7XvqTtW84i1z7MigkdZ0" crossorigin="anonymous"> -->
     
-    <link rel="stylesheet" href="../output.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>

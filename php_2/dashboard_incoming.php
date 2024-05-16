@@ -82,28 +82,32 @@
             array_push($recep_arr, $formattedDifference);
         }
         
-        // INTERDEPT REFERRAL AVERAGE
-        $totalSeconds_interdept = 0;
-        foreach ($dataRecep_interdept as $item) {
-            // Extract hours, minutes, and seconds from final_progress_time
-            list($hours, $minutes, $seconds) = explode(':', $item['final_progress_time']);
-            // Convert hours and minutes to seconds and add to total
-            $totalSeconds_interdept += $hours * 3600 + $minutes * 60 + $seconds;
-        }
+        // // INTERDEPT REFERRAL AVERAGE
+        // $totalSeconds_interdept = 0;
+        // foreach ($dataRecep_interdept as $item) {
+        //     // Extract hours, minutes, and seconds from final_progress_time
+        //     list($hours, $minutes, $seconds) = explode(':', $item['final_progress_time']);
+        //     // Convert hours and minutes to seconds and add to total
+        //     $totalSeconds_interdept += $hours * 3600 + $minutes * 60 + $seconds;
+        // }
 
-        // Calculate the average in seconds
-        $averageSeconds_interdept = (int) ($totalSeconds_interdept / count($dataRecep_interdept));
+        // // Calculate the average in seconds
+        // $averageSeconds_interdept = (int) ($totalSeconds_interdept / count($dataRecep_interdept));
 
-        // Optionally, convert the average back to hh:mm:ss format
-        $averageTime_interdept = gmdate("H:i:s", $averageSeconds_interdept);
+        // // Optionally, convert the average back to hh:mm:ss format
+        // $averageTime_interdept = gmdate("H:i:s", $averageSeconds_interdept);
 
-        // echo "Average final_progress_time: $averageTime_interdept";
 
         // SDN REFERRAL AVERAGE
         $sum_sdn_average = 0;
 
         foreach ($dataRecep as $item) {
-            $sum_sdn_average += strtotime($item['sent_interdept_time']) - strtotime('00:00:00');
+            // echo '<pre>'; print_r($item); echo '</pre>';
+            if($item['sent_interdept_time'] === NULL || $item['sent_interdept_time'] === ""){
+                $sum_sdn_average += strtotime($item['final_progressed_timer']) - strtotime('00:00:00');
+            }else{
+                $sum_sdn_average += strtotime($item['sent_interdept_time']) - strtotime('00:00:00');
+            }
         }
 
         $count_sdn_average = count($dataRecep);

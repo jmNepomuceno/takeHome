@@ -62,7 +62,7 @@
         $sql .= "1";  // Always true condition if no input values provided.
     }
     
-    $sql .= " AND refer_to = '" . $_SESSION["hospital_name"] . "'";
+    // $sql .= " AND refer_to = '" . $_SESSION["hospital_name"] . "' ORDER BY column_name DESC";
     // echo $sql;
     $stmt = $pdo->prepare($sql);
     $stmt->execute();

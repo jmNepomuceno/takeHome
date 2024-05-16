@@ -353,7 +353,7 @@
                                     <div>
                                         <label for="hperson-mobile-no-pa"> Mobile Phone No. </label>
                                     </div>
-                                    <input id="hperson-mobile-no-pa" class="input-txt-classes" type="number" name="hperson-mobile-no-pa" autocomplete="off" required>
+                                    <input id="hperson-mobile-no-pa" class="input-txt-classes" type="text" name="hperson-mobile-no-pa" autocomplete="off" required>
                                 </div>
                             </div>
 
@@ -448,7 +448,7 @@
                                     <div>
                                         <label for="hperson-mobile-no-ca"> Mobile Phone No. </label>
                                     </div>
-                                    <input id="hperson-mobile-no-ca" class="input-txt-classes" type="number" name="hperson-mobile-no-ca" autocomplete="off">
+                                    <input id="hperson-mobile-no-ca" class="input-txt-classes" type="text" name="hperson-mobile-no-ca" autocomplete="off">
                                 </div>
                             </div>
 
@@ -694,3 +694,5 @@
     <script src="../js_2/search_name_2.js?v=<?php echo time(); ?>"></script>    
 </body>
 </html>
+
+<!-- services.csc.gov.ph -->

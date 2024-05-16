@@ -138,12 +138,12 @@
     $stmt->bindParam(20, $reason_referral_input, PDO::PARAM_STR);
     $stmt->bindParam(21, $diagnosis, PDO::PARAM_STR);
 
-    $stmt->bindParam(22, $bp_input, PDO::PARAM_INT);
+    $stmt->bindParam(22, $bp_input, PDO::PARAM_STR);
     $stmt->bindParam(23, $hr_input, PDO::PARAM_STR);
     $stmt->bindParam(24, $rr_input, PDO::PARAM_STR);
 
     $stmt->bindParam(25, $temp_input, PDO::PARAM_STR);
-    $stmt->bindParam(26, $weight_input, PDO::PARAM_INT);
+    $stmt->bindParam(26, $weight_input, PDO::PARAM_STR);
     $stmt->bindParam(27, $pe_findings_input, PDO::PARAM_STR);
 
     if($type === "OB"){

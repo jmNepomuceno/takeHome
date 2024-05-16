@@ -274,6 +274,8 @@ $('#notif-sub-div').on('click' , function(event){
 
         $('#total-processed-refer').text(response.totalReferrals)
         $('#average-reception-id').text(response.averageDuration_reception)
+        $('#average-sdn-approve-id').text(response.average_sdn_average)
+        $('#average-interdept-approve-id').text(response.averageTime_interdept)
         $('#average-approve-id').text(response.averageDuration_approval)
         $('#average-total-id').text(response.averageDuration_total)
         $('#fastest-id').text(response.fastest_response_final)
