@@ -503,7 +503,8 @@ $(document).ready(function(){
                 middle_name : $('#incoming-middle-name-search').val(),
                 case_type : $('#incoming-type-select').val(),
                 agency : $('#incoming-agency-select').val(),
-                status : $('#incoming-status-select').val()
+                status : $('#incoming-status-select').val(),
+                'where' : 'search'
             }
             console.log(data)
 
@@ -535,6 +536,35 @@ $(document).ready(function(){
             defaultMyModal.show()
         }
 
+    })
+
+    $('#incoming-clear-search-btn').on('click' , () =>{
+        $.ajax({
+            url: '../php_2/incoming_search.php',
+            method: "POST", 
+            data:{
+                'where' : "clear"
+            },
+            success: function(response){
+                // console.log(response)
+
+                dataTable.clear();
+                dataTable.rows.add($(response)).draw();
+
+                length_curr_table = $('.tr-incoming').length
+                for(let i = 0; i < length_curr_table; i++){
+                    toggle_accordion_obj[i] = true
+                }
+
+                const expand_elements = document.querySelectorAll('.accordion-btn');
+                expand_elements.forEach(function(element, index) {
+                    element.addEventListener('click', function() {
+                        console.log(index)
+                        global_breakdown_index = index;
+                    });
+                });
+            }
+        }) 
     })
 
     dataTable.on('page.dt', function () {
@@ -707,6 +737,13 @@ $(document).ready(function(){
                 selectElement.value = '';
                 selectElement.value = selectElement.options[0].value;
                 $('#eraa').val("")
+
+                //disabled again the interdepartamental buttons and immediate referral button
+                $('#imme-approval-btn').css('opacity' , '0.6')
+                $('#imme-approval-btn').css('pointer-events' , 'none')
+
+                $('#inter-dept-referral-btn').css('opacity' , '0.6')
+                $('#inter-dept-referral-btn').css('pointer-events' , 'none')
 
                 const pencil_elements = document.querySelectorAll('.pencil-btn');
                     pencil_elements.forEach(function(element, index) {

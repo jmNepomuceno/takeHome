@@ -9,7 +9,7 @@
         $user_name = $_SESSION['hospital_name'];
     }
 
-    $table_header_arr = ['Hospital Name' , 'Hospital Code', 'Verified', 'Number of Users', ""];
+    $table_header_arr = ['Hospital Name' , 'Hospital Code', 'Verified', 'Number of Users' , ""];
     $sub_table_header_arr = ['Last Name' , 'First Name', 'Middle Name', 'Username', 'Password', 'Active', 'Action'];
 
     $sql = "SELECT classifications FROM classifications";
@@ -59,7 +59,13 @@
     for($i = 0; $i < count($data_sdn_users_count1); $i++){
         array_push($users_count_1_hcode, $data_sdn_users_count1[$i]['hospital_code']);
     }
-    
+
+    $sql = "SELECT * FROM sdn_users WHERE hospital_code=9312";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $users_curr_hospitals = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // print_r($users_curr_hospitals);
+    // echo count($users_curr_hospitals);
 ?>
 
 <!DOCTYPE html>
@@ -81,7 +87,7 @@
 
     <style>
         .custom-modal-width {
-            max-width: 1600px; /* Adjust the width as per your requirements */
+            max-width: 75vw; /* Adjust the width as per your requirements */
             width: 100%;
         }
     </style>
@@ -270,11 +276,11 @@
                 </button>
             </div>
             <div id="modal-body-main" class="modal-body-main h-[750px]">
-                <div class="add-classification-div w-full h-full flex flex-col justify-start items-center overflow-auto">
+                <div class="add-classification-div w-full h-full flex flex-col justify-start items-center overflow-x-auto">
                     <table class="w-[95%] h-[95%] text-center">
                         <thead class="">
                             <tr>
-                                <?php for($i = 0; $i < 5; $i++) { ?>
+                                <?php for($i = 0; $i < count($table_header_arr); $i++) { ?>
                                     <th class="border border-[#b3b3b3] p-3 bg-[#333333] text-white text-lg"> 
                                         <div class="flex flex-row justify-center items-center w-full h-full">
                                             <?php echo $table_header_arr[$i] ?>
@@ -325,6 +331,8 @@
                                         $sub_color_style = "#cccccc";   
                                     }
 
+                                    $hospital_mobile_number = $data_sdn_hospitals[$i]['hospital_mobile'];
+
                                     // echo $data_sdn_hospitals[$i]['hospital_code'];
                                     // echo '</br>';
                                     $users_curr_hospitals = "";
@@ -341,7 +349,7 @@
                                     <td class="border-r border-[#b3b3b3] w-[450px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_name'] ?></td>
                                     <td class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_code'] ?></td>
                                     <td class="border-r border-[#b3b3b3] w-[130px] h-full"> <?php echo $hospital_isVerified ?></td>
-
+                                    <!-- <td class="w-[300px] border-r border"> <?php echo $hospital_mobile_number ?> </td>  -->
                                     <td class="border-r border flex flex-col justify-center items-center w-full h-full text-center"> 
                                         <div class="number_users w-[90%] h-[25px] flex flex-row justify-center items-center"> <?php echo $number_users ?> </div>
                                         
@@ -360,7 +368,7 @@
                                                             <?php $user_firstName_var =$users_curr_hospitals[$x]['user_firstname']; ?>
                                                             <tr class="h-[50%] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
                                                                 <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[$x]['user_lastname'] ?> />
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value="<?php echo $users_curr_hospitals[$x]['user_lastname'] ?>" />
                                                                 </td>
                                                                 <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
                                                                     <input type="text" class="edit-users-info w-[90%] h-full outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none text-pretty" value="<?php echo $users_curr_hospitals[$x]['user_firstname']; ?>" />
@@ -420,6 +428,7 @@
                                             </table>
                                         </div>
                                     </td>
+                                    
                                     <td class="w-[50px]"><i class="see-more-btn fa-regular fa-square-caret-down cursor-pointer"></i></td> 
                                     <!-- end rendering - sakto hahaha gl gl  -->
                                 </tr>

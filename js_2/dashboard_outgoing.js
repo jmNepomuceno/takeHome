@@ -3,6 +3,12 @@
 $(document).ready(function(){
   $('#total-processed-refer').text($('#total-processed-refer-inp').val())
 
+  const myModal = new bootstrap.Modal(document.getElementById('myModal-dashboardOutgoing'));
+  
+  if(number_of_referrals === 0){
+    myModal.show()
+  }
+
   const playAudio = () =>{
     let audio = document.getElementById("notif-sound")
     audio.muted = false;
@@ -10,9 +16,8 @@ $(document).ready(function(){
         'Error playing audio: ' , error
     }) 
   }
-  console.log(dataReferFrom)
 function renderPieChart(chart, dataArray){
-  // console.log(dataArray)
+  console.log(dataArray)
   let xValues = []
   for(let i=0; i < dataArray.length; i++){
     switch(chart){

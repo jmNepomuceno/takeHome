@@ -119,7 +119,7 @@ $(document).ready(function(){
                 }
             }
 
-            // zero_inputs = 0;
+            zero_inputs = 0;
             if(zero_inputs >= 1){
                 console.log('here')
                 $('#modal-body').text('Please fill out the required fields.')
@@ -296,25 +296,25 @@ $(document).ready(function(){
                 //16
                 // hpercode : (Math.floor(Math.random() * 1000) + 1).toString(),
                 hpatcode : $('#hpatcode-input').val(),
-                patlast : "Test 0516E",
-                patfirst : "Test 0516E",
-                patmiddle : "Test 0516E",
+                patlast : "Test 0517E",
+                patfirst : "Test 0517E",
+                patmiddle : "Test 0517E",
                 patsuffix : "N/A",
                 pat_bdate : '2000-05-16',
                 pat_age : 23,
                 patsex : 'Male',
-                patcstat :"Test 0516E", //accepts null = yes
-                relcode : "Test 0516E",
+                patcstat :"Test 0517E", //accepts null = yes
+                relcode : "Test 0517E",
                 
-                pat_occupation: "Test 0516E",
-                natcode : "Test 0516E",
+                pat_occupation: "Test 0517E",
+                natcode : "Test 0517E",
                 pat_passport_no : "N/A",
                 hospital_code : $('#hpatcode-input').val(),
                 phicnum : 34252522535,
     
                 //PERMANENT ADDRESS
-                pat_bldg_pa : "Test 0516E",
-                hperson_street_block_pa: "Test 0516E",
+                pat_bldg_pa : "Test 0517E",
+                hperson_street_block_pa: "Test 0517E",
                 pat_region_pa : '3',
                 pat_province_pa : "308",
                 pat_municipality_pa : '30804',
@@ -324,8 +324,8 @@ $(document).ready(function(){
                 pat_mobile_no_pa : '09823425253',
     
                 //CURRENT ADDRESS
-                pat_bldg_ca : "Test 0516E",
-                hperson_street_block_ca: "Test 0516E",
+                pat_bldg_ca : "Test 0517E",
+                hperson_street_block_ca: "Test 0517E",
                 pat_region_ca : '3',
                 pat_province_ca : "308",
                 pat_municipality_ca : '30804',

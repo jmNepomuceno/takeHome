@@ -219,5 +219,15 @@ $(document).ready(function(){
     event.preventDefault();
     window.location.href = "../main.php";
   })
+
+  $('#history-log-btn').on('click' , function(event){
+    event.preventDefault();
+    window.location.href = "../php_2/history_log.php";
+  })
+
+  $('#admin-module-id').on('click' , function(event){
+    event.preventDefault();
+    window.location.href = "../php_2/admin.php";
+  })
     
 })

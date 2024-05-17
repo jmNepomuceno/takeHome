@@ -1,8 +1,11 @@
 $(document).ready(function(){
+    let myModal = new bootstrap.Modal(document.getElementById('myModal-hospitalAndUsers'));
+    myModal.show()
+    
     let intervalHistoryLog;
-  
     let inactivityTimer;
     let userIsActive = true;
+
     function handleUserActivity() {
         userIsActive = true;
         // Additional code to handle user activity if needed
@@ -203,7 +206,7 @@ $(document).ready(function(){
 
     $('#history-log-btn').on('click' , function(event){
         event.preventDefault();
-        window.location.href = "../php/history_log.php";
+        window.location.href = "../php_2/history_log.php";
     })
 
   
@@ -383,6 +386,7 @@ $(document).ready(function(){
         temp.push( $('.edit-users-info').eq(i).val())
       }
 
+      console.log(temp)
       const data = {
         prev_last_name : prev_info_arr[0],
         prev_first_name : prev_info_arr[1],

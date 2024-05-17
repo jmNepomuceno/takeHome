@@ -14,7 +14,7 @@
     $stmt->bindParam(':proc_date', $formattedDate, PDO::PARAM_STR);
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
-    // echo $data['COUNT(*)'];
+    $number_of_referrals = $data['COUNT(*)'];
 
     if ($_SESSION['user_name'] === 'admin'){
         $user_name = 'Bataan General Hospital and Medical Center';
@@ -544,11 +544,11 @@
                 </div>
                 <!-- <div id="modal-body-main" class="modal-body-main"> -->
                 <div id="modal-body" class="logout-modal">
-                        Are you sure you want to logout?
+                    No incoming referrals for today yet.
                 </div>
                 <div class="modal-footer">
                     <button id="ok-modal-btn-main" type="button" data-bs-dismiss="modal">OK</button>
-                    <button id="yes-modal-btn-main" type="button" data-bs-dismiss="modal">Yes</button>
+                    <button id="yes-modal-btn-main" type="button" data-bs-dismiss="modal" style="display:none">Yes</button>
                 </div>
             </div>
         </div>
@@ -558,6 +558,7 @@
         var dataReferFrom = <?php echo $dataReferFrom_json; ?>;
         var dataPatClass = <?php echo $dataPatClass_json; ?>;
         var dataPatType = <?php echo $dataPatType_json; ?>;
+        var number_of_referrals = <?php echo $number_of_referrals ?>
     </script>
     <script type="text/javascript" src="../js_2/dashboard_incoming.js?v=<?php echo time(); ?>"></script>
 </body>

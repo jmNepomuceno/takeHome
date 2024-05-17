@@ -1,6 +1,12 @@
 // ************************************************************************** 
 //  ME ME ME ME ME ME ME
 $(document).ready(function(){
+  const myModal = new bootstrap.Modal(document.getElementById('myModal-dashboardIncoming'));
+  
+  if(number_of_referrals === 0){
+    myModal.show()
+  }
+
   $('#total-processed-refer').text($('#total-processed-refer-inp').val())
 
   const playAudio = () =>{
@@ -12,7 +18,6 @@ $(document).ready(function(){
   }
 
 function renderPieChart(chart, dataArray){
-  console.log(dataArray)
   let xValues = []
   for(let i=0; i < dataArray.length; i++){
     switch(chart){
@@ -23,7 +28,6 @@ function renderPieChart(chart, dataArray){
     
   }
   xValues.sort()
-  console.log(xValues)
 
   var counts = {};
 
@@ -412,5 +416,4 @@ $('#notif-sub-div').on('click' , function(event){
   }
 
 })
-
 

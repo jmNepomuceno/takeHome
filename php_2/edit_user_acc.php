@@ -17,7 +17,7 @@
 
     $sql = "UPDATE sdn_users 
         SET 
-            user_lastname = :last_name,
+            user_lastname = :last_name, 
             user_firstname = :first_name,
             user_middlename = :middle_name,
             username = :username,

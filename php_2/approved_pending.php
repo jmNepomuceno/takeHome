@@ -145,8 +145,10 @@
             $type_color = '#22c45e';
         }else if($row['type'] == 'ER'){
             $type_color = '#0368a1';
-        }else if($row['type'] == 'PCR' || $row['type'] == 'Toxicology'){
+        }else if($row['type'] == 'PCR'){
             $type_color = '#cf3136';
+        }else if($row['type'] == 'Toxicology'){
+            $type_color = '#919122';
         }
 
         if($previous == 0){
