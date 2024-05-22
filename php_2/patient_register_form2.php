@@ -52,7 +52,8 @@
                     <select id="classification-dropdown">
                         <option value="">Classification</option>
                         <?php for($i = 0; $i < count($classification_arr); $i++){ ?>
-                            <option class="cursor-pointer" value=<?php echo strtolower($classification_arr[$i]) ?>><?php echo $classification_arr[$i] ?></option>
+                            <!-- <option class="cursor-pointer" value=<?php echo strtolower($classification_arr[$i]) ?>><?php echo $classification_arr[$i] ?></option> -->
+                            <option class="cursor-pointer" value=<?php echo $classification_arr[$i] ?>><?php echo $classification_arr[$i] ?></option>
                         <?php }?>
                     </select>
 

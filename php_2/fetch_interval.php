@@ -20,6 +20,17 @@
             echo $notif_value;
         }
     }else if($_POST['from_where'] == 'incoming'){
+        // get the classification names
+        $sql = "SELECT classifications FROM classifications";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $data_classifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $color = ["#d77707" , "#22c45e" , "#0368a1" , "#cf3136" , "#919122" , "#999966" , "#6666ff"];
+        $dynamic_classification = [];
+        for($i = 0; $i < count($data_classifications); $i++){
+            $dynamic_classification[$data_classifications[$i]['classifications']] = $color[$i];
+        }
         try{
             $sql = "SELECT * FROM incoming_referrals WHERE (status='Pending' OR status='On-Process') AND refer_to='". $_SESSION["hospital_name"] ."' ORDER BY date_time ASC";
             $stmt = $pdo->prepare($sql);
@@ -34,18 +45,7 @@
             $i = 0;
             // Loop through the data and generate table rows
             foreach ($data as $row) {
-                $type_color;
-                if($row['type'] == 'OPD'){
-                    $type_color = '#d77707';
-                }else if($row['type'] == 'OB'){
-                    $type_color = '#22c45e';
-                }else if($row['type'] == 'ER'){
-                    $type_color = '#0368a1';
-                }else if($row['type'] == 'PCR'){
-                    $type_color = '#cf3136';
-                }else if($row['type'] == 'Toxicology'){
-                    $type_color = '#919122';
-                }
+                $type_color = $dynamic_classification[$row['type']];
 
                 if($previous == 0){
                     $index += 1;

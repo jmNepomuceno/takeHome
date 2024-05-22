@@ -884,3 +884,212 @@ for($i = 0; $i < count($class_code); $i++){
 0514
 1. reset the data of the eraa and select value
 2. kapag may laman yung incoming referral, tas naubos na, naaiiwan yung 0 na value sa bell, need i reset and ihide
+
+<div class="add-classification-div w-[100%] h-full flex flex-col justify-start items-center overflow-auto">
+                    <table id="main-table" class="w-[100%] h-[95%] text-center">
+                        <thead class="">
+                            <tr>
+                                <?php for($i = 0; $i < count($table_header_arr); $i++) { ?>
+                                    <!-- <th class="border border-[#b3b3b3] p-3 bg-[#333333] text-white text-lg">  -->
+                                    <th class="border-2 border-red-600 p-3 bg-[#333333] text-white text-lg"> 
+                                        <div class="flex flex-row justify-center items-center w-full h-full">
+                                            <?php echo $table_header_arr[$i] ?>
+                                            <?php if($i < 3){?>
+                                                <div class="flex flex-col justify-center items-center">
+                                                    <i id="sort-up-btn-id-<?php echo $i; ?>" class="sort-up-btn fa-solid fa-caret-up ml-2 mt-1 cursor-pointer opacity-30 hover:opacity-100"></i>
+                                                    <i id="sort-down-btn-id-<?php echo $i; ?>" class="sort-down-btn fa-solid fa-caret-down ml-2 -mt-2 cursor-pointer"></i>
+                                                </div>
+                                            <?php }?>
+                                        </div>
+                                    </th>
+                                <?php } ?>
+                            </tr>
+                        </thead>
+                        <!-- Table body -->
+                        <tbody class="table-body border border-[#b3b3b3] w-full">
+                            <?php 
+                                $sql = "SELECT * FROM sdn_hospital ORDER BY hospital_name ASC";
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute();
+                                $data_sdn_hospitals = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            ?>
+                            <?php for($i = 0; $i < count($data_sdn_hospitals); $i++) { ?>
+                                <?php
+                                    // $hospital_isVerified    
+                                    
+                                    if($data_sdn_hospitals[$i]['hospital_isVerified'] === 1){
+                                        $hospital_isVerified = 'Verified';
+                                    }else{
+                                        $hospital_isVerified = 'Not Verified';
+                                    }
+
+                                    $number_users = 0;
+                                    
+
+                                    if(in_array($data_sdn_hospitals[$i]['hospital_code'], $users_count_1_hcode)){
+                                        $number_users = 1;
+                                    }
+
+                                    if(in_array($data_sdn_hospitals[$i]['hospital_code'], $users_count_2_hcode)){
+                                        $number_users = 2;
+                                    }
+
+                                    $color_style = "#fffff";
+                                    $sub_color_style = "#fffff";
+                                    if($i % 2 == 0){
+                                        $color_style = "#999999";
+                                        $sub_color_style = "#cccccc";   
+                                    }
+
+                                    $hospital_mobile_number = $data_sdn_hospitals[$i]['hospital_mobile'];
+
+                                    // echo $data_sdn_hospitals[$i]['hospital_code'];
+                                    // echo '</br>';
+                                    $users_curr_hospitals = "";
+                                    $sql = "SELECT * FROM sdn_users WHERE hospital_code=:code";
+                                    $stmt = $pdo->prepare($sql);
+                                    $stmt->bindParam(':code', $data_sdn_hospitals[$i]['hospital_code'], PDO::PARAM_INT);
+                                    $stmt->execute();
+                                    $users_curr_hospitals = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                    // print_r($users_curr_hospitals);
+                                    // echo count($users_curr_hospitals);
+                                    // echo $users_curr_hospitals[0]['user_firstname'];
+                                ?>
+                                <tr class="table-tr h-[50px] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
+                                    <td class="border-r border-[#b3b3b3] w-[2650px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_name'] ?></td>
+                                    <td class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_code'] ?></td>
+                                    <td class="border-r border-[#b3b3b3] w-[130px] h-full"> <?php echo $hospital_isVerified ?></td>
+                                    <!-- <td class="w-[300px] border-r border"> <?php echo $hospital_mobile_number ?> </td>  -->
+                                    <td class="border-r border flex flex-col justify-center items-center w-full h-full text-center"> 
+                                        <div class="number_users w-[90%] h-[25px] flex flex-row justify-center items-center"> <?php echo $number_users ?> </div>
+                                        
+                                        <div class="hidden breakdown-div w-[95%] h-[300px] bg-[<?php echo $sub_color_style ?>] rounded flex flex-row justify-center items-center overflow-hidden">
+                                            <table class="w-[97%] h-[95%] text-center rounded">
+                                                <thead>
+                                                    <tr>
+                                                    <?php for($j = 0; $j < count($sub_table_header_arr); $j++) { ?>
+                                                        <th class="border border-[#b3b3b3] p-3 bg-[#333333] text-white text-xs"> <?php echo $sub_table_header_arr[$j] ?></th>
+                                                    <?php } ?>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php if(count($users_curr_hospitals) === 2){?>
+                                                        <?php for($x = 0; $x < 2; $x++) { ?>
+                                                            <?php $user_firstName_var =$users_curr_hospitals[$x]['user_firstname']; ?>
+                                                            <tr class="h-[50%] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value="<?php echo $users_curr_hospitals[$x]['user_lastname'] ?>" />
+                                                                </td>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] h-full outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none text-pretty" value="<?php echo $users_curr_hospitals[$x]['user_firstname']; ?>" />
+                                                                </td>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[$x]['user_middlename'] ?> />
+                                                                </td>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[$x]['username'] ?> />
+                                                                </td>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[$x]['password'] ?> />
+                                                                </td>
+                                                                <?php if($users_curr_hospitals[$x]['user_isActive'] === 0) {?>
+                                                                    <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> Inactive</td>
+                                                                <?php }else{ ?>
+                                                                    <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> Active</td>
+                                                                <?php } ?>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm">
+                                                                    <button type="button" class="edit-info-btn bg-[#0d6efd] w-[90%] h-[35px] text-white rounded-md p-1">Edit</button>
+                                                                    <button type="button" class="hidden cancel-info-btn bg-[#6c757d] w-[90%] h-[35px] text-white rounded-md p-1 mt-2">Close</button>
+                                                                </td>
+                                                                <input class="hcode-edit-info" type="hidden" name="hcode-edit-info" value=<?php echo $users_curr_hospitals[$x]['hospital_code'] ?> />
+                                                            </tr>
+                                                        <?php }?>
+                                                    <?php } else if(count($users_curr_hospitals) === 1){ ?>
+                                                        <tr class="h-[50%] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
+                                                        <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[0]['user_lastname'] ?> />
+                                                                </td>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none text-pretty" value= <?php echo $users_curr_hospitals[0]['user_firstname'] ?> />
+                                                                </td>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[0]['user_middlename'] ?> />
+                                                                </td>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[0]['username'] ?> />
+                                                                </td>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
+                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[0]['password'] ?> />
+                                                                </td>
+                                                            <?php if($users_curr_hospitals[0]['user_isActive'] === 0) {?>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> Inactive</td>
+                                                            <?php }else{ ?>
+                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> Active</td>
+                                                            <?php } ?>
+                                                            <td class="border-r border-[#b3b3b3] w-[100px] text-sm">
+                                                                <button type="button" class="edit-info-btn bg-[#0d6efd] w-[90%] h-[35px] text-white rounded-md p-1">Edit</button>
+                                                                <button type="button" class="hidden cancel-info-btn bg-[#6c757d] w-[90%] h-[35px] text-white rounded-md p-1 mt-2">Close</button>
+                                                            </td>
+                                                            <input class="hcode-edit-info" type="hidden" name="hcode-edit-info" value=<?php echo $users_curr_hospitals[0]['hospital_code'] ?> />
+                                                        </tr>
+                                                    <?php } ?>
+                                                        
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+
+                                    <td class="w-[50px]"><i class="see-more-btn fa-regular fa-square-caret-down cursor-pointer"></i></td> 
+                                    <!-- end rendering - sakto hahaha gl gl  -->
+                                </tr>
+                            <?php } ?>
+                            <!-- Add more rows as needed  -->
+                        </tbody>
+                    </table>
+                </div>
+
+
+ <div class="table-container">
+                    <table>
+                        <!-- Table content goes here -->
+                        <thead>
+                            <tr>
+                                <th>Header 1</th>
+                                <th>Header 2</th>
+                                <th>Header 3</th>
+                                <th>Header 3</th>
+                                <th>Header 3</th>
+                                <th>Header 3</th>
+                                <th>Header 3</th>
+                                <!-- Add more headers as needed -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Row 1, Cell 1</td>
+                                <td>Row 1, Cell 2</td>
+                                <td>Row 1, Cell 3</td>
+                                <td>Row 1, Cell 3</td>
+                                <td>Row 1, Cell 3</td>
+                                <td>Row 1, Cell 3</td>
+                                <td>Row 1, Cell 3</td>
+                                <!-- Add more cells as needed -->
+                            </tr>
+                            <tr>
+                                <td>Row 2, Cell 1</td>
+                                <td>Row 2, Cell 2</td>
+                                <td>Row 2, Cell 3</td>
+                                <td>Row 2, Cell 3</td>
+                                <td>Row 2, Cell 3</td>
+                                <td>Row 2, Cell 3</td>
+                                <td>Row 2, Cell 3</td>
+                                <!-- Add more cells as needed -->
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+no approve details

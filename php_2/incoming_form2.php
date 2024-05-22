@@ -99,6 +99,13 @@
     // $sql = "UPDATE incoming_interdept SET unRead=1, referring_seenTime=null, referring_seenBy=null";
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
+
+    $sql = "SELECT classifications FROM classifications";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $data_classifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // echo '<pre>'; print_r($data_classifications); echo '</pre>';
+    // echo count($data_classifications);
 ?>
 
 <!DOCTYPE html>
@@ -162,11 +169,15 @@
             <div class="caseType-search-div">
                 <label>Case Type</label>
                 <select id='incoming-type-select'>
-                    <option value=""> None</option>
-                    <option value="ER"> ER</option>
-                    <option value="OB"> OB</option>
-                    <option value="OPD"> OPD</option>
-                    <option value="PCR"> PCR</option>
+                    <?php 
+                        $stmt = $pdo->prepare('SELECT classifications FROM classifications');
+                        $stmt->execute();
+
+                        echo '<option value=""> None </option>';
+                        while($data = $stmt->fetch(PDO::FETCH_ASSOC)){
+                            echo '<option value="' , $data['classifications'] , '">' , $data['classifications'] , '</option>';
+                        } 
+                    ?>
                 </select>
             </div>
 
@@ -228,8 +239,19 @@
                 </thead>
                 <tbody id="incoming-tbody">
                     <?php
+                        // get the classification names
+                        $sql = "SELECT classifications FROM classifications";
+                        $stmt = $pdo->prepare($sql);
+                        $stmt->execute();
+                        $data_classifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        $color = ["#d77707" , "#22c45e" , "#0368a1" , "#cf3136" , "#919122" , "#999966" , "#6666ff"];
+                        $dynamic_classification = [];
+                        for($i = 0; $i < count($data_classifications); $i++){
+                            $dynamic_classification[$data_classifications[$i]['classifications']] = $color[$i];
+                        }
+
                         // SQL query to fetch data from your table
-                        // echo  "here";
                         try{
                             $sql = "SELECT * FROM incoming_referrals WHERE (status='Pending' OR status='On-Process') AND refer_to='". $_SESSION["hospital_name"] ."' ORDER BY date_time ASC";
                             $stmt = $pdo->prepare($sql);
@@ -244,18 +266,7 @@
                             $loop = 0;
                             // Loop through the data and generate table rows
                             foreach ($data as $row) {
-                                $type_color;
-                                if($row['type'] == 'OPD'){
-                                    $type_color = '#d77707';
-                                }else if($row['type'] == 'OB'){
-                                    $type_color = '#22c45e';
-                                }else if($row['type'] == 'ER'){
-                                    $type_color = '#0368a1';
-                                }else if($row['type'] == 'PCR'){
-                                    $type_color = '#cf3136';
-                                }else if($row['type'] == 'Toxicology'){
-                                    $type_color = '#919122';
-                                }
+                                $type_color = $dynamic_classification[$row['type']];
 // cscKEKW-28
                                 if($previous == 0){
                                     $index += 1;
@@ -583,7 +594,6 @@
                     </div>
                 </div>
 
-                
                 <div class="modal-footer">
                     <!-- <button id="ok-modal-btn-incoming" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" data-bs-dismiss="modal">OK</button>
                     <button id="yes-modal-btn-incoming" type="button" class="hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" data-bs-dismiss="modal">Yes</button>

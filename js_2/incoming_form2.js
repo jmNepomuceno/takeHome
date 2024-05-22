@@ -227,7 +227,7 @@ $(document).ready(function(){
 
     document.addEventListener('mousemove', handleUserActivity);
 
-    const inactivityInterval = 115000; 
+    const inactivityInterval = 5000; 
 
     function startInactivityTimer() {
         inactivityTimer = setInterval(() => {
@@ -504,7 +504,7 @@ $(document).ready(function(){
                 case_type : $('#incoming-type-select').val(),
                 agency : $('#incoming-agency-select').val(),
                 status : $('#incoming-status-select').val(),
-                'where' : 'search'
+                where : 'search'
             }
             console.log(data)
 
@@ -512,6 +512,7 @@ $(document).ready(function(){
                 url: '../php_2/incoming_search.php',
                 method: "POST", 
                 data:data,
+                // dataType:'JSON',
                 success: function(response){
                     // console.log(response)
 
@@ -762,7 +763,7 @@ $(document).ready(function(){
                 });
 
             }
-         })
+        })
      })
 
      $(document).on('click' , '.accordion-btn' , function(event){

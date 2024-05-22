@@ -9,7 +9,7 @@
         $user_name = $_SESSION['hospital_name'];
     }
 
-    $table_header_arr = ['Hospital Name' , 'Hospital Code', 'Verified', 'Number of Users' , ""];
+    $table_header_arr = ['Hospital Name' , 'Hospital Code', 'Verified', 'Number of Users' ,  'Contact Information', 'Hospital Director' , 'Point Person'];
     $sub_table_header_arr = ['Last Name' , 'First Name', 'Middle Name', 'Username', 'Password', 'Active', 'Action'];
 
     $sql = "SELECT classifications FROM classifications";
@@ -84,10 +84,10 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-QLqnKz6C9OrRGIWwA6Hph2JVBA5Mz0lU4AJU5dzXXCfb7XvqTtW84i1z7MigkdZ0" crossorigin="anonymous"> -->
     
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <link rel="stylesheet" href="../css/admin.css">
     <style>
         .custom-modal-width {
-            max-width: 75vw; /* Adjust the width as per your requirements */
+            max-width: 80vw; /* Adjust the width as per your requirements */
             width: 100%;
         }
     </style>
@@ -136,41 +136,6 @@
             </div>
         </div>
     </header>  
-
-    <div id="nav-mobile-account-div" class="sm:hidden flex flex-col justify-start items-center bg-[#1f292e] text-white fixed w-64 h-full overflow-y-auto transition-transform duration-300 transform translate-x-96 z-10">
-        <div id="close-nav-mobile-btn" class="w-full h-[50px] mt-2 flex flex-row justify-start items-center">
-            <i class="fa-solid fa-x ml-2 text-2xl"></i>
-        </div>
-        <div class="w-full h-[350px] flex flex-col justify-around items-center">
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center">
-                <h2 class="" >Dashboard (Incoming)</h2>
-            </div>
-
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center">
-                <h2 class="">Dashboard (Outgoing)</h2>
-            </div>
-
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center">
-                <h2 class="">Dashboard (ER/OPD)</h2>
-            </div>
-
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center">
-                <h2 class="">History Log</h2>
-            </div>
-
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center">
-                <h2 class="">Settings</h2>
-            </div>
-
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center">
-                <h2 class="">Help</h2>
-            </div>
-
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center">
-                <h2 class="">Logout</h2>
-            </div>
-        </div>
-    </div>
 
     <div id="nav-drop-account-div" class="hidden z-10 absolute right-0 top-[45px] flex flex-col justify-start items-center bg-[#1f292e] text-white fixed w-[15%] h-[400px]">
         <div class="w-full h-[350px] flex flex-col justify-around items-center">
@@ -276,16 +241,17 @@
                 </button>
             </div>
             <div id="modal-body-main" class="modal-body-main h-[750px]">
-                <div class="add-classification-div w-full h-full flex flex-col justify-start items-center overflow-x-auto">
-                    <table class="w-[95%] h-[95%] text-center">
+                <div class="add-classification-div">
+                    <table id="main-table">
                         <thead class="">
                             <tr>
                                 <?php for($i = 0; $i < count($table_header_arr); $i++) { ?>
+                                    <!-- <th class="border border-[#b3b3b3] p-3 bg-[#333333] text-white text-lg">  -->
                                     <th class="border border-[#b3b3b3] p-3 bg-[#333333] text-white text-lg"> 
                                         <div class="flex flex-row justify-center items-center w-full h-full">
                                             <?php echo $table_header_arr[$i] ?>
                                             <?php if($i < 3){?>
-                                                <div class="flex flex-col justify-center items-center">
+                                                <div class="flex flex-col justify-center items-center"> 
                                                     <i id="sort-up-btn-id-<?php echo $i; ?>" class="sort-up-btn fa-solid fa-caret-up ml-2 mt-1 cursor-pointer opacity-30 hover:opacity-100"></i>
                                                     <i id="sort-down-btn-id-<?php echo $i; ?>" class="sort-down-btn fa-solid fa-caret-down ml-2 -mt-2 cursor-pointer"></i>
                                                 </div>
@@ -345,15 +311,15 @@
                                     // echo count($users_curr_hospitals);
                                     // echo $users_curr_hospitals[0]['user_firstname'];
                                 ?>
-                                <tr class="table-tr h-[50px] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
+                                <tr class="table-tr h-[70px] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
                                     <td class="border-r border-[#b3b3b3] w-[450px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_name'] ?></td>
                                     <td class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_code'] ?></td>
                                     <td class="border-r border-[#b3b3b3] w-[130px] h-full"> <?php echo $hospital_isVerified ?></td>
                                     <!-- <td class="w-[300px] border-r border"> <?php echo $hospital_mobile_number ?> </td>  -->
-                                    <td class="border-r border flex flex-col justify-center items-center w-full h-full text-center"> 
-                                        <div class="number_users w-[90%] h-[25px] flex flex-row justify-center items-center"> <?php echo $number_users ?> </div>
+                                    <td class="border-r border-[#b3b3b3] w-[130px] h-full text-center relative"> 
+                                        <div class="number_users w-[90%] h-full flex flex-row justify-center items-center"> <?php echo $number_users ?> </div>
                                         
-                                        <div class="hidden breakdown-div w-[95%] h-[300px] bg-[<?php echo $sub_color_style ?>] rounded flex flex-row justify-center items-center overflow-hidden">
+                                        <div class="hidden breakdown-div ml-4 w-[550px] h-[300px] bg-[<?php echo $sub_color_style ?>] rounded flex flex-row justify-center items-center overflow-hidden">
                                             <table class="w-[97%] h-[95%] text-center rounded">
                                                 <thead>
                                                     <tr>
@@ -427,16 +393,27 @@
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                        <i class="see-more-btn absolute top-5 right-2 text-2xl fa-regular fa-square-caret-down cursor-pointer"></i>
                                     </td>
+                                    <!-- <td class="w-[50px]"></td>  -->
+
+                                    <td class="border-r border-[#b3b3b3] w-[300px] h-full">
+                                        <div class="w-full h-full flex flex-col justify-center items-center">
+                                            <label>Landline: <?php echo $data_sdn_hospitals[$i]['hospital_landline'] ?></label>
+                                            <label>Mobile: <?php echo $data_sdn_hospitals[$i]['hospital_mobile'] ?></label>
+                                        </div>
+                                    </td>
+                                    <td class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_director'] ?></td>
+                                    <td class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_point_person'] ?></td>
+
                                     
-                                    <td class="w-[50px]"><i class="see-more-btn fa-regular fa-square-caret-down cursor-pointer"></i></td> 
                                     <!-- end rendering - sakto hahaha gl gl  -->
                                 </tr>
                             <?php } ?>
                             <!-- Add more rows as needed  -->
                         </tbody>
                     </table>
-
                 </div>
             </div>
             <!-- <div class="modal-footer">

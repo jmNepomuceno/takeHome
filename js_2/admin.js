@@ -1,7 +1,7 @@
 $(document).ready(function(){
     let myModal = new bootstrap.Modal(document.getElementById('myModal-hospitalAndUsers'));
-    myModal.show()
-    
+    // myModal.show()
+
     let intervalHistoryLog;
     let inactivityTimer;
     let userIsActive = true;
@@ -33,7 +33,6 @@ $(document).ready(function(){
                 handleUserInactivity();
             }
             userIsActive = false; // Reset userIsActive after each check
-            
         }, inactivityInterval);
     }
   
@@ -338,11 +337,19 @@ $(document).ready(function(){
           document.querySelectorAll('.table-tr')[global_breakdown_index].style.height = "350px"
           document.querySelectorAll('.breakdown-div')[global_breakdown_index].style.display = 'flex'
           document.querySelectorAll('.number_users')[global_breakdown_index].style.display = 'none'
+
+          $('.see-more-btn').eq(global_breakdown_index).removeClass('top-5')
+          $('.see-more-btn').eq(global_breakdown_index).addClass('top-[45%]')
+
           toggle_accordion_obj[global_breakdown_index] = false
       }else{
-          document.querySelectorAll('.table-tr')[global_breakdown_index].style.height = "50px"
+          document.querySelectorAll('.table-tr')[global_breakdown_index].style.height = "70px"
           document.querySelectorAll('.breakdown-div')[global_breakdown_index].style.display = 'none'
           document.querySelectorAll('.number_users')[global_breakdown_index].style.display = 'flex'
+
+          $('.see-more-btn').eq(global_breakdown_index).addClass('top-5')
+          $('.see-more-btn').eq(global_breakdown_index).removeClass('top-[45%]')
+
           toggle_accordion_obj[global_breakdown_index] = true
       }
 

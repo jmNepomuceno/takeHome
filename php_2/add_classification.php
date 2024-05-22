@@ -6,10 +6,11 @@
     $what = $_POST['what'];
 
     if($what == 'add'){
-        $sql = "INSERT INTO classifications (classifications) VALUES (?)";
+        $sql = "INSERT INTO classifications (classifications, class_code) VALUES (?,?)";
         $stmt = $pdo->prepare($sql);
 
         $stmt->bindParam(1, $classification, PDO::PARAM_STR);
+        $stmt->bindParam(2, $classification, PDO::PARAM_STR);
         $stmt->execute();
     }else{
         $sql = "DELETE FROM classifications WHERE classifications=:classification";

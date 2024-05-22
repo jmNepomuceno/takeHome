@@ -19,7 +19,7 @@ $(document).ready(function(){
     // loadContent('../php_2/outgoing_form2.php')
     // loadContent('../php_2/interdept_form.php')
 
-    // Function to parse query parameters from URL
+    // Function to parse query parameters from URL  
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -146,7 +146,6 @@ $(document).ready(function(){
             $('#sdn-title-h1').removeClass('hidden')
             side_bar_btn_counter = 0;
         }
-        
     })
 
     
