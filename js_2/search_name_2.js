@@ -30,6 +30,7 @@ $(document).ready(function(){
 
     let if_clicked_same_perma = false;
     let global_breakdown_index = 0;
+    const patHistoryModal = new bootstrap.Modal(document.getElementById('patHistoryModal'));
 
     function searchSubDiv() {
         const search_Sub_Div_elements = document.querySelectorAll('.search-sub-div');
@@ -230,21 +231,31 @@ $(document).ready(function(){
                             $(all_input_arr[j]).css('background' , '#cccccc')
                             // $(all_input_arr[j]).css('border' , '2px solid red')
                         }
-                        
+
                         if(response[0].status === null){
-                            $("#classification-dropdown").removeClass('hidden')
-
+                            $("#classification-dropdown").css('display' , 'block')
+                            
                         }else{
-                            $('#add-patform-btn-id').removeClass('bg-cyan-600 hover:bg-cyan-700')
-                            $('#add-patform-btn-id').addClass('bg-green-600 hover:bg-green-700')
-                            $('#add-patform-btn-id').addClass('pointer-events-none opacity-20')
-                            $("#classification-dropdown").addClass('hidden')
+                            // #0991b3 // #0e7590
+                            // #17a44f // #178140
+                            console.log('pending')
+                            $("#add-patform-btn-id").css('background-color' , '#17a44f')
+                            $("#add-patform-btn-id").hover(
+                                function() {
+                                  $(this).css('background-color', '#178140');
+                                },
+                                function() {
+                                  // Mouse leaves the element
+                                  $(this).css('background-color', '#17a44f'); // Reset to original color or specify a color
+                                }
+                            );
 
+                            $("#add-patform-btn-id").css('pointer-events' , 'none')
+                            $("#classification-dropdown").css('display' , 'none')
                         }
 
                         $('#clear-patform-btn-id').text('Cancel')
                         $('#clear-patform-btn-id').css('width' , '90px')
-                        $('#classification-dropdown').css('display', 'flex')
                         $('#add-patform-btn-id').css('margin-left', '5%')
                         $('#add-patform-btn-id').css('pointer-events', 'none')
                         $('#add-patform-btn-id').css('opacity', '0.3')
@@ -322,11 +333,59 @@ $(document).ready(function(){
                     search_query_result.innerHTML += response;
                     search_query_result.style.color = 'white'
                     search_query_result.style.fontWeight = 'bold'
+                    
                     searchSubDiv();
                 }
             })
         }
-        
-
     })
+
+
+
+    $(document).on('click', '#pat-history', function() {
+        const data = {
+            hpercode : $('.search-sub-code').eq(global_breakdown_index).text()
+        }
+        console.log(data)
+
+        $.ajax({
+            url: '../php_2/fetch_pat_history.php',
+            method: "POST",
+            data:data,
+            dataType: 'JSON',
+            success: function(response){
+                // console.log(response)
+
+                patHistoryModal.show()
+                $('#info-input-lname').val(response[1].patlast)
+                $('#info-input-fname').val(response[1].patfirst)
+                $('#info-input-mname').val(response[1].patmiddle)
+                $('#info-input-sname').val(response[1].patsuffix)
+                $('#info-input-bdate').val(response[0].patbdate)
+                $('#info-input-age').val(response[0].pat_age)
+                $('#info-input-sex').val(response[0].patsex)
+                $('#info-input-brgy').val(response[0].pat_curr_barangay)
+                $('#info-input-city').val(response[0].pat_curr_municipality)
+                $('#info-input-prov').val(response[0].pat_curr_province)
+                $('#info-input-region').val(response[0].pat_curr_region)
+                $('#info-input-email').val(response[0].pat_email)
+                $('#info-input-mobile').val("0" + response[0].pat_mobile_no)
+                $('#info-input-telephone').val(response[0].pat_homephone_no)
+                $('#info-input-rec_at').val(response[0].created_at)
+                $('#info-input-reg_at').val(response[0].hpatcode)
+
+                $('#info-input-pat-type').val(response[1].type)
+                $('#info-input-pat-class').val(response[1].pat_class)
+                $('#info-input-ref-date').val(response[1].date_time)
+                $('#info-input-ref-by').val(response[1].referred_by)
+                $('#info-input-ref-to').val(response[1].refer_to)
+                $('#info-input-approve-time').val(response[1].approved_time)
+                $('#info-input-reason-ref').val(response[1].reason)
+                $('#info-input-approve-details').val(response[1].approval_details)
+
+                // #6aa37d
+                $('#pat-ref-status-span').css('color' , '#619e75')
+            }
+        })
+    });
 })

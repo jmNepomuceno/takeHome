@@ -72,17 +72,27 @@
                 $bg_color = "transparent";
             }
 
+            $history_style = "none";
+            $text_color = "white";
+            if (isset($data[$i]['status'])) {
+                $text_color =  "#99ff99";
+                $history_style = "block";
+            }
+
             echo '<div id="search-sub-div" class="search-sub-div" style="background: '. $bg_color .'">';
             echo ' <div id="upper-part-sub-div">';
             echo    '<h1 id="pat-id-h1" class="search-sub-code">'. $data[$i]['hpercode'] .'</h1>';
             echo      '<div>';
-            echo          '<h1">'. $data[$i]['patbdate'] .'</h1>';
+            echo          '<h1>'. $data[$i]['patbdate'] .'</h1>';
             echo           '<span class="fa-solid fa-user"></span>';
             echo     ' </div>';
-            echo    '</div>';
+            echo '</div>';
             echo ' <div id="lower-part-sub-div">';
             echo     ' <h3 id="pat-name">'. $data[$i]['patlast'] . ", " . $data[$i]['patfirst'] . " " . $data[$i]['patmiddle'] .'</h3>';
-            echo      '<h3 id="pat-stat">' . (isset($data[$i]['status']) ? "Status: Referred-" . $data[$i]['status'] : "Status: Not yet referred") . '</h3>';
+            echo      '<div>';
+            echo        '<h3 class="pat-history-class" id="pat-history" style="display:'.$history_style.';"> <i class="fa-solid fa-clock-rotate-left"></i> </h3>';
+            echo        '<h3 id="pat-stat" style="color: '.$text_color.';">' . (isset($data[$i]['status']) ? "Status: Referred-" . $data[$i]['status'] : "Status: Not yet referred") . '</h3>';
+            echo      '</div>';
             echo  '</div>';
             echo'</div>';
         }
