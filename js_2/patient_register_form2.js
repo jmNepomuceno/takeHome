@@ -10,7 +10,9 @@ $(document).ready(function(){
 
     // patHistoryModal
     const patHistoryModal = new bootstrap.Modal(document.getElementById('patHistoryModal'));
-    patHistoryModal.show()
+    let patRegModal = new bootstrap.Modal(document.getElementById('myModal_pat_reg'));
+    
+    // patHistoryModal.show()
 
     // loadContent('php/opd_referral_form.php?type=' + $('#tertiary-case').val() + "&code=" + $('#hpercode-input').val())
     // loadContent('../php_2/referral_form.php?type="OB"&code="BGHMC-0058"')
@@ -123,7 +125,7 @@ $(document).ready(function(){
                 }
             }
 
-            // zero_inputs = 0;
+            zero_inputs = 0;
             if(zero_inputs >= 1){
                 console.log('here')
                 $('#modal-body').text('Please fill out the required fields.')
@@ -310,25 +312,25 @@ $(document).ready(function(){
             //     //16
             //     // hpercode : (Math.floor(Math.random() * 1000) + 1).toString(),
             //     hpatcode : $('#hpatcode-input').val(),
-            //     patlast : "Test 0522D",
-            //     patfirst : "Test 0522D",
-            //     patmiddle : "Test 0522D",
+            //     patlast : "Test 0528C",
+            //     patfirst : "Test 0528C",
+            //     patmiddle : "Test 0528C",
             //     patsuffix : "N/A",
             //     pat_bdate : '2000-05-16',
             //     pat_age : 23,
             //     patsex : 'Male',
-            //     patcstat :"Test 0522D", //accepts null = yes
-            //     relcode : "Test 0522D",
+            //     patcstat :"Test 0528C", //accepts null = yes
+            //     relcode : "Test 0528C",
                 
-            //     pat_occupation: "Test 0522D",
-            //     natcode : "Test 0522D",
+            //     pat_occupation: "Test 0528C",
+            //     natcode : "Test 0528C",
             //     pat_passport_no : "N/A",
             //     hospital_code : $('#hpatcode-input').val(),
             //     phicnum : 34252522535,
     
             //     //PERMANENT ADDRESS
-            //     pat_bldg_pa : "Test 0522D",
-            //     hperson_street_block_pa: "Test 0522D",
+            //     pat_bldg_pa : "Test 0528C",
+            //     hperson_street_block_pa: "Test 0528C",
             //     pat_region_pa : '3',
             //     pat_province_pa : "308",
             //     pat_municipality_pa : '30804',
@@ -338,8 +340,8 @@ $(document).ready(function(){
             //     pat_mobile_no_pa : '09823425253',
     
             //     //CURRENT ADDRESS
-            //     pat_bldg_ca : "Test 0522D",
-            //     hperson_street_block_ca: "Test 0522D",
+            //     pat_bldg_ca : "Test 0528C",
+            //     hperson_street_block_ca: "Test 0528C",
             //     pat_region_ca : '3',
             //     pat_province_ca : "308",
             //     pat_municipality_ca : '30804',
@@ -359,7 +361,7 @@ $(document).ready(function(){
             //     pat_landline_no : parseInt($('#hperson-ll-mb-no-cwa').val()) ? $('#hperson-ll-mb-no-cwa').val() : "N/A",
             //     pat_email_cwa : $('#hperson-email-cwa').val() ? $('#hperson-email-cwa').val() : "N/A",
     
-    
+
             //     // FOR OFW ONLY
             //     pat_emp_name : $('#hperson-emp-name-ofw').val() ? $('#hperson-emp-name-ofw').val() : "N/A",
             //     pat_occupation_ofw: $('#hperson-occupation-ofw').val() ? $('#hperson-occupation-ofw').val() : "N/A",
@@ -511,5 +513,9 @@ $(document).ready(function(){
         $("#add-patform-btn-id").css("opacity" , "1")
         $('#add-patform-btn-id').text('Refer')
         $('#tertiary-case').val(selectedValue)
+      });
+
+      $('#update-stat-select').change(function() {
+        var selectedOption = $(this).val();
       });
 })

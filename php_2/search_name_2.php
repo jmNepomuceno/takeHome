@@ -63,6 +63,7 @@
 
     // $finalJsonString = json_encode($data);
     // echo $finalJsonString;
+    // echo json_encode($data);
     
     if(count($data) >= 1){
         for($i = 0; $i < count($data); $i++){

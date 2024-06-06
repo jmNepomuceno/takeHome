@@ -359,8 +359,59 @@
     background: #5c7a8a;
     display:flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
+}
+
+#pendingModal .modal-content .modal-body-incoming .status-form-div #left,
+#pendingModal .modal-content .modal-body-incoming .status-form-div #right{
+    width:50%;
+    display:flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+#pendingModal .modal-content .modal-body-incoming .status-form-div #right{
+    justify-content: end;
+}
+
+#pendingModal .modal-content #right #save-update{
+    background: #198754;
+    color:white;
+    border:none;
+    width: 20%;
+    padding: 5px;
+    height: 40px;
+    border-radius: 5px; 
+    margin-left:45px;
+    font-weight: 600;
+    display:none;
+}
+
+#pendingModal .modal-content #right #update-stat-select{
+    width:45%;
+    height: 40px;
+    padding:5px;
+    text-align: center;
+    background: #2f3e46;
+    border-radius: 5px; 
+    font-size: 1.2rem;
+    color:white;
+    margin-left: 10px;
+    border:none;
+    background: #ffc107;
+    /* color: black; */
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    margin-right:5px;
+    display:none;
+}
+
+#pendingModal .modal-content #update-stat-select .custom-select{
+    background:#2f3e46;
+    cursor: pointer;
 }
 
 #pendingModal .modal-content .modal-body-incoming #inter-dept-stat-form-div{
@@ -387,7 +438,6 @@
     display:flex;
     flex-direction: column;
     margin-top: 1%;
-    
 }
 
 #pendingModal .modal-content #approval-form #approval-title-div{
@@ -402,27 +452,36 @@
     padding-left: 10px; 
 }
 
-#pendingModal .modal-content #approval-form .approval-main-content{
+#pendingModal .modal-content #approval-details{
+    display:none;    
+}
+
+#pendingModal .modal-content #approval-form .approval-main-content,
+#pendingModal .modal-content #approval-details .approval-main-content{
     display:flex;
     flex-direction: column;
     height: 85%;
 }
 
 #pendingModal .modal-content #approval-form .approval-main-content #case-cate-title,
-#pendingModal .modal-content #approval-form .approval-main-content #admin-action-title{
+#pendingModal .modal-content #approval-form .approval-main-content #admin-action-title,
+#pendingModal .modal-content #approval-details .approval-main-content #case-cate-title,
+#pendingModal .modal-content #approval-details .approval-main-content #admin-action-title{
     margin-left: 2%;
     font-weight: 600;
     margin-top:1%
 }
 
-#pendingModal .modal-content #approval-form .approval-main-content #approve-classification-select{
+#pendingModal .modal-content #approval-form .approval-main-content #approve-classification-select,
+#pendingModal .modal-content #approval-details .approval-main-content #approve-classification-select-details{
     width:95%;
     margin-left: 2%;
     border-radius: 0.125rem;
     outline:none;
 }
 
-#pendingModal .modal-content #approval-form .approval-main-content #eraa{
+#pendingModal .modal-content #approval-form .approval-main-content #eraa,
+#pendingModal .modal-content #approval-details .approval-main-content #eraa-details{
     border:2px solid #bfbfbf;
     width: 95%;
     height: 150px;
@@ -655,6 +714,12 @@
 
 #pendingModal .modal-content .referral-details .ul-div ul .pending-type-ob{
     display:hidden;
+}
+
+#pendingModal .modal-content #approval-details{
+    width:100%;
+    height: auto;
+    background: #c2cfd6;
 }
 
 #myModal-incoming .modal-header,

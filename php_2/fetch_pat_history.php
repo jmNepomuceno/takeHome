@@ -43,12 +43,26 @@
 
 
     // fetch the needed information for patients referral information
-    $sql = "SELECT patlast, patfirst, patmiddle, patsuffix, type, pat_class, date_time, referred_by, refer_to, approved_time, approval_details, reason FROM incoming_referrals WHERE hpercode=?";
+    $sql = "SELECT patlast, patfirst, patmiddle, patsuffix, type, pat_class, date_time, referred_by, refer_to, approved_time, approval_details, reason, status, discharged_time FROM incoming_referrals WHERE hpercode=?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$hpercode]);
     $incoming_data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $mergedData = array_merge($hperson_data, $incoming_data);
+    $sql = "SELECT referral_id FROM hperson WHERE hpercode=?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$hpercode]);
+    $data_referral_id = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Decode the referral_id values from JSON to arrays
+    foreach ($data_referral_id as &$row) {
+        $row['referral_id'] = json_decode($row['referral_id'], true);
+    }
+
+    // Extract referral_id values from $data_referral_id
+    $referral_ids = array_column($data_referral_id, 'referral_id');
+
+    
+    $mergedData = array_merge($hperson_data, $incoming_data, $referral_ids);
     $jsonData = json_encode($mergedData);
     echo $jsonData;
 ?>

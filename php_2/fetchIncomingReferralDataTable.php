@@ -152,11 +152,15 @@
 
             $data[$data_index]['pat_full_name'] = $pat_full_name;
             $data[$data_index]['index'] = $index;
+            $data[$data_index]['reception_time'] = $row['reception_time'];
+            $data[$data_index]['sent_interdept_time'] = $row['sent_interdept_time'];
+            $data[$data_index]['interdept_time'] = $interdept_time[0]['final_progress_time'];
+            $data[$data_index]['total_time'] = $total_time;
+            $data[$data_index]['approved_time'] = $row['approved_time'];
 
             $data_index += 1;
             $previous = $row['reference_num'];
             $loop += 1;
-
         }
 
         // echo '<pre>'; print_r($data); echo '</pre>';

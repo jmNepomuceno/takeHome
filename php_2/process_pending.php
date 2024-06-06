@@ -106,6 +106,11 @@
     // print mo lang lahat ng need i print sa incoming_form.js bukas. gege
     // gl hf tomorrow! :)))))) <333333
 
+    $sql = "UPDATE hperson SET status='On-Process' WHERE hpercode=:hpercode ";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':hpercode', $hpercode, PDO::PARAM_STR);
+    $stmt->execute();
+
 
     echo '<ul class="referred-details-ul">';
         echo '<li><label>Referring Agency:</label><span id="refer-agency"> '. $response[0]['referred_by'].'</span></li>';

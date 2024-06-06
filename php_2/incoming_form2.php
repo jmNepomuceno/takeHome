@@ -107,7 +107,7 @@
     // echo '<pre>'; print_r($data_classifications); echo '</pre>';
     // echo count($data_classifications);
 ?>
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,15 +117,14 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    
-
+     -->
+     
+     <?php require "../header_link.php" ?>
     <link rel="stylesheet" href="../css/incoming_form.css">
 </head>
 <body>
@@ -267,7 +266,6 @@
                             // Loop through the data and generate table rows
                             foreach ($data as $row) {
                                 $type_color = $dynamic_classification[$row['type']];
-// cscKEKW-28
                                 if($previous == 0){
                                     $index += 1;
                                 }else{
@@ -452,8 +450,25 @@
                 </div>
                 <div  class="modal-body-incoming">
                     <div class="status-form-div">
-                        <label id="status-bg-div">Status: </label>
-                        <label  id="pat-status-form">Pending</label>
+                        <div id="left">
+                            <label id="status-bg-div">Status: </label>
+                            <label id="pat-status-form">Pending</label>
+                        </div>
+
+                        <div id="right">
+                            <button id="save-update">Update</button>
+                            <select id="update-stat-select" autocomplete="off" required>
+                                <option value="" disabled selected hidden>Update Status</option>
+                                <option class="custom-select" value="Cancelled"> Cancelled</option>
+                                <option class="custom-select" value="Arrived"> Arrived</option>
+                                <option class="custom-select" value="Checked"> Checked</option>
+                                <option class="custom-select" value="Admitted"> Admitted</option>
+                                <option class="custom-select" value="Discharged"> Discharged</option>
+                                <option class="custom-select" value="For follow"> For follow up</option>
+                                <option class="custom-select" value="Referred"> Referred Back</option>
+                            </select>
+                        </div>
+                        
                     </div>
                                 
                     <div id='approval-form'>
@@ -537,6 +552,21 @@
                             <button id="cancel-btn" >Cancel</button>
                             <button id="final-approve-btn">Proceed to Approval</button>
                         </div>
+                    </div>
+
+                    <div id="approval-details">
+                        <div class="approval-main-content"> 
+                            <label id="case-cate-title">Case Category</label>
+                            <select id="approve-classification-select-details" style="pointer-events:none;">
+                                <option value="">Select</option>
+                                <option value="Primary">Primary</option>
+                                <option value="Secondary">Secondary</option>
+                                <option value="Tertiary">Tertiary</option>
+                            </select>
+
+                            <label id="admin-action-title">Emergency Room Administrator Action</label>
+                            <textarea id="eraa-details" style="pointer-events:none;"></textarea>
+                        </div> 
                     </div>
 
                     <div class="referral-details">

@@ -18,6 +18,21 @@
         $sdn_password = $_POST['sdn_password'];
         $account_validity = false;
 
+        $timezone = new DateTimeZone('Asia/Manila'); // Replace 'Your/Timezone' with your actual time zone
+        $currentDateTime = new DateTime("",$timezone);
+
+        // Format date components
+        $year = $currentDateTime->format('Y');
+        $month = $currentDateTime->format('m');
+        $day = $currentDateTime->format('d');
+
+        $hours = $currentDateTime->format('H');
+        $minutes = $currentDateTime->format('i');
+        $seconds = $currentDateTime->format('s');
+
+        $final_date = $year . "/" . $month . "/" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
+        $normal_date = $year . "-" . $month . "-" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
+
         // login verifaction for the outside users
         if($sdn_username != "admin" && $sdn_password != "admin"){
             try{
@@ -55,23 +70,6 @@
                     $_SESSION['running_timer'] = "";
                     $_SESSION['fifo_hpercode'] = "asdf";
                     $_SESSION['running_hpercode'] = "";
-
-                    // Get the current date and time
-                    $timezone = new DateTimeZone('Asia/Manila'); // Replace 'Your/Timezone' with your actual time zone
-                    $currentDateTime = new DateTime("",$timezone);
-
-                    // Format date components
-                    $year = $currentDateTime->format('Y');
-                    $month = $currentDateTime->format('m');
-                    $day = $currentDateTime->format('d');
-
-                    $hours = $currentDateTime->format('H');
-                    $minutes = $currentDateTime->format('i');
-                    $seconds = $currentDateTime->format('s');
-
-                    $final_date = $year . "/" . $month . "/" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
-                    $normal_date = $year . "-" . $month . "-" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
-
                     $_SESSION['login_time'] = $final_date;
 
                     $sql = "UPDATE incoming_referrals SET login_time = '". $final_date ."' , login_user='". $sdn_username ."' ";
@@ -127,21 +125,17 @@
         
         //verification for admin user logged in
         else if($sdn_username == "admin" && $sdn_password == "admin"){
-            // $_SESSION['user_name'] = "Bataan General Hospital and Medical Center";
             $_SESSION['hospital_code'] = '1437';
             $_SESSION['hospital_name'] = "Bataan General Hospital and Medical Center";
             $_SESSION['hospital_landline'] = '333-3333';
             $_SESSION['hospital_mobile'] = '3333-3333-333';
-            // $_SESSION['user_name'] = "Administrator";
-            // $_SESSION['user_password'] = $sdn_password;
-
+            
             $_SESSION['user_name'] = 'admin';
             $_SESSION['user_password'] = 'admin';
             $_SESSION['last_name'] = 'Administrator';
             $_SESSION['first_name'] = '';
             $_SESSION['middle_name'] = '';
             $_SESSION['user_type'] = 'admin';
-            // $_SESSION["process_timer"] = [];
             $_SESSION['post_value_reload'] = 'false';
             $_SESSION["sub_what"] = "";
             
@@ -152,22 +146,8 @@
             $_SESSION['update_current_date'] = "";
             $_SESSION['patient_status'] = "";
             $_SESSION['approval_details_arr'] = array();
-            
-            // Get the current date and time
-            $timezone = new DateTimeZone('Asia/Manila'); // Replace 'Your/Timezone' with your actual time zone
-            $currentDateTime = new DateTime("",$timezone);
-
-            // Format date components
-            $year = $currentDateTime->format('Y');
-            $month = $currentDateTime->format('m');
-            $day = $currentDateTime->format('d');
-
-            $hours = $currentDateTime->format('H');
-            $minutes = $currentDateTime->format('i');
-            $seconds = $currentDateTime->format('s');
-
-            $final_date = $year . "/" . $month . "/" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
-            $temp_date = $year . "-" . $month . "-" . $day . " " . $hours . ":" . $minutes . ":" . $seconds;
+        
+            $temp_date = $normal_date;
             
             $_SESSION['login_time'] = $final_date;
 
@@ -231,9 +211,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Delivery Network</title>
 
-    <link rel="icon" href="/assets/main_imgs/favicon/favicon.ico" type="image/x-icon"/>
+    <!-- <link rel="icon" href="/assets/main_imgs/favicon/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <?php require "./header_link.php" ?>
+
     <link rel="stylesheet" href="index.css" />
 
     <style>

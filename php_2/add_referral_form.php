@@ -53,6 +53,7 @@
         $data_municipality_desc['municipality_description'] = "BALANGA";
         $abbreviation = "BGHMC";
    }
+
     $reference_num = 'R3-BTN-'. $data_municipality_desc['municipality_description'] . '-' . $abbreviation . '-' . $year . '-' . $month . '-' . $day;
     $patlast = $data['patlast'];
     $patfirst = $data['patfirst'];
@@ -68,6 +69,39 @@
     $referred_time =  $year . '/' .  $month . '/' .  $day  . ' - ' .  $hours . ':' .  $minutes . ':' .  $seconds;
     $temp_referred_time =  $year . '-' .  $month . '-' .  $day  . ' ' .  $hours . ':' .  $minutes . ':' .  $seconds;
     $status = 'Pending';
+
+    $sql = "SELECT referral_id FROM incoming_referrals ORDER BY referral_id DESC LIMIT 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $data_referral_id = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    $referral_id = ""; 
+    if($data_referral_id == "" || $data_referral_id == null ){
+        $referral_id = "REF000001";
+    }else{
+        $last_number = substr($data_referral_id['referral_id'], 3);
+
+        $referral_idPrefix = "REF"; // Set the prefix
+        $new_number = $last_number + 1; // Increment the last number
+
+        $zeros = "0";
+
+        if($new_number <= 9){
+            $zeros = "00000";
+        }else if($new_number <= 99){
+            $zeros = "0000";
+        }else if($new_number <= 999){
+            $zeros = "000";
+        }else if($new_number <= 9999){
+            $zeros = "00";
+        }else if($new_number <= 99999){
+            $zeros = "0";
+        }else if($new_number <= 999999){
+            $zeros = "";
+        }
+
+        $referral_id = $referral_idPrefix . $zeros . $new_number;
+    }
 
     /////////////////////////////////////////////////
 
@@ -100,64 +134,77 @@
 
     $sql = "";
    if($type === "OB"){
-        $sql = "INSERT INTO incoming_referrals (hpercode, reference_num, patlast, patfirst, patmiddle, patsuffix, type, referred_by, landline_no, mobile_no, date_time, status, refer_to, sensitive_case, parent_guardian , phic_member, transport,
+        $sql = "INSERT INTO incoming_referrals (referral_id, hpercode, reference_num, patlast, patfirst, patmiddle, patsuffix, type, referred_by, landline_no, mobile_no, date_time, status, refer_to, sensitive_case, parent_guardian , phic_member, transport,
             referring_doctor, chief_complaint_history, reason, diagnosis, bp, hr, rr, temp, weight, pertinent_findings,
             fetal_heart_tone, fundal_height, cervical_dilation, bag_water, presentation, others_ob)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?, ?,?,?,?,?,?)";
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?, ?,?,?,?,?,?)";
    }else{
-        $sql = "INSERT INTO incoming_referrals (hpercode, reference_num, patlast, patfirst, patmiddle, patsuffix, type, referred_by, landline_no, mobile_no, date_time, status, refer_to, sensitive_case, parent_guardian , phic_member, transport, referring_doctor, chief_complaint_history, reason, diagnosis, bp, hr, rr, temp, weight, pertinent_findings)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?)";
+        $sql = "INSERT INTO incoming_referrals (referral_id, hpercode, reference_num, patlast, patfirst, patmiddle, patsuffix, type, referred_by, landline_no, mobile_no, date_time, status, refer_to, sensitive_case, parent_guardian , phic_member, transport, referring_doctor, chief_complaint_history, reason, diagnosis, bp, hr, rr, temp, weight, pertinent_findings)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?)";
    }
 
     $stmt = $pdo->prepare($sql);
 
-    $stmt->bindParam(1, $code, PDO::PARAM_STR);
-    $stmt->bindParam(2, $reference_num, PDO::PARAM_STR);
-    $stmt->bindParam(3, $patlast, PDO::PARAM_STR);
-    $stmt->bindParam(4, $patfirst, PDO::PARAM_STR);
-    $stmt->bindParam(5, $patmiddle, PDO::PARAM_STR);
-    $stmt->bindParam(6, $patsuffix, PDO::PARAM_STR);
-    $stmt->bindParam(7, $type, PDO::PARAM_STR);
-    $stmt->bindParam(8, $referred_by, PDO::PARAM_STR);
+    $stmt->bindParam(1, $referral_id, PDO::PARAM_STR);
+    $stmt->bindParam(2, $code, PDO::PARAM_STR);
+    $stmt->bindParam(3, $reference_num, PDO::PARAM_STR);
+    $stmt->bindParam(4, $patlast, PDO::PARAM_STR);
+    $stmt->bindParam(5, $patfirst, PDO::PARAM_STR);
+    $stmt->bindParam(6, $patmiddle, PDO::PARAM_STR);
+    $stmt->bindParam(7, $patsuffix, PDO::PARAM_STR);
+    $stmt->bindParam(8, $type, PDO::PARAM_STR);
+    $stmt->bindParam(9, $referred_by, PDO::PARAM_STR);
 
-    $stmt->bindParam(9, $landline_no, PDO::PARAM_STR);
-    $stmt->bindParam(10, $mobile_no, PDO::PARAM_STR);
+    $stmt->bindParam(10, $landline_no, PDO::PARAM_STR);
+    $stmt->bindParam(11, $mobile_no, PDO::PARAM_STR);
 
-    $stmt->bindParam(11, $referred_time, PDO::PARAM_STR);
-    $stmt->bindParam(12, $status, PDO::PARAM_STR);
+    $stmt->bindParam(12, $referred_time, PDO::PARAM_STR);
+    $stmt->bindParam(13, $status, PDO::PARAM_STR);
 
-    $stmt->bindParam(13, $refer_to, PDO::PARAM_STR);
-    $stmt->bindParam(14, $sensitive_case, PDO::PARAM_STR);
+    $stmt->bindParam(14, $refer_to, PDO::PARAM_STR);
+    $stmt->bindParam(15, $sensitive_case, PDO::PARAM_STR);
 
-    $stmt->bindParam(15, $parent_guardian, PDO::PARAM_STR);
-    $stmt->bindParam(16, $phic_member, PDO::PARAM_STR);
-    $stmt->bindParam(17, $transport, PDO::PARAM_STR);
-    $stmt->bindParam(18, $referring_doc, PDO::PARAM_STR);
+    $stmt->bindParam(16, $parent_guardian, PDO::PARAM_STR);
+    $stmt->bindParam(17, $phic_member, PDO::PARAM_STR);
+    $stmt->bindParam(18, $transport, PDO::PARAM_STR);
+    $stmt->bindParam(19, $referring_doc, PDO::PARAM_STR);
 
-    $stmt->bindParam(19, $complaint_history_input, PDO::PARAM_STR);
-    $stmt->bindParam(20, $reason_referral_input, PDO::PARAM_STR);
-    $stmt->bindParam(21, $diagnosis, PDO::PARAM_STR);
+    $stmt->bindParam(20, $complaint_history_input, PDO::PARAM_STR);
+    $stmt->bindParam(21, $reason_referral_input, PDO::PARAM_STR);
+    $stmt->bindParam(22, $diagnosis, PDO::PARAM_STR);
 
-    $stmt->bindParam(22, $bp_input, PDO::PARAM_STR);
-    $stmt->bindParam(23, $hr_input, PDO::PARAM_STR);
-    $stmt->bindParam(24, $rr_input, PDO::PARAM_STR);
+    $stmt->bindParam(23, $bp_input, PDO::PARAM_STR);
+    $stmt->bindParam(24, $hr_input, PDO::PARAM_STR);
+    $stmt->bindParam(25, $rr_input, PDO::PARAM_STR);
 
-    $stmt->bindParam(25, $temp_input, PDO::PARAM_STR);
-    $stmt->bindParam(26, $weight_input, PDO::PARAM_STR);
-    $stmt->bindParam(27, $pe_findings_input, PDO::PARAM_STR);
+    $stmt->bindParam(26, $temp_input, PDO::PARAM_STR);
+    $stmt->bindParam(27, $weight_input, PDO::PARAM_STR);
+    $stmt->bindParam(28, $pe_findings_input, PDO::PARAM_STR);
 
     if($type === "OB"){
-        $stmt->bindParam(28, $fetal_heart_inp, PDO::PARAM_STR);
-        $stmt->bindParam(29, $fundal_height_inp, PDO::PARAM_STR);
-        $stmt->bindParam(30, $cervical_dilation_inp, PDO::PARAM_STR);
-        $stmt->bindParam(31, $bag_water_inp, PDO::PARAM_STR);
-        $stmt->bindParam(32, $presentation_ob_inp, PDO::PARAM_STR);
-        $stmt->bindParam(33, $others_ob_inp, PDO::PARAM_STR);
+        $stmt->bindParam(29, $fetal_heart_inp, PDO::PARAM_STR);
+        $stmt->bindParam(30, $fundal_height_inp, PDO::PARAM_STR);
+        $stmt->bindParam(31, $cervical_dilation_inp, PDO::PARAM_STR);
+        $stmt->bindParam(32, $bag_water_inp, PDO::PARAM_STR);
+        $stmt->bindParam(33, $presentation_ob_inp, PDO::PARAM_STR);
+        $stmt->bindParam(34, $others_ob_inp, PDO::PARAM_STR);
     }
-    
+
     $stmt->execute();
    
     // updating the status of the person in the hperson table
+
+    $sql2 = "UPDATE hperson SET referral_id = IFNULL(referral_id, JSON_ARRAY()) WHERE hpercode=:hpercode";
+    $stmt = $pdo->prepare($sql2);
+    $stmt->bindParam(':hpercode', $code, PDO::PARAM_STR);
+    $stmt->execute();
+
+    $sql2 = "UPDATE hperson SET referral_id = JSON_ARRAY_APPEND(referral_id, '$', :referral_id) WHERE hpercode=:hpercode";
+    $stmt = $pdo->prepare($sql2);
+    $stmt->bindParam(':hpercode', $code, PDO::PARAM_STR);
+    $stmt->bindParam(':referral_id', $referral_id, PDO::PARAM_STR);
+    $stmt->execute();
+
     $sql = "UPDATE hperson SET status='Pending' WHERE hpercode=:hpercode ";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':hpercode', $code, PDO::PARAM_STR);

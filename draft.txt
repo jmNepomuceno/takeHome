@@ -1093,3 +1093,20 @@ for($i = 0; $i < count($class_code); $i++){
 
 
 no approve details
+
+38,358
+PAT000007---Discharged---2024-05-30 15:56:49
+// cscKEKW-28
+
+
+Array
+(
+    [ER] => #d77707
+    [OB] => #22c45e
+    [OPD] => #0368a1
+    [PCR] => #cf3136
+    [Toxicology] => #919122
+    [Cancer] => #999966
+)
+
+dataTableLength

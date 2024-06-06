@@ -797,12 +797,21 @@
     height: auto;
     display:flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+}
+
+#patHistoryModal .modal-content .pat-ref-div .pat-status-mini-div div{
+    width:70%;
+    height: 100%;
+    display:flex;
+    flex-direction: row;
     justify-content: start;
-    align-items: center;
+    align-items: start;
 }
 
 #patHistoryModal .modal-content .pat-ref-div .pat-status-mini-div #pat-ref-title{
-    width:30%;
+    width:45%;
     padding:10px;
     text-align: center;
     background: #2f3e46;
@@ -812,7 +821,7 @@
 }
 
 #patHistoryModal .modal-content .pat-ref-div .pat-status-mini-div #pat-ref-status{
-    width:15%;
+    width:35%;
     padding:10px;
     text-align: center;
     background: #2f3e46;
@@ -821,6 +830,7 @@
     color:white;
     margin-left: 10px;
 }
+
 
 #patHistoryModal .modal-content .pat-info-div #pat-info-title{
     width:22%;
@@ -876,6 +886,7 @@
     outline:none;
     pointer-events: none;
 }
+
 
 
 

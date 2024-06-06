@@ -18,6 +18,7 @@
     for($i = 0; $i < count($data); $i++){
         array_push($classification_arr, $data[$i]['classifications']);
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -26,15 +27,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SDN</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     
-    
+    <?php require "../header_link.php" ?>
     <link rel="stylesheet" href="../css/patient_register_form2.css">
 
 </head>
@@ -740,7 +742,7 @@
 
                             <div class="input-div">
                                 <label class="input-title-lbl">Barangay</label>
-                                <input type="text" class="info-inputs" id="info-input-brgy" value="St/ Francis 2"/>
+                                <input type="text" class="info-inputs" id="info-input-brgy" value="St. Francis 2"/>
                             </div> 
 
                             <div class="input-div">
@@ -788,8 +790,11 @@
                     <!-- referral information -->
                     <div class="pat-ref-div">
                         <div class="pat-status-mini-div">
-                            <h4 id="pat-ref-title">Patient's Referral Information</h4>
-                            <h4 id="pat-ref-status">Status: <span id="pat-ref-status-span">Pending</span></h4>
+                            <div>
+                                <h4 id="pat-ref-title">Patient's Referral Information</h4>
+                                <h4 id="pat-ref-status">Status: <span id="pat-ref-status-span">Pending</span></h4>
+                            </div>
+                            
                         </div>
                         <div class="pat-ref-sub-div">
                             <div class="input-div">
@@ -808,7 +813,7 @@
                             </div>
 
                             <div class="input-div" style="width:220px">
-                                <label class="input-title-lbl">Approved Time</label>
+                                <label class="input-title-lbl" id="status-time-lbl">Approved Time</label>
                                 <input type="text" class="info-inputs" id="info-input-approve-time" value="2023-10-12 02:24:22"/>
                             </div>
 
@@ -843,6 +848,8 @@
             </div>
         </div>  
     </div>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

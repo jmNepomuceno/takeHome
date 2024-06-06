@@ -4,29 +4,39 @@
 
     //PERSONAL INFORMATIONS // 16
 
+    // generation for hpercode or referral patient code
     // get the last value of hpercode from the database
     $sql = "SELECT hpercode FROM hperson ORDER BY hpercode DESC LIMIT 1";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
-    $last_number = substr($data['hpercode'], 6);
 
-    $hpercodePrefix = "BGHMC-"; // Set the prefix
-    $new_number = $last_number + 1; // Increment the last number
+    if($data == "" || $data == null ){
+        $hpercode = "PAT000001";
+    }else{
+        $last_number = substr($data['hpercode'], 3);
 
-    $zeros = "0";
+        $hpercodePrefix = "PAT"; // Set the prefix
+        $new_number = $last_number + 1; // Increment the last number
 
-    if($new_number <= 9){
-        $zeros = "000";
-    }else if($new_number <= 99){
-        $zeros = "00";
-    }else if($new_number <= 999){
         $zeros = "0";
-    }else if($new_number <= 9999){
-        $zeros = "";
-    }
 
-    $hpercode = $hpercodePrefix . $zeros . $new_number;
+        if($new_number <= 9){
+            $zeros = "00000";
+        }else if($new_number <= 99){
+            $zeros = "0000";
+        }else if($new_number <= 999){
+            $zeros = "000";
+        }else if($new_number <= 9999){
+            $zeros = "00";
+        }else if($new_number <= 99999){
+            $zeros = "0";
+        }else if($new_number <= 999999){
+            $zeros = "";
+        }
+
+        $hpercode = $hpercodePrefix . $zeros . $new_number;
+    }
 
     $hpatcode = $_POST['hpatcode']; //2
     $patlast = $_POST['patlast']; //3

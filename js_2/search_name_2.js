@@ -232,9 +232,8 @@ $(document).ready(function(){
                             // $(all_input_arr[j]).css('border' , '2px solid red')
                         }
 
-                        if(response[0].status === null){
-                            $("#classification-dropdown").css('display' , 'block')
-                            
+                        if(response[0].status === null || response[0].status === "Discharged"){
+                            $("#classification-dropdown").css('display' , 'block')   
                         }else{
                             // #0991b3 // #0e7590
                             // #17a44f // #178140
@@ -354,8 +353,8 @@ $(document).ready(function(){
             data:data,
             dataType: 'JSON',
             success: function(response){
-                // console.log(response)
-
+                console.log(response)
+                
                 patHistoryModal.show()
                 $('#info-input-lname').val(response[1].patlast)
                 $('#info-input-fname').val(response[1].patfirst)
@@ -385,6 +384,38 @@ $(document).ready(function(){
 
                 // #6aa37d
                 $('#pat-ref-status-span').css('color' , '#619e75')
+                $('#pat-ref-status-span').text(response[1].status)
+
+                // pat-ref-sub-div
+
+                if(response[1].status === 'Discharged'){
+                    const containerDiv = document.createElement('div');
+                    containerDiv.className = 'input-div';
+
+                    const label = document.createElement('label');
+                    label.className = 'input-title-lbl';
+                    label.textContent = 'Discharged Time';
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'info-inputs';
+                    input.id = 'info-input-discharged-time';
+                    input.value = 'ER';
+
+                    containerDiv.appendChild(label);
+                    containerDiv.appendChild(input);
+
+                    const motherDiv = document.querySelector('.pat-ref-sub-div');
+                    motherDiv.appendChild(containerDiv);
+
+                    $('#info-input-discharged-time').val(response[1].discharged_time)
+                }else{
+                    const motherDiv = document.querySelector('.pat-ref-sub-div');
+                    const inputToRemove = document.getElementById('info-input-discharged-time');
+                    if (inputToRemove) {
+                        motherDiv.removeChild(inputToRemove.parentNode); // Remove the parent container div
+                    }
+                }
             }
         })
     });

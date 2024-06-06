@@ -159,6 +159,14 @@ $(document).ready(function(){
 
     enabledNextReferral()
 
+    function changePatientModalContent(){
+        $('#pat-status-form').text('Approved')
+        $('#approval-form').css('display' , 'none')
+        $('#approval-details').css('display' , 'block')
+
+        $('#update-stat-select').css('display' , 'block')
+    }
+
     function handleUserActivity() {
         userIsActive = true;
         // console.log('active')
@@ -227,7 +235,7 @@ $(document).ready(function(){
 
     document.addEventListener('mousemove', handleUserActivity);
 
-    const inactivityInterval = 5000; 
+    const inactivityInterval = 115000; 
 
     function startInactivityTimer() {
         inactivityTimer = setInterval(() => {
@@ -267,48 +275,72 @@ $(document).ready(function(){
                         method: "POST", 
                         data:data
                     })
+                    $('#update-stat-select').css('display' , 'none')
+
+                }else if(document.querySelectorAll('.pat-status-incoming')[index].textContent == 'Approved'){
+                    console.log('wopwopwop')
+                    let data = {
+                        hpercode : document.querySelectorAll('.hpercode')[index].value,
+                    }
+                    console.log(data)
+
+                    $.ajax({
+                        url: '../php_2/fetch_approve_details.php',
+                        method: "POST", 
+                        data:data,
+                        dataType: 'JSON',
+                        success: function(response){
+                            console.log(response)
+                            // response[0].pat_class
+                            $('#approve-classification-select-details').val(response[0].pat_class)
+                            $('#eraa-details').val(response[0].approval_details)
+                            
+                        }
+                    })
+
+                    changePatientModalContent()
                 }
 
+                
                 // checking if the patient is already referred interdepartamentally
                 // console.log(data)
 
-                $.ajax({
-                    url: '../php_2/check_interdept_refer.php',
-                    method: "POST", 
-                    data:data,
-                    success: function(response){
-                        response = JSON.parse(response);    
-                        // console.log(response)
-                        console.log(typeof response.status_interdept)
+                // $.ajax({
+                //     url: '../php_2/check_interdept_refer.php',
+                //     method: "POST", 
+                //     data:data,
+                //     success: function(response){
+                //         response = JSON.parse(response);    
+                //         // console.log(response)
+                //         console.log(typeof response.status_interdept)
 
-                        if(response.status_interdept){
-                            $('#approval-form').css('display','none')
-                            $('.interdept-div-v2').css('display','flex')
-                            $('#cancel-btn').css('display','block')
+                //         if(response.status_interdept){
+                //             $('#approval-form').css('display','none')
+                //             $('.interdept-div-v2').css('display','flex')
+                //             $('#cancel-btn').css('display','block')
                 
-                            updateInterdeptFunc()
-                        }else{
-                            $('#approval-form').css('display','flex')
-                            $('.approval-main-content').css('display','block')
-                            $('.interdept-div-v2').css('display','none')
-                            $('#cancel-btn').css('display','none')
-                        }
+                //             updateInterdeptFunc()
+                //         }else{
+                //             $('#approval-form').css('display','flex')
+                //             $('.approval-main-content').css('display','block')
+                //             $('.interdept-div-v2').css('display','none')
+                //             $('#cancel-btn').css('display','none')
+                //         }
 
-                        $('#seen-by-lbl span').text(response.referring_seenBy)
-                        $('#seen-date-lbl span').text(response.referring_seenTime)
+                //         $('#seen-by-lbl span').text(response.referring_seenBy)
+                //         $('#seen-date-lbl span').text(response.referring_seenTime)
                         
-                        if (document.querySelectorAll('.pat-status-incoming')[global_index].textContent.includes("Approve")) {
-                            $('#final-approve-btn').css('display','block')
-                        } 
-                    }
-                })
+                //         if (document.querySelectorAll('.pat-status-incoming')[global_index].textContent.includes("Approve")) {
+                //             $('#final-approve-btn').css('display','block')
+                //         } 
+                //     }
+                // })
 
                 myModal.show();
 
             }
         })
     }
-
     const pencil_elements = document.querySelectorAll('.pencil-btn');
         pencil_elements.forEach(function(element, index) {
         element.addEventListener('click', function() {
@@ -531,6 +563,15 @@ $(document).ready(function(){
                             global_breakdown_index = index;
                         });
                     });
+
+                    const pencil_elements = document.querySelectorAll('.pencil-btn');
+                    pencil_elements.forEach(function(element, index) {
+                        element.addEventListener('click', function() {
+                            console.log('den')
+                            ajax_method(index)
+                        });
+                    });
+
                 }
             }) 
         }else{
@@ -927,4 +968,36 @@ $(document).ready(function(){
 
         defaultMyModal.show()
     })
+
+    $('#update-stat-select').on('change', function() {
+        var selectedValue = $(this).val();
+        
+        if (selectedValue) {
+            $('#save-update').show(); 
+        } else {
+            $('#save-update').hide(); 
+        }
+    });
+
+    $('#save-update').on('click', function() {
+        const  selectedValue = $('#update-stat-select').val();
+        let data = {
+            hpercode : document.querySelectorAll('.hpercode')[global_index].value,
+            newStatus : selectedValue
+        }
+        console.log(data)
+        $.ajax({
+            url: '../php_2/update_referral_status.php',
+            method: "POST",
+            data : data,
+            success: function(response){
+                console.log(response)
+                $('#pat-status-form').text(data.newStatus)
+                $('#modal-body-incoming').text('Successfully Updated')
+                defaultMyModal.show()
+                $('#save-update').hide(); 
+                $('#update-stat-select').prop('selectedIndex', 0);
+            }
+         })
+    });
 })
