@@ -26,37 +26,16 @@
     margin-top:5px;
 }
 
-#patient-reg-form-div #upper-part-div #privacy-reminder-div{
-    width: 65%;
-    height: 65%;
-    display: none;
+#patient-reg-form-div #upper-part-div .right-side{
+    width:70%;
+    height: 100%;
+    display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: end;
     align-items: center;
-    border-radius: 0.5rem;
-    background: #fbf1c7;
-    /* visibility: hidden; */
-    
 }
 
-#patient-reg-form-div #upper-part-div #privacy-reminder-div p{
-    font-size: 0.75rem;
-    line-height: 1.25rem;
-    margin-top: 1.3%;
-}
-
-#patient-reg-form-div #upper-part-div #privacy-reminder-div p span{
-    font-weight: bold;
-}
-
-#patient-reg-form-div #upper-part-div #privacy-reminder-div button{
-    font-size: 1.125rem;
-    border:none;
-    background: transparent;
-    margin-bottom: 1px;
-}
-
-#patient-reg-form-div #upper-part-div #check-if-registered-btn{
+#patient-reg-form-div #upper-part-div .right-side #check-if-registered-btn{
     width: 50px;
     height: 40px;
     margin-right: 0.5rem;
@@ -77,19 +56,21 @@
 
 }
 
-#patient-reg-form-div #upper-part-div #check-if-registered-btn i{
+#patient-reg-form-div #upper-part-div .right-side #check-if-registered-btn i{
     cursor: pointer;
     font-size: 1.5rem; /* 24px */
     line-height: 2rem; /* 32px */
     color:white;
 }
 
-#patient-reg-form-div #upper-part-div #check-if-registered-btn h3{
+#patient-reg-form-div #upper-part-div .right-side #check-if-registered-btn h3{
     display:none;
     cursor: pointer;
     font-size: 1rem;
     margin-top: 8px;
 }
+
+
 
 #patient-reg-form-div #upper-part-div .important-btns{
     width:25%;
@@ -162,6 +143,57 @@
 
 #patient-reg-form-div #upper-part-div .important-btns .patient-form-btns #clear-patform-btn-id:hover{
     background: #ec4545;
+}
+
+#patient-reg-form-div #upper-part-div .right-side .already-registered-div{
+    background: #2f3e46;
+    padding:5px;
+    border-radius: 5px;
+    margin-right:10px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#patient-reg-form-div #upper-part-div .right-side .already-registered-div #check-pat-registration-btn,
+#patient-reg-form-div #upper-part-div .right-side .already-registered-div #searching-btn{
+    background: transparent;
+    color:white;
+    border:none;
+    margin-right: 5px;
+    border-right:3px solid #33444d;
+    padding:5px;
+}
+
+#patient-reg-form-div #upper-part-div .right-side .already-registered-div #data-found-btn{
+    background: #759577;
+    color:white;
+    padding:5px;
+    border:none;
+    border-radius: 5px;
+    margin: 0 10px 0 10px;
+    display:none;
+}
+
+#patient-reg-form-div #upper-part-div .right-side .already-registered-div i{
+    background: transparent;
+    color:#ffc107;
+    border:none;
+    margin-left:5px;
+    margin-right:5px;
+    cursor: pointer;
+}
+
+#patient-reg-form-div #upper-part-div .right-side .already-registered-div i:hover{
+    color:#ffd24d; 
+}
+
+#patient-reg-form-div #upper-part-div .right-side .already-registered-div #searching-btn{
+    width:auto; 
+    padding:0;
+    display:none;
+    border:none;
 }
 
 #patient-reg-form-div #check-if-registered-div{

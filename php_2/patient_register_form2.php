@@ -28,14 +28,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SDN</title>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-    
     <?php require "../header_link.php" ?>
     <link rel="stylesheet" href="../css/patient_register_form2.css">
 
@@ -64,16 +56,36 @@
 
                 </div>
             </aside>
+
+            
         
-            <div id="privacy-reminder-div">
+            <!-- <div id="privacy-reminder-div">
                 <p> <span>Notice: </span>For data integrity purposes. Changing of Name and Birthday will be restricted. Please send an email to bataan.bghmc.ihomp@gmail.com for your request of patient name change. </p>
                 <button>x</button>
-            </div>
+            </div> -->
 
-            <button id="check-if-registered-btn">
-                <i  class="fa-solid fa-magnifying-glass"></i>
-                <h3 id="check-if-registered-h3">Check if the patient is already registered</h3>
-            </button>
+            <div class="right-side">
+                
+
+                <div class="already-registered-div">
+                    <i id="data-found-i" class="fa-solid fa-circle-exclamation"></i>
+                    <!-- <i class="fa-solid fa-circle-check"></i> -->
+                    <button id="check-pat-registration-btn">Check if registered na sa ibang RHUs</button>
+
+                    <button class="btn btn-primary" id="searching-btn" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Searching...
+                    </button>
+
+                    <button id="data-found-btn">Check the Data</button>
+
+                </div>
+
+                <button id="check-if-registered-btn">
+                    <i  class="fa-solid fa-magnifying-glass"></i>
+                    <h3 id="check-if-registered-h3">Check if the patient is already registered</h3>
+                </button>
+            </div>
         </div>
         
         <div id="check-if-registered-div">
@@ -849,8 +861,7 @@
         </div>  
     </div>
 
-
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

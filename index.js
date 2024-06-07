@@ -27,7 +27,7 @@ $(document).ready(function(){
         event.preventDefault();
         $('.main-content').css('display', 'none');
         $('.sub-content').css('display', 'flex');
-    })
+    })  
 
     $('.return').on('click' , function(event){
         event.preventDefault();
