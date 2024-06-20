@@ -3,42 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Input Width</title>
+    <title>Accurate Timer</title>
     <style>
-        .dynamic-input {
-            display: inline-block;
-            padding: 5px;
-            border: 1px solid #ccc;
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             font-family: Arial, sans-serif;
-            font-size: 16px;
-            transition: width 0.2s; /* Smooth width adjustment */
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .timer-container {
+            text-align: center;
+        }
+        .timer {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            font-size: 1rem;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+        }
+        .buttons button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <input type="text" class="dynamic-input" id="dynamic-input" oninput="adjustWidth(this)" value="John Doe">
-    
+    <div class="timer-container">
+        <div id="timer" class="timer">0.00</div>
+        <div class="buttons">
+            <button onclick="startTimer()">Start</button>
+            <button onclick="stopTimer()">Stop</button>
+            <button onclick="resetTimer()">Reset</button>
+        </div>
+    </div>
+
     <script>
-        function adjustWidth(input) {
-            // Create a canvas context to measure text width
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            
-            // Get the computed style of the input element
-            const computedStyle = window.getComputedStyle(input);
-            
-            // Set the canvas context font to match the input element's font
-            context.font = computedStyle.font;
-            
-            // Measure the width of the input's value
-            const textWidth = context.measureText(input.value).width;
-            
-            // Set the input width plus some padding
-            input.style.width = `${textWidth + 20}px`; // Adding some padding (20px)
+        let startTime;
+        let elapsedTime = 0;
+        let running = false;
+        let requestId;
+
+        function updateTimer() {
+            if (!running) return;
+
+            const now = performance.now();
+            elapsedTime = now - startTime;
+            document.getElementById('timer').textContent = (elapsedTime / 1000).toFixed(2);
+            requestId = requestAnimationFrame(updateTimer);
         }
 
-        // Initialize width on page load
-        window.onload = () => adjustWidth(document.getElementById('dynamic-input'));
+        function startTimer() {
+            if (running) return;
+
+            running = true;
+            startTime = performance.now() - elapsedTime;
+            requestId = requestAnimationFrame(updateTimer);
+        }
+
+        function stopTimer() {
+            running = false;
+            cancelAnimationFrame(requestId);
+        }
+
+        function resetTimer() {
+            running = false;
+            elapsedTime = 0;
+            document.getElementById('timer').textContent = '0.00';
+            cancelAnimationFrame(requestId);
+        }
     </script>
 </body>
 </html>

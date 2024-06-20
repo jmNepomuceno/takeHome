@@ -225,10 +225,8 @@ $(document).ready(function(){
                         clearInterval(running_timer_interval_update)
                         $('#span-status').text("Approved | ") 
                         $('#final-approve-btn').css('display',  'block')
-    
                     }
                 }
-               
             }
         });
     }
@@ -415,6 +413,11 @@ $(document).ready(function(){
             runTimer(parseInt($('#running-index').val()), seconds, minutes, hours)
         }
     }
+
+    let running = false;
+    let startTime;
+    let elapsedTime = 0;
+    let requestId;
 
     function runTimer(index, sec, min, hrs){
         let seconds = sec;

@@ -54,8 +54,15 @@
         }
         
 
+        $style_color = "#ffffff";
+        $text_color = "#1f292e";
+        if($i % 2 == 1){
+            $style_color = "#1f292e"; 
+            $text_color = "#ffffff";
+        }
+
         echo '
-            <div class="history-div w-full h-[10%] border-b-2 border-[#bfbfbf] flex flex-row justify-between items-center">
+            <div class="history-div w-full h-[10%] border-b-2 border-[#bfbfbf] flex flex-row justify-between items-center bg-['.$style_color.'] text-['.$text_color.']">
                 <div class="w-[20%] h-full flex flex-row justify-around items-center ml-4">
                     <i class="fa-regular fa-calendar-days text-2xl "></i>
                     <h3>'. $temp_1 .'</h3>

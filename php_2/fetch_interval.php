@@ -31,22 +31,23 @@
         for($i = 0; $i < count($data_classifications); $i++){
             $dynamic_classification[$data_classifications[$i]['classifications']] = $color[$i];
         }
+
+        // SQL query to fetch data from your table
         try{
             $sql = "SELECT * FROM incoming_referrals WHERE (status='Pending' OR status='On-Process') AND refer_to='". $_SESSION["hospital_name"] ."' ORDER BY date_time ASC";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
             $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $jsonString = json_encode($data);
-            
+            // echo count($data);
+            $jsonData = json_encode($data);
+
             $index = 0;
             $previous = 0;
             $loop = 0;
-            $i = 0;
             // Loop through the data and generate table rows
             foreach ($data as $row) {
                 $type_color = $dynamic_classification[$row['type']];
-
                 if($previous == 0){
                     $index += 1;
                 }else{
@@ -95,12 +96,12 @@
                 // processed time = progress time ng admin + progress time ng dept
                 // maiiwan yung timer na naka print, once na send na sa interdept
                 
-                
-                $sql = "SELECT final_progress_time FROM incoming_interdept WHERE hpercode='BGHMC-0049'";
+                $sql = "SELECT final_progress_time FROM incoming_interdept WHERE hpercode=:hpercode";
                 $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':hpercode', $row['hpercode'], PDO::PARAM_STR);
                 $stmt->execute();
                 $interdept_time = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                
+
                 $total_time = "00:00:00";
                 if($interdept_time){
                     if($interdept_time[0]['final_progress_time'] != "" && $row['sent_interdept_time'] != ""){
@@ -140,23 +141,29 @@
 
                 $stopwatch = "00:00:00";
                 if($row['sent_interdept_time'] == "00:00:00"){
-                    // echo "here";
                     if($_SESSION['running_timer'] != "" && $row['status'] == 'On-Process'){
                         $stopwatch  = $_SESSION['running_timer'];
                     }
                 }else{
-                    // echo "asdf";
                     $stopwatch  = $row['sent_interdept_time'];
                 }
 
-
-                // echo $_SESSION['running_timer'];
-                // echo $row['sent_interdept_time'];
-                // echo "\n";
+                // for sensitive case
+                $pat_full_name = ""; 
+                if($row['sensitive_case'] === 'true'){
+                    $pat_full_name = "
+                        <div class='pat-full-name-div'>
+                            <button class='sensitive-case-btn'> <i class='sensitive-lock-icon fa-solid fa-lock'></i> Sensitive Case </button>
+                            <input class='sensitive-hpercode' type='hidden' name='sensitive-hpercode' value= '" . $row['hpercode'] . "'>
+                        </div>
+                    ";
+                }else{
+                    $pat_full_name = $row['patlast'] . ", " . $row['patfirst'] . " " . $row['patmiddle'];
+                }
 
                 echo '<tr class="tr-incoming" style="'. $style_tr .'">
                         <td id="dt-refer-no"> ' . $row['reference_num'] . ' - '.$index.' </td>
-                        <td id="dt-patname">' . $row['patlast'] , ", " , $row['patfirst'] , " " , $row['patmiddle']  . '</td>
+                        <td id="dt-patname">' . $pat_full_name . '</td>
                         <td id="dt-type" style="background:' . $type_color . ' ">' . $row['type'] . '</td>
                         <td id="dt-phone-no">
                             <label> Referred: ' . $row['referred_by'] . '  </label>
@@ -192,23 +199,28 @@
                         
                         <td id="dt-status">
                             <div> 
+                                <label class="pat-status-incoming">' . $row['status'] . '</label>';
+                                if ($row['sensitive_case'] === 'true') {
+                                    echo '<i class="pencil-btn fa-solid fa-pencil" style="pointer-events:none; opacity:0.3"></i>';
+                                }else{
+                                    echo'<i class="pencil-btn fa-solid fa-pencil"></i>';
+                                }
                                 
-                                <label class="pat-status-incoming">' . $row['status'] . '</label>
-                                <i class="pencil-btn fa-solid fa-pencil"></i>
-                                <input class="hpercode" type="hidden" name="hpercode" value= ' . $row['hpercode'] . '>
+                                echo '<input class="hpercode" type="hidden" name="hpercode" value= ' . $row['hpercode'] . '>
 
                             </div>
                         </td>
                     </tr>';
 
-
-                
                 $previous = $row['reference_num'];
                 $loop += 1;
-                $i += 1;
             }
-        }catch(PDOException $e){
-            echo $notif_value;
+
+            // Close the database connection
+            $pdo = null;
+        }
+        catch(PDOException $e){
+            echo "asdf";
         }
     }else if($_POST['from_where'] == 'outgoing'){
         try{
@@ -358,10 +370,15 @@
                     $temp_3 = $name;
                 }
                 
-                
+                $style_color = "#ffffff";
+                $text_color = "#1f292e";
+                if($i % 2 == 1){
+                    $style_color = "#1f292e"; 
+                    $text_color = "#ffffff";
+                }
 
                 echo '
-                    <div class="history-div w-full h-[10%] border-b-2 border-[#bfbfbf] flex flex-row justify-between items-center">
+                    <div class="history-div w-full h-[10%] border-b-2 border-[#bfbfbf] flex flex-row justify-between items-center bg-['.$style_color.'] text-['.$text_color.']">
                         <div class="w-[20%] h-full flex flex-row justify-around items-center ml-4">
                             <i class="fa-regular fa-calendar-days text-2xl "></i>
                             <h3>'. $temp_1 .'</h3>

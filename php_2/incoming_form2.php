@@ -133,21 +133,21 @@
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
 
-    $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000021'";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000021'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
 
-    $sql = "UPDATE incoming_referrals SET status='Pending' WHERE hpercode='PAT000021'";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    // $sql = "UPDATE incoming_referrals SET status='Pending' WHERE hpercode='PAT000021'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
 
-    $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000022'";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000022'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
 
-    $sql = "UPDATE incoming_referrals SET status='Pending' WHERE hpercode='PAT000022'";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    // $sql = "UPDATE incoming_referrals SET status='Pending' WHERE hpercode='PAT000022'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
 ?>
 
  
