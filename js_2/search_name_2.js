@@ -339,7 +339,48 @@ $(document).ready(function(){
         }
     })
 
+    function onClickReferralCase(index, response, newTemp_response){
+        // css toggle for referral case buttons
+        console.log('here')
+        $('.ref-counter').eq(index - 1).css('opacity', '1')
+        for(let i = 0; i < $('.ref-counter').length; i++){
+            if(i != index - 1){
+                $('.ref-counter').eq(i).css('opacity', '0.3')
+            }
+        }
+        
+        index = index - 1
 
+        $('#info-input-lname').text(response[1].patlast)
+        $('#info-input-fname').text(response[1].patfirst)
+        $('#info-input-mname').text(response[1].patmiddle)
+        $('#info-input-sname').text(response[1].patsuffix)
+        $('#info-input-bdate').text(response[0].patbdate)
+        $('#info-input-age').text(response[0].pat_age)
+        $('#info-input-sex').text(response[0].patsex)
+        $('#info-input-brgy').text(response[0].pat_curr_barangay)
+        $('#info-input-city').text(response[0].pat_curr_municipality)
+        $('#info-input-prov').text(response[0].pat_curr_province)
+        $('#info-input-region').text(response[0].pat_curr_region)
+        $('#info-input-email').text(response[0].pat_email)
+        $('#info-input-mobile').text("0" + response[0].pat_mobile_no)
+        $('#info-input-telephone').text(response[0].pat_homephone_no)
+        $('#info-input-rec_at').text(response[0].created_at)
+        $('#info-input-reg_at').text(response[0].hpatcode)
+
+        $('#info-input-pat-type').text(newTemp_response[index].type)
+        $('#info-input-pat-class').text(newTemp_response[index].pat_class)
+        $('#info-input-ref-date').text(newTemp_response[index].date_time)
+        $('#info-input-ref-by').text(newTemp_response[index].referred_by)
+        $('#info-input-ref-to').text(newTemp_response[index].refer_to)
+        $('#info-input-approve-time').text(newTemp_response[index].approved_time)
+        $('#info-input-reason-ref').text(newTemp_response[index].reason)
+        $('#info-input-approve-details').text(newTemp_response[index].approval_details)
+
+        // #6aa37d
+        $('#pat-ref-status-span').css('color' , '#619e75')
+        $('#pat-ref-status-span').text(newTemp_response[index].status)
+    }
 
     $(document).on('click', '#pat-history', function() {
         const data = {
@@ -354,68 +395,101 @@ $(document).ready(function(){
             dataType: 'JSON',
             success: function(response){
                 console.log(response)
+                let referral_counter = response[response.length - 1].length
                 
                 patHistoryModal.show()
-                $('#info-input-lname').val(response[1].patlast)
-                $('#info-input-fname').val(response[1].patfirst)
-                $('#info-input-mname').val(response[1].patmiddle)
-                $('#info-input-sname').val(response[1].patsuffix)
-                $('#info-input-bdate').val(response[0].patbdate)
-                $('#info-input-age').val(response[0].pat_age)
-                $('#info-input-sex').val(response[0].patsex)
-                $('#info-input-brgy').val(response[0].pat_curr_barangay)
-                $('#info-input-city').val(response[0].pat_curr_municipality)
-                $('#info-input-prov').val(response[0].pat_curr_province)
-                $('#info-input-region').val(response[0].pat_curr_region)
-                $('#info-input-email').val(response[0].pat_email)
-                $('#info-input-mobile').val("0" + response[0].pat_mobile_no)
-                $('#info-input-telephone').val(response[0].pat_homephone_no)
-                $('#info-input-rec_at').val(response[0].created_at)
-                $('#info-input-reg_at').val(response[0].hpatcode)
 
-                $('#info-input-pat-type').val(response[1].type)
-                $('#info-input-pat-class').val(response[1].pat_class)
-                $('#info-input-ref-date').val(response[1].date_time)
-                $('#info-input-ref-by').val(response[1].referred_by)
-                $('#info-input-ref-to').val(response[1].refer_to)
-                $('#info-input-approve-time').val(response[1].approved_time)
-                $('#info-input-reason-ref').val(response[1].reason)
-                $('#info-input-approve-details').val(response[1].approval_details)
+                // initial data, but with the first referral case
+                $('#info-input-lname').text(response[1].patlast)
+                $('#info-input-fname').text(response[1].patfirst)
+                $('#info-input-mname').text(response[1].patmiddle)
+                $('#info-input-sname').text(response[1].patsuffix)
+                $('#info-input-bdate').text(response[0].patbdate)
+                $('#info-input-age').text(response[0].pat_age)
+                $('#info-input-sex').text(response[0].patsex)
+                $('#info-input-brgy').text(response[0].pat_curr_barangay)
+                $('#info-input-city').text(response[0].pat_curr_municipality)
+                $('#info-input-prov').text(response[0].pat_curr_province)
+                $('#info-input-region').text(response[0].pat_curr_region)
+                $('#info-input-email').text(response[0].pat_email)
+                $('#info-input-mobile').text("0" + response[0].pat_mobile_no)
+                $('#info-input-telephone').text(response[0].pat_homephone_no)
+                $('#info-input-rec_at').text(response[0].created_at)
+                $('#info-input-reg_at').text(response[0].hpatcode)
 
-                // #6aa37d
+                $('#info-input-pat-type').text(response[1].type)
+                $('#info-input-pat-class').text(response[1].pat_class)
+                $('#info-input-ref-date').text(response[1].date_time)
+                $('#info-input-ref-by').text(response[1].referred_by)
+                $('#info-input-ref-to').text(response[1].refer_to)
+                $('#info-input-approve-time').text(response[1].approved_time)
+                $('#info-input-reason-ref').text(response[1].reason)
+                $('#info-input-approve-details').text(response[1].approval_details)
+
                 $('#pat-ref-status-span').css('color' , '#619e75')
                 $('#pat-ref-status-span').text(response[1].status)
 
-                // pat-ref-sub-div
+                $('#info-input-pat-discharge').text((response[1].discharged_time) ? response[1].discharged_time : "N/A")
 
-                if(response[1].status === 'Discharged'){
-                    const containerDiv = document.createElement('div');
-                    containerDiv.className = 'input-div';
+                // generate the number of referral case
+                let temp_response = response;
+                const [, ...newTemp_response] = temp_response; // Skip the first element and collect the rest
+                newTemp_response.pop()
 
-                    const label = document.createElement('label');
-                    label.className = 'input-title-lbl';
-                    label.textContent = 'Discharged Time';
+                console.log(newTemp_response);
 
-                    const input = document.createElement('input');
-                    input.type = 'text';
-                    input.className = 'info-inputs';
-                    input.id = 'info-input-discharged-time';
-                    input.value = 'ER';
+                // remove all the current buttons elements
+                const parentElement = document.querySelector('.num-refer-div');
+                Array.from(parentElement.querySelectorAll('.ref-counter')).forEach(button => button.remove());
 
-                    containerDiv.appendChild(label);
-                    containerDiv.appendChild(input);
+                for(let i = 1; i <= referral_counter; i++){
+                    let elem = document.createElement('button')
+                    elem.className = 'ref-counter'
 
-                    const motherDiv = document.querySelector('.pat-ref-sub-div');
-                    motherDiv.appendChild(containerDiv);
+                    const dateTimeString = newTemp_response[i - 1]['date_time'];
+                    const datePart = dateTimeString.split(' ')[0];
+                    const formattedDate = datePart.split('-').join('/');
+                    elem.textContent = `#${i}. ${formattedDate}`
 
-                    $('#info-input-discharged-time').val(response[1].discharged_time)
-                }else{
-                    const motherDiv = document.querySelector('.pat-ref-sub-div');
-                    const inputToRemove = document.getElementById('info-input-discharged-time');
-                    if (inputToRemove) {
-                        motherDiv.removeChild(inputToRemove.parentNode); // Remove the parent container div
+                    if(i === 1){
+                        elem.style.opacity = '1'
+                    }else{
+                        elem.style.opacity = '0.5'
                     }
+                    document.querySelector('.num-refer-div').appendChild(elem)
+                    elem.addEventListener('click' , () => onClickReferralCase(i, response, newTemp_response))
                 }
+
+                // pat-ref-sub-div
+ 
+                // if(response[1].status === 'Discharged'){
+                //     const containerDiv = document.createElement('div');
+                //     containerDiv.className = 'input-div';
+
+                //     const label = document.createElement('label');
+                //     label.className = 'input-title-lbl';
+                //     label.textContent = 'Discharged Time';
+
+                //     const input = document.createElement('input');
+                //     input.type = 'text';
+                //     input.className = 'info-inputs';
+                //     input.id = 'info-input-discharged-time';
+                //     input.value = 'ER';
+
+                //     containerDiv.appendChild(label);
+                //     containerDiv.appendChild(input);
+
+                //     const motherDiv = document.querySelector('.pat-ref-sub-div');
+                //     motherDiv.appendChild(containerDiv);
+
+                //     $('#info-input-discharged-time').val(response[1].discharged_time)
+                // }else{
+                //     const motherDiv = document.querySelector('.pat-ref-sub-div');
+                //     const inputToRemove = document.getElementById('info-input-discharged-time');
+                //     if (inputToRemove) {
+                //         motherDiv.removeChild(inputToRemove.parentNode); // Remove the parent container div
+                //     }
+                // }
             }
         })
     });

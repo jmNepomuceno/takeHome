@@ -18,9 +18,9 @@ $(document).ready(function(){
     // loadContent('../php_2/referral_form.php?type="OB"&code="BGHMC-0058"')
 
     $('#check-if-registered-btn').on('click' , function(event){
-        console.log('here')
-        if($("#check-if-registered-btn").css("width") === "50px"){
-            $("#check-if-registered-btn").css("width" , "493px")
+        console.log($("#check-if-registered-btn").get(0).style.width )
+        if ($("#check-if-registered-btn").get(0).style.width === ""){
+            $("#check-if-registered-btn").css("width" , "550")
             $("#check-if-registered-div").css("right" , "8px")
 
             $("#check-if-registered-btn").css("border-top-left-radius" , "0.5rem")
@@ -32,10 +32,10 @@ $(document).ready(function(){
             $("#check-if-registered-btn").css("border-right" , "5px solid #1f292e")
             $("#check-if-registered-btn").css("border-left" , "5px solid #1f292e")
 
-            $('#check-if-registered-h3').css('display' , 'block')
+            $("#check-if-registered-btn").css('justify-content' , 'center')
         }else {
-            $("#check-if-registered-btn").css("width" , "50px")
-            $("#check-if-registered-div").css("right" , "-500px")
+            $("#check-if-registered-btn").css("width" , "")
+            $("#check-if-registered-div").css("right" , "-550px")
 
             $("#check-if-registered-btn").css("border-top-left-radius" , "0.5rem")
             $("#check-if-registered-btn").css("border-top-right-radius" , "0.5rem")
@@ -45,12 +45,8 @@ $(document).ready(function(){
             $("#check-if-registered-btn").css("border-top" , "none")
             $("#check-if-registered-btn").css("border-right" , "none")
             $("#check-if-registered-btn").css("border-left" , "none")
-
-            $('#check-if-registered-h3').css('display' , 'none')
         }   
     })
-
-    
 
     // console.log(document.querySelectorAll('.input-txt-classes-non'))
     //***********************************************************************************************************************/

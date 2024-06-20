@@ -111,7 +111,7 @@ $(document).ready(function(){
             }
 
             if (areAllValuesFilled(data)) {
-                console.log('den')
+                console.log(data)
                 $.ajax({
                     url: '../php_2/add_referral_form.php',
                     method: "POST",

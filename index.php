@@ -138,6 +138,11 @@
             $_SESSION['user_type'] = 'admin';
             $_SESSION['post_value_reload'] = 'false';
             $_SESSION["sub_what"] = "";
+
+            $_SESSION['mcc_passwords'] = [
+                "Lacsamana" => "123",
+                "Baltazar" => "1"
+            ];
             
             $_SESSION['running_timer'] = "";
             $_SESSION['running_hpercode'] = "";

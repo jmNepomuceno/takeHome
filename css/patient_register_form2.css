@@ -36,7 +36,7 @@
 }
 
 #patient-reg-form-div #upper-part-div .right-side #check-if-registered-btn{
-    width: 50px;
+    width: auto;
     height: 40px;
     margin-right: 0.5rem;
     display:flex;
@@ -53,21 +53,24 @@
     transition-delay: 150ms;
     transition-duration: 150ms;
     border:none;
-
+    padding: 5px;
 }
 
 #patient-reg-form-div #upper-part-div .right-side #check-if-registered-btn i{
     cursor: pointer;
-    font-size: 1.5rem; /* 24px */
-    line-height: 2rem; /* 32px */
+    font-size: 1rem; /* 24px */
     color:white;
+    margin-left: 10px;
+
 }
 
 #patient-reg-form-div #upper-part-div .right-side #check-if-registered-btn h3{
-    display:none;
+    /* display:none; */
     cursor: pointer;
-    font-size: 1rem;
-    margin-top: 8px;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    margin-left:10px;
+    margin-right: 10px;
 }
 
 
@@ -206,9 +209,10 @@
     border-left: 5px solid #1f292e;
     position:fixed;
     /* right:8px; */
-    right:-500px;
+    right:-550px;
     top:106px;
-    width:493px;
+    /* width:493px; */
+    width:550px;
     height: 80%;
     border-bottom-right-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
@@ -304,7 +308,7 @@
     height: 30%;
     display:flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #d9d9d9;
 }
@@ -314,14 +318,18 @@
     color:#e6e6e6;
 }
 
-#patient-reg-form-div #check-if-registered-div #search-result-div{
+#patient-reg-form-div #check-if-registered-div #search-result-div,
+#patient-reg-form-div #check-if-registered-div #search-result-div #search-sub-div {
+    box-sizing: border-box;
+}
+
+#patient-reg-form-div #check-if-registered-div #search-result-div {
     width: 95%;
     height: 82%;
-    display:flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    overflow-y: scroll;
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 100px); /* Set fixed height for each row */
+    grid-gap: 10px; /* Adjust gap between rows */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 #patient-reg-form-div #check-if-registered-div #search-result-div #no-pat-found{
@@ -371,6 +379,7 @@
     font-size: 1rem;
     height: 100%;
     margin-top:9px;
+    font-weight: 600;
 }
 
 #patient-reg-form-div #check-if-registered-div #search-result-div #search-sub-div #upper-part-sub-div div{
@@ -396,7 +405,7 @@
 
 #patient-reg-form-div #check-if-registered-div #search-result-div #search-sub-div #lower-part-sub-div{
     width: 100%;
-    height: 40%;
+    /* height: 40%; */
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -443,6 +452,14 @@
     scrollbar-width: none;  /* Firefox */
 }
 
+#patient-reg-form-div #check-if-registered-div #search-result-div #search-sub-div #reg-at-lbl{
+    width:100%;
+    height: auto;
+    text-align: right;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-right:25px;
+}
 
 /* PATIENTS REGISTRATION FORMS */
 
@@ -795,7 +812,19 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
+
 }
+
+/* #patHistoryModal .modal-content .modal-header .num-refer-div{
+    border:1px solid red;
+    width:50%;
+    height: 100%;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: bottom;
+} */
 
 #patHistoryModal .modal-content .modal-header button{
     background: #0587ca;
@@ -813,14 +842,52 @@
     height: 550px;
     border-bottom:2px solid #5c7a8a;
     margin-top:10px;
+
 }
+
+#patHistoryModal .modal-content .pat-info-div .num-refer-div{
+    margin-bottom:10px;
+    border-bottom:1px solid gray;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: end;
+}
+
+#patHistoryModal .modal-content .pat-info-div .num-refer-div #referral-case-title{
+    margin:0;
+    padding:0;
+    font-size: 1.2rem;
+    background: #2f3e46;
+    padding:7px;
+    color:white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#patHistoryModal .modal-content .pat-info-div .num-refer-div button{
+    background:#2f3e46;
+    border:none;
+    color:white;
+    padding:7px;
+    margin-left:10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-weight: bold;
+}
+
+#patHistoryModal .modal-content .pat-info-div .num-refer-div button:hover{
+    background: #759577;
+}
+
+/* */
 
 /* #patHistoryModal .modal-content */
 
 #patHistoryModal .modal-content .pat-ref-div{
-    margin-top:30px;
+    margin-top:10px;
     width:100%;
-    height: 550px;
+    height: auto;
     border-bottom:2px solid #5c7a8a;
 }
 
@@ -829,31 +896,12 @@
     height: auto;
     display:flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: start;
-}
-
-#patHistoryModal .modal-content .pat-ref-div .pat-status-mini-div div{
-    width:70%;
-    height: 100%;
-    display:flex;
-    flex-direction: row;
-    justify-content: start;
-    align-items: start;
-}
-
-#patHistoryModal .modal-content .pat-ref-div .pat-status-mini-div #pat-ref-title{
-    width:45%;
-    padding:10px;
-    text-align: center;
-    background: #2f3e46;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    color:white;
 }
 
 #patHistoryModal .modal-content .pat-ref-div .pat-status-mini-div #pat-ref-status{
-    width:35%;
+    width:auto;
     padding:10px;
     text-align: center;
     background: #2f3e46;
@@ -863,15 +911,24 @@
     margin-left: 10px;
 }
 
-
-#patHistoryModal .modal-content .pat-info-div #pat-info-title{
+#patHistoryModal .modal-content .pat-info-div .pat-info-sub-div .pat-info-title,
+#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .pat-ref-title{
     width:22%;
-    padding:10px;
+    padding:5px;
     text-align: center;
     background: #2f3e46;
     border-radius: 5px;
     font-size: 1.2rem;
     color:white;
+    margin-top: 25px;
+}
+
+#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div #pat-ref-info-h4{
+    width:28%;
+}
+
+#patHistoryModal .modal-content .pat-info-div .pat-info-sub-div .pat-info-title:nth-child(1){
+    margin-top:10px;
 }
 
 #patHistoryModal .modal-content .pat-ref-div #pat-ref-title{
@@ -883,41 +940,73 @@
     width:100%;
     height: 90%;
     display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+}
+
+#patHistoryModal .modal-content .pat-info-div .pat-info-sub-div .pat-info-sub-div-solo,
+#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .pat-ref-sub-div-solo{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: start;
+    /* border:1px solid red; */
+}
+
+#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div #pat-ref-info-div{
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#patHistoryModal .modal-content .pat-info-div .pat-info-sub-div .pat-info-sub-div-solo .input-div,
+#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .pat-ref-sub-div-solo .input-div{
+    width: auto;
+    height: 50px;
+    display:flex;
     flex-direction: row;
     justify-content: center;
-    align-items: start;
-    flex-wrap: wrap;
-}
-
-#patHistoryModal .modal-content .pat-info-div .pat-info-sub-div .input-div,
-#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .input-div{
-    width: 220px;
-    height: 80px;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     margin-left: 15px;
     background: #f2f2f2;
+    border-radius: 5px;
+    padding:10px;
 }
 
-#patHistoryModal .modal-content .pat-info-div .pat-info-sub-div .input-div label,
-#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .input-div label{
-    text-align: left;
-    width: 85%;
+#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .pat-ref-sub-div-solo .input-div{
+    justify-content: flex-start;
+    align-items: flex-start;
+    
+}
+
+#patHistoryModal .modal-content .pat-info-div .pat-info-sub-div .pat-info-sub-div-solo .input-div .input-title-lbl,
+#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .pat-ref-sub-div-solo .input-div .input-title-lbl{
+    /* text-align: left; */
+    width: auto;
     font-weight:600;
 }
 
-#patHistoryModal .modal-content .pat-info-div .pat-info-sub-div .input-div input,
-#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .input-div input{
-    text-align: center;
-    width: 85%;
+#patHistoryModal .modal-content .pat-info-div .pat-info-sub-div .pat-info-sub-div-solo .input-div .info-inputs,
+#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .pat-ref-sub-div-solo .input-div .info-inputs{
+    text-align: left;
+    width: auto;
     background: white;
-    border:1px solid #595959;
+    border:none;
     outline:none;
     pointer-events: none;
+    background: transparent;
+    margin-left:5px;
 }
+
+#patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .pat-ref-sub-div-solo #approval-details-div{
+    height: auto;
+}
+
+/* #patHistoryModal .modal-content .pat-ref-div .pat-ref-sub-div .input-div .info-inputs {
+    text-wrap: wrap;
+} */
 
 
 

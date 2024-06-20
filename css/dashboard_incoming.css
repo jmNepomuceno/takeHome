@@ -407,22 +407,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .main-div .main-graph-div{
     display:flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
-    width: 93%;
-    height: 23%;
+    width: 90%;
+    height: 30%;
     margin-left: 3%;
     margin-top: 2%;
+
 }
 
 .main-div .main-graph-div div{
-    width: 20%;
+    width: 30%;
     height: 100%;
     display:flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    /* border:1px solid black; */
+
+    margin: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* width: 300px; */
 }
 
 .main-div .main-graph-div div label{
@@ -437,15 +446,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .main-div .main-graph-div div canvas{
-    width:100%;
-    height: 210px !important;
+    width:100% !important;
+    height:190px !important;
+    margin-top:10px;
+    /* height: 210px !important; */
     /* margin-bottom:3px; */
 }
 
 .main-div .main-data-div{
     width: 100%;
     height: auto !important;
-    margin-top: 1%;
+    margin-top: 2%;
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -518,3 +529,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .modal-footer #yes-modal-btn-main{
     /* display:none; */
 }
+
+/* .main-graph-div div canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto; 
+} */
+
+/* .main-graph-div div label {
+    margin-bottom: 10px;
+    display: block;
+} */

@@ -4,18 +4,14 @@
     date_default_timezone_set('Asia/Manila');
 
     $hpercode = $_POST['hpercode'];
-    $sql = "SELECT * FROM incoming_referrals WHERE hpercode='". $hpercode ."' ";
+    $sql = "SELECT * FROM incoming_referrals WHERE hpercode='". $hpercode ."' ORDER BY date_time DESC LIMIT 1";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);  
     $jsonString = $data;
 
-    // echo '<pre>'; print_r($data); echo '</pre>';
-    //if(count($data) === 1){
-        // $jsonString = json_encode($data);
-        // echo $jsonString;
-    //}
+
 
     $sql = "SELECT * FROM hperson WHERE hpercode='". $hpercode ."' ";
 
@@ -106,7 +102,7 @@
     // print mo lang lahat ng need i print sa incoming_form.js bukas. gege
     // gl hf tomorrow! :)))))) <333333
 
-    $sql = "UPDATE hperson SET status='On-Process' WHERE hpercode=:hpercode ";
+    $sql = "UPDATE hperson SET status='On-Process' WHERE hpercode=:hpercode";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':hpercode', $hpercode, PDO::PARAM_STR);
     $stmt->execute();

@@ -65,11 +65,9 @@
             </div> -->
 
             <div class="right-side">
-                
-
-                <div class="already-registered-div">
+                <!-- <div class="already-registered-div">
                     <i id="data-found-i" class="fa-solid fa-circle-exclamation"></i>
-                    <!-- <i class="fa-solid fa-circle-check"></i> -->
+                    <i class="fa-solid fa-circle-check"></i>
                     <button id="check-pat-registration-btn">Check if registered na sa ibang RHUs</button>
 
                     <button class="btn btn-primary" id="searching-btn" type="button" disabled>
@@ -78,12 +76,12 @@
                     </button>
 
                     <button id="data-found-btn">Check the Data</button>
-
-                </div>
+                </div> -->
 
                 <button id="check-if-registered-btn">
-                    <i  class="fa-solid fa-magnifying-glass"></i>
-                    <h3 id="check-if-registered-h3">Check if the patient is already registered</h3>
+                    <i  class="fa-solid fa-magnifying-glass"></i>   
+                    <h3 id="check-if-registered-h3">Search Patient</h3>
+
                 </button>
             </div>
         </div>
@@ -117,7 +115,7 @@
                 </button>
 
                 <div id="name-bday-div">
-                    <h3>Name</h3>
+                    <h3>Patient ID</h3>
                     <h3>Birthday</h3>
                 </div>
 
@@ -134,7 +132,9 @@
                     </div>
                     <div id="lower-part-sub-div">
                         <h3 id="pat-name">Nepomuceno, John Marvin Gomez</h3>
+                        <h3 id="pat-stat">Status: Not yet referred</h3>
                     </div>
+                    <label>Registered at: Pilar Medical Center</label>
                 </div> -->
 
             </div>
@@ -709,145 +709,181 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <!-- <button>Print</button> -->
+                    
                     <button id="close-pending-modal" data-bs-dismiss="modal">Close</button>
                 </div>
                 <div  class="modal-body-incoming">
                     <!-- patient information -->
                     <div class="pat-info-div">
-                        <h4 id="pat-info-title">Patient's Information</h4>
-                        <div class="pat-info-sub-div">
+                        <div class="num-refer-div">
+                            <h6 id="referral-case-title">Referral Case: </h6>
+                            <!-- <button class="ref-counter">#1. 06/05/24</button> -->
+                        </div>
+                        <!-- <h4 id="pat-info-title">Patient's Information</h4> -->
+                        <div class="pat-info-sub-div">  
 
-                            <div class="input-div">
-                                <label class="input-title-lbl">Last Name</label>
-                                <input type="text" class="info-inputs" id="info-input-lname" value="Nepomuceno"/>
+                            <h4 class="pat-info-title">Patient's Full Name</h4>
+                            <div class="pat-info-sub-div-solo" id="pat-full-name-div">
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Last Name:</label>
+                                    <label class="info-inputs" id="info-input-lname" >Nepomuceno</label>
+                                </div>
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">First Name:</label>
+                                    <label class="info-inputs" id="info-input-fname">John Marvin</label>
+                                </div>
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Middle Name:</label>
+                                    <label class="info-inputs" id="info-input-mname">Gomez</label>
+                                </div>
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Suffix Name:</label>
+                                    <label class="info-inputs" id="info-input-sname">Gomez</label>
+                                </div>
                             </div>
 
-                            <div class="input-div">
-                                <label class="input-title-lbl">First Name</label>
-                                <input type="text" class="info-inputs" id="info-input-fname" value="John Marvin"/>
+                            <h4 class="pat-info-title">Patient's Information</h4>
+                            <div class="pat-info-sub-div-solo" id="pat-full-name-div">
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Birthdate:</label>
+                                    <label class="info-inputs" id="info-input-bdate">2001-04-28</label>
+                                </div>                 
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Age:</label>
+                                    <label class="info-inputs" id="info-input-age">22</label>
+                                </div> 
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Sex:</label>
+                                    <label class="info-inputs" id="info-input-sex">Male</label>
+                                </div> 
                             </div>
 
-                            <div class="input-div">
-                                <label class="input-title-lbl">Middle Name</label>
-                                <input type="text" class="info-inputs" id="info-input-mname" value="Gomez"/>
+                            <h4 class="pat-info-title">Patient's Address</h4>
+                            <div class="pat-info-sub-div-solo" id="pat-full-name-div">
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Barangay:</label>
+                                    <label class="info-inputs" id="info-input-brgy">St. Francis 2</label>
+                                </div> 
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Municipality:</label>
+                                    <label class="info-inputs" id="info-input-city">Limay</label>
+                                </div> 
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Province:</label>
+                                    <label class="info-inputs" id="info-input-prov">Bataan</label>
+                                </div> 
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Region:</label>
+                                    <label class="info-inputs" id="info-input-region">Region 3</label>
+                                </div> 
                             </div>
 
-                            <div class="input-div">
-                                <label class="input-title-lbl">Suffix Name</label>
-                                <input type="text" class="info-inputs" id="info-input-sname" value="Gomez"/>
+                            <h4 class="pat-info-title">Contact Number:</h4>
+                            <div class="pat-info-sub-div-solo" id="pat-full-name-div">
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Email Address:</label>
+                                    <label class="info-inputs" id="info-input-email">jmgnngmj@gmail.com</label>
+                                </div> 
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Mobile Phone No.: </label>
+                                    <label class="info-inputs" id="info-input-mobile">09196044820</label>
+                                </div> 
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Telephone Number:</label>
+                                    <label class="info-inputs" id="info-input-telephone">333-3333</label>
+                                </div> 
                             </div>
 
-                            <div class="input-div">
-                                <label class="input-title-lbl">Birthdate</label>
-                                <input type="text" class="info-inputs" id="info-input-bdate" value="2001-04-28"/>
-                            </div>                 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Age</label>
-                                <input type="text" class="info-inputs" id="info-input-age" value="22"/>
-                            </div> 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Sex</label>
-                                <input type="text" class="info-inputs" id="info-input-sex" value="Male"/>
-                            </div> 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Barangay</label>
-                                <input type="text" class="info-inputs" id="info-input-brgy" value="St. Francis 2"/>
-                            </div> 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Municipality</label>
-                                <input type="text" class="info-inputs" id="info-input-city" value="Limay"/>
-                            </div> 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Province</label>
-                                <input type="text" class="info-inputs" id="info-input-prov" value="Bataan"/>
-                            </div> 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Region</label>
-                                <input type="text" class="info-inputs" id="info-input-region" value="Reion 3"/>
-                            </div> 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Email Address</label>
-                                <input type="text" class="info-inputs" id="info-input-email" value="jmgnngmj@gmail.com"/>
-                            </div> 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Mobile Phone No. </label>
-                                <input type="text" class="info-inputs" id="info-input-mobile" value="09196044820"/>
-                            </div> 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Telephone Number</label>
-                                <input type="text" class="info-inputs" id="info-input-telephone" value="333-3333"/>
-                            </div> 
-
-                            <div class="input-div">
-                                <label class="input-title-lbl">Recorded at: </label>
-                                <input type="text" class="info-inputs" id="info-input-rec_at" value="2023-10-16 10:10:16"/>
-                            </div> 
-
-                            <div class="input-div" style="width:500px">
-                                <label class="input-title-lbl">Registered at: </label>
-                                <input type="text" class="info-inputs" id="info-input-reg_at" value="Limay Medical Center"/>
-                            </div>  
                         </div>   
                     </div>
 
                     <!-- referral information -->
                     <div class="pat-ref-div">
                         <div class="pat-status-mini-div">
-                            <div>
-                                <h4 id="pat-ref-title">Patient's Referral Information</h4>
-                                <h4 id="pat-ref-status">Status: <span id="pat-ref-status-span">Pending</span></h4>
-                            </div>
-                            
+                            <h4 id="pat-ref-status">Status: <span id="pat-ref-status-span">Pending</span></h4>
                         </div>
+
                         <div class="pat-ref-sub-div">
-                            <div class="input-div">
-                                <label class="input-title-lbl">Patient Type</label>
-                                <input type="text" class="info-inputs" id="info-input-pat-type" value="ER"/>
+
+                            <h4 class="pat-ref-title">Patient's Registration</h4>
+                            <div class="pat-ref-sub-div-solo" id="pat-registration-div">
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Recorded at: </label>
+                                    <label class="info-inputs" id="info-input-rec_at">2023-10-16 10:10:16</label>
+                                </div> 
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Registered at: </label>
+                                    <label class="info-inputs" id="info-input-reg_at">Limay Medical Center</label>
+                                </div>
                             </div>
 
-                            <div class="input-div">
-                                <label class="input-title-lbl">Patient Classification</label>
-                                <input type="text" class="info-inputs" id="info-input-pat-class" value="Tertiary"/>
+                            <h4 class="pat-ref-title" id="pat-ref-info-h4">Patient's Referral Information</h4>
+                            <div class="pat-ref-sub-div-solo" id="pat-ref-info-div">
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Referred Date:</label>
+                                    <label class="info-inputs" id="info-input-ref-date">2023-10-12 02:24:22</label>
+                                </div>
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Referred By:</label>
+                                    <label class="info-inputs" id="info-input-ref-by">Limay Medical Center</label>
+                                </div>
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Referred To:</label>
+                                    <label class="info-inputs" id="info-input-ref-to">Bataan General Hospital and Medical Center</label>
+                                </div>
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Reason Referral:</label>
+                                    <label class="info-inputs" id="info-input-reason-ref"></label>
+                                </div>
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Patient Type:</label>
+                                    <label class="info-inputs" id="info-input-pat-type">ER</label>
+                                </div>
                             </div>
 
-                            <div class="input-div">
-                                <label class="input-title-lbl">Referred Date</label>
-                                <input type="text" class="info-inputs" id="info-input-ref-date" value="2023-10-12 02:24:22"/>
+                            <h4 class="pat-ref-title" id="pat-ref-info-h4">Patient's Approval Information</h4>
+                            <div class="pat-ref-sub-div-solo" id="pat-ref-info-div">
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Patient Classification:</label>
+                                    <label class="info-inputs" id="info-input-pat-class">Tertiary</label>
+                                </div>
+
+                                <div class="input-div">
+                                    <label class="input-title-lbl" id="status-time-lbl">Approved Time:</label>
+                                    <label class="info-inputs" id="info-input-approve-time">2023-10-12 02:24:22</label>
+                                </div>
+
+                                <div class="input-div" id="approval-details-div">
+                                    <label class="input-title-lbl">Approval Details:</label>
+                                    <label class="info-inputs" id="info-input-approve-details">
+                                    John Marvin Gomez Nepomuceno John Marvin Gomez Nepomuceno John Marvin Gomez Nepomuceno John Marvin Gomez Nepomuceno
+                                    John Marvin Gomez Nepomuceno John Marvin Gomez Nepomuceno John Marvin Gomez Nepomuceno John Marvin Gomez Nepomuceno</label>
+                                </div>
                             </div>
 
-                            <div class="input-div" style="width:220px">
-                                <label class="input-title-lbl" id="status-time-lbl">Approved Time</label>
-                                <input type="text" class="info-inputs" id="info-input-approve-time" value="2023-10-12 02:24:22"/>
+                            <h4 class="pat-ref-title" id="pat-ref-info-h4">Patient's Discharged Information</h4>
+                            <div class="pat-ref-sub-div-solo" id="pat-ref-info-div">
+                                <div class="input-div">
+                                    <label class="input-title-lbl">Discharged Time:</label>
+                                    <label class="info-inputs" id="info-input-pat-discharge">Tertiary</label>
+                                </div>
                             </div>
 
-                            <div class="input-div" style="width:500px">
-                                <label class="input-title-lbl">Referred By</label>
-                                <input type="text" class="info-inputs" id="info-input-ref-by" value="Limay Medical Center"/>
-                            </div>
-
-                            <div class="input-div" style="width:500px">
-                                <label class="input-title-lbl">Referred To</label>
-                                <input type="text" class="info-inputs" id="info-input-ref-to" value="Bataan General Hospital and Medical Center"/>
-                            </div>
-
-                            <div class="input-div" style="width:500px; height:200px;">
-                                <label class="input-title-lbl">Reason Referral</label>
-                                <input type="text" class="info-inputs" id="info-input-reason-ref" value="" style="height:150px;"/>
-                            </div>
-
-                            <div class="input-div" style="width:500px; height:200px">
-                                <label class="input-title-lbl">Approval Details</label>
-                                <input type="text" class="info-inputs" id="info-input-approve-details" value="" style="height:150px;"/>
-                            </div>
                         </div>   
                     </div>
                 </div>

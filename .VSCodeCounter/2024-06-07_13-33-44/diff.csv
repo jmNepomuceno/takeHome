@@ -1,0 +1,9 @@
+"filename", "language", "PHP", "JavaScript", "CSS", "comment", "blank", "total"
+"c:\Webapp\ServiceDeliveryNetwork\Dummy\test.php", "PHP", -152, 0, 0, -6, -5, -163
+"c:\Webapp\ServiceDeliveryNetwork\css\patient_register_form2.css", "CSS", 0, 0, 42, 2, 5, 49
+"c:\Webapp\ServiceDeliveryNetwork\js_2\patient_register_form2.js", "JavaScript", 0, 169, 0, 24, 57, 250
+"c:\Webapp\ServiceDeliveryNetwork\php_2\checkPatientRegUniq.php", "PHP", 29, 0, 0, 4, 3, 36
+"c:\Webapp\ServiceDeliveryNetwork\php_2\history_log.php", "PHP", -6, 0, 0, 0, 0, -6
+"c:\Webapp\ServiceDeliveryNetwork\php_2\patient_register_form2.php", "PHP", 14, 0, 0, 0, 5, 19
+"c:\Webapp\ServiceDeliveryNetwork\php_2\search_name_2.php", "PHP", -1, 0, 0, 6, 1, 6
+"Total", "-", -116, 169, 42, 30, 66, 191

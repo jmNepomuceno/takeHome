@@ -341,6 +341,7 @@ $(document).ready(function(){
             }
         })
     }
+
     const pencil_elements = document.querySelectorAll('.pencil-btn');
         pencil_elements.forEach(function(element, index) {
         element.addEventListener('click', function() {
@@ -951,27 +952,77 @@ $(document).ready(function(){
          })
     });
 
+
     // sensitive case
-    $('#sensitive-case-btn').on('click',()=>{
-        console.log('869')
+    
+    $(document).on('click', '.sensitive-case-btn', function(event){
+        var index = $('.sensitive-case-btn').index(this);
+        console.log(index);
+        let sensitive_hpercode = document.querySelectorAll('.sensitive-hpercode')
+        console.log(sensitive_hpercode[0].value)
 
-        $('#modal-title-incoming').text('Verification')
+        $.ajax({
+            url: '../php_2/fetch_sensitive_names.php',
+            method: "POST",
+            data : {
+                hpercode : sensitive_hpercode[index].value // index = should always be = 0
+            },
+            dataType:'JSON',
+            success: function(response){
+                console.log(response)
+                let fullNameLabel = `<label class='pat-full-name-lbl'>${response.patlast}, ${response.patfirst} ${response.patmiddle}</label>`;
+                $('.pat-full-name-div').append(fullNameLabel);
 
-        // <input id="sensitive-pw" type="password" placeholder="Input Password">
-        $('#modal-body-incoming').text('')
-        let sensitive_btn = document.createElement('input')
-        sensitive_btn.id = 'sensitive-pw'
-        sensitive_btn.type = 'password'
-        sensitive_btn.placeholder = 'Input Password'
+                $('#modal-title-incoming').text('Verification')
+                // <input id="sensitive-pw" type="password" placeholder="Input Password">
+                $('#modal-body-incoming').text('')
+                let sensitive_btn = document.createElement('input')
+                sensitive_btn.id = 'sensitive-pw'
+                sensitive_btn.type = 'password'
+                sensitive_btn.placeholder = 'Input Password'
 
-        $('#modal-body-incoming').append(sensitive_btn)
+                $('#modal-body-incoming').append(sensitive_btn)
 
-        defaultMyModal.show()
+                defaultMyModal.show()
+            }
+        })
+    })
+
+    $('#ok-modal-btn-incoming').on('click' , function(event){
+        let mcc_passwords_validity = false
+        let input_pw = $('#sensitive-pw').val().toString()
+        for (var key in mcc_passwords) {
+            if (mcc_passwords.hasOwnProperty(key)) {
+                if(mcc_passwords[key] === input_pw){
+                    mcc_passwords_validity = true;
+                }
+            }
+        }
+        
+        if (mcc_passwords_validity) {
+            // Your existing code when validity is true
+            $('.sensitive-lock-icon').eq(0)
+                .css('color', 'lightgreen')
+                .removeClass('fa-solid fa-lock')
+                .addClass('fa-solid fa-lock-open');
+        
+            $('.pencil-btn').eq(0)
+                .css('pointer-events', 'auto')
+                .css('opacity', '1');
+            $('.sensitive-case-btn').eq(0).fadeOut(2000)
+        } else {
+            // Change color to red
+            $('.sensitive-lock-icon').eq(0).css('color', 'red');
+        
+            // Fade back to normal color after 2 seconds
+            setTimeout(function() {
+                $('.sensitive-lock-icon').eq(0).css('color', ''); // Reset to original color
+            }, 2000);
+        }
     })
 
     $('#update-stat-select').on('change', function() {
         var selectedValue = $(this).val();
-        
         if (selectedValue) {
             $('#save-update').show(); 
         } else {
@@ -992,6 +1043,8 @@ $(document).ready(function(){
             data : data,
             success: function(response){
                 console.log(response)
+                myModal.hide()
+                
                 $('#pat-status-form').text(data.newStatus)
                 $('#modal-body-incoming').text('Successfully Updated')
                 defaultMyModal.show()

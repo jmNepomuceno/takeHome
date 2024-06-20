@@ -27,15 +27,15 @@
         $conditions[] = "patmiddle LIKE :search_mname";
     }
 
-    $sql = "SELECT patfirst, patlast, patmiddle, hpercode, patbdate, status FROM hperson";
+    $sql = "SELECT patfirst, patlast, patmiddle, hpercode, patbdate, hpatcode, status FROM hperson";
 
     if (!empty($conditions)) {
         $sql .= " WHERE " . implode(" AND ", $conditions);
     }
 
-    if($hpatcode != '1437'){
-        $sql .= " AND hpatcode=:hpatcode;";
-    }
+    // if($hpatcode != '1437'){
+    //     $sql .= " AND hpatcode=:hpatcode;";
+    // }
     $stmt = $pdo->prepare($sql);
 
     if (!empty($search_lname)) {
@@ -54,9 +54,9 @@
     }
 
     
-    if($hpatcode != '1437'){
-        $stmt->bindParam(':hpatcode', $hpatcode, PDO::PARAM_STR);   
-    }
+    // if($hpatcode != '1437'){
+    //     $stmt->bindParam(':hpatcode', $hpatcode, PDO::PARAM_STR);   
+    // }
     
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -80,6 +80,11 @@
                 $history_style = "block";
             }
 
+            $sql = "SELECT hospital_name FROM sdn_hospital WHERE hospital_code=?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$data[$i]['hpatcode']]);
+            $hpatcode_data = $stmt->fetch(PDO::FETCH_ASSOC);
+
             echo '<div id="search-sub-div" class="search-sub-div" style="background: '. $bg_color .'">';
             echo ' <div id="upper-part-sub-div">';
             echo    '<h1 id="pat-id-h1" class="search-sub-code">'. $data[$i]['hpercode'] .'</h1>';
@@ -95,6 +100,7 @@
             echo        '<h3 id="pat-stat" style="color: '.$text_color.';">' . (isset($data[$i]['status']) ? "Status: Referred-" . $data[$i]['status'] : "Status: Not yet referred") . '</h3>';
             echo      '</div>';
             echo  '</div>';
+            echo '<label id="reg-at-lbl">Registered at: '. $hpatcode_data['hospital_name'] .'</label>';
             echo'</div>';
         }
     }else{

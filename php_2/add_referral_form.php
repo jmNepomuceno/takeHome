@@ -259,8 +259,11 @@
 
     $stmt->execute();
 
-    $sql = "UPDATE hperson SET status='Pending', type='". $type ."' WHERE hpercode=:hpercode ";
+    $sql = "UPDATE hperson SET status = 'Pending', type = :type WHERE hpercode = :hpercode";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':hpercode', $global_single_hpercode, PDO::PARAM_STR);
+    $stmt->bindParam(':hpercode', $code, PDO::PARAM_STR);
+    $stmt->bindParam(':type', $type, PDO::PARAM_STR);
     $stmt->execute();
+
+    echo $type;
 ?>

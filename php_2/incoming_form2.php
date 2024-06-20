@@ -2,6 +2,12 @@
     session_start();
     include('../database/connection2.php');
 
+    if($_SESSION['hospital_code'] === '1437'){
+        $mcc_passwords = json_encode($_SESSION['mcc_passwords']);
+    }else{
+        $mcc_passwords = json_encode("");
+    }
+
     $timer_running = false;
     $post_value_reload = '';
 
@@ -100,13 +106,50 @@
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
 
-    $sql = "SELECT classifications FROM classifications";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $data_classifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // $sql = "SELECT classifications FROM classifications";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+    // $data_classifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
     // echo '<pre>'; print_r($data_classifications); echo '</pre>';
     // echo count($data_classifications);
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null WHERE date_time='2024-06-11 11:57:27'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE incoming_referrals SET status='Discharged' WHERE date_time='2024-06-10 10:08:35'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE incoming_referrals SET status='Discharged' WHERE date_time='2024-06-07 13:27:11'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, pat_class=null, approval_details=null, approved_time=null, reception_time=null WHERE hpercode='PAT000017'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000017'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000021'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+
+    $sql = "UPDATE incoming_referrals SET status='Pending' WHERE hpercode='PAT000021'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+
+    $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000022'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+
+    $sql = "UPDATE incoming_referrals SET status='Pending' WHERE hpercode='PAT000022'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 ?>
+
  
 <!DOCTYPE html>
 <html lang="en">
@@ -360,9 +403,14 @@
                                 }
 
                                 // for sensitive case
-                                $pat_full_name = "";
+                                $pat_full_name = ""; 
                                 if($row['sensitive_case'] === 'true'){
-                                    $pat_full_name = "<button id='sensitive-case-btn'> Sensitive Case </button>";
+                                    $pat_full_name = "
+                                        <div class='pat-full-name-div'>
+                                            <button class='sensitive-case-btn'> <i class='sensitive-lock-icon fa-solid fa-lock'></i> Sensitive Case </button>
+                                            <input class='sensitive-hpercode' type='hidden' name='sensitive-hpercode' value= '" . $row['hpercode'] . "'>
+                                        </div>
+                                    ";
                                 }else{
                                     $pat_full_name = $row['patlast'] . ", " . $row['patfirst'] . " " . $row['patmiddle'];
                                 }
@@ -405,9 +453,14 @@
                                         
                                         <td id="dt-status">
                                             <div> 
-                                                <label class="pat-status-incoming">' . $row['status'] . '</label>
-                                                <i class="pencil-btn fa-solid fa-pencil"></i>
-                                                <input class="hpercode" type="hidden" name="hpercode" value= ' . $row['hpercode'] . '>
+                                                <label class="pat-status-incoming">' . $row['status'] . '</label>';
+                                                if ($row['sensitive_case'] === 'true') {
+                                                    echo '<i class="pencil-btn fa-solid fa-pencil" style="pointer-events:none; opacity:0.3"></i>';
+                                                }else{
+                                                    echo'<i class="pencil-btn fa-solid fa-pencil"></i>';
+                                                }
+                                                
+                                                echo '<input class="hpercode" type="hidden" name="hpercode" value= ' . $row['hpercode'] . '>
 
                                             </div>
                                         </td>
@@ -646,7 +699,7 @@
                 Please input at least one value in any field.
             </div>
             <div class="modal-footer">
-                <button id="ok-modal-btn-incoming" type="button" data-bs-dismiss="modal">OK</button>
+                <button id="ok-modal-btn-incoming" type="button" data-bs-dismiss="modal" data-target=".sensitive-case-btn">OK</button>
                 <button id="yes-modal-btn-incoming" type="button" data-bs-dismiss="modal">Yes</button>
             </div>
             </div>
@@ -662,6 +715,8 @@
     <script src="../js_2/incoming_form2.js?v= <?php echo time(); ?>"></script>
 
     <script>
+        var mcc_passwords = <?php echo $mcc_passwords; ?>;
+
         var jsonData = <?php echo $jsonData; ?>;
         // var logout_data =  echo $logout_data; ?>;
         var login_data = "<?php echo $_SESSION['login_time']; ?>";

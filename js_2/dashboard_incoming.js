@@ -17,57 +17,97 @@ $(document).ready(function(){
     }) 
   }
 
-function renderPieChart(chart, dataArray){
-  let xValues = []
-  for(let i=0; i < dataArray.length; i++){
-    switch(chart){
-      case "case_type" : xValues.push(dataArray[i]['type']); break;
-      case "rhu" : xValues.push(dataArray[i]['referred_by']); break;
-      case "case_category" : xValues.push(dataArray[i]['pat_class']); break;
+  function renderPieChart(chart, dataArray) {
+    let xValues = [];
+    for (let i = 0; i < dataArray.length; i++) {
+        switch (chart) {
+            case "case_type": xValues.push(dataArray[i]['type']); break;
+            case "rhu": xValues.push(dataArray[i]['referred_by']); break;
+            case "case_category": xValues.push(dataArray[i]['pat_class']); break;
+        }
     }
-    
-  }
-  xValues.sort()
+    xValues.sort();
 
-  var counts = {};
+    var counts = {};
 
-  xValues.forEach(function(item) {
-      counts[item] = (counts[item] || 0) + 1;
-  });
+    xValues.forEach(function(item) {
+        counts[item] = (counts[item] || 0) + 1;
+    });
 
-  var uniqueArray = Object.keys(counts);
+    var uniqueArray = Object.keys(counts);
+    var duplicatesCount = uniqueArray.map(function(item) {
+        return counts[item];
+    });
 
-  var duplicatesCount = uniqueArray.map(function(item) {
-      return counts[item];
-  });
+    xValues = uniqueArray;
+    const yValues = duplicatesCount;
+    const barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+    ];
 
-  xValues = uniqueArray
-  const yValues = duplicatesCount
-  const barColors = [
-    "#b91d47",
-    "#00aba9",
-    "#2b5797",
-    "#e8c3b9",
-    "#1e7145"
-  ];
-  
-  let what_chart = ""
-  switch(chart){
-    case "case_type" : what_chart = "myChart-2"; break;
-    case "rhu" : what_chart = "myChart-3"; break;
-    case "case_category" : what_chart = "myChart-1"; break;
-  }
-  new Chart(what_chart, {
-    type: "pie",
-    data: {
-      labels: xValues,
-      datasets: [{
-        backgroundColor: barColors,
-        data: yValues
-      }]
+    let what_chart = "";
+    switch (chart) {
+        case "case_type": what_chart = "myChart-2"; break;
+        case "rhu": what_chart = "myChart-3"; break;
+        case "case_category": what_chart = "myChart-1"; break;
     }
-  });
+
+    new Chart(document.getElementById(what_chart), {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues,
+                label: "Data"
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    align: 'center',
+                    labels: {
+                        font: {
+                            size: 13, // Set the font size for legend labels
+                            weight: 'bold' // Make legend labels bold
+                        },
+                        boxWidth: 15,
+                        padding: 20
+                    }
+                },
+                tooltip: {
+                    bodyFont: {
+                        size: 12, // Set the font size for tooltips
+                        weight: 'bold' // Make tooltips font bold
+                    }
+                },
+                datalabels: {
+                    color: '#000',
+                    font: {
+                        weight: 'bold', // Make data labels bold
+                        size: 14 // Font size for data labels
+                    }
+                }
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                }
+            }
+        }
+    });
 }
+
 
 renderPieChart("rhu" , dataReferFrom)
 renderPieChart("case_type" , dataPatType)

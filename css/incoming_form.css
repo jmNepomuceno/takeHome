@@ -162,8 +162,13 @@
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-refer-no,
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-patname{
     font-size: 0.9rem; 
-
+    
 }
+
+#dt-patname{
+    position: relative;
+}
+
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-refer-no{
     border-left: 1px solid #b2b3b3;
@@ -268,11 +273,11 @@
     align-items: center;
 }
 
-.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-status div i{
+.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-status div .pencil-btn{
     cursor: pointer;
 }
 
-.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-status div i:hover{
+.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-status div .pencil-btn:hover{
     color:white;
 }
 
@@ -745,8 +750,12 @@
     display:none;
 }
 
-#sensitive-case-btn{
-    width: 90%;
+/* .pat-full-name-div{
+    border:1px solid red;
+} */
+
+.sensitive-case-btn{
+    width: 95%;
     border-radius: 5px;
     background: #2f3e46;
     color:white;
@@ -756,6 +765,21 @@
     outline: none;
     border:none;
     padding: 5px;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    position:absolute;
+    left: 50%; /* Move the button to the center horizontally */
+    top: 50%; /* Move the button to the center vertically */
+    transform: translate(-50%, -50%); /* Center the button precisely */
+    z-index: 1;
+}
+
+.sensitive-case-btn i{
+    margin-right:10px;
 }
 
 #sensitive-pw{
@@ -769,3 +793,4 @@
     border-radius: 5px;
     border:2px solid #bfbfbf;
 }
+
