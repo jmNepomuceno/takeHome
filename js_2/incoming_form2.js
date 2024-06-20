@@ -956,10 +956,14 @@ $(document).ready(function(){
     // sensitive case
     
     $(document).on('click', '.sensitive-case-btn', function(event){
+        //reset the the buttons in modal after the previous transaction
+        $('#ok-modal-btn-incoming').text('OK')
+        $('#yes-modal-btn-incoming').css('display', 'none')
+
+       console.log($('.sensitive-case-btn').index(this))
+
         var index = $('.sensitive-case-btn').index(this);
-        console.log(index);
         let sensitive_hpercode = document.querySelectorAll('.sensitive-hpercode')
-        console.log(sensitive_hpercode[0].value)
 
         $.ajax({
             url: '../php_2/fetch_sensitive_names.php',
@@ -989,6 +993,7 @@ $(document).ready(function(){
     })
 
     $('#ok-modal-btn-incoming').on('click' , function(event){
+        console.log('990')
         let mcc_passwords_validity = false
         let input_pw = $('#sensitive-pw').val().toString()
         for (var key in mcc_passwords) {
@@ -1001,23 +1006,37 @@ $(document).ready(function(){
         
         if (mcc_passwords_validity) {
             // Your existing code when validity is true
-            $('.sensitive-lock-icon').eq(0)
+            // checking of all the sensitive-btn and get the index of the previous display=none, and +1 on the index for the current sensitive button
+            console.log($('.sensitive-case-btn').length)
+            let sensitive_btn_index = 0;
+            for(let i = 0; i < $('.sensitive-case-btn').length; i++){
+                if($('.sensitive-case-btn').eq(0).css('display') === 'flex'){
+                    break;
+                }
+                else if($('.sensitive-case-btn').eq(i).css('display') === 'none'){
+                    sensitive_btn_index = i + 1
+                    break;
+                }
+            }
+
+            $('.sensitive-lock-icon').eq(sensitive_btn_index)
                 .css('color', 'lightgreen')
                 .removeClass('fa-solid fa-lock')
                 .addClass('fa-solid fa-lock-open');
         
-            $('.pencil-btn').eq(0)
+            $('.pencil-btn').eq(sensitive_btn_index)
                 .css('pointer-events', 'auto')
                 .css('opacity', '1');
-            $('.sensitive-case-btn').eq(0).fadeOut(2000)
+            $('.sensitive-case-btn').eq(sensitive_btn_index).fadeOut(2000)
         } else {
             // Change color to red
-            $('.sensitive-lock-icon').eq(0).css('color', 'red');
+            console.log(sensitive_btn_index)
+            // $('.sensitive-lock-icon').eq(sensitive_btn_index).css('color', 'red');
         
-            // Fade back to normal color after 2 seconds
-            setTimeout(function() {
-                $('.sensitive-lock-icon').eq(0).css('color', ''); // Reset to original color
-            }, 2000);
+            // // Fade back to normal color after 2 seconds
+            // setTimeout(function() {
+            //     $('.sensitive-lock-icon').eq(sensitive_btn_index).css('color', ''); // Reset to original color
+            // }, 2000);
         }
     })
 

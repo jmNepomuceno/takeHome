@@ -269,7 +269,7 @@
                 $pat_full_name = "
                     <div class='pat-full-name-div'>
                         <button class='sensitive-case-btn'> <i class='sensitive-lock-icon fa-solid fa-lock'></i> Sensitive Case </button>
-                        <label class='pat-full-name-lbl'> ".$row['patlast'] . ', ' . $row['patfirst'] . ' ' . $row['patmiddle'] ."</label>
+                        <input class='sensitive-hpercode' type='hidden' name='sensitive-hpercode' value= '" . $row['hpercode'] . "'>
                     </div>
                 ";
             }else{
@@ -326,6 +326,7 @@
                         </div>
                     </td>
                 </tr>';
+
 
             $previous = $row['reference_num'];
             $loop += 1;
