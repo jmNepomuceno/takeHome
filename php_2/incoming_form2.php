@@ -148,6 +148,24 @@
     // $sql = "UPDATE incoming_referrals SET status='Pending' WHERE hpercode='PAT000022'";
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
+
+    // ******************************************************************************************************************************************
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, pat_class=null  WHERE hpercode='PAT000004'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000004'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, pat_class=null  WHERE hpercode='PAT000009'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000009'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
 ?>
 
  

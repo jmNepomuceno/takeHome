@@ -1,0 +1,51 @@
+Date : 2024-06-21 07:38:22
+Directory : c:\Webapp\ServiceDeliveryNetwork
+Total : 20 files,  591 codes, 140 comments, 117 blanks, all 848 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| PHP        |         12 |        369 |         71 |         70 |        510 |
+| JavaScript |          4 |        156 |         38 |         22 |        216 |
+| CSS        |          4 |         66 |         31 |         25 |        122 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                              | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                 |         20 |        591 |        140 |        117 |        848 |
+| . (Files)                                                         |          1 |          4 |          0 |          1 |          5 |
+| Dummy                                                             |          1 |        217 |         20 |         37 |        274 |
+| css                                                               |          4 |         66 |         31 |         25 |        122 |
+| js_2                                                              |          4 |        156 |         38 |         22 |        216 |
+| php_2                                                             |         10 |        148 |         51 |         32 |        231 |
++-------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                          | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Webapp\ServiceDeliveryNetwork\Dummy\test.php                   | PHP        |        217 |         20 |         37 |        274 |
+| c:\Webapp\ServiceDeliveryNetwork\css\dashboard_incoming.css       | CSS        |          8 |         11 |          4 |         23 |
+| c:\Webapp\ServiceDeliveryNetwork\css\incoming_form.css            | CSS        |         15 |          3 |          8 |         26 |
+| c:\Webapp\ServiceDeliveryNetwork\css\main_style.css               | CSS        |          1 |          0 |          0 |          1 |
+| c:\Webapp\ServiceDeliveryNetwork\css\patient_register_form2.css   | CSS        |         42 |         17 |         13 |         72 |
+| c:\Webapp\ServiceDeliveryNetwork\index.php                        | PHP        |          4 |          0 |          1 |          5 |
+| c:\Webapp\ServiceDeliveryNetwork\js_2\dashboard_incoming.js       | JavaScript |         40 |          0 |          0 |         40 |
+| c:\Webapp\ServiceDeliveryNetwork\js_2\incoming_form2.js           | JavaScript |         80 |         11 |         14 |        105 |
+| c:\Webapp\ServiceDeliveryNetwork\js_2\patient_register_form2.js   | JavaScript |          0 |          0 |         -3 |         -3 |
+| c:\Webapp\ServiceDeliveryNetwork\js_2\search_name_2.js            | JavaScript |         36 |         27 |         11 |         74 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\add_referral_form.php      | PHP        |          2 |          0 |          1 |          3 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\approved_pending.php       | PHP        |         57 |         16 |         11 |         84 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\fetch_interval.php         | PHP        |         22 |         -1 |         -4 |         17 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\fetch_sensitive_names.php  | PHP        |         10 |          1 |          2 |         13 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\history_filter.php         | PHP        |          6 |          0 |          1 |          7 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\history_log.php            | PHP        |          5 |          0 |         -2 |          3 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\incoming_form2.php         | PHP        |         11 |         31 |         13 |         55 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\patient_register_form2.php | PHP        |         31 |          0 |          5 |         36 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\pendingToOnProcess.php     | PHP        |          4 |          9 |          4 |         17 |
+| c:\Webapp\ServiceDeliveryNetwork\php_2\process_pending.php        | PHP        |          0 |         -5 |          1 |         -4 |
+| Total                                                             |            |        591 |        140 |        117 |        848 |
++-------------------------------------------------------------------+------------+------------+------------+------------+------------+

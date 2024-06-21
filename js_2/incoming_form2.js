@@ -20,6 +20,8 @@ $(document).ready(function(){
     let length_curr_table = document.querySelectorAll('.hpercode').length;
     let toggle_accordion_obj = {}
     let type_approval = true // true = immediate approval // false = interdepartamental approval
+    let running = false; // running timer general
+
     for(let i = 0; i < length_curr_table; i++){
         toggle_accordion_obj[i] = true
     }
@@ -225,8 +227,10 @@ $(document).ready(function(){
                         clearInterval(running_timer_interval_update)
                         $('#span-status').text("Approved | ") 
                         $('#final-approve-btn').css('display',  'block')
+    
                     }
                 }
+               
             }
         });
     }
@@ -380,20 +384,10 @@ $(document).ready(function(){
         return (num < 10 ? '0' : '') + num;
     }
 
-    function timeToSeconds(timeString) {
-        // Split the time string into hours, minutes, and seconds
-        const [hours, minutes, seconds] = timeString.split(':').map(Number);
-        
-        // Calculate the total number of seconds
-        const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-        
-        return totalSeconds;
-    }
-
     // if theres a timer running before the reload
     if($('#running-timer-input').val() !== "" && $('#running-timer-input').val() !== "00:00:00"){
+        console.log('asdf')
         if($('#pat-curr-stat-input').val() === ""){
-            console.log('here')
             const parts = $('#running-timer-input').val().split(':');
             // Extract hours, minutes, and seconds
             let hours = 0;
@@ -410,56 +404,166 @@ $(document).ready(function(){
             } else if (parts.length === 1) {
                 seconds = parseInt(parts[0], 10);
             }
-            runTimer(parseInt($('#running-index').val()), seconds, minutes, hours)
+            console.log()
+            // runTimer(parseInt($('#running-index').val()), seconds, minutes, hours)
+            // runTimer()
         }
     }
 
-    let running = false;
-    let startTime;
-    let elapsedTime = 0;
-    let requestId;
+    // function runTimer(index, sec, min, hrs){
+    //     let seconds = sec;
+    //     let minutes = min;
+    //     let hours = hrs;
 
-    function runTimer(index, sec, min, hrs){
+    //     running_timer_interval = setInterval(function() {
+    //         seconds++;
+
+    //         if (seconds === 60) {
+    //             seconds = 0;
+    //             minutes++;
+    //         }
+
+    //         if (minutes === 60) {
+    //             minutes = 0;
+    //             hours++;
+    //         }
+
+    //         const formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+    //         global_timer = formattedTime
+    //         if(global_paging === 1){
+    //             document.querySelectorAll('.stopwatch')[index].textContent = formattedTime;
+    //             document.querySelectorAll('.pat-status-incoming')[index].textContent = 'On-Process';
+    //         }
+
+    //         let data = {
+    //             formattedTime: formattedTime,
+    //             hpercode: document.querySelectorAll('.hpercode')[0].value,
+    //             from : 'incoming'
+    //         }
+    //         console.log(data)
+    //         $.ajax({
+    //             url: '../php_2/session_timer.php',
+    //             method: "POST", 
+    //             data:data,
+    //             success: function(response){
+    //                 // Display the time in the HTML element
+    //             }
+    //         })
+
+    //     }, 1000); 
+    // }
+
+    function runTimer(index, sec, min, hrs) {
         let seconds = sec;
         let minutes = min;
         let hours = hrs;
-
-        running_timer_interval = setInterval(function() {
-            seconds++;
-
-            if (seconds === 60) {
-                seconds = 0;
-                minutes++;
-            }
-
-            if (minutes === 60) {
-                minutes = 0;
-                hours++;
-            }
-
-            const formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
-            global_timer = formattedTime
-            if(global_paging === 1){
-                document.querySelectorAll('.stopwatch')[index].textContent = formattedTime;
-                document.querySelectorAll('.pat-status-incoming')[index].textContent = 'On-Process';
-            }
-            $.ajax({
-                url: '../php_2/session_timer.php',
-                method: "POST", 
-                data:{
-                    formattedTime: formattedTime,
-                    hpercode: document.querySelectorAll('.hpercode')[0].value,
-                    from : 'incoming'
-                },
-                success: function(response){
-                    // Display the time in the HTML element
-                    
+        let elapsedTime = 0;
+        // let running = false;
+        let requestId;
+        let lastLoggedSecond = 0;
+        let startTime;
+    
+        function pad(num) {
+            return num.toString().padStart(2, '0');
+        }
+    
+        function updateTimer() {
+            if (!running) return;
+    
+            const now = performance.now();
+            const deltaTime = now - startTime;
+            startTime = now;  // Reset start time for the next frame
+    
+            elapsedTime += deltaTime / 1000;  // Convert milliseconds to seconds
+            const secondsElapsed = Math.floor(elapsedTime);
+    
+            if (secondsElapsed > lastLoggedSecond) {
+                seconds += secondsElapsed - lastLoggedSecond;
+                lastLoggedSecond = secondsElapsed;
+    
+                if (seconds >= 60) {
+                    minutes += Math.floor(seconds / 60);
+                    seconds = seconds % 60;
                 }
-            })
-
-        }, 1000); 
+                if (minutes >= 60) {
+                    hours += Math.floor(minutes / 60);
+                    minutes = minutes % 60;
+                }
+    
+                const formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(Math.floor(seconds));
+                global_timer = formattedTime;
+                
+                if(document.querySelectorAll('.pat-status-incoming').length > 0){
+                    if (global_paging === 1) {
+                        // console.log(document.querySelectorAll('.stopwatch').length, index)
+                        document.querySelectorAll('.stopwatch')[index].textContent = formattedTime;
+    
+                        document.querySelectorAll('.pat-status-incoming')[index].textContent = 'On-Process';
+                    }
+        
+                    console.log("global_timer: " + global_timer);
+    
+                    let data = {
+                        formattedTime: formattedTime,
+                        hpercode: document.querySelectorAll('.hpercode')[0].value, 
+                        from : 'incoming'
+                    }
+                    // console.log(data)
+                    $.ajax({
+                        url: '../php_2/session_timer.php',
+                        method: "POST", 
+                        data:data,
+                        success: function(response){
+                            // console.log("response: " + response)
+                        }
+                    })
+                }else{
+                    if (global_paging === 1) {
+                        document.querySelectorAll('.stopwatch')[index].textContent = formattedTime;
+                    }
+                }
+                
+            }
+    
+            requestId = requestAnimationFrame(updateTimer);
+        }
+    
+        function start() {
+            if (running) return;
+            running = true;
+            startTime = performance.now();
+            requestId = requestAnimationFrame(updateTimer);
+        }
+    
+        function stop() {
+            running = false;
+            cancelAnimationFrame(requestId);
+        }
+    
+        function reset() {
+            running = false;
+            cancelAnimationFrame(requestId);
+            elapsedTime = 0;
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            lastLoggedSecond = 0;
+            const formattedTime = '00:00:00';
+            global_timer = formattedTime;
+    
+            if (global_paging === 1) {
+                document.querySelectorAll('.stopwatch')[index].textContent = formattedTime;
+                document.querySelectorAll('.pat-status-incoming')[index].textContent = 'Not Started';
+            }
+        }
+    
+        // Start the timer
+        start();
+    
+        // Expose control functions
+        return { start, stop, reset };
     }
-
+    
     window.addEventListener('beforeunload', function(e) {
         // e.preventDefault()
         // look only for the status that is On-Process
@@ -635,8 +739,8 @@ $(document).ready(function(){
             url: '../php_2/save_process_time.php',
             method: "POST",
             data : {what: 'continue'},
+            // dataType : 'JSON',
             success: function(response){
-                // response = JSON.parse(response);  
                 // console.log(response)
 
                 if(response.length > 0){
@@ -766,7 +870,8 @@ $(document).ready(function(){
             success: function(response){
                 // console.log(response)
 
-                clearInterval(running_timer_interval)
+                // clearInterval(running_timer_interval)
+                runTimer().stop()
                 document.querySelectorAll('.pat-status-incoming')[global_index].textContent = 'Approved';
                 myModal.hide()
                 
