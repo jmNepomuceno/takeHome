@@ -1,76 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Side Bar Demo</title>
-<style>
-  .sidebar {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #f0f0f0;
-  }
-  .content {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highlight Button</title>
+    <style>
+        /* Overlay to dim the screen */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            z-index: 10;
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+
+        /* Highlighted area around Button 1 */
+        #highlight {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.0); /* Fully transparent */
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5); /* Create the overlay effect */
+            pointer-events: none; /* Allow clicks to pass through */
+        }
+
+        /* Ensure Button 1 is above the overlay */
+        #button-1 {
+            position: relative;
+            z-index: 20; /* Higher than the overlay */
+        }
+    </style>
 </head>
 <body>
+    <div id="overlay"></div>
+    <button id="button-1">Button 1</button>
+    <button id="button-2">Button 2</button>
+    <button id="button-3">Button 3</button>
 
-<div class="sidebar">
-  <button onclick="loadContent('side1')">Side 1</button>
-  <button onclick="loadContent('side2')">Side 2</button>
-  <button onclick="loadContent('side3')">Side 3</button>
-</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const button1 = document.getElementById("button-1");
+            const overlay = document.getElementById("overlay");
 
-<div class="content" id="content">
-  <!-- Content will be loaded here -->
-</div>
+            // Create the highlight effect
+            const highlight = document.createElement("div");
+            highlight.id = "highlight";
+            document.body.appendChild(highlight);
 
-<script>
-  var timerInterval; // Variable to store the interval ID
-  var currentSide = null; // Variable to store the currently loaded side
-  var seconds = 0; // Variable to store the timer count
+            function updateHighlight() {
+                const rect = button1.getBoundingClientRect();
+                highlight.style.width = `${rect.width}px`;
+                highlight.style.height = `${rect.height}px`;
+                highlight.style.top = `${rect.top + window.scrollY}px`;
+                highlight.style.left = `${rect.left + window.scrollX}px`;
+            }
 
-  // Function to load content based on the side button clicked
-  function loadContent(side) {
-    var contentDiv = document.getElementById('content');
-    
-    // Update currentSide
-    currentSide = side;
-    
-    switch (side) {
-      case 'side1':
-        contentDiv.innerHTML = '<h2>Content for Side 1</h2><p>This is the content for Side 1.</p>';
-        break;
-      case 'side2':
-        contentDiv.innerHTML = '<h2>Content for Side 2</h2><p>This is the content for Side 2. <span id="timerLabel">0</span></p>';
-        break;
-      case 'side3':
-        contentDiv.innerHTML = '<h2>Content for Side 3</h2><p>This is the content for Side 3.</p><p>Timer: <span id="timerLabel">0</span> seconds</p>';
-        startTimer();
-        break;
-      default:
-        contentDiv.innerHTML = '<h2>Default Content</h2><p>Select a side to load content.</p>';
-    }
-  }
+            // Initial highlight update
+            updateHighlight();
 
-  // Function to start the timer
-  function startTimer() {
-    timerInterval = setInterval(function() {
-      var timerLabel = document.getElementById('timerLabel');
-      // Check if timerLabel exists
-      if (timerLabel) {
-        seconds++;
-        timerLabel.textContent = seconds;
-        console.log(seconds)
-      }
-    }, 1000);
-  }
-</script>
-
+            // Update highlight on window resize or scroll
+            window.addEventListener("resize", updateHighlight);
+            window.addEventListener("scroll", updateHighlight);
+        });
+    </script>
 </body>
 </html>

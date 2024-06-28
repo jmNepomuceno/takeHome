@@ -142,7 +142,14 @@
                 $stopwatch = "00:00:00";
                 if($row['sent_interdept_time'] == "00:00:00"){
                     if($_SESSION['running_timer'] != "" && $row['status'] == 'On-Process'){
-                        $stopwatch  = $_SESSION['running_timer'];
+                        $totalSeconds = floor($_SESSION['running_timer']);
+                        $hours = floor($totalSeconds / 3600);
+                        $minutes = floor(($totalSeconds % 3600) / 60);
+                        $seconds = $totalSeconds % 60;
+                    
+                        $stopwatch  = sprintf('%02d:%02d:%02d', $hours, $minutes, $seconds);
+                        // $stopwatch  = $_SESSION['running_timer'] != "" && $row['status'] == 'On-Process';
+                        // $stopwatch  = "here";
                     }
                 }else{
                     $stopwatch  = $row['sent_interdept_time'];

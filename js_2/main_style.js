@@ -9,6 +9,8 @@ $(document).ready(function(){
         })
     }
 
+    const myModal_main = new bootstrap.Modal(document.getElementById('myModal-main'));
+
     // BGHMC adheres to all satutatory mandatory and regulatory requirements to ensure standard implementation
     // loadContent('../php_2/default_view2.php')
     // loadContent('../php_2/patient_register_form2.php')
@@ -330,7 +332,6 @@ $(document).ready(function(){
 
     $('#outgoing-sub-div-id').on('click' , function(event){
         event.preventDefault();
-
         loadContent('../php_2/outgoing_form2.php')
     })
 
@@ -342,6 +343,7 @@ $(document).ready(function(){
 
     $('#patient-reg-form-sub-side-bar').on('click' , function(event){
         event.preventDefault();
+        $(document).trigger('saveTimeSession');
 
         loadContent('../php_2/patient_register_form2.php')
     })

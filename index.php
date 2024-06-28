@@ -67,10 +67,14 @@
                     $_SESSION['post_value_reload'] = 'false';
                     $_SESSION["sub_what"] = "";
 
+                    $_SESSION['running_bool'] = false;
+                    $_SESSION['running_startTime'] = "";
                     $_SESSION['running_timer'] = "";
                     $_SESSION['fifo_hpercode'] = "asdf";
                     $_SESSION['running_hpercode'] = "";
                     $_SESSION['login_time'] = $final_date;
+
+                    $_SESSION['current_content'] = "";
 
                     $sql = "UPDATE incoming_referrals SET login_time = '". $final_date ."' , login_user='". $sdn_username ."' ";
                     $stmt = $pdo->prepare($sql);
@@ -144,6 +148,8 @@
                 "Baltazar" => "1"
             ];
             
+            $_SESSION['running_bool'] = false;
+            $_SESSION['running_startTime'] = "";
             $_SESSION['running_timer'] = "";
             $_SESSION['running_hpercode'] = "";
             $_SESSION['running_index'] = "";
@@ -151,7 +157,9 @@
             $_SESSION['update_current_date'] = "";
             $_SESSION['patient_status'] = "";
             $_SESSION['approval_details_arr'] = array();
-        
+            
+            $_SESSION['current_content'] = "";
+
             $temp_date = $normal_date;
             
             $_SESSION['login_time'] = $final_date;
@@ -527,8 +535,56 @@
                 </div>
             </div>
         </div>
-                            
     </div>
+
+    <div id="overlay"></div>
+    <i id="tutorial-btn" class="fa-regular fa-circle-question"></i>
+
+    <!-- <div class="modal fade" id="tutorial-modal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div id="tutorial_dialog" class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 id="tutorial_title" class="modal-title fs-5">Welcome to BataanGHMC Service Delivery Network Tutorial</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="tutorial_body">
+                First, click sign in to register your RHU
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+        </div>
+    </div> -->
+
+    <div id="tutorial-carousel" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#tutorial-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#tutorial-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#tutorial-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./assets/tutorial_images/login_imgs/login_tutorial_1.png" class="d-block w-100" alt="image">
+            </div>
+            <div class="carousel-item">
+                <img src="./assets/tutorial_images/login_imgs/login_tutorial_2.png" class="d-block w-100" alt="image">
+            </div>
+            <div class="carousel-item">
+                <img src="./assets/tutorial_images/login_imgs/login_tutorial_4.png" class="d-block w-100" alt="image">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#tutorial-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#tutorial-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -537,6 +593,7 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/js/bootstrap.bundle.min.js"></script>
 
 
     <script src="./index.js?v=<?php echo time(); ?>"></script>

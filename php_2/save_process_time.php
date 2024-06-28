@@ -57,15 +57,24 @@
     }
 
 
-    // if($what === 'continue'){
-    //     $sql = "SELECT hpercode,status,progress_timer,logout_date FROM incoming_referrals WHERE progress_timer!='' AND refer_to = '" . $_SESSION["hospital_name"] . "'";
-    //     $stmt = $pdo->prepare($sql);
-    //     $stmt->execute();
-    //     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if($what === 'continue'){
+        $_SESSION['running_bool'] = "true";
 
-    //     $jsonString = json_encode($data);
-    //     echo $jsonString;
-    // }
+        $sql = "SELECT hpercode,status,progress_timer,logout_date FROM incoming_referrals WHERE progress_timer!='' AND refer_to = '" . $_SESSION["hospital_name"] . "'";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $jsonString = json_encode($data);
+        echo $jsonString;
+
+        // delete the progress_timer after sending back the request
+        // dapat yung referralID kukunin mo hindi yung hpercode
+
+        $sql = "UPDATE incoming_referrals SET progress_timer=null WHERE hpercode='PAT000023'";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+    }
 
     
 ?>

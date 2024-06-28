@@ -2,6 +2,7 @@
     session_start();
     include('../database/connection2.php');
     
+    $_SESSION['current_content'] = "default";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +23,10 @@
                 <p>This software program is protected by the Republic of the Philippines copyright laws. Reproduction and distribution of the software without prior written permission of the author is prohibited.</p>
                 <p>If you wish to use the software for commercial or other purposes, please contact us at bgh_bataan2005@yahoo.com.ph.</p>
             </div>
+        </div>
+
+        <div id="stopwatch-sub-div" style="display:none">
+            Processing: <span class="stopwatch"></span>
         </div>
 
     <!-- <script src="../js_2/main_style.js"></script> -->

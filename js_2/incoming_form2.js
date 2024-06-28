@@ -10,17 +10,24 @@ $(document).ready(function(){
     $('#myDataTable thead th').removeClass('sorting sorting_asc sorting_desc');
     dataTable.search('').draw(); 
 
+    const inactivityInterval = 551000; 
+
     const myModal = new bootstrap.Modal(document.getElementById('pendingModal'));
     const defaultMyModal = new bootstrap.Modal(document.getElementById('myModal-incoming'));
     // myModal.show()
 
     let global_index = 0, global_paging = 1, global_timer = "", global_breakdown_index = 0;
-    let final_time_total = "", update_seconds = 0;
+    let final_time_total = ""
     let next_referral_index_table;
     let length_curr_table = document.querySelectorAll('.hpercode').length;
     let toggle_accordion_obj = {}
     let type_approval = true // true = immediate approval // false = interdepartamental approval
-    let running = false; // running timer general
+
+    let startTime;
+    let elapsedTime = 0;
+    let running = false;
+    let requestId;
+    let lastLoggedSecond = 0;
 
     for(let i = 0; i < length_curr_table; i++){
         toggle_accordion_obj[i] = true
@@ -65,19 +72,27 @@ $(document).ready(function(){
                         var seconds = parseInt(timeParts[2]);
 
                         running_timer_interval_update = setInterval(function() {
-                            seconds++;
+                            // seconds++;
                 
-                            if (seconds === 60) {
-                                seconds = 0;
-                                minutes++;
-                            }
+                            // if (seconds === 60) {
+                            //     seconds = 0;
+                            //     minutes++;
+                            // }
                 
-                            if (minutes === 60) {
-                                minutes = 0;
-                                hours++;
-                            }
+                            // if (minutes === 60) {
+                            //     minutes = 0;
+                            //     hours++;
+                            // }
                 
-                            const formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+                            // const formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
+                            const totalSeconds = Math.floor(timeString / 1000);
+                            const hours = Math.floor(totalSeconds / 3600);
+                            const minutes = Math.floor((totalSeconds % 3600) / 60);
+                            const seconds = totalSeconds % 60;
+
+                            const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                            console.log(formattedTime)
+                            
                             $('#v2-update-stat').text(`Last update: ${response[0]['currentDateTime']}`)
 
                             // <label for="" id="v2-stat"> <span id="span-dept">Surgery</span> - <span id="span-status">Pending</span> - <span id="span-time">00:00:00</span></span></label>
@@ -140,6 +155,8 @@ $(document).ready(function(){
         })
     }
 
+
+    // for interdepartamental module. Whenever the first current referral is already pending on interdept, the next referral will be availabe to process.
     function enabledNextReferral(){
         // check the status of the referrals to get the index of the next referral to be enable
         for(let i = 0; i < document.querySelectorAll('.pat-status-incoming').length; i++){
@@ -158,7 +175,6 @@ $(document).ready(function(){
         }
         
     }
-
     enabledNextReferral()
 
     function changePatientModalContent(){
@@ -171,18 +187,16 @@ $(document).ready(function(){
 
     function handleUserActivity() {
         userIsActive = true;
-        // console.log('active')
     }
 
     function handleUserInactivity() {
-        // console.log('inactive')
         userIsActive = false;
         $.ajax({
             url: '../php_2/fetch_interval.php',
             method: "POST",
             data : {
                 from_where : 'incoming'
-            },
+            }, 
             success: function(response) {
                 console.log("fetch_interval")
 
@@ -237,8 +251,6 @@ $(document).ready(function(){
 
     document.addEventListener('mousemove', handleUserActivity);
 
-    const inactivityInterval = 115000; 
-
     function startInactivityTimer() {
         inactivityTimer = setInterval(() => {
             if (!userIsActive) {
@@ -266,8 +278,8 @@ $(document).ready(function(){
                 document.querySelector('.ul-div').innerHTML = ''
                 document.querySelector('.ul-div').innerHTML += response
                 if(document.querySelectorAll('.pat-status-incoming')[index].textContent == 'Pending'){
-                    console.log(259)
-                    runTimer(index, 0, 0, 0) // secs, minutes, hours
+                    console.log(259, index)
+                    runTimer(index)
                     let data = {
                         hpercode : document.querySelectorAll('.hpercode')[index].value,
                         from : 'incoming'
@@ -305,38 +317,38 @@ $(document).ready(function(){
 
                 
                 // checking if the patient is already referred interdepartamentally
-                // console.log(data)
+                console.log(data)
 
-                // $.ajax({
-                //     url: '../php_2/check_interdept_refer.php',
-                //     method: "POST", 
-                //     data:data,
-                //     success: function(response){
-                //         response = JSON.parse(response);    
-                //         // console.log(response)
-                //         console.log(typeof response.status_interdept)
+                $.ajax({
+                    url: '../php_2/check_interdept_refer.php',
+                    method: "POST", 
+                    data:data,
+                    success: function(response){
+                        response = JSON.parse(response);    
+                        console.log(response)
+                        console.log(typeof response.status_interdept)
 
-                //         if(response.status_interdept){
-                //             $('#approval-form').css('display','none')
-                //             $('.interdept-div-v2').css('display','flex')
-                //             $('#cancel-btn').css('display','block')
+                        if(response.status_interdept){
+                            $('#approval-form').css('display','none')
+                            $('.interdept-div-v2').css('display','flex')
+                            $('#cancel-btn').css('display','block')
                 
-                //             updateInterdeptFunc()
-                //         }else{
-                //             $('#approval-form').css('display','flex')
-                //             $('.approval-main-content').css('display','block')
-                //             $('.interdept-div-v2').css('display','none')
-                //             $('#cancel-btn').css('display','none')
-                //         }
+                            updateInterdeptFunc()
+                        }else{
+                            $('#approval-form').css('display','flex')
+                            $('.approval-main-content').css('display','block')
+                            $('.interdept-div-v2').css('display','none')
+                            $('#cancel-btn').css('display','none')
+                        }
 
-                //         $('#seen-by-lbl span').text(response.referring_seenBy)
-                //         $('#seen-date-lbl span').text(response.referring_seenTime)
+                        $('#seen-by-lbl span').text(response.referring_seenBy)
+                        $('#seen-date-lbl span').text(response.referring_seenTime)
                         
-                //         if (document.querySelectorAll('.pat-status-incoming')[global_index].textContent.includes("Approve")) {
-                //             $('#final-approve-btn').css('display','block')
-                //         } 
-                //     }
-                // })
+                        if (document.querySelectorAll('.pat-status-incoming')[global_index].textContent.includes("Approve")) {
+                            $('#final-approve-btn').css('display','block')
+                        } 
+                    }
+                })
 
                 myModal.show();
 
@@ -346,36 +358,8 @@ $(document).ready(function(){
 
     const pencil_elements = document.querySelectorAll('.pencil-btn');
         pencil_elements.forEach(function(element, index) {
-        element.addEventListener('click', function() {
-            //myModal.show();
-            
+        element.addEventListener('click', function() {       
             ajax_method(index)
-
-            // lobal_index = index
-
-            // // possible redundant
-            // const data = {
-            //     hpercode: document.querySelectorAll('.hpercode')[index].value,
-            //     from: 'incoming'
-            // }
-            // $.ajax({
-            //     url: '../php/process_pending.php',
-            //     method: "POST", 
-            //     data:data,
-            //     success: function(response){
-            //         document.querySelector('.ul-div').innerHTML = ''
-            //         document.querySelector('.ul-div').innerHTML += response
-                    
-            //         // if(document.querySelectorAll('.pat-status-incoming')[index].textContent == 'Pending'){
-            //         //     console.log('here')
-            //         //     runTimer(index, 0, 0, 0) // secs, minutes, hours
-            //         // }
-            //         myModal.show();
-
-            //     }
-            // })
-
-
         });
     });
 
@@ -384,214 +368,195 @@ $(document).ready(function(){
         return (num < 10 ? '0' : '') + num;
     }
 
-    // if theres a timer running before the reload
-    if($('#running-timer-input').val() !== "" && $('#running-timer-input').val() !== "00:00:00"){
-        console.log('asdf')
-        if($('#pat-curr-stat-input').val() === ""){
-            const parts = $('#running-timer-input').val().split(':');
-            // Extract hours, minutes, and seconds
-            let hours = 0;
-            let minutes = 0;
-            let seconds = 0;
-            
-            if (parts.length === 3) {
-                hours = parseInt(parts[0], 10);
-                minutes = parseInt(parts[1], 10);
-                seconds = parseInt(parts[2], 10);
-            } else if (parts.length === 2) {
-                minutes = parseInt(parts[0], 10);
-                seconds = parseInt(parts[1], 10);
-            } else if (parts.length === 1) {
-                seconds = parseInt(parts[0], 10);
+    function loadStateFromSession() {
+        // upon logout
+        if(post_value_reload === 'true'){
+            console.log('366')
+            $.ajax({
+                url: '../php_2/save_process_time.php',
+                method: "POST",
+                data : {what: 'continue'},
+                dataType : 'JSON',
+                success: function(response){
+                    running_timer_var = response[0].progress_timer
+                    post_value_reload_bool = (post_value_reload === "true") ? true : false;
+
+                    running_bool_var =  (running_bool_var === "true") ? true : false;
+                    // initialize mo na lang na false agad yung running na session, tanggalin mo na yung global variable sa taas(?)
+                    // tapos ayusin mo yung code mo, nakadepende pa din sa hpercode, depende mo sa referral ID dapat pag multiple referral per account.
+                    // running_bool_var = true
+
+                    elapsedTime = (running_timer_var || 0) * 1000; // Convert seconds to milliseconds
+                    startTime = running_startTime_var ? running_startTime_var : performance.now() - elapsedTime;
+                    running = running_bool_var || false;
+
+                    startTime = performance.now() - elapsedTime;
+                    requestId = requestAnimationFrame(runTimer(0).updateTimer);
+                }
+            })
+        }else{
+            console.log('390')
+            running_bool_var =  (running_bool_var === "true") ? true : false;
+            elapsedTime = (running_timer_var || 0) * 1000; // Convert seconds to milliseconds
+            startTime = running_startTime_var ? running_startTime_var : performance.now() - elapsedTime;
+            running = running_bool_var || false;
+    
+    
+            if (running && previous_loadcontent === "incoming_ref") {
+                startTime = performance.now() - elapsedTime;
+                requestId = requestAnimationFrame(runTimer(0).updateTimer);
             }
-            console.log()
-            // runTimer(parseInt($('#running-index').val()), seconds, minutes, hours)
-            // runTimer()
         }
     }
 
-    // function runTimer(index, sec, min, hrs){
-    //     let seconds = sec;
-    //     let minutes = min;
-    //     let hours = hrs;
+    // on load
+    loadStateFromSession()
 
-    //     running_timer_interval = setInterval(function() {
-    //         seconds++;
+    function runTimer(index) {
+        function formatTime(milliseconds) {
+            const totalSeconds = Math.floor(milliseconds / 1000);
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
 
-    //         if (seconds === 60) {
-    //             seconds = 0;
-    //             minutes++;
-    //         }
-
-    //         if (minutes === 60) {
-    //             minutes = 0;
-    //             hours++;
-    //         }
-
-    //         const formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
-    //         global_timer = formattedTime
-    //         if(global_paging === 1){
-    //             document.querySelectorAll('.stopwatch')[index].textContent = formattedTime;
-    //             document.querySelectorAll('.pat-status-incoming')[index].textContent = 'On-Process';
-    //         }
-
-    //         let data = {
-    //             formattedTime: formattedTime,
-    //             hpercode: document.querySelectorAll('.hpercode')[0].value,
-    //             from : 'incoming'
-    //         }
-    //         console.log(data)
-    //         $.ajax({
-    //             url: '../php_2/session_timer.php',
-    //             method: "POST", 
-    //             data:data,
-    //             success: function(response){
-    //                 // Display the time in the HTML element
-    //             }
-    //         })
-
-    //     }, 1000); 
-    // }
-
-    function runTimer(index, sec, min, hrs) {
-        let seconds = sec;
-        let minutes = min;
-        let hours = hrs;
-        let elapsedTime = 0;
-        // let running = false;
-        let requestId;
-        let lastLoggedSecond = 0;
-        let startTime;
-    
-        function pad(num) {
-            return num.toString().padStart(2, '0');
+            return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
-    
+
         function updateTimer() {
             if (!running) return;
-    
+
             const now = performance.now();
-            const deltaTime = now - startTime;
-            startTime = now;  // Reset start time for the next frame
-    
-            elapsedTime += deltaTime / 1000;  // Convert milliseconds to seconds
-            const secondsElapsed = Math.floor(elapsedTime);
-    
+            elapsedTime = now - startTime;
+            const secondsElapsed = Math.floor(elapsedTime / 1000);
+
             if (secondsElapsed > lastLoggedSecond) {
-                seconds += secondsElapsed - lastLoggedSecond;
+                // console.log(secondsElapsed);
                 lastLoggedSecond = secondsElapsed;
-    
-                if (seconds >= 60) {
-                    minutes += Math.floor(seconds / 60);
-                    seconds = seconds % 60;
-                }
-                if (minutes >= 60) {
-                    hours += Math.floor(minutes / 60);
-                    minutes = minutes % 60;
-                }
-    
-                const formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(Math.floor(seconds));
-                global_timer = formattedTime;
-                
+
+                global_timer = formatTime(elapsedTime);
+
                 if(document.querySelectorAll('.pat-status-incoming').length > 0){
                     if (global_paging === 1) {
                         // console.log(document.querySelectorAll('.stopwatch').length, index)
-                        document.querySelectorAll('.stopwatch')[index].textContent = formattedTime;
-    
+                        document.querySelectorAll('.stopwatch')[index].textContent = formatTime(elapsedTime);
+
                         document.querySelectorAll('.pat-status-incoming')[index].textContent = 'On-Process';
                     }
         
-                    console.log("global_timer: " + global_timer);
-    
-                    let data = {
-                        formattedTime: formattedTime,
-                        hpercode: document.querySelectorAll('.hpercode')[0].value, 
-                        from : 'incoming'
+                    // console.log("global_timer: " + global_timer);
+                    let curr_index = 0;
+                    for(let i = 0; i < document.querySelectorAll('.pat-status-incoming').length; i++){
+                        if(document.querySelectorAll('.pat-status-incoming')[i].textContent === "On-Process"){
+                            curr_index = i;
+                        }
                     }
-                    // console.log(data)
+
                     $.ajax({
-                        url: '../php_2/session_timer.php',
+                        url: '../php_2/fetch_onProcess.php',
                         method: "POST", 
-                        data:data,
+                        data:{
+                            // timer: document.querySelectorAll('.stopwatch')[curr_index].textContent,
+                            timer : elapsedTime / 1000,
+                            running_bool : running,
+                            startTime : running ? performance.now() : startTime,
+                            hpercode: document.querySelectorAll('.hpercode')[curr_index].value,
+                            index: curr_index // questionable
+                        },
                         success: function(response){
-                            // console.log("response: " + response)
+                            // console.log(response)
                         }
                     })
+
                 }else{
                     if (global_paging === 1) {
-                        document.querySelectorAll('.stopwatch')[index].textContent = formattedTime;
+                        document.querySelectorAll('.stopwatch')[index].textContent = formatTime(elapsedTime);
                     }
                 }
-                
             }
-    
             requestId = requestAnimationFrame(updateTimer);
         }
-    
+
         function start() {
             if (running) return;
+
             running = true;
-            startTime = performance.now();
+            startTime = performance.now() - elapsedTime;
             requestId = requestAnimationFrame(updateTimer);
+            // saveStateToSession(); // Save state whenever the timer is started
         }
-    
+
         function stop() {
             running = false;
             cancelAnimationFrame(requestId);
+            // saveStateToSession(); // Save state whenever the timer is stopped
         }
-    
+
         function reset() {
             running = false;
-            cancelAnimationFrame(requestId);
             elapsedTime = 0;
-            seconds = 0;
-            minutes = 0;
-            hours = 0;
+            document.getElementById('timer').textContent = '00:00:00';
             lastLoggedSecond = 0;
-            const formattedTime = '00:00:00';
-            global_timer = formattedTime;
-    
-            if (global_paging === 1) {
-                document.querySelectorAll('.stopwatch')[index].textContent = formattedTime;
-                document.querySelectorAll('.pat-status-incoming')[index].textContent = 'Not Started';
-            }
+            cancelAnimationFrame(requestId);
+            saveStateToSession(); // Save state whenever the timer is reset
         }
     
         // Start the timer
         start();
     
         // Expose control functions
-        return { start, stop, reset };
+        return { start, stop, reset, updateTimer };
     }
-    
-    window.addEventListener('beforeunload', function(e) {
-        // e.preventDefault()
+
+    function saveTimeSession(){
         // look only for the status that is On-Process
+
         let curr_index = 0;
         for(let i = 0; i < document.querySelectorAll('.pat-status-incoming').length; i++){
             if(document.querySelectorAll('.pat-status-incoming')[i].textContent === "On-Process"){
                 curr_index = i;
             }
         }
-        console.log(curr_index)
+
+        console.log({
+            timer : elapsedTime / 1000,
+            running_bool : running,
+            startTime : running ? performance.now() : startTime,
+            hpercode: document.querySelectorAll('.hpercode')[curr_index].value,
+            index: curr_index // questionable)
+        })
+        
         $.ajax({
             url: '../php_2/fetch_onProcess.php',
             method: "POST", 
             data:{
-                timer: document.querySelectorAll('.stopwatch')[curr_index].textContent,
+                // timer: document.querySelectorAll('.stopwatch')[curr_index].textContent,
+                timer : elapsedTime / 1000,
+                running_bool : running,
+                startTime : running ? performance.now() : startTime,
                 hpercode: document.querySelectorAll('.hpercode')[curr_index].value,
-                index: curr_index
+                index: curr_index // questionable
             },
             success: function(response){
-                // response = JSON.parse(response);   
-                console.log(response)
-
-                // document.querySelector('.referral-details').innerHTML += response
-                // runTimer(index)
-                // myModal.show();
+                // console.log(response)
             }
         })
+    }
+        
+    window.addEventListener('beforeunload', function(event) {
+        // e.preventDefault()
+        saveTimeSession()
     });
+
+    $(document).on('saveTimeSession', saveTimeSession);
+
+
+
+
+
+
+
+
+
 
     // search incoming patients
     $('#incoming-search-btn').on('click' , function(event){        
@@ -734,66 +699,6 @@ $(document).ready(function(){
         //5000
     }
 
-    if($('#post-value-reload-input').val() === 'true'){
-        $.ajax({
-            url: '../php_2/save_process_time.php',
-            method: "POST",
-            data : {what: 'continue'},
-            // dataType : 'JSON',
-            success: function(response){
-                // console.log(response)
-
-                if(response.length > 0){
-                    // Function to format time as HH:MM:SS
-                    function millisecondsToHMS(milliseconds) {
-                        // Calculate total seconds
-                        let totalSeconds = Math.floor(milliseconds / 1000);
-                        
-                        // Calculate hours, minutes, and remaining seconds
-                        let hours = Math.floor(totalSeconds / 3600);
-                        let minutes = Math.floor((totalSeconds % 3600) / 60);
-                        let remainingSeconds = totalSeconds % 60;
-                        
-                        // Format the result as HH:MM:SS
-                        let formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-                        
-                        return formattedTime;
-                    }
-
-
-                    
-                    // Get the current time
-                    let currentTime = new Date();
-                    
-                    // Given formatted time string
-                    let formattedTimeString = response[0].logout_date;
-                    
-                    // Parse the formatted time string
-                    let formattedTime = new Date(formattedTimeString);
-                    
-                    // Calculate the time difference
-                    let timeDifference = currentTime - formattedTime;
-                    // console.log(currentTime , formattedTime)
-
-                    // console.log(timeDifference) // milliseconds
-
-                    let final_time = millisecondsToHMS(timeDifference  + parseTimeToMilliseconds(response[0].progress_timer));
-                    console.log(final_time);  // Output: "00:11:50"
-
-                    // Split the time string by colon
-                    const timeParts = final_time.split(':');
-
-                    // Extract hours, minutes, and seconds
-                    const hours = parseInt(timeParts[0], 10);
-                    const minutes = parseInt(timeParts[1], 10);
-                    const seconds = parseInt(timeParts[2], 10);
-
-                    runTimer(0, seconds, minutes, hours)
-                }
-            }
-        })
-    }
-
 
     $('#inter-dept-referral-btn').on('click' , function(event){
         $('.interdept-div').css('display' , 'flex')
@@ -804,6 +709,7 @@ $(document).ready(function(){
         $('#modal-title-incoming').text('Successed')
         document.querySelector('#modal-icon').className = 'fa-solid fa-circle-check'
         $('#modal-body-incoming').text('Successfully Forwarded')
+        $('#ok-modal-btn-incoming').text('Close')
         defaultMyModal.show()
         $('.interdept-div-v2').css('display' , 'flex')
 
@@ -827,13 +733,16 @@ $(document).ready(function(){
                 $('.interdept-div').css('display','none')
                 $('#cancel-btn').css('display','block')
                 $('.approval-main-content').css('display','none')
-                clearInterval(running_timer_interval)
+
+                runTimer().stop()
+                // clearInterval(running_timer_interval)
                 
                 document.querySelectorAll('.pat-status-incoming')[global_index].textContent = 'Pending - ' + $('#inter-depts-select').val().toUpperCase();
 
                 // enable the second request on the table while waiting for the current request that is on interdepartment already
                 // document.querySelectorAll('.tr-incoming').
                 myModal.hide()
+
                 enabledNextReferral()
             }
         })
@@ -912,6 +821,10 @@ $(document).ready(function(){
                     });
                 });
 
+                // reset timer variables
+                elapsedTime = 0;
+                running = false;
+                lastLoggedSecond = 0;
             }
         })
      })
@@ -1101,51 +1014,56 @@ $(document).ready(function(){
     })
 
     $('#ok-modal-btn-incoming').on('click' , function(event){
-        console.log('990')
-        let mcc_passwords_validity = false
-        let input_pw = $('#sensitive-pw').val().toString()
-        for (var key in mcc_passwords) {
-            if (mcc_passwords.hasOwnProperty(key)) {
-                if(mcc_passwords[key] === input_pw){
-                    mcc_passwords_validity = true;
-                }
-            }
+        if($('#ok-modal-btn-incoming').text() === 'Close'){
+            console.log('done interdept referral shared')
         }
-        
-        if (mcc_passwords_validity) {
-            // Your existing code when validity is true
-            // checking of all the sensitive-btn and get the index of the previous display=none, and +1 on the index for the current sensitive button
-            console.log($('.sensitive-case-btn').length)
-            let sensitive_btn_index = 0;
-            for(let i = 0; i < $('.sensitive-case-btn').length; i++){
-                if($('.sensitive-case-btn').eq(0).css('display') === 'flex'){
-                    break;
-                }
-                else if($('.sensitive-case-btn').eq(i).css('display') === 'none'){
-                    sensitive_btn_index = i + 1
-                    break;
+        else{
+            let mcc_passwords_validity = false
+            let input_pw = $('#sensitive-pw').val().toString()
+            for (var key in mcc_passwords) {
+                if (mcc_passwords.hasOwnProperty(key)) {
+                    if(mcc_passwords[key] === input_pw){
+                        mcc_passwords_validity = true;
+                    }
                 }
             }
+            
+            if (mcc_passwords_validity) {
+                // Your existing code when validity is true
+                // checking of all the sensitive-btn and get the index of the previous display=none, and +1 on the index for the current sensitive button
+                console.log($('.sensitive-case-btn').length)
+                let sensitive_btn_index = 0;
+                for(let i = 0; i < $('.sensitive-case-btn').length; i++){
+                    if($('.sensitive-case-btn').eq(0).css('display') === 'flex'){
+                        break;
+                    }
+                    else if($('.sensitive-case-btn').eq(i).css('display') === 'none'){
+                        sensitive_btn_index = i + 1
+                        break;
+                    }
+                }
 
-            $('.sensitive-lock-icon').eq(sensitive_btn_index)
-                .css('color', 'lightgreen')
-                .removeClass('fa-solid fa-lock')
-                .addClass('fa-solid fa-lock-open');
-        
-            $('.pencil-btn').eq(sensitive_btn_index)
-                .css('pointer-events', 'auto')
-                .css('opacity', '1');
-            $('.sensitive-case-btn').eq(sensitive_btn_index).fadeOut(2000)
-        } else {
-            // Change color to red
-            console.log(sensitive_btn_index)
-            // $('.sensitive-lock-icon').eq(sensitive_btn_index).css('color', 'red');
-        
-            // // Fade back to normal color after 2 seconds
-            // setTimeout(function() {
-            //     $('.sensitive-lock-icon').eq(sensitive_btn_index).css('color', ''); // Reset to original color
-            // }, 2000);
+                $('.sensitive-lock-icon').eq(sensitive_btn_index)
+                    .css('color', 'lightgreen')
+                    .removeClass('fa-solid fa-lock')
+                    .addClass('fa-solid fa-lock-open');
+            
+                $('.pencil-btn').eq(sensitive_btn_index)
+                    .css('pointer-events', 'auto')
+                    .css('opacity', '1');
+                $('.sensitive-case-btn').eq(sensitive_btn_index).fadeOut(2000)
+            } else {
+                // Change color to red
+                console.log(sensitive_btn_index)
+                // $('.sensitive-lock-icon').eq(sensitive_btn_index).css('color', 'red');
+            
+                // // Fade back to normal color after 2 seconds
+                // setTimeout(function() {
+                //     $('.sensitive-lock-icon').eq(sensitive_btn_index).css('color', ''); // Reset to original color
+                // }, 2000);
+            }
         }
+        
     })
 
     $('#update-stat-select').on('change', function() {

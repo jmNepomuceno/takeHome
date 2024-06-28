@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     function validateElement(element) { 
         var isValid = true;
 
@@ -27,6 +28,14 @@ $(document).ready(function(){
         event.preventDefault();
         $('.main-content').css('display', 'none');
         $('.sub-content').css('display', 'flex');
+
+        // if(tutorialMode_on){
+        //     tutorial_modal.show()
+        //     $('#tutorial_title').text("Registration of your RHUs")
+        //     $('#tutorial_body').text("All field must be filled")
+        //     $('#tutorial_dialog').removeClass('modal-lg')
+        //     $('#tutorial_dialog').addClass('modal-md')
+        // }
     })  
 
     $('.return').on('click' , function(event){
@@ -302,4 +311,19 @@ $(document).ready(function(){
     // $('#authorization-confirm-btn').blur(function() {
     //     validateElement($(this));
     // });
+
+    // tutorial_modal.show()
+    
+    $('#tutorial-btn').mouseenter(function(){
+        $('#tutorial-btn').removeClass('fa-regular fa-circle-question');
+        $('#tutorial-btn').addClass('fa-solid fa-circle-question');
+    }).mouseout(function(){
+        $('#tutorial-btn').removeClass('fa-solid fa-circle-question');
+        $('#tutorial-btn').addClass('fa-regular fa-circle-question');
+    })
+
+    $('#tutorial-btn').on('click' , function(){
+        console.log('here')
+    })
+
 })

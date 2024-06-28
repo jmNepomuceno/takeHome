@@ -8,7 +8,7 @@
         $mcc_passwords = json_encode("");
     }
 
-    $timer_running = false;
+    // hold the data of the running timer opon logout
     $post_value_reload = '';
 
     $sql = "SELECT * FROM incoming_referrals WHERE progress_timer IS NOT NULL AND refer_to = '" . $_SESSION["hospital_name"] . "'";
@@ -22,22 +22,15 @@
     }
 
 
+    // holds the data upon logging out
     $sql = "SELECT * FROM incoming_referrals WHERE logout_date!='null' AND refer_to = '" . $_SESSION["hospital_name"] . "' ";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
     $logout_data = json_encode($data);
-    // $login_data = $_SESSION['login_time'];
 
-    // echo json_encode($data);
-    // echo $_SESSION['login_time'];
-
-    // $logout_data = 3;
-    // $login_data = 3;
-    // $_SESSION["sub_what"]
-
+    // for interdepartamental
     if($_SESSION['running_hpercode'] != null || $_SESSION['running_hpercode'] != ""){
         $sql = "SELECT status_interdept FROM incoming_referrals WHERE hpercode = :hpercode";
         $stmt = $pdo->prepare($sql);
@@ -57,108 +50,6 @@
         }
     }
 
-    // *******************************************************************************
-    // database showcase
-
-    // $sql = "SELECT * FROM incoming_referrals WHERE refer_to='Bataan General Hospital and Medical Center' AND hpercode='BGHMC-0049'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-    // $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // echo '<pre>'; print_r($data); echo '</pre>';
-
-    // $sql = "SELECT * FROM incoming_referrals WHERE hpercode='BGHMC-0049'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-    // $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    //*************************************************************************** */ refresh value of the data in database 
-    
-    
-    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, status_interdept=NULL, reception_time=NULL, final_progressed_timer=NULL, sent_interdept_time=NULL, last_update=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0049' ";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "DELETE FROM incoming_interdept";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute(); 
-
-    // $sql = "UPDATE incoming_referrals SET pat_class=NULL, status_interdept=NULL, reception_time=NULL, final_progressed_timer=NULL, sent_interdept_time=NULL, last_update=NULL, status='Pending', approved_time=NULL, progress_timer=NULL, logout_date=NULL WHERE hpercode='BGHMC-0061' ";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    //************************************************************************ */
-
-    // $sql = "SELECT * FROM incoming_referrals WHERE hpercode='BGHMC-0049'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-    // $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // echo '<pre>'; print_r($data); echo '</pre>';
-
-    //*************************************************************************
-
-    // $sql = "SELECT * FROM incoming_interdept";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-    // $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // echo '<pre>'; print_r($data); echo '</pre>';
-
-    // $sql = "UPDATE incoming_interdept SET unRead=1, referring_seenTime=null, referring_seenBy=null";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "SELECT classifications FROM classifications";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-    // $data_classifications = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    // echo '<pre>'; print_r($data_classifications); echo '</pre>';
-    // echo count($data_classifications);
-
-    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null WHERE date_time='2024-06-11 11:57:27'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET status='Discharged' WHERE date_time='2024-06-10 10:08:35'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET status='Discharged' WHERE date_time='2024-06-07 13:27:11'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, pat_class=null, approval_details=null, approved_time=null, reception_time=null WHERE hpercode='PAT000017'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000017'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000021'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET status='Pending' WHERE hpercode='PAT000021'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000022'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE incoming_referrals SET status='Pending' WHERE hpercode='PAT000022'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // ******************************************************************************************************************************************
-
-    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, pat_class=null  WHERE hpercode='PAT000004'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
-    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000004'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
-
     // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, pat_class=null  WHERE hpercode='PAT000009'";
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
@@ -166,13 +57,26 @@
     // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000009'";
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, pat_class=null, reception_time=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000023'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000023'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+    
+    // echo $_SESSION['running_timer'];
+    // echo $_SESSION['running_bool'] . "----" . gettype($_SESSION['running_bool']);
+    // echo $_SESSION['running_startTime'];
+
 ?>
 
  
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">r
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -182,14 +86,7 @@
     <link rel="stylesheet" href="../css/incoming_form.css">
 </head>
 <body>
-    <!-- <button id="pending-stop-btn" class="border-2 border-black">Stop</button> -->
-    
-    <input id="timer-running-input" type="hidden" name="timer-running-input" value= <?php echo $timer_running ?>>
-    <input id="post-value-reload-input" type="hidden" name="post-value-reload-input" value= <?php echo $post_value_reload ?>>
-    <input id="post-value-reload-history-input" type="hidden" name="post-value-reload-history-input" value= <?php echo $_SESSION["sub_what"] ?>>
 
-    <input id="running-timer-input" type="hidden" name="running-timer-input" value= <?php echo $_SESSION["running_timer"] ?>>
-    <!-- $current_pat_status -->
     <?php
         if(isset($_SESSION['running_hpercode']) && ($_SESSION['running_hpercode'] != null || $_SESSION['running_hpercode'] != "")) {
             echo '<input id="pat-curr-stat-input" type="hidden" name="pat-curr-stat-input" value="' . $current_pat_status . '">';
@@ -502,8 +399,6 @@
 
     <!-- MODAL -->
     
-
-    
     <div class="modal fade" id="pendingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -732,15 +627,20 @@
                         
     <script src="../js_2/incoming_form2.js?v= <?php echo time(); ?>"></script>
 
-    <script>
+    <script>                        
+        var post_value_reload  = <?php echo json_encode($post_value_reload); ?>;
+
+        var running_timer_var = <?php echo json_encode(floatval($_SESSION['running_timer'])); ?>;
+        var running_bool_var = <?php echo json_encode($_SESSION['running_bool']); ?>;
+        var running_startTime_var = <?php echo json_encode($_SESSION['running_startTime']); ?>;
+        var previous_loadcontent = <?php echo json_encode($_SESSION['current_content']); ?>;
+
         var mcc_passwords = <?php echo $mcc_passwords; ?>;
 
         var jsonData = <?php echo $jsonData; ?>;
-        // var logout_data =  echo $logout_data; ?>;
         var login_data = "<?php echo $_SESSION['login_time']; ?>";
-
-        // console.log(logout_data)
-    
     </script>
 </body>
 </html>
+
+<?php $_SESSION['current_content'] = 'incoming_ref' ?>;

@@ -79,7 +79,7 @@ $(document).ready(function(){
                     pass_word : $('#sdn-autho-password').val(),
                     confirm_password : $('#sdn-autho-confirm-password').val(),
                     created_at : created_at,
-                    user_type: 'Sample',
+                    usert_ype: 'Sample',
                     user_isActive: false
                 }
     

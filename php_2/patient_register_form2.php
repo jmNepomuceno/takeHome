@@ -2,6 +2,8 @@
     session_start();
     include('../database/connection2.php');
 
+    $_SESSION['current_content'] = "pat_register";
+
     $sql = "SELECT classifications FROM classifications";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();

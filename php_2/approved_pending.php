@@ -353,4 +353,11 @@
         }
         $_SESSION['approval_details_arr'] = array_values($_SESSION['approval_details_arr']);
     }
+
+    $_SESSION['running_timer'] = 0; // elapsedTime
+    $_SESSION['running_bool'] = false;
+    $_SESSION['running_startTime'] = null;
+
+    $_SESSION['running_hpercode'] = "";
+    $_SESSION['running_index'] = null;
 ?>

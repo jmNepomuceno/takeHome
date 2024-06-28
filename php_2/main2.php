@@ -271,6 +271,36 @@
         </div>
     </div>
 
+    <div id="overlay"></div>
+
+    <div id="tutorial-carousel" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#tutorial-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#tutorial-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#tutorial-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="../assets/tutorial_images/login_imgs/login_tutorial_1.png" class="d-block w-100" alt="image">
+            </div>
+            <div class="carousel-item">
+                <img src="../assets/tutorial_images/login_imgs/login_tutorial_2.png" class="d-block w-100" alt="image">
+            </div>
+            <div class="carousel-item">
+                <img src="../assets/tutorial_images/login_imgs/login_tutorial_4.png" class="d-block w-100" alt="image">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#tutorial-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#tutorial-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
     <!-- <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

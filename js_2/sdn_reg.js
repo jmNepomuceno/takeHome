@@ -12,49 +12,49 @@ $(document).ready(function(){ //sdn-register-btn
                 filled_inputs = true
             }
         })
-        filled_inputs = true
+        
         if(filled_inputs){
-            // const data = {
-            //     hospital_name : $('#sdn-hospital-name').val(),
-            //     hospital_code : $('#sdn-hospital-code').val(),
-
-            //     region : $('#sdn-region-select').val(),
-            //     province : $('#sdn-province-select').val(),
-            //     municipality : $('#sdn-city-select').val(),
-            //     barangay : $('#sdn-brgy-select').val(),
-            //     zip_code : $('#sdn-zip-code').val(),
-            //     email : $('#sdn-email-address').val(),
-            //     landline_no : $('#sdn-landline-no').val(),
-
-            //     hospital_mobile_no : $('#sdn-hospital-mobile-no').val(),
-
-            //     hospital_director : $('#sdn-hospital-director').val(),
-            //     hospital_director_mobile_no : $('#sdn-hospital-director-mobile-no').val(),
-
-            //     point_person : $('#sdn-point-person').val(),
-            //     point_person_mobile_no : $('#sdn-point-person-mobile-no').val(),
-            // }
-
             const data = {
-                hospital_name : "Test 0507B",
-                hospital_code : "2507",
+                hospital_name : $('#sdn-hospital-name').val(),
+                hospital_code : $('#sdn-hospital-code').val(),
 
-                region : "3",
-                province : "308",
-                municipality : "30806",
-                barangay : "30806015",
-                zip_code : "2103",
-                email : "cosmotamer@gmail.com",
-                landline_no : "425-4255",
+                region : $('#sdn-region-select').val(),
+                province : $('#sdn-province-select').val(),
+                municipality : $('#sdn-city-select').val(),
+                barangay : $('#sdn-brgy-select').val(),
+                zip_code : $('#sdn-zip-code').val(),
+                email : $('#sdn-email-address').val(),
+                landline_no : $('#sdn-landline-no').val(),
 
-                hospital_mobile_no : "0919-6044-820",
+                hospital_mobile_no : $('#sdn-hospital-mobile-no').val(),
 
-                hospital_director : "Pepe Smith",
-                hospital_director_mobile_no : "0919-6044-820",
+                hospital_director : $('#sdn-hospital-director').val(),
+                hospital_director_mobile_no : $('#sdn-hospital-director-mobile-no').val(),
 
-                point_person : "Pepe Smith",
-                point_person_mobile_no : "0919-6044-820",
+                point_person : $('#sdn-point-person').val(),
+                point_person_mobile_no : $('#sdn-point-person-mobile-no').val(),
             }
+
+            // const data = {
+            //     hospital_name : "Test 0507B",
+            //     hospital_code : "2507",
+
+            //     region : "3",
+            //     province : "308",
+            //     municipality : "30806",
+            //     barangay : "30806015",
+            //     zip_code : "2103",
+            //     email : "cosmotamer@gmail.com",
+            //     landline_no : "425-4255",
+
+            //     hospital_mobile_no : "0919-6044-820",
+
+            //     hospital_director : "Pepe Smith",
+            //     hospital_director_mobile_no : "0919-6044-820",
+
+            //     point_person : "Pepe Smith",
+            //     point_person_mobile_no : "0919-6044-820",
+            // }
 
             // console.log(data.region)
 
