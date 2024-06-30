@@ -62,33 +62,14 @@ $(document).ready(function(){
                 }
 
                 if(response[0]['status_interdept'] === "On-Process"){
-                    const timeString = response[1].curr_time;
+                    let timeString = response[1].curr_time;
                     if(timeString){
-                        // Split the time string into an array using the ":" delimiter
-                        const timeParts = timeString.split(":");
-
-                        var hours = parseInt(timeParts[0]);
-                        var minutes = parseInt(timeParts[1]);
-                        var seconds = parseInt(timeParts[2]);
-
                         running_timer_interval_update = setInterval(function() {
-                            // seconds++;
-                
-                            // if (seconds === 60) {
-                            //     seconds = 0;
-                            //     minutes++;
-                            // }
-                
-                            // if (minutes === 60) {
-                            //     minutes = 0;
-                            //     hours++;
-                            // }
-                
-                            // const formattedTime = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
-                            const totalSeconds = Math.floor(timeString / 1000);
-                            const hours = Math.floor(totalSeconds / 3600);
-                            const minutes = Math.floor((totalSeconds % 3600) / 60);
-                            const seconds = totalSeconds % 60;
+                            console.log(timeString)
+                            let totalSeconds = timeString;
+                            let hours = Math.floor(totalSeconds / 3600);
+                            let minutes = Math.floor((totalSeconds % 3600) / 60);
+                            let seconds = (totalSeconds % 60).toFixed(0);
 
                             const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
                             console.log(formattedTime)
@@ -99,7 +80,7 @@ $(document).ready(function(){
                             $('#span-dept').text(response[1].department.charAt(0).toUpperCase() + response[1].department.slice(1) + " | ") 
                             $('#span-status').text(response[0].status_interdept + " | ") 
                             $('#span-time').text(formattedTime)
-
+                            
                             // here
                             $('.interdept-div').css('display','none')
                             $('#cancel-btn').css('display','block')
@@ -117,7 +98,7 @@ $(document).ready(function(){
                             //         // document.querySelectorAll('.pat-status-incoming')[global_index].textContent = 'Pending - ' + $('#inter-depts-select').val().toUpperCase();;
                             //     }
                             // })
-
+                            timeString =  parseInt(timeString) + 1
                         }, 1000); 
                     }
                 }
@@ -326,6 +307,7 @@ $(document).ready(function(){
                     success: function(response){
                         response = JSON.parse(response);    
                         console.log(response)
+                        
                         console.log(typeof response.status_interdept)
 
                         if(response.status_interdept){
@@ -978,12 +960,13 @@ $(document).ready(function(){
     
     $(document).on('click', '.sensitive-case-btn', function(event){
         //reset the the buttons in modal after the previous transaction
+        console.log('here')
         $('#ok-modal-btn-incoming').text('OK')
         $('#yes-modal-btn-incoming').css('display', 'none')
 
        console.log($('.sensitive-case-btn').index(this))
 
-        var index = $('.sensitive-case-btn').index(this);
+        let index = $('.sensitive-case-btn').index(this);
         let sensitive_hpercode = document.querySelectorAll('.sensitive-hpercode')
 
         $.ajax({

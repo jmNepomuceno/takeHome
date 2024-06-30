@@ -5,6 +5,7 @@
     $hpercode = $_POST['hpercode'];
     $myArray = [];
     $seen_data;
+
     //update the status of the patient in the table of incoming_referrals
     $sql = "SELECT status_interdept, reception_time FROM incoming_referrals WHERE hpercode=:hpercode";
     $stmt = $pdo->prepare($sql);
@@ -20,7 +21,8 @@
         
     // referring_seenTime, referring_seenBy
 
-    if($data['status_interdept'] != ""){
+    if($data['status_interdept'] != "" || $data['status_interdept'] != null){
+        
         $myArray['status_interdept'] = true;
 
         $sql = "SELECT referring_seenTime, referring_seenBy FROM incoming_interdept WHERE hpercode=:hpercode";
