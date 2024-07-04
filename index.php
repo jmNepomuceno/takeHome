@@ -67,6 +67,8 @@
                     $_SESSION['post_value_reload'] = 'false';
                     $_SESSION["sub_what"] = "";
 
+                    $_SESSION['datatable_index'] = 0;
+
                     $_SESSION['running_bool'] = false;
                     $_SESSION['running_startTime'] = "";
                     $_SESSION['running_timer'] = "";
@@ -157,6 +159,8 @@
             $_SESSION['update_current_date'] = "";
             $_SESSION['patient_status'] = "";
             $_SESSION['approval_details_arr'] = array();
+
+            $_SESSION['datatable_index'] = 0;
             
             $_SESSION['current_content'] = "";
 
@@ -261,7 +265,7 @@
 <body>
         <!-- aesthetic hospital website background -->
         <div id="particles-js"></div> 
-        <div class="count-particles"> <span class="js-count-particles">--</span> particles </div> <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+        <div class="count-particles"> <span class="js-count-particles">--</span> particles </div> <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
         
     <div class="container">
         

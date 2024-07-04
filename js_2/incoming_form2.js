@@ -38,6 +38,8 @@ $(document).ready(function(){
     let running_timer_interval = "", running_timer_interval_update;
     let userIsActive = true;
 
+    let sensitive_case_btn_index = ""
+
     // reusable functions
     function updateInterdeptFunc(){
         let data = {
@@ -248,7 +250,8 @@ $(document).ready(function(){
         global_index = index
         const data = {
             hpercode: document.querySelectorAll('.hpercode')[index].value,
-            from:'incoming'
+            from:'incoming',
+            datatable_index : global_index
         }
         console.log(data)
         $.ajax({
@@ -350,7 +353,7 @@ $(document).ready(function(){
         return (num < 10 ? '0' : '') + num;
     }
 
-    function loadStateFromSession() {
+    function loadStateFromSession(current_dataTable_index) {
         // upon logout
         if(post_value_reload === 'true'){
             console.log('366')
@@ -386,13 +389,13 @@ $(document).ready(function(){
     
             if (running && previous_loadcontent === "incoming_ref") {
                 startTime = performance.now() - elapsedTime;
-                requestId = requestAnimationFrame(runTimer(0).updateTimer);
+                requestId = requestAnimationFrame(runTimer(current_dataTable_index).updateTimer);
             }
         }
     }
 
     // on load
-    loadStateFromSession()
+    loadStateFromSession(current_dataTable_index)
 
     function runTimer(index) {
         function formatTime(milliseconds) {
@@ -476,10 +479,10 @@ $(document).ready(function(){
         function reset() {
             running = false;
             elapsedTime = 0;
-            document.getElementById('timer').textContent = '00:00:00';
+            // document.getElementById('timer').textContent = '00:00:00';
             lastLoggedSecond = 0;
             cancelAnimationFrame(requestId);
-            saveStateToSession(); // Save state whenever the timer is reset
+            // saveStateToSession(); // Save state whenever the timer is reset
         }
     
         // Start the timer
@@ -493,12 +496,28 @@ $(document).ready(function(){
         // look only for the status that is On-Process
 
         let curr_index = 0;
-        for(let i = 0; i < document.querySelectorAll('.pat-status-incoming').length; i++){
-            if(document.querySelectorAll('.pat-status-incoming')[i].textContent === "On-Process"){
-                curr_index = i;
+        let interdept_status
+        // check if theres a pending status currently on the interdepartamental referral
+        for(let i = 0; i < status_interdept_arr.length; i++){
+            if(status_interdept_arr[i].status_interdept != null){
+                console.log('here')
+                interdept_status = i
             }
         }
 
+        if(interdept_status != null || interdept_status != "" || interdept_status != undefined){
+            curr_index = interdept_status + 1
+        }else{
+            for(let i = 0; i < document.querySelectorAll('.pat-status-incoming').length; i++){
+                if(document.querySelectorAll('.pat-status-incoming')[i].textContent === "On-Process"){
+                    curr_index = i;
+                }
+            }
+        }
+        
+
+
+        // getting the index for interdepartamental referral
         console.log({
             timer : elapsedTime / 1000,
             running_bool : running,
@@ -525,8 +544,12 @@ $(document).ready(function(){
     }
         
     window.addEventListener('beforeunload', function(event) {
-        // e.preventDefault()
         saveTimeSession()
+
+        // var message = "You have unsaved changes. Are you sure you want to leave?";
+        // event.returnValue = message;
+        // return message;
+
     });
 
     $(document).on('saveTimeSession', saveTimeSession);
@@ -653,6 +676,14 @@ $(document).ready(function(){
                     toggle_accordion_obj[i] = true
                 }
 
+                $('#incoming-referral-no-search').val("")
+                $('#incoming-last-name-search').val("")
+                $('#incoming-first-name-search').val("")
+                $('#incoming-middle-name-search').val("")
+                $('#incoming-type-select').val("")
+                $('#incoming-agency-select').val("")
+                $('#incoming-status-select').val("default")
+
                 const expand_elements = document.querySelectorAll('.accordion-btn');
                 expand_elements.forEach(function(element, index) {
                     element.addEventListener('click', function() {
@@ -660,6 +691,8 @@ $(document).ready(function(){
                         global_breakdown_index = index;
                     });
                 });
+
+                
             }
         }) 
     })
@@ -692,6 +725,7 @@ $(document).ready(function(){
         document.querySelector('#modal-icon').className = 'fa-solid fa-circle-check'
         $('#modal-body-incoming').text('Successfully Forwarded')
         $('#ok-modal-btn-incoming').text('Close')
+        $('#yes-modal-btn-incoming').css('display' , 'none')
         defaultMyModal.show()
         $('.interdept-div-v2').css('display' , 'flex')
 
@@ -717,6 +751,7 @@ $(document).ready(function(){
                 $('.approval-main-content').css('display','none')
 
                 runTimer().stop()
+                runTimer().reset()
                 // clearInterval(running_timer_interval)
                 
                 document.querySelectorAll('.pat-status-incoming')[global_index].textContent = 'Pending - ' + $('#inter-depts-select').val().toUpperCase();
@@ -724,6 +759,12 @@ $(document).ready(function(){
                 // enable the second request on the table while waiting for the current request that is on interdepartment already
                 // document.querySelectorAll('.tr-incoming').
                 myModal.hide()
+
+                // reset the value of approval details
+                const selectElement = document.getElementById('approve-classification-select');
+                selectElement.value = '';
+                selectElement.value = selectElement.options[0].value;
+                $('#eraa').val("")
 
                 enabledNextReferral()
             }
@@ -807,6 +848,8 @@ $(document).ready(function(){
                 elapsedTime = 0;
                 running = false;
                 lastLoggedSecond = 0;
+
+                enabledNextReferral()
             }
         })
      })
@@ -920,7 +963,8 @@ $(document).ready(function(){
             timer : final_time_total,
             approve_details : $('#eraa').val(), 
             case_category : $('#approve-classification-select').val(),
-            action : "Approve"
+            action : "Approve",
+            type_approval : "false"
         }
 
         console.log(data);
@@ -960,26 +1004,24 @@ $(document).ready(function(){
     
     $(document).on('click', '.sensitive-case-btn', function(event){
         //reset the the buttons in modal after the previous transaction
-        console.log('here')
         $('#ok-modal-btn-incoming').text('OK')
-        $('#yes-modal-btn-incoming').css('display', 'none')
-
-       console.log($('.sensitive-case-btn').index(this))
-
-        let index = $('.sensitive-case-btn').index(this);
+        $('#yes-modal-btn-incoming').css('display', 'none') 
+       
+        sensitive_case_btn_index = $('.sensitive-case-btn').index(this);
         let sensitive_hpercode = document.querySelectorAll('.sensitive-hpercode')
+        console.log(sensitive_case_btn_index)
 
         $.ajax({
             url: '../php_2/fetch_sensitive_names.php',
             method: "POST",
             data : {
-                hpercode : sensitive_hpercode[index].value // index = should always be = 0
+                hpercode : sensitive_hpercode[sensitive_case_btn_index].value // sensitive_case_btn_index = should always be = 0
             },
             dataType:'JSON',
             success: function(response){
                 console.log(response)
                 let fullNameLabel = `<label class='pat-full-name-lbl'>${response.patlast}, ${response.patfirst} ${response.patmiddle}</label>`;
-                $('.pat-full-name-div').append(fullNameLabel);
+                $('.pat-full-name-div').eq(sensitive_case_btn_index).append(fullNameLabel);
 
                 $('#modal-title-incoming').text('Verification')
                 // <input id="sensitive-pw" type="password" placeholder="Input Password">
@@ -994,6 +1036,7 @@ $(document).ready(function(){
                 defaultMyModal.show()
             }
         })
+
     })
 
     $('#ok-modal-btn-incoming').on('click' , function(event){
@@ -1012,10 +1055,36 @@ $(document).ready(function(){
             }
             
             if (mcc_passwords_validity) {
+                let current_index = 0
+                let all_pointerevents = false;
+                // check the index of the clicked sensitive-btn
+                for(let i = 0; i < $('.tr-incoming').length; i++){
+                    if($('.tr-incoming').eq(i).css('pointer-events') === 'none'){
+                        current_index = i - 1
+                        break
+                    }
+                }
+
+                // check if all of the tr-incoming on the current table are with sensitive case are all visible pointer events != none
+                for(let i = 0; i < $('.tr-incoming').length; i++){
+                    if($('.tr-incoming').eq(i).css('pointer-events') === 'auto'){
+                        all_pointerevents = true
+                    }else{
+                        all_pointerevents = false
+                    }
+                }
+
+                if(all_pointerevents){
+                    current_index = $('.tr-incoming').length - 1
+                }
+
+                console.log(current_index)
+                
                 // Your existing code when validity is true
                 // checking of all the sensitive-btn and get the index of the previous display=none, and +1 on the index for the current sensitive button
                 console.log($('.sensitive-case-btn').length)
                 let sensitive_btn_index = 0;
+                
                 for(let i = 0; i < $('.sensitive-case-btn').length; i++){
                     if($('.sensitive-case-btn').eq(0).css('display') === 'flex'){
                         break;
@@ -1026,15 +1095,18 @@ $(document).ready(function(){
                     }
                 }
 
-                $('.sensitive-lock-icon').eq(sensitive_btn_index)
+                console.log(current_index , sensitive_case_btn_index)
+
+                $('.sensitive-lock-icon').eq(sensitive_case_btn_index)
                     .css('color', 'lightgreen')
                     .removeClass('fa-solid fa-lock')
                     .addClass('fa-solid fa-lock-open');
             
-                $('.pencil-btn').eq(sensitive_btn_index)
+                $('.pencil-btn').eq(current_index)
                     .css('pointer-events', 'auto')
                     .css('opacity', '1');
-                $('.sensitive-case-btn').eq(sensitive_btn_index).fadeOut(2000)
+                    
+                $('.sensitive-case-btn').eq(sensitive_case_btn_index).fadeOut(2000)
             } else {
                 // Change color to red
                 console.log(sensitive_btn_index)
@@ -1046,7 +1118,6 @@ $(document).ready(function(){
                 // }, 2000);
             }
         }
-        
     })
 
     $('#update-stat-select').on('change', function() {

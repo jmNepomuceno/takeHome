@@ -32,7 +32,7 @@
         $stmt = $pdo->prepare($query_bucasSDN);
         $stmt->bindParam(':param_bucasID', $param_bucasID, PDO::PARAM_STR);
         $stmt->execute();
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC); 
 
         include_once("bucas_display.php");
     } else {

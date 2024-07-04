@@ -11,5 +11,7 @@
     $_SESSION['running_hpercode'] = $_POST['hpercode'];
     $_SESSION['running_index'] = $_POST['index'];
 
+    $_SESSION['datatable_index'] = $_POST['index'];
+
     echo $_SESSION['running_timer'];
 ?>

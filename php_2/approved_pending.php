@@ -11,7 +11,7 @@
 
     // ORDER BY date_time DESC LIMIT 1
 
-    
+    $index = 0;
     if($_POST['type_approval'] === 'true'){
         $pat_class = $_POST['case_category'];
         $global_single_hpercode = filter_input(INPUT_POST, 'global_single_hpercode');
@@ -21,17 +21,22 @@
         foreach ($_SESSION['approval_details_arr'] as $index => $element) {
             if ($element['hpercode'] == $_POST['global_single_hpercode']) {
                 // Found the matching element
-                $index;
                 break; // Stop looping once found
+            }else{
+                $index += 1;
             }
         }
         // C:\Users\ACER\Documents\dumps
     
-        $_SESSION['approval_details_arr'][] = array(
-            'hpercode' => $_POST['global_single_hpercode'],
-            'category' => $_POST['case_category'] , 
-            'approve_details' => $_POST['approve_details']
-        );
+        // $_SESSION['approval_details_arr'][] = array(
+        //     'hpercode' => $_POST['global_single_hpercode'],
+        //     'category' => $_POST['case_category'] , 
+        //     'approve_details' => $_POST['approve_details']
+        // );
+
+        $pat_class = $_SESSION['approval_details_arr'][$index]['category'];
+        $global_single_hpercode = $_SESSION['approval_details_arr'][$index]['hpercode'];
+        $approve_details = $_SESSION['approval_details_arr'][$index]['approve_details'];
     }
 
     // if hpercode has duplicates
@@ -354,6 +359,7 @@
         $_SESSION['approval_details_arr'] = array_values($_SESSION['approval_details_arr']);
     }
 
+    // refresh the value of the session timers
     $_SESSION['running_timer'] = 0; // elapsedTime
     $_SESSION['running_bool'] = false;
     $_SESSION['running_startTime'] = null;

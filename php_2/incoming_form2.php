@@ -58,29 +58,76 @@
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
 
-    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, pat_class=null, reception_time=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000023'";
+    // ******************************************************************
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000023'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000024'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000025'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000026'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE incoming_referrals SET status='Pending', final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000027'";
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
 
     // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000023'";
     // $stmt = $pdo->prepare($sql);
     // $stmt->execute();
-    
-    // echo $_SESSION['running_timer'];
-    // echo $_SESSION['running_bool'] . "----" . gettype($_SESSION['running_bool']);
-    // echo $_SESSION['running_startTime'];
 
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000024'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000025'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000026'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000027'";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+
+    // $sql = "DELETE FROM incoming_interdept";
+    // $stmt = $pdo->prepare($sql);
+    // $stmt->execute();
+    
+    // echo $_SESSION['running_timer'] . "----";
+    // echo $_SESSION['running_bool'] . "----";
+    // echo $_SESSION['running_hpercode'] . "----";
+    // echo $_SESSION['running_index'] . "----";
+
+    // echo '<pre>'; print_r($_SESSION['approval_details_arr']); echo '</pre>';
+
+    $sql = "SELECT status_interdept FROM incoming_referrals WHERE (status='Pending' OR status='On-Process') AND refer_to='". $_SESSION["hospital_name"] ."' ORDER BY date_time ASC";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $status_interdept_arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // echo $_SESSION['datatable_index'];
 ?>
 
  
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">r
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 
      <?php require "../header_link.php" ?>
     <link rel="stylesheet" href="../css/incoming_form.css">
@@ -639,6 +686,11 @@
 
         var jsonData = <?php echo $jsonData; ?>;
         var login_data = "<?php echo $_SESSION['login_time']; ?>";
+
+        var status_interdept_arr = <?php echo json_encode($status_interdept_arr); ?>;
+        console.log(status_interdept_arr)
+
+        var current_dataTable_index = <?php echo json_encode($_SESSION['datatable_index']); ?>;
     </script>
 </body>
 </html>

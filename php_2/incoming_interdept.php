@@ -38,6 +38,16 @@
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $response = json_encode($data);
+    // refresh the value of the session timers
+    $_SESSION['running_timer'] = 0; // elapsedTime
+    $_SESSION['running_bool'] = false;
+    $_SESSION['running_startTime'] = null;
+
+    $_SESSION['running_hpercode'] = "";
+    $_SESSION['running_index'] = null;
+    
+    $arr = [$_SESSION['running_timer'] , $_SESSION['running_bool'] , $_SESSION['running_startTime'] , $_SESSION['running_hpercode'] , $_SESSION['running_index']];
+
+    $response = json_encode($arr);
     echo $response;
 ?>

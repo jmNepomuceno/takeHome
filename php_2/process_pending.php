@@ -173,5 +173,5 @@
     $stmt->bindParam(':reception_time', $reception_time, PDO::PARAM_STR);
     $stmt->bindParam(':hpercode', $hpercode, PDO::PARAM_STR);
     $stmt->execute();
-    
+
 ?>
