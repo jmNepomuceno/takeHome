@@ -340,8 +340,10 @@
                                 }else{
                                     $interdept_time[0]['final_progress_time'] = "00:00:00";
                                     $row['sent_interdept_time'] = "00:00:00";
+                                    // $total_time = $row['final_progressed_timer'];
                                 }
 
+                                // echo($total_time);
 
                                 if($row['approved_time'] == ""){
                                     $row['approved_time'] = "0000-00-00 00:00:00";
@@ -374,7 +376,14 @@
                                         </div>
                                     ";
                                 }else{
-                                    $pat_full_name = $row['patlast'] . ", " . $row['patfirst'] . " " . $row['patmiddle'];
+                                    // $pat_full_name = $row['patlast'] . ", " . $row['patfirst'] . " " . $row['patmiddle'];
+                                    $pat_full_name = "
+                                        <div class='pat-full-name-div'>
+                                            <button class='sensitive-case-btn' style='display:none;'> <i class='sensitive-lock-icon fa-solid fa-lock'></i> Sensitive Case </button>
+                                            <label> " . $row['patlast'] . " , " . $row['patfirst'] . "  " . $row['patmiddle'] . "</label>
+                                            <input class='sensitive-hpercode' type='hidden' name='sensitive-hpercode' value= '" . $row['hpercode'] . "'>
+                                        </div>
+                                    ";
                                 }
 
                                 echo '<tr class="tr-incoming" style="'. $style_tr .'">

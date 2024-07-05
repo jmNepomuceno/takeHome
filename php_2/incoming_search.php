@@ -339,6 +339,7 @@
             }else{
                 $interdept_time[0]['final_progress_time'] = "00:00:00";
                 $row['sent_interdept_time'] = "00:00:00";
+                $total_time = $row['final_progressed_timer'];
             }
 
 
@@ -350,8 +351,12 @@
                 $interdept_time[0]['final_progress_time'] = "00:00:00";
             }
 
+            $sdn_processed_value = "";
             if($row['sent_interdept_time'] == ""){
                 $row['sent_interdept_time'] = "00:00:00";
+                $sdn_processed_value = "00:00:00";
+            }else{
+                $sdn_processed_value = $row['final_progressed_timer'];
             }
 
             $stopwatch = "00:00:00";
@@ -390,7 +395,7 @@
 
                             <label class="referred-time-lbl"> Referred: ' . $row['date_time'] . ' </label>
                             <label class="reception-time-lbl"> Reception: '. $row['reception_time'] .'</label>
-                            <label class="sdn-proc-time-lbl"> SDN Processed: '. $row['sent_interdept_time'] .'</label>
+                            <label class="sdn-proc-time-lbl"> SDN Processed: '. $sdn_processed_value .'</label>
                             
                             <div class="breakdown-div">
                                 <label class="interdept-proc-time-lbl"> Interdept Processed: '. $interdept_time[0]['final_progress_time'].'</label>

@@ -35,7 +35,7 @@
     if($data['COUNT(*)'] > 0){
         
         // echo $currentDateTime;
-        $sql = "SELECT hpercode, reception_time, date_time, final_progressed_timer, sent_interdept_time FROM incoming_referrals WHERE refer_to = :hospital_name AND reception_time LIKE :current_date";
+        $sql = "SELECT hpercode, reception_time, date_time, final_progressed_timer, sent_interdept_time FROM incoming_referrals WHERE status='Approved' AND refer_to = :hospital_name AND reception_time LIKE :current_date";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':hospital_name', $_SESSION['hospital_name']); 
         $currentDateTime_param = "%$currentDateTime%";
@@ -44,7 +44,7 @@
         $dataRecep = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // INTERDEPARTAMENTAL REFERRAL 
-        $sql = "SELECT hpercode, final_progress_time FROM incoming_interdept WHERE final_progress_date LIKE :current_date";
+        $sql = "SELECT hpercode, final_progress_time FROM incoming_interdept WHERE interdept_status='Approved' AND final_progress_date LIKE :current_date";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':current_date', $currentDateTime_param, PDO::PARAM_STR); 
         $stmt->execute();
@@ -82,27 +82,27 @@
             array_push($recep_arr, $formattedDifference);
         }
         
-        // // INTERDEPT REFERRAL AVERAGE
-        // $totalSeconds_interdept = 0;
-        // foreach ($dataRecep_interdept as $item) {
-        //     // Extract hours, minutes, and seconds from final_progress_time
-        //     list($hours, $minutes, $seconds) = explode(':', $item['final_progress_time']);
-        //     // Convert hours and minutes to seconds and add to total
-        //     $totalSeconds_interdept += $hours * 3600 + $minutes * 60 + $seconds;
-        // }
+        // INTERDEPT REFERRAL AVERAGE
+        $totalSeconds_interdept = 0;
+        foreach ($dataRecep_interdept as $item) {
+            // Extract hours, minutes, and seconds from final_progress_time
+            list($hours, $minutes, $seconds) = explode(':', $item['final_progress_time']);
+            // Convert hours and minutes to seconds and add to total
+            $totalSeconds_interdept += $hours * 3600 + $minutes * 60 + $seconds;
+        }
 
-        // // Calculate the average in seconds
-        // $averageSeconds_interdept = (int) ($totalSeconds_interdept / count($dataRecep_interdept));
+        // Calculate the average in seconds
+        $averageSeconds_interdept = (int) ($totalSeconds_interdept / (count($dataRecep_interdept) === 0) ? 1 : count($dataRecep_interdept));
 
-        // // Optionally, convert the average back to hh:mm:ss format
-        // $averageTime_interdept = gmdate("H:i:s", $averageSeconds_interdept);
+        // Optionally, convert the average back to hh:mm:ss format
+        $averageTime_interdept = gmdate("H:i:s", $averageSeconds_interdept);
 
 
         // SDN REFERRAL AVERAGE
         $sum_sdn_average = 0;
 
         foreach ($dataRecep as $item) {
-            // echo '<pre>'; print_r($item); echo '</pre>';
+            echo '<pre>'; print_r($item); echo '</pre>';
             if($item['sent_interdept_time'] === NULL || $item['sent_interdept_time'] === ""){
                 $sum_sdn_average += strtotime($item['final_progressed_timer']) - strtotime('00:00:00');
             }else{

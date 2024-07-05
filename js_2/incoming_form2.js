@@ -1055,57 +1055,17 @@ $(document).ready(function(){
             }
             
             if (mcc_passwords_validity) {
-                let current_index = 0
-                let all_pointerevents = false;
-                // check the index of the clicked sensitive-btn
-                for(let i = 0; i < $('.tr-incoming').length; i++){
-                    if($('.tr-incoming').eq(i).css('pointer-events') === 'none'){
-                        current_index = i - 1
-                        break
-                    }
-                }
-
-                // check if all of the tr-incoming on the current table are with sensitive case are all visible pointer events != none
-                for(let i = 0; i < $('.tr-incoming').length; i++){
-                    if($('.tr-incoming').eq(i).css('pointer-events') === 'auto'){
-                        all_pointerevents = true
-                    }else{
-                        all_pointerevents = false
-                    }
-                }
-
-                if(all_pointerevents){
-                    current_index = $('.tr-incoming').length - 1
-                }
-
-                console.log(current_index)
-                
-                // Your existing code when validity is true
-                // checking of all the sensitive-btn and get the index of the previous display=none, and +1 on the index for the current sensitive button
-                console.log($('.sensitive-case-btn').length)
-                let sensitive_btn_index = 0;
-                
-                for(let i = 0; i < $('.sensitive-case-btn').length; i++){
-                    if($('.sensitive-case-btn').eq(0).css('display') === 'flex'){
-                        break;
-                    }
-                    else if($('.sensitive-case-btn').eq(i).css('display') === 'none'){
-                        sensitive_btn_index = i + 1
-                        break;
-                    }
-                }
-
-                console.log(current_index , sensitive_case_btn_index)
+                console.log(sensitive_case_btn_index)
 
                 $('.sensitive-lock-icon').eq(sensitive_case_btn_index)
                     .css('color', 'lightgreen')
                     .removeClass('fa-solid fa-lock')
                     .addClass('fa-solid fa-lock-open');
             
-                $('.pencil-btn').eq(current_index)
+                $('.pencil-btn').eq(sensitive_case_btn_index)
                     .css('pointer-events', 'auto')
                     .css('opacity', '1');
-                    
+                
                 $('.sensitive-case-btn').eq(sensitive_case_btn_index).fadeOut(2000)
             } else {
                 // Change color to red
