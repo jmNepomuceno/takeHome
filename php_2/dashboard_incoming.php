@@ -92,7 +92,7 @@
         }
 
         // Calculate the average in seconds
-        $averageSeconds_interdept = (int) ($totalSeconds_interdept / (count($dataRecep_interdept) === 0) ? 1 : count($dataRecep_interdept));
+        $averageSeconds_interdept = (int) ($totalSeconds_interdept / count($dataRecep_interdept));
 
         // Optionally, convert the average back to hh:mm:ss format
         $averageTime_interdept = gmdate("H:i:s", $averageSeconds_interdept);
@@ -102,7 +102,7 @@
         $sum_sdn_average = 0;
 
         foreach ($dataRecep as $item) {
-            echo '<pre>'; print_r($item); echo '</pre>';
+            // echo '<pre>'; print_r($item); echo '</pre>';
             if($item['sent_interdept_time'] === NULL || $item['sent_interdept_time'] === ""){
                 $sum_sdn_average += strtotime($item['final_progressed_timer']) - strtotime('00:00:00');
             }else{

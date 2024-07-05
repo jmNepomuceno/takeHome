@@ -138,25 +138,14 @@
             if($row['reception_time'] == ""){
                 $row['reception_time'] = "00:00:00";
             }
-
-            // if($row['status_interdept'] != "" && $row['status_interdept'] != null){
-            //     $sql = "SELECT department FROM incoming_interdept WHERE hpercode='". $row['hpercode'] ."'";
-            //     $stmt = $pdo->prepare($sql);
-            //     $stmt->execute();
-            //     $data = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            //     $row['status'] = $row['status_interdept'] . " - " . strtoupper($data['department']);
-            // }
-            
-            // processed time = progress time ng admin + progress time ng dept
-            // maiiwan yung timer na naka print, once na send na sa interdept
-            
-            $sql = "SELECT final_progress_time FROM incoming_interdept WHERE hpercode=?";
+   
+            $sql = "SELECT department, final_progress_time, interdept_status FROM incoming_interdept WHERE hpercode=?";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$row['hpercode']]);
             $interdept_time = $stmt->fetchAll(PDO::FETCH_ASSOC);
             
             $total_time = "00:00:00";
+            $on_process_status = "";
             if($interdept_time){
                 if($interdept_time[0]['final_progress_time'] != "" && $row['sent_interdept_time'] != ""){
                     list($hours1, $minutes1, $seconds1) = array_map('intval', explode(':', $interdept_time[0]['final_progress_time']));
@@ -175,14 +164,12 @@
                     // Format the result in UTC time "HH:mm:ss"
                     $total_time = $newDate->format('H:i:s');
                 }
+                $on_process_status = $interdept_time[0]['interdept_status'] . " - " . $interdept_time[0]['department'];
             }else{
                 $interdept_time[0]['final_progress_time'] = "00:00:00";
-                $row['sent_interdept_time'] = "00:00:00";
-
-                // calculate for immediate approval
-                if($row['final_progressed_timer'] != NULL){
-                    $total_time = $row['final_progressed_timer'];
-                }
+                // $row['sent_interdept_time'] = "00:00:00";
+                $total_time = $row['final_progressed_timer'];
+                $on_process_status = $row['status'];
             }
 
 
@@ -200,6 +187,14 @@
             //     // $sdn_processed_val = $row['final_progressed_timer'];
             // }
 
+            $sdn_processed_value = "";
+            if($row['sent_interdept_time'] == ""){
+                $row['sent_interdept_time'] = "00:00:00";
+                $sdn_processed_value = $row['final_progressed_timer'];
+            }else{
+                $sdn_processed_value =  $row['sent_interdept_time'];
+            }
+
             $stopwatch = "00:00:00";
             if($row['sent_interdept_time'] == "00:00:00"){
                 if($_SESSION['running_timer'] != "" && $row['status'] == 'On-Process'){
@@ -213,9 +208,28 @@
                 $sdn_processed_val = $row['final_progressed_timer'];
             }
 
+            $pat_full_name = ""; 
+            if($row['sensitive_case'] === 'true'){
+                $pat_full_name = "
+                    <div class='pat-full-name-div'>
+                        <button class='sensitive-case-btn'> <i class='sensitive-lock-icon fa-solid fa-lock'></i> Sensitive Case </button>
+                        <input class='sensitive-hpercode' type='hidden' name='sensitive-hpercode' value= '" . $row['hpercode'] . "'>
+                    </div>
+                ";
+            }else{
+                // $pat_full_name = $row['patlast'] . ", " . $row['patfirst'] . " " . $row['patmiddle'];
+                $pat_full_name = "
+                    <div class='pat-full-name-div'>
+                        <button class='sensitive-case-btn' style='display:none;'> <i class='sensitive-lock-icon fa-solid fa-lock'></i> Sensitive Case </button>
+                        <label> " . $row['patlast'] . " , " . $row['patfirst'] . "  " . $row['patmiddle'] . "</label>
+                        <input class='sensitive-hpercode' type='hidden' name='sensitive-hpercode' value= '" . $row['hpercode'] . "'>
+                    </div>
+                ";
+            }
+            
                 echo '<tr class="tr-incoming" style="'. $style_tr .'">
                         <td id="dt-refer-no"> ' . $row['reference_num'] . ' - '.$index.' </td>
-                        <td id="dt-patname">' . $row['patlast'] , ", " , $row['patfirst'] , " " , $row['patmiddle']  . '</td>
+                        <td id="dt-patname">' . $pat_full_name  . '</td>
                         <td id="dt-type" style="background:' . $type_color . ' ">' . $row['type'] . '</td>
                         <td id="dt-phone-no">
                             <label> Referred: ' . $row['referred_by'] . '  </label>
@@ -227,7 +241,7 @@
 
                             <label class="referred-time-lbl"> Referred: ' . $row['date_time'] . ' </label>
                             <label class="reception-time-lbl"> Reception: '. $row['reception_time'] .'</label>
-                            <label class="sdn-proc-time-lbl"> SDN Processed: '. $sdn_processed_val .'</label>
+                            <label class="sdn-proc-time-lbl"> SDN Processed: '. $row['sent_interdept_time'] .'</label>
                             
                             <div class="breakdown-div">
                                 <label class="interdept-proc-time-lbl"> Interdept Processed: '. $interdept_time[0]['final_progress_time'].'</label>
@@ -251,10 +265,14 @@
                         
                         <td id="dt-status">
                             <div> 
+                                <label class="pat-status-incoming">' . $on_process_status . '</label>';
+                                if ($row['sensitive_case'] === 'true') {
+                                    echo '<i class="pencil-btn fa-solid fa-pencil" style="pointer-events:none; opacity:0.3"></i>';
+                                }else{
+                                    echo'<i class="pencil-btn fa-solid fa-pencil"></i>';
+                                }
                                 
-                                <label class="pat-status-incoming">' . $row['status'] . '</label>
-                                <i class="pencil-btn fa-solid fa-pencil"></i>
-                                <input class="hpercode" type="hidden" name="hpercode" value= ' . $row['hpercode'] . '>
+                                echo '<input class="hpercode" type="hidden" name="hpercode" value= ' . $row['hpercode'] . '>
 
                             </div>
                         </td>
@@ -338,7 +356,7 @@
                 }
             }else{
                 $interdept_time[0]['final_progress_time'] = "00:00:00";
-                $row['sent_interdept_time'] = "00:00:00";
+                // $row['sent_interdept_time'] = "00:00:00";
                 $total_time = $row['final_progressed_timer'];
             }
 
@@ -354,9 +372,9 @@
             $sdn_processed_value = "";
             if($row['sent_interdept_time'] == ""){
                 $row['sent_interdept_time'] = "00:00:00";
-                $sdn_processed_value = "00:00:00";
-            }else{
                 $sdn_processed_value = $row['final_progressed_timer'];
+            }else{
+                $sdn_processed_value =  $row['sent_interdept_time'];
             }
 
             $stopwatch = "00:00:00";
@@ -383,7 +401,7 @@
 
                 echo '<tr class="tr-incoming" style="'. $style_tr .'">
                         <td id="dt-refer-no"> ' . $row['reference_num'] . ' - '.$index.' </td>
-                        <td id="dt-patname">' . $row['patlast'] , ", " , $row['patfirst'] , " " , $row['patmiddle']  . '</td>
+                        <td id="dt-patname">' . $pat_full_name  . '</td>
                         <td id="dt-type" style="background:' . $type_color . ' ">' . $row['type'] . '</td>
                         <td id="dt-phone-no">
                             <label> Referred: ' . $row['referred_by'] . '  </label>

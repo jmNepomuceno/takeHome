@@ -4,6 +4,7 @@
     date_default_timezone_set('Asia/Manila');
 
     $hpercode = $_POST['hpercode'];
+    $incoming_referrals_data = [];
     $sql = "SELECT * FROM incoming_referrals WHERE hpercode='". $hpercode ."' ORDER BY date_time DESC LIMIT 1";
 
     $stmt = $pdo->prepare($sql);
@@ -11,7 +12,7 @@
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);  
     $jsonString = $data;
 
-
+    $incoming_referrals_data = $data;
 
     $sql = "SELECT * FROM hperson WHERE hpercode='". $hpercode ."' ";
 
@@ -167,11 +168,12 @@
 
 
     // update the date of the reception time or, when did the user click the pencil or open the referral form
-    $reception_time = date('Y-m-d H:i:s');
-    $sql = "UPDATE incoming_referrals SET reception_time=:reception_time WHERE hpercode=:hpercode ";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':reception_time', $reception_time, PDO::PARAM_STR);
-    $stmt->bindParam(':hpercode', $hpercode, PDO::PARAM_STR);
-    $stmt->execute();
-
+    if($incoming_referrals_data[0]['reception_time'] == null || $incoming_referrals_data[0]['reception_time'] == ""){
+        $reception_time = date('Y-m-d H:i:s');
+        $sql = "UPDATE incoming_referrals SET reception_time=:reception_time WHERE hpercode=:hpercode ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':reception_time', $reception_time, PDO::PARAM_STR);
+        $stmt->bindParam(':hpercode', $hpercode, PDO::PARAM_STR);
+        $stmt->execute();
+    }
 ?>

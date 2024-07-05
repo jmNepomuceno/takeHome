@@ -142,21 +142,23 @@ $(document).ready(function(){
     // for interdepartamental module. Whenever the first current referral is already pending on interdept, the next referral will be availabe to process.
     function enabledNextReferral(){
         // check the status of the referrals to get the index of the next referral to be enable
+        let hasTwoSpaces;
         for(let i = 0; i < document.querySelectorAll('.pat-status-incoming').length; i++){
             const str = document.querySelectorAll('.pat-status-incoming')[i].textContent.trim(); // Trim to remove leading and trailing whitespace
 
             if (str && typeof str === 'string') {
-                const hasTwoSpaces = str.match(/^[^\s]*\s[^\s]*\s[^\s]*$/);; // Check if the string contains two consecutive spaces
+                hasTwoSpaces = str.match(/^[^\s]*\s[^\s]*\s[^\s]*$/);; // Check if the string contains two consecutive spaces
                 if (hasTwoSpaces) {
+                    console.log(hasTwoSpaces)
                     next_referral_index_table = i;
+
+                    if(next_referral_index_table >= 0 && next_referral_index_table + 1 < document.querySelectorAll('.tr-incoming').length){
+                        document.querySelectorAll('.tr-incoming')[next_referral_index_table + 1].style.opacity = "1"
+                        document.querySelectorAll('.tr-incoming')[next_referral_index_table + 1].style.pointerEvents = "auto"
+                    }
                 } 
             }
         }
-        if(next_referral_index_table >= 0 && next_referral_index_table + 1 < document.querySelectorAll('.tr-incoming').length){
-            document.querySelectorAll('.tr-incoming')[next_referral_index_table + 1].style.opacity = "1"
-            document.querySelectorAll('.tr-incoming')[next_referral_index_table + 1].style.pointerEvents = "auto"
-        }
-        
     }
     enabledNextReferral()
 
@@ -995,6 +997,9 @@ $(document).ready(function(){
                         ajax_method(index)
                     });
                 });
+
+                enabledNextReferral()
+                // if()
             }
          })
     });
