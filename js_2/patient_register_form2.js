@@ -18,34 +18,13 @@ $(document).ready(function(){
     // loadContent('../php_2/referral_form.php?type="OB"&code="BGHMC-0058"')
 
     $('#check-if-registered-btn').on('click' , function(event){
-        console.log($("#check-if-registered-btn").get(0).style.width )
-        if ($("#check-if-registered-btn").get(0).style.width === ""){
-            $("#check-if-registered-btn").css("width" , "550")
-            $("#check-if-registered-div").css("right" , "8px")
+        $('#check-if-registered-btn').css('display', 'none')
+        $("#check-if-registered-div").css("right" , "8px")
+    })
 
-            $("#check-if-registered-btn").css("border-top-left-radius" , "0.5rem")
-            $("#check-if-registered-btn").css("border-top-right-radius" , "0.5rem")
-            $("#check-if-registered-btn").css("border-bottom-left-radius" , "0")
-            $("#check-if-registered-btn").css("border-bottom-right-radius" , "0")
-
-            $("#check-if-registered-btn").css("border-top" , "5px solid #1f292e")
-            $("#check-if-registered-btn").css("border-right" , "5px solid #1f292e")
-            $("#check-if-registered-btn").css("border-left" , "5px solid #1f292e")
-
-            $("#check-if-registered-btn").css('justify-content' , 'center')
-        }else {
-            $("#check-if-registered-btn").css("width" , "")
-            $("#check-if-registered-div").css("right" , "-550px")
-
-            $("#check-if-registered-btn").css("border-top-left-radius" , "0.5rem")
-            $("#check-if-registered-btn").css("border-top-right-radius" , "0.5rem")
-            $("#check-if-registered-btn").css("border-bottom-left-radius" , "0.5rem")
-            $("#check-if-registered-btn").css("border-bottom-right-radius" , "0.5rem")
-
-            $("#check-if-registered-btn").css("border-top" , "none")
-            $("#check-if-registered-btn").css("border-right" , "none")
-            $("#check-if-registered-btn").css("border-left" , "none")
-        }   
+    $('#close-search-pat-btn').on('click', function(){
+        $('#check-if-registered-btn').css('display', 'flex')
+        $("#check-if-registered-div").css("right" , "-550px")
     })
 
     // console.log(document.querySelectorAll('.input-txt-classes-non'))

@@ -90,10 +90,12 @@
         
         <div id="check-if-registered-div">
             <div id="search-upper-div">
-
+                <h4>
+                    Search Patient
+                    <i id="close-search-pat-btn" class="fa-solid fa-xmark"></i> 
+                </h4>
                 <div id="search-upper-sub-div">
                     <form action="">
-
                         <div id="lname-input-div">
                             <label for="search-lname"> Last Name</label>
                             <input id="search-lname" type="text" name="search-lname" autocomplete="off" placeholder="Last Name">
@@ -153,7 +155,6 @@
                         </div>
                         <!-- <div class="w-[98%] h-full border-2 border-[#bfbfbf] rounded-lg"> -->
                         <div id="form-body-div-1">
-
                             <div class="form-sub-divs-col">
                                 <div class="">
                                     <label for="hperson-last-name"> Last Name </label>
@@ -207,10 +208,10 @@
 
                                 <div class="form-sub-divs-row-right">
                                     <div>
-                                        <label for="hperson-gender"> Gender </label>
+                                        <label for="hperson-gender" id="gender-lbl"> Gender </label>
                                     </div>
                                     <select name="hperson-gender" class="input-txt-classes" id="hperson-gender" autocomplete="off" required>
-                                        <option value="">Choose</option>
+                                        <option value="">Select</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
@@ -221,7 +222,7 @@
                                         <label for="hperson-civil-status"> Civil Status </label>
                                     </div>
                                     <select name="hperson-civil-status" class="input-txt-classes" id="hperson-civil-status" autocomplete="off" required>
-                                        <option value="">Choose</option>
+                                        <option value="">Select</option>
                                         <option value="Single">Single</option>
                                         <option value="Married">Married</option>
                                         <option value="Divorced">Divorced</option>
@@ -318,8 +319,8 @@
                                     <div>
                                         <label for="hperson-region-select-pa"> Region </label>
                                     </div>
-                                    <select id="hperson-region-select-pa" class="input-txt-classes" required onchange="getLocations('region', 'pa-region')" name="region" autocomplete="off" required>
-                                        <option value="" class="">Choose a Region</option>
+                                    <select id="hperson-region-select-pa" class="input-txt-classes" required onchange="getLocations('region', 'pa-region', 'reg-pat')" name="region" autocomplete="off" required>
+                                        <option value="" class="">Select</option>
                                         <?php 
                                             $stmt = $pdo->query('SELECT region_code, region_description from region');
                                             while($data = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -333,8 +334,8 @@
                                     <div>
                                         <label for="hperson-province-select-pa"> Province </label>
                                     </div>
-                                    <select id="hperson-province-select-pa"  class="input-txt-classes" required onchange="getLocations('province', 'pa-province')" name="province" required>
-                                        <option value="" class="">Choose a Province</option>
+                                    <select id="hperson-province-select-pa"  class="input-txt-classes" required onchange="getLocations('province', 'pa-province' , 'reg-pat')" name="province" required>
+                                        <option value="" class="">Select</option>
                                     </select>
                                 </div>
                             </div>
@@ -344,8 +345,8 @@
                                     <div>
                                         <label for="hperson-city-select-pa"> Municipality / City </label>
                                     </div>
-                                    <select id="hperson-city-select-pa" class="input-txt-classes" required onchange="getLocations('city', 'pa-city')" name="city" required>
-                                        <option value="" class="">Choose a Municipality</option>
+                                    <select id="hperson-city-select-pa" class="input-txt-classes" required onchange="getLocations('city', 'pa-city' , 'reg-pat')" name="city" required>
+                                        <option value="" class="">Select</option>
                                     </select>
                                 </div>
                                 
@@ -354,7 +355,7 @@
                                         <label for="hperson-brgy-select-pa"> Barangay </label>
                                     </div>
                                     <select id="hperson-brgy-select-pa" class="input-txt-classes" required name="brgy" required>
-                                        <option value="" class="">Choose a Barangay</option>
+                                        <option value="" class="">Select</option>
                                     </select>
                                 </div>
                             </div>
@@ -413,8 +414,8 @@
                                     <div>
                                         <label for="hperson-region-select-ca"> Region CA </label>
                                     </div>
-                                    <select id="hperson-region-select-ca" class="input-txt-classes" required onchange="getLocations('region' , 'ca-region')" name="region" autocomplete="off">
-                                        <option value="" class="">Choose a Region</option>
+                                    <select id="hperson-region-select-ca" class="input-txt-classes" required onchange="getLocations('region' , 'ca-region' , 'reg-pat')" name="region" autocomplete="off">
+                                        <option value="" class="">Select</option>
                                         <?php 
                                             $stmt = $pdo->query('SELECT region_code, region_description from region');
                                             while($data = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -428,8 +429,8 @@
                                     <div>
                                         <label for="hperson-province-select-ca"> Province </label>
                                     </div>
-                                    <select id="hperson-province-select-ca" class="input-txt-classes" required onchange="getLocations('province' , 'ca-province')" name="province">
-                                        <option value="ABUCAY" class="">Choose a Province</option>
+                                    <select id="hperson-province-select-ca" class="input-txt-classes" required onchange="getLocations('province' , 'ca-province' , 'reg-pat')" name="province">
+                                        <option value="ABUCAY" class="">Select</option>
                                     </select>
                                 </div>
                             </div>
@@ -439,8 +440,8 @@
                                     <div>
                                         <label for="hperson-city-select-ca"> Municipality / City </label>
                                     </div>
-                                    <select id="hperson-city-select-ca" class="input-txt-classes" required onchange="getLocations('city' , 'ca-city')" name="province">
-                                        <option value="" class="">Choose a Municipality</option>
+                                    <select id="hperson-city-select-ca" class="input-txt-classes" required onchange="getLocations('city' , 'ca-city' , 'reg-pat')" name="province">
+                                        <option value="" class="">Select</option>
                                     </select>
                                 </div>
                                 
@@ -449,7 +450,7 @@
                                         <label for="hperson-brgy-select-ca"> Barangay </label>
                                     </div>
                                     <select id="hperson-brgy-select-ca" class="input-txt-classes" required name="province">
-                                        <option value="" class="">Choose a Barangay</option>
+                                        <option value="" class="">Select</option>
                                     </select>
                                 </div>
                             </div>
@@ -511,7 +512,7 @@
                                     <div>
                                         <label for="hperson-region-select-cwa"> Region </label>
                                     </div>
-                                    <select id="hperson-region-select-cwa" class="input-txt-classes-non" required onchange="getLocations('region' , 'cwa-region')" name="region" autocomplete="off">
+                                    <select id="hperson-region-select-cwa" class="input-txt-classes-non" required onchange="getLocations('region' , 'cwa-region' , 'reg-pat')" name="region" autocomplete="off">
                                         <option value="" class="">Choose a Region</option>
                                         <?php 
                                             $stmt = $pdo->query('SELECT region_code, region_description from region');
@@ -526,7 +527,7 @@
                                     <div>
                                         <label for="hperson-province-select-cwa"> Province </label>
                                     </div>
-                                    <select id="hperson-province-select-cwa" class="input-txt-classes-non" required onchange="getLocations('province' , 'cwa-province')" name="province">
+                                    <select id="hperson-province-select-cwa" class="input-txt-classes-non" required onchange="getLocations('province' , 'cwa-province' , 'reg-pat')" name="province">
                                         <option value="" class="">Choose a Province</option>
                                     </select>
                                 </div>
@@ -537,7 +538,7 @@
                                     <div>
                                         <label for="hperson-city-select-cwa"> Municipality / City </label>
                                     </div>
-                                    <select id="hperson-city-select-cwa" class="input-txt-classes-non" required onchange="getLocations('city' , 'cwa-city')" name="city">
+                                    <select id="hperson-city-select-cwa" class="input-txt-classes-non" required onchange="getLocations('city' , 'cwa-city' , 'reg-pat')" name="city">
                                         <option value="" class="">Choose a Municipality</option>
                                     </select>
                                 </div>
@@ -562,7 +563,7 @@
                                 
                                 <div id="fifty" class="form-sub-divs-row-right">
                                     <div>
-                                        <label for="hperson-ll-mb-no-cwa"> Landline / Mobile Phone No. </label>
+                                        <label for="hperson-ll-mb-no-cwa"> Landline / Mobile No. </label>
                                     </div>
                                     <input id="hperson-ll-mb-no-cwa" class="input-txt-classes-non" type="text" name="hperson-ll-mb-no-cwa" autocomplete="off">
                                 </div>

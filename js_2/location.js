@@ -1,4 +1,4 @@
-const locations = (variant, where) =>{
+const locations = (variant, where, mod) =>{
     let query = ""
     let selected_code
 
@@ -52,7 +52,15 @@ const locations = (variant, where) =>{
     }
 
     // fetch("php/get_locations.php?" + query + "=" + selected_code + "&" + "val=" + variant)
-    fetch("../php_2/get_locations.php?" + query + "=" + selected_code + "&" + "val=" + variant)
+    let module_path = ""
+    if(mod === 'reg-pat'){
+        module_path = "../php_2/get_locations.php?"
+    }else{
+        module_path = "php_2/get_locations.php?"
+    }
+    console.log(module_path)
+
+    fetch(module_path + query + "=" + selected_code + "&" + "val=" + variant)
     .then(response => response.text())
     .then(data =>{
         if(variant === 'region'){
@@ -111,6 +119,6 @@ const locations = (variant, where) =>{
     })
 }
 
-function getLocations(variant, where){
-    locations(variant, where)
+function getLocations(variant, where, mod){
+    locations(variant, where, mod)
 }   

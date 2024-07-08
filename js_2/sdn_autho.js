@@ -59,10 +59,14 @@ $(document).ready(function(){
         const reg_inputs = [$('#sdn-autho-hospital-code-id'), $('#sdn-autho-cipher-key-id'), $('#sdn-autho-last-name-id'), $('#sdn-autho-first-name-id'), $('#sdn-autho-middle-name-id'),
                             $('#sdn-autho-username'), $('#sdn-autho-password'), $('#sdn-autho-confirm-password')]
         let filled_inputs = false
+        let invalid_inputs = []
 
         reg_inputs.forEach((elem)=>{
             if(elem.val() !== "" ){
                 filled_inputs = true
+            }else{
+                invalid_inputs.push(elem)
+                filled_inputs = false
             }
         })
 
@@ -79,7 +83,7 @@ $(document).ready(function(){
                     pass_word : $('#sdn-autho-password').val(),
                     confirm_password : $('#sdn-autho-confirm-password').val(),
                     created_at : created_at,
-                    usert_ype: 'Sample',
+                    user_type: 'Sample',
                     user_isActive: false
                 }
     
@@ -143,6 +147,10 @@ $(document).ready(function(){
                         }
                     }
                 })
+            }
+        }else{
+            for(let i = 0; i < invalid_inputs.length; i++){
+                invalid_inputs[i].css('border' , '3px solid #ca8187')
             }
         }
 

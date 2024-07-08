@@ -2,7 +2,7 @@
 
   $dbHost = "localhost";
   $dbUser = "root";
-  $dbPassword = "S3rv3r";
+  $dbPassword = "password";
   $dbName = "bghmc";
 
   try {

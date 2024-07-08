@@ -92,7 +92,7 @@
         }
 
         // Calculate the average in seconds
-        $averageSeconds_interdept = (int) ($totalSeconds_interdept / count($dataRecep_interdept));
+        $averageSeconds_interdept = (int) ($totalSeconds_interdept / (count($dataRecep_interdept) === 0) ? 1 : count($dataRecep_interdept));
 
         // Optionally, convert the average back to hh:mm:ss format
         $averageTime_interdept = gmdate("H:i:s", $averageSeconds_interdept);

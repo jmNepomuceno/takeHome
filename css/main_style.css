@@ -17,7 +17,7 @@
 
 #main-div .header-div{
     width:100%;
-    height: 60px;
+    height: 40px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -26,27 +26,28 @@
 }
 
 #main-div .header-div .side-bar-title{
-    width: 30%;
+    width: 250px;
     height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-
 }
 
 #main-div .header-div .side-bar-title #sdn-title-h1{
     color:white;
-    font-size: 1rem;
-    margin-left:1.75rem;
+    font-size: 10pt;
+    margin-left:1rem;
     margin-right:1rem;
     cursor: pointer;
-    
-    margin-top: 1%;
+    font-weight: bold;
+    margin-top: 4%;
+
+    /* width:50%; */
 }
 
 #main-div .header-div .side-bar-title .side-bar-mobile-btn{
-    width: 50%;
+    /* width: 50%; */
     height: 100%;
     display:flex;
     flex-direction: row;
@@ -55,12 +56,12 @@
     cursor:pointer;
     background: #1f292e;
     transition-delay: 150ms;
+    /* display: none; */
 }
 
 #main-div .header-div .side-bar-title .side-bar-mobile-btn i{
     color:white;
-    font-size: 2rem; 
-    line-height: 2.5rem; 
+    font-size: 1.5rem; 
 }
 
 #main-div .header-div .account-header-div{
@@ -92,11 +93,12 @@
     align-items: center;
     cursor: pointer;
     position:relative;
+
 }
 
 #main-div .header-div .account-header-div .notif-main-div #notif-div #notif-circle{
     position: absolute;
-    top:15%;
+    top:10%;
     text-align: center;
     width: 15px;
     height: 15px;
@@ -114,8 +116,9 @@
 
 #main-div .header-div .account-header-div .notif-main-div #notif-div i{
     color:white;
-    font-size: 1.25rem; /* 20px */
+    font-size: 10pt; /* 20px */
     line-height: 1.75rem; /* 28px */
+    opacity: 0.5;
 }
 
 #main-div .header-div .account-header-div .notif-main-div #notif-div #notif-sub-div{
@@ -186,7 +189,6 @@
     justify-content: flex-end;
     align-items: center;
     margin-right: 1rem;
-
 }
 
 #main-div header .header-username-div .user-icon-div{
@@ -201,7 +203,7 @@
 
 #main-div header .header-username-div .user-icon-div i{
     color:white;
-    font-size: 1.25rem; /* 20px */
+    font-size: 10pt; /* 20px */
     line-height: 1.75rem; /* 28px */
     
 
@@ -220,7 +222,7 @@
 
 #main-div header .header-username-div .user-name-div #user_name-id{
     color:white;
-    font-size: 1rem; /* 16px */
+    font-size: 10pt; /* 16px */
     margin-top: 2%;
     font-weight: 400;
 }
@@ -238,14 +240,14 @@
 
 #main-div header .header-username-div .username-caret-div i{
     color:white;
-    font-size: 0.9rem;
+    font-size: 10pt;
 }
 
 #main-div #nav-drop-account-div{
     z-index: 10;
     position:absolute;
     right:0;
-    top:45px;
+    top:30px;
     display:none;
     flex-direction: column;
     justify-content: flex-start;
@@ -253,8 +255,9 @@
     background: #1f292e;
     color:white;
     /* position: fixed; */
-    width:15%;
+    width:300px;
     height: 400px;
+    border-bottom-left-radius: 10px;
 }
 
 #main-div #nav-drop-account-div #nav-drop-acc-sub-div{
@@ -300,7 +303,7 @@
 #main-div .aside-main-div #side-bar-div{
     font-size: 1.125rem; 
     line-height: 1.75rem; 
-    width:13.5%;
+    width:250px;
     height: 100%;
     display:flex;
     flex-direction: column;
@@ -314,14 +317,22 @@
 }
 
 #main-div .aside-main-div #side-bar-div #side-bar-title-bgh{
-    width:95%;
+    width:90%;
     height: 10%;
     display:flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-bottom: 4px solid #29363d;
+    /* border-bottom: 4px solid #29363d; */
+    margin-top:20px;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
 }
 
 #main-div .aside-main-div #side-bar-div #side-bar-title-bgh img{
@@ -352,6 +363,10 @@
     margin-top:5%;
 }
 
+#main-div .aside-main-div #side-bar-div #main-side-bar-1{
+    margin-top: 10%;
+}
+
 #main-div .aside-main-div #side-bar-div #main-side-bar-1 #main-side-bar-1-subdiv,
 #main-div .aside-main-div #side-bar-div #main-side-bar-2 #main-side-bar-2-subdiv{
     width: 100%;
@@ -378,7 +393,7 @@
     margin-left: 0.75rem;
     margin-top: 0.25rem;
     color:white;
-    font-size: 0.9rem;
+    font-size: 10pt;
     letter-spacing: 1px;
 }
 
@@ -395,12 +410,13 @@
 #main-div .aside-main-div #side-bar-div #main-side-bar-2 #sub-side-bar-2 #bucasPending-sub-div-id,
 #main-div .aside-main-div #side-bar-div #main-side-bar-2 #sub-side-bar-2 #bucasHistory-sub-div-id {
     width:100%;
-    height: 50px;
+    height: 40px;
     display:flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     opacity: 0.3;
+    /* border-bottom: 2px solid #34444c; */
 }
 
 #main-div .aside-main-div #side-bar-div #main-side-bar-1 #sub-side-bar-1 #patient-reg-form-sub-side-bar:hover,
@@ -431,7 +447,7 @@
 #main-div .aside-main-div #side-bar-div #main-side-bar-2 #sub-side-bar-2 #bucasPending-sub-div-id h3,
 #main-div .aside-main-div #side-bar-div #main-side-bar-2 #sub-side-bar-2 #bucasHistory-sub-div-id h3
 {
-    font-size: 0.8rem;
+    font-size: 9pt;
     margin: 0.75rem;
     color:white;
 }

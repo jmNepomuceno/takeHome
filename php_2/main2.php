@@ -53,36 +53,32 @@
                 </div>
             </div>
             <div class="account-header-div">
-                <div class="notif-main-div">
-                    <!-- <div class="w-[33.3%] h-full   flex flex-row justify-end items-center -mr-1">
-                        <h1 class="text-center w-full rounded-full p-1 bg-yellow-500 font-bold">6</h1>
-                    </div> -->
-                                        
-                        <div id="notif-div">
-                            <?php 
-                                if($incoming_num['COUNT(*)'] > 0){
-                                    echo '<h1 id="notif-circle" style="display:block;"><span id="notif-span"></span></h1>';
-                                }else{
-                                    echo '<h1 id="notif-circle" style="display:none;"><span id="notif-span"></span></h1>';
-                                }
-                            ?>
-                            <i class="fa-solid fa-bell"></i> 
-                            <audio id="notif-sound" preload='auto' muted loop>
-                                <source src="../assets/sound/water_droplet.mp3" type="audio/mpeg">
-                            </audio>
+                <div class="notif-main-div">                                        
+                    <div id="notif-div">
+                        <?php 
+                            if($incoming_num['COUNT(*)'] > 0){
+                                echo '<h1 id="notif-circle" style="display:block;"><span id="notif-span"></span></h1>';
+                            }else{
+                                echo '<h1 id="notif-circle" style="display:none;"><span id="notif-span"></span></h1>';
+                            }
+                        ?>
+                        <i class="fa-solid fa-bell"></i> 
+                        <audio id="notif-sound" preload='auto' muted loop>
+                            <source src="../assets/sound/water_droplet.mp3" type="audio/mpeg">
+                        </audio>
 
-                            <div id="notif-sub-div">
-                                <!-- <div class="h-[30px] w-full border border-black flex flex-row justify-evenly items-center">
-                                    <h4 class="font-bold text-lg">3</h4>
-                                    <h4 class="font-bold text-lg">OB</h4>
-                                </div> -->
-                                <!-- b3b3b3 -->
-                            </div>
+                        <div id="notif-sub-div">
+                            <!-- <div class="h-[30px] w-full border border-black flex flex-row justify-evenly items-center">
+                                <h4 class="font-bold text-lg">3</h4>
+                                <h4 class="font-bold text-lg">OB</h4>
+                            </div> -->
+                            <!-- b3b3b3 -->
                         </div>
+                    </div>
 
-                        <!-- <div class="w-[20px] h-full flex flex-col justify-center items-center">
-                            <i class="fa-solid fa-caret-down text-white text-xs mt-2"></i>
-                        </div> -->
+                    <!-- <div class="w-[20px] h-full flex flex-col justify-center items-center">
+                        <i class="fa-solid fa-caret-down text-white text-xs mt-2"></i>
+                    </div> -->
                 </div>
 
                 <div id="nav-account-div" class="header-username-div">
@@ -110,7 +106,6 @@
 
         <div id="nav-drop-account-div">
             <div id="nav-drop-acc-sub-div">
-                
                 <?php if($_SESSION["user_name"] == "admin") {?>
                     <div id="admin-module-btn" class="nav-drop-btns">
                         <h2 id="admin-module-id" class="nav-drop-btns-txt">Admin</h2>
