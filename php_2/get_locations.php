@@ -15,7 +15,7 @@
         $stmt = $pdo->prepare('SELECT province_code, province_description FROM provinces WHERE region_code = ?');
         $stmt->execute([$region_code]);
 
-        echo '<option value=""> Select </option>';
+        echo '<option value=""> Choose a Province </option>';
         while($data = $stmt->fetch(PDO::FETCH_ASSOC)){
             echo '<option value="' , $data['province_code'] , '">' , $data['province_description'] , '</option>';
         }  
@@ -28,7 +28,7 @@
         $stmt = $pdo->prepare('SELECT municipality_code, municipality_description FROM city WHERE province_code = ?');
         $stmt->execute([$province_code]);
 
-        echo '<option value=""> Select </option>';
+        echo '<option value=""> Choose a Municipality </option>';
         while($data = $stmt->fetch(PDO::FETCH_ASSOC)){
             echo '<option value="' , $data['municipality_code'] , '">' , $data['municipality_description'] , '</option>';
 
@@ -41,7 +41,7 @@
         $stmt = $pdo->prepare('SELECT barangay_code, barangay_description FROM barangay WHERE bgymuncod = ?');
         $stmt->execute([$city_code]);
 
-        echo '<option value=""> Select </option>';
+        echo '<option value=""> Choose a Barangay </option>';
         while($data = $stmt->fetch(PDO::FETCH_ASSOC)){
             echo '<option value="' , $data['barangay_code'] , '">' , $data['barangay_description'] , '</option>';
         }  

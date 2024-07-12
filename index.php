@@ -77,6 +77,7 @@
                     $_SESSION['login_time'] = $final_date;
 
                     $_SESSION['current_content'] = "";
+                    $_SESSION['session_navigation'] = "";
 
                     $sql = "UPDATE incoming_referrals SET login_time = '". $final_date ."' , login_user='". $sdn_username ."' ";
                     $stmt = $pdo->prepare($sql);
@@ -163,6 +164,7 @@
             $_SESSION['datatable_index'] = 0;
             
             $_SESSION['current_content'] = "";
+            $_SESSION['session_navigation'] = "";
 
             $temp_date = $normal_date;
             
@@ -292,7 +294,7 @@
                         <input type="password" name="sdn_password" id="password-inp" placeholder="Password" required autocomplete="off">
                     </div>
 
-                    <button id="login-btn">Login</button>
+                    <button id="login-btn">Sign In</button>
                 </form>
                 
                 <div class="query-signin-div">
@@ -321,17 +323,17 @@
             <form class="sub-content-registration-form">
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Hospital Name<span>*</span></label>
-                    <input id="sdn-hospital-name" type="text" class="reg-inputs" required autocomplete="off">
+                    <input id="sdn-hospital-name" type="text" class="reg-inputs form-control" required autocomplete="off">
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Hospital Code<span>*</span></label>
-                    <input id="sdn-hospital-code" type="number" class="reg-inputs" required autocomplete="off">
+                    <input id="sdn-hospital-code" type="number" class="reg-inputs form-control" required autocomplete="off">
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Address: Region<span>*</span></label>
-                    <select id="sdn-region-select" class="reg-inputs" name="region" required autocomplete="off" style="cursor:pointer;" onchange="getLocations('region' , 'sdn-region')">
+                    <select id="sdn-region-select" class="reg-inputs form-control" name="region" required autocomplete="off" style="cursor:pointer;" onchange="getLocations('region' , 'sdn-region')">
                         <option value="" class="">Select</option>
                         <?php 
                             $stmt = $pdo->query('SELECT region_code, region_description from region');
@@ -344,63 +346,63 @@
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Address: Province<span>*</span></label>
-                    <select id="sdn-province-select" class="reg-inputs" name="province" required autocomplete="off" onchange="getLocations('province' , 'sdn-province')">
+                    <select id="sdn-province-select" class="reg-inputs form-control" name="province" required autocomplete="off" onchange="getLocations('province' , 'sdn-province')">
                         <option value="" class="">Select</option>
                     </select>
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Address: Municipality<span>*</span></label>
-                    <select id="sdn-city-select" class="reg-inputs" name="city" required autocomplete="off" onchange="getLocations('city', 'sdn-city')">
+                    <select id="sdn-city-select" class="reg-inputs form-control" name="city" required autocomplete="off" onchange="getLocations('city', 'sdn-city')">
                         <option value="" class="">Select</option>
                     </select>
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Address: Barangay<span>*</span></label>
-                    <select id="sdn-brgy-select" class="reg-inputs" name="brgy" required autocomplete="off">
+                    <select id="sdn-brgy-select" class="reg-inputs form-control" name="brgy" required autocomplete="off">
                         <option value="" class="">Select</option>
                     </select>
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Zip Code<span>*</span></label>
-                    <input id="sdn-zip-code" type="number" class="reg-inputs" required autocomplete="off">
+                    <input id="sdn-zip-code" type="number" class="reg-inputs form-control" required autocomplete="off">
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Email Address<span>*</span></label>
-                    <input id="sdn-email-address" type="email" class="reg-inputs"  required autocomplete="off">
+                    <input id="sdn-email-address" type="email" class="reg-inputs form-control"  required autocomplete="off">
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Hospital Landline No.<span>*</span></label>
-                    <input id="sdn-landline-no" type="text" class="reg-inputs" required autocomplete="off" placeholder="999-9999">
+                    <input id="sdn-landline-no" type="text" class="reg-inputs form-control" required autocomplete="off" placeholder="999-9999">
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Hospital Mobile No.<span>*</span></label>
-                    <input id="sdn-hospital-mobile-no" type="text" class="reg-inputs" required autocomplete="off" placeholder="9999-999-9999">
+                    <input id="sdn-hospital-mobile-no" type="text" class="reg-inputs form-control" required autocomplete="off" placeholder="9999-999-9999">
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Hospital Director<span>*</span></label>
-                    <input id="sdn-hospital-director" type="text" class="reg-inputs" required autocomplete="off" onkeydown="return /[a-zA-Z\s.,-]/i.test(event.key)">
+                    <input id="sdn-hospital-director" type="text" class="reg-inputs form-control" required autocomplete="off" onkeydown="return /[a-zA-Z\s.,-]/i.test(event.key)">
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Hospital Director Mobile No.<span>*</span></label>
-                    <input id="sdn-hospital-director-mobile-no" type="text" class="reg-inputs" required autocomplete="off" placeholder="9999-999-9999">
+                    <input id="sdn-hospital-director-mobile-no" type="text" class="reg-inputs form-control" required autocomplete="off" placeholder="9999-999-9999">
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Point Person<span>*</span></label>
-                    <input id="sdn-point-person" type="text" class="reg-inputs" required autocomplete="off" onkeydown="return /[a-zA-Z\s.,-]/i.test(event.key)">
+                    <input id="sdn-point-person" type="text" class="reg-inputs form-control" required autocomplete="off" onkeydown="return /[a-zA-Z\s.,-]/i.test(event.key)">
                 </div>
 
                 <div class="reg-form-divs">
                     <label for="" class="reg-labels">Point Person Mobile No.<span>*</span></label>
-                    <input id="sdn-point-person-mobile-no" type="text" class="reg-inputs" required autocomplete="off" placeholder="9999-999-9999">
+                    <input id="sdn-point-person-mobile-no" type="text" class="reg-inputs form-control" required autocomplete="off" placeholder="9999-999-9999">
                 </div>
 
                 <!-- <button id="register-confirm-btn" type="button" class="btn btn-success">Success</button> -->
@@ -414,47 +416,47 @@
                             
                 <div class="autho-form-divs">
                     <label for="" class="reg-labels">Hospital Code<span>*</span></label>
-                    <input id="sdn-autho-hospital-code-id" type="number" class="reg-inputs" autocomplete="off">
+                    <input id="sdn-autho-hospital-code-id" type="number" class="reg-inputs form-control" autocomplete="off">
                 </div>
 
                 <div class="autho-form-divs">
                     <label for="" class="reg-labels">Cipher Key<span>*</span></label>
-                    <input id="sdn-autho-cipher-key-id" type="text" class="reg-inputs" autocomplete="off">
+                    <input id="sdn-autho-cipher-key-id" type="text" class="reg-inputs form-control" autocomplete="off">
                 </div>
 
                 <div class="autho-form-divs">
                     <label for="" class="reg-labels">Last Name<span>*</span></label>
-                    <input id="sdn-autho-last-name-id" type="text" class="reg-inputs" autocomplete="off">
+                    <input id="sdn-autho-last-name-id" type="text" class="reg-inputs form-control" autocomplete="off">
                 </div>
 
                 <div class="autho-form-divs">
                     <label for="" class="reg-labels">First Name<span>*</span></label>
-                    <input id="sdn-autho-first-name-id" type="text" class="reg-inputs" autocomplete="off">
+                    <input id="sdn-autho-first-name-id" type="text" class="reg-inputs form-control" autocomplete="off">
                 </div>
 
                 <div class="autho-form-divs">
                     <label for="" class="reg-labels">Middle Name<span>*</span></label>
-                    <input id="sdn-autho-middle-name-id" type="text" class="reg-inputs" autocomplete="off">
+                    <input id="sdn-autho-middle-name-id" type="text" class="reg-inputs form-control" autocomplete="off">
                 </div>
 
                 <div class="autho-form-divs">
                     <label for="" class="reg-labels">Extension Name</label>
-                    <input id="sdn-autho-ext-name-id" type="text" class="reg-inputs" autocomplete="off">
+                    <input id="sdn-autho-ext-name-id" type="text" class="reg-inputs form-control" autocomplete="off">
                 </div>
 
                 <div class="autho-form-divs">
                     <label for="" class="reg-labels">Username<span>*</span></label>
-                    <input id="sdn-autho-username" type="text" class="reg-inputs" autocomplete="off">
+                    <input id="sdn-autho-username" type="text" class="reg-inputs form-control" autocomplete="off">
                 </div>
 
                 <div class="autho-form-divs">
                     <label for="" class="reg-labels">Password<span>*</span></label>
-                    <input id="sdn-autho-password" type="password" class="reg-inputs" autocomplete="off">
+                    <input id="sdn-autho-password" type="password" class="reg-inputs form-control" autocomplete="off">
                 </div>
 
                 <div class="autho-form-divs">
                     <label for="" class="reg-labels">Confirm Password<span>*</span></label>
-                    <input id="sdn-autho-confirm-password" type="password" class="reg-inputs" autocomplete="off">
+                    <input id="sdn-autho-confirm-password" type="password" class="reg-inputs form-control" autocomplete="off">
                 </div>
 
                 <!-- <button id="register-confirm-btn" type="button" class="btn btn-success">Success</button> -->

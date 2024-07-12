@@ -6,14 +6,10 @@ $(document).ready(function(){ //sdn-register-btn
         const reg_inputs = [$('#sdn-hospital-name') , $('#sdn-hospital-code'), $('#sdn-region-select'), $('#sdn-province-select'), $('#sdn-city-select'), $('#sdn-brgy-select'),  $('#sdn-zip-code'), $('#sdn-email-address'), 
                             $('#sdn-landline-no'), $('#sdn-hospital-mobile-no'), $('#sdn-hospital-director'), $('#sdn-hospital-director-mobile-no'), $('#sdn-point-person'), $('#sdn-point-person-mobile-no')]
         let filled_inputs = false
-        let invalid_inputs = []
 
         reg_inputs.forEach((elem)=>{
             if(elem.val() !== "" ){
                 filled_inputs = true
-            }else{
-                invalid_inputs.push(elem)
-                filled_inputs = false
             }
         })
         
@@ -134,8 +130,8 @@ $(document).ready(function(){ //sdn-register-btn
             })
 
         }else{
-            for(let i = 0; i < invalid_inputs.length; i++){
-                invalid_inputs[i].css('border' , '3px solid #ca8187')
+            for(let i = 0; i < reg_inputs.length; i++){
+                reg_inputs[i].addClass('is-invalid').removeClass('is-valid');
             }
         }
 

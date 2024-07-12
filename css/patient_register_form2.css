@@ -14,6 +14,8 @@
     background: transparent;
     overflow: hidden;
     transition-duration: 0s;
+
+    /* background: red; */
 }
 
 #patient-reg-form-div #upper-part-div{
@@ -342,11 +344,12 @@
 
 #patient-reg-form-div #check-if-registered-div #search-result-div {
     width: 95%;
-    height: 82%;
+    height: 75%;
     display: grid;
     grid-template-rows: repeat(auto-fill, 100px); /* Set fixed height for each row */
     grid-gap: 10px; /* Adjust gap between rows */
     overflow-y: auto; /* Enable vertical scrolling */
+    margin-top:10%;
 }
 
 #patient-reg-form-div #check-if-registered-div #search-result-div #no-pat-found{
@@ -503,13 +506,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    /* border: 2px solid #859fad; */
     margin-top:1.5rem;
 }
-
-/* #patient-reg-form-div #main-div form #patient-reg-form-div-2,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3{
-    width: 35%;
-} */
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1,
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-2,
@@ -573,7 +572,7 @@
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-title-div-6 h3{
     margin-left: 0.75rem;
     font-weight: bold;
-    font-size: 10pt;
+    font-size: 1rem;
 }
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-title-div-4 #same-as-perma-btn{
@@ -611,25 +610,15 @@
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row,
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row{
     width:90%;
-    height: 66px;
+    height: 12.5%;
     display:flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-}     
-
-#patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-col{
-    height: 12.5%;
 }
 
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-body-div-3 .form-sub-divs-row,
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-body-div-4 .form-sub-divs-row,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row{
-    height:20%;
-}
-
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row{
-    height: 16.5%;
+#patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-2 #form-body-div-2 .form-sub-divs-row{
+    height: 100%;
 }
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-row,
@@ -641,9 +630,15 @@
     flex-direction: row;
 }
 
-/* #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row{
-    height: 55px;
-} */
+#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-body-div-3 .form-sub-divs-row,
+#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-body-div-4 .form-sub-divs-row,
+#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row{
+    height: 20%;
+}
+
+#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row{
+    height: 16.5%;
+}
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-col div{
     width:100%;
@@ -651,8 +646,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    /* padding:0.25rem; */
-    
+    height: 0;
 }
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-col div label{
@@ -685,12 +679,13 @@
     width:70%;
     height: 100%;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+
 }
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-row .form-sub-divs-row-right{
-    width:30%;
+    width:50%;
 }
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-row #fifty,
@@ -699,7 +694,6 @@
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row #fifty,
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row #fifty{
     width:50%;
-
 }
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-body-div-3 .form-sub-divs-row #alone,
@@ -727,8 +721,6 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    /* padding: 0.25rem; */
-
 }
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-row .form-sub-divs-row-left div label,
@@ -743,22 +735,12 @@
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row .form-sub-divs-row-right div label,
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-left div label,
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-right div label{
-    font-size: 1rem;
+    font-size: 10pt;
     line-height: 1.5rem; 
     margin-left: 0.75rem;
 }
 
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-body-div-3 .form-sub-divs-row .form-sub-divs-row-left div label,
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-body-div-3 .form-sub-divs-row .form-sub-divs-row-right div label,
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-body-div-4 .form-sub-divs-row .form-sub-divs-row-left div label,
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-body-div-4 .form-sub-divs-row .form-sub-divs-row-right div label,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row .form-sub-divs-row-left div label,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row .form-sub-divs-row-right div label,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-left div label,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-right div label{
-    font-size: 10pt;
 
-}
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-row .form-sub-divs-row-right div label,
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-2 #form-body-div-2 .form-sub-divs-row .form-sub-divs-row-right div label,
@@ -766,7 +748,7 @@
 #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-body-div-4 .form-sub-divs-row .form-sub-divs-row-right div label,
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row .form-sub-divs-row-right div label,
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-right div label{
-    margin-left:10%;
+    margin-left:0;
 }
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-row .form-sub-divs-row-left input,
@@ -787,18 +769,6 @@
     border-radius: 0.5rem;
     padding: 0.5rem;
     margin-left:0.75rem;
-    
-}
-
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-body-div-3 .form-sub-divs-row .form-sub-divs-row-left input,
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-body-div-3 .form-sub-divs-row .form-sub-divs-row-right input,
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-body-div-4 .form-sub-divs-row .form-sub-divs-row-left input,
-#patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-body-div-4 .form-sub-divs-row .form-sub-divs-row-right input,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row .form-sub-divs-row-left input,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row .form-sub-divs-row-right input,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-left input,
-#patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-right input{
-    font-size: 10pt;
 }
 
 #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-row .form-sub-divs-row-right input,
@@ -822,16 +792,11 @@
 #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-right select{
     margin-left: 0.75rem;
     width:90%;
-    height: 25px;
+    height: 40%;
     border:2px solid #bfbfbf;
     border-radius: 0.5rem;
     cursor: pointer;
     color:#666666;
-    font-size: 10pt;
-}
-
-#gender-lbl{
-    margin-left:10% !important;
 }
 
 #myModal_pat_reg .modal-header{
@@ -1075,11 +1040,29 @@
     text-wrap: wrap;
 } */
 
+@media only screen and (max-height: 750px){
+    #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-title-div-1 h3,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-2 #form-title-div-2 h3,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-title-div-3 h3,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-title-div-4 h3,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-title-div-5 h3,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-title-div-6 h3{
+        font-size: 10pt;
+    }
 
-
-
-
-
+    #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-row .form-sub-divs-row-left select,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-body-div-1 .form-sub-divs-row .form-sub-divs-row-right select,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-body-div-3 .form-sub-divs-row .form-sub-divs-row-left select,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-body-div-3 .form-sub-divs-row .form-sub-divs-row-right select,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-body-div-4 .form-sub-divs-row .form-sub-divs-row-left select,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-4 #form-body-div-4 .form-sub-divs-row .form-sub-divs-row-right select,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row .form-sub-divs-row-left select,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-5 #form-body-div-5 .form-sub-divs-row .form-sub-divs-row-right select,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-left select,
+    #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-right select{
+        font-size: 10pt;
+    }
+}
 
 
 

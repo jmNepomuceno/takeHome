@@ -40,7 +40,6 @@
     <input id="hpatcode-input" type="hidden" name="hpatcode-input" value=<?php echo $_SESSION["hospital_code"]?>>
 
     <main id="patient-reg-form-div">
-
         <div id="upper-part-div">
             <aside class="important-btns">
                 <!-- FUNCTION BUTTONS -->
@@ -96,19 +95,20 @@
                 </h4>
                 <div id="search-upper-sub-div">
                     <form action="">
+
                         <div id="lname-input-div">
                             <label for="search-lname"> Last Name</label>
-                            <input id="search-lname" type="text" name="search-lname" autocomplete="off" placeholder="Last Name">
+                            <input id="search-lname" class="form-control" type="text" name="search-lname" autocomplete="off" placeholder="Last Name">
                         </div>
 
                         <div id="fname-input-div">
                             <label for="search-fname"> First Name</label>
-                            <input id="search-fname" type="text" sname="search-fname" autocomplete="off" placeholder="First Name">
+                            <input id="search-fname" class="form-control" type="text" sname="search-fname" autocomplete="off" placeholder="First Name">
                         </div>
 
                         <div id="mname-input-div">
                             <label for="search-mname"> Middle Name</label>
-                            <input id="search-mname" type="text" name="search-mname" autocomplete="off" placeholder="Middle Name">
+                            <input id="search-mname" class="form-control" type="text" name="search-mname" autocomplete="off" placeholder="Middle Name">
                         </div>
 
                     </form>
@@ -155,18 +155,19 @@
                         </div>
                         <!-- <div class="w-[98%] h-full border-2 border-[#bfbfbf] rounded-lg"> -->
                         <div id="form-body-div-1">
+
                             <div class="form-sub-divs-col">
                                 <div class="">
                                     <label for="hperson-last-name"> Last Name </label>
                                 </div>
-                                <input id="hperson-last-name" class="input-txt-classes" type="text" name="hperson-last-name" autocomplete="off" placeholder="Dela Cruz" required>
+                                <input id="hperson-last-name" class="input-txt-classes form-control" type="text" name="hperson-last-name" autocomplete="off" placeholder="Dela Cruz" required>
                             </div>
 
                             <div class="form-sub-divs-col">
                                 <div>
                                     <label class="text-base ml-3" for="hperson-first-name"> First Name </label>
                                 </div>
-                                <input id="hperson-first-name" class="input-txt-classes" type="text" name="hperson-first-name" autocomplete="off" placeholder="Juan" required>
+                                <input id="hperson-first-name" class="input-txt-classes form-control" type="text" name="hperson-first-name" autocomplete="off" placeholder="Juan" required>
                             </div>
 
                             <div class="form-sub-divs-row">
@@ -175,14 +176,14 @@
                                     <div>
                                         <label for="hperson-middle-name"> Middle Name </label>
                                     </div>
-                                    <input id="hperson-middle-name" class="input-txt-classes" type="text" name="hperson-middle-name" autocomplete="off" placeholder="Santos" required>
+                                    <input id="hperson-middle-name" class="input-txt-classes form-control" type="text" name="hperson-middle-name" autocomplete="off" placeholder="Santos" required>
                                 </div>
                                 
                                 <div class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-ext-name"> Name Ext. </label>
                                     </div>
-                                    <input id="hperson-ext-name" class="input-txt-classes-non" type="text" name="hperson-ext-name" autocomplete="off" placeholder="Jr.">
+                                    <input id="hperson-ext-name" class="input-txt-classes-non form-control" type="text" name="hperson-ext-name" autocomplete="off" placeholder="Jr.">
                                 </div>
                             </div>
 
@@ -192,23 +193,23 @@
                                     <div>
                                         <label for="hperson-birthday"> Birthday </label>
                                     </div>
-                                    <input id="hperson-birthday" class="input-txt-classes" type="date" name="hperson-birthday" autocomplete="off" style="color:#666666" required>
+                                    <input id="hperson-birthday" class="input-txt-classes form-control" type="date" name="hperson-birthday" autocomplete="off" style="color:#666666" required>
                                 </div>
                                 
                                 <div class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-age"> Age </label>
                                     </div>
-                                    <input id="hperson-age" class="input-txt-classes-non" tabindex="-1" disabled="disabled" type="number" name="hperson-age" autocomplete="off">
+                                    <input id="hperson-age" class="input-txt-classes-non form-control" tabindex="-1" disabled="disabled" type="number" name="hperson-age" autocomplete="off">
                                 </div>
 
                             </div>
 
                             <div class="form-sub-divs-row">
 
-                                <div class="form-sub-divs-row-right">
+                                <div class="form-sub-divs-row-left">
                                     <div>
-                                        <label for="hperson-gender" id="gender-lbl"> Gender </label>
+                                        <label for="hperson-gender"> Gender </label>
                                     </div>
                                     <select name="hperson-gender" class="input-txt-classes" id="hperson-gender" autocomplete="off" required>
                                         <option value="">Select</option>
@@ -236,14 +237,14 @@
                                 <div>
                                     <label for="hperson-religion"> Religion </label>
                                 </div>
-                                <input id="hperson-religion" class="input-txt-classes" type="text" name="hperson-religion" autocomplete="off" placeholder="ex. Roman Catholic" required>
+                                <input id="hperson-religion" class="input-txt-classes form-control" type="text" name="hperson-religion" autocomplete="off" placeholder="ex. Roman Catholic" required>
                             </div>
 
                             <div class="form-sub-divs-col">
                                 <div>
                                     <label for="hperson-occupation"> Occupation </label>
                                 </div>
-                                <input id="hperson-occupation" class="input-txt-classes-non" type="text" name="hperson-occupation" autocomplete="off" placeholder="ex. Doctor" required >
+                                <input id="hperson-occupation" class="input-txt-classes-non form-control" type="text" name="hperson-occupation" autocomplete="off" placeholder="ex. Doctor" required >
                             </div>
 
                             <div class="form-sub-divs-row">
@@ -252,14 +253,14 @@
                                     <div>
                                         <label for="hperson-nationality"> Nationality </label>
                                     </div>
-                                    <input id="hperson-nationality" class="input-txt-classes" type="text" name="hperson-nationality" autocomplete="off" placeholder="ex. Filipino" required>
+                                    <input id="hperson-nationality" class="input-txt-classes form-control" type="text" name="hperson-nationality" autocomplete="off" placeholder="ex. Filipino" required>
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-passport-no"> Passport No. </label>
                                     </div>
-                                    <input id="hperson-passport-no" class="input-txt-classes-non" type="text" name="hperson-passport-no" autocomplete="off" required>
+                                    <input id="hperson-passport-no" class="input-txt-classes-non form-control" type="text" name="hperson-passport-no" autocomplete="off" required>
                                 </div>
 
                             </div>
@@ -277,14 +278,14 @@
                                     <div>
                                         <label for="hperson-hospital-no"> Hospital No. </label>
                                     </div>
-                                    <input id="hperson-hospital-no" class="input-txt-classes" type="number" name="hperson-hospital-no"  autocomplete="off" value=<?php echo $_SESSION['hospital_code'] ?> style="pointer-events: none; background:#bfbfbf">
+                                    <input id="hperson-hospital-no" class="input-txt-classes form-control" type="number" name="hperson-hospital-no"  autocomplete="off" value=<?php echo $_SESSION['hospital_code'] ?> style="pointer-events: none; background:#bfbfbf">
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-phic">PHIC </label>
                                     </div>
-                                    <input id="hperson-phic" class="input-txt-classes" type="text" name="hperson-phic" autocomplete="off" placeholder="PhilHealth Number" required>
+                                    <input id="hperson-phic" class="input-txt-classes form-control" type="text" name="hperson-phic" autocomplete="off" placeholder="PhilHealth Number" required>
                                 </div>
                             </div>
                         </div>
@@ -303,14 +304,14 @@
                                     <div>
                                         <label for="hperson-house-no-pa"> House No./Lot/Bldg </label>
                                     </div>
-                                    <input id="hperson-house-no-pa" class="input-txt-classes" type="text" name="hperson-house-no-pa" autocomplete="off" placeholder="Lot 1" required>
+                                    <input id="hperson-house-no-pa" class="input-txt-classes form-control" type="text" name="hperson-house-no-pa" autocomplete="off" placeholder="Lot 1" required>
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-street-block-pa"> Street/Block </label>
                                     </div>
-                                    <input id="hperson-street-block-pa" class="input-txt-classes" type="text" name="hperson-street-block-pa" autocomplete="off" placeholder="Block 1" required>
+                                    <input id="hperson-street-block-pa" class="input-txt-classes form-control" type="text" name="hperson-street-block-pa" autocomplete="off" placeholder="Block 1" required>
                                 </div>
                             </div>
 
@@ -319,7 +320,7 @@
                                     <div>
                                         <label for="hperson-region-select-pa"> Region </label>
                                     </div>
-                                    <select id="hperson-region-select-pa" class="input-txt-classes" required onchange="getLocations('region', 'pa-region', 'reg-pat')" name="region" autocomplete="off" required>
+                                    <select id="hperson-region-select-pa" class="input-txt-classes" required onchange="getLocations('region', 'pa-region')" name="region" autocomplete="off" required>
                                         <option value="" class="">Select</option>
                                         <?php 
                                             $stmt = $pdo->query('SELECT region_code, region_description from region');
@@ -330,11 +331,11 @@
                                     </select>
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-province-select-pa"> Province </label>
                                     </div>
-                                    <select id="hperson-province-select-pa"  class="input-txt-classes" required onchange="getLocations('province', 'pa-province' , 'reg-pat')" name="province" required>
+                                    <select id="hperson-province-select-pa"  class="input-txt-classes" required onchange="getLocations('province', 'pa-province')" name="province" required>
                                         <option value="" class="">Select</option>
                                     </select>
                                 </div>
@@ -345,12 +346,12 @@
                                     <div>
                                         <label for="hperson-city-select-pa"> Municipality / City </label>
                                     </div>
-                                    <select id="hperson-city-select-pa" class="input-txt-classes" required onchange="getLocations('city', 'pa-city' , 'reg-pat')" name="city" required>
+                                    <select id="hperson-city-select-pa" class="input-txt-classes" required onchange="getLocations('city', 'pa-city')" name="city" required>
                                         <option value="" class="">Select</option>
                                     </select>
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-brgy-select-pa"> Barangay </label>
                                     </div>
@@ -365,14 +366,14 @@
                                     <div>
                                         <label for="hperson-home-phone-no-pa"> Home Phone No. </label>
                                     </div>
-                                    <input id="hperson-home-phone-no-pa" class="input-txt-classes-non" type="text" name="hperson-home-phone-no-pa" autocomplete="off">
+                                    <input id="hperson-home-phone-no-pa" class="input-txt-classes-non form-control" type="text" name="hperson-home-phone-no-pa" autocomplete="off">
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-mobile-no-pa"> Mobile Phone No. </label>
                                     </div>
-                                    <input id="hperson-mobile-no-pa" class="input-txt-classes" type="text" name="hperson-mobile-no-pa" autocomplete="off" required>
+                                    <input id="hperson-mobile-no-pa" class="input-txt-classes form-control" type="text" name="hperson-mobile-no-pa" autocomplete="off" required>
                                 </div>
                             </div>
 
@@ -381,7 +382,7 @@
                                     <div>
                                         <label class="text-base ml-3" for="hperson-email-pa"> Email Address </label>
                                     </div>
-                                    <input id="hperson-email-pa" class="input-txt-classes-non" type="email" name="hperson-email-pa" autocomplete="off">
+                                    <input id="hperson-email-pa" class="input-txt-classes-non form-control" type="email" name="hperson-email-pa" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -398,14 +399,14 @@
                                     <div>
                                         <label for="hperson-house-no-ca"> House No./Lot/Bldg </label>
                                     </div>
-                                    <input id="hperson-house-no-ca" class="input-txt-classes" type="text" name="hperson-house-no-ca" autocomplete="off" placeholder="Lot 1">
+                                    <input id="hperson-house-no-ca" class="input-txt-classes form-control" type="text" name="hperson-house-no-ca" autocomplete="off" placeholder="Lot 1">
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-street-block-ca"> Street/Block </label>
                                     </div>
-                                    <input id="hperson-street-block-ca" class="input-txt-classes" type="text" name="hperson-street-block-ca" autocomplete="off" placeholder="Block 1">
+                                    <input id="hperson-street-block-ca" class="input-txt-classes form-control" type="text" name="hperson-street-block-ca" autocomplete="off" placeholder="Block 1">
                                 </div>
                             </div>
 
@@ -414,7 +415,7 @@
                                     <div>
                                         <label for="hperson-region-select-ca"> Region CA </label>
                                     </div>
-                                    <select id="hperson-region-select-ca" class="input-txt-classes" required onchange="getLocations('region' , 'ca-region' , 'reg-pat')" name="region" autocomplete="off">
+                                    <select id="hperson-region-select-ca" class="input-txt-classes" required onchange="getLocations('region' , 'ca-region')" name="region" autocomplete="off">
                                         <option value="" class="">Select</option>
                                         <?php 
                                             $stmt = $pdo->query('SELECT region_code, region_description from region');
@@ -425,11 +426,11 @@
                                     </select>
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right" >
+                                <div id="fifty" class="form-sub-divs-row-left" >
                                     <div>
                                         <label for="hperson-province-select-ca"> Province </label>
                                     </div>
-                                    <select id="hperson-province-select-ca" class="input-txt-classes" required onchange="getLocations('province' , 'ca-province' , 'reg-pat')" name="province">
+                                    <select id="hperson-province-select-ca" class="input-txt-classes" required onchange="getLocations('province' , 'ca-province')" name="province">
                                         <option value="ABUCAY" class="">Select</option>
                                     </select>
                                 </div>
@@ -440,12 +441,12 @@
                                     <div>
                                         <label for="hperson-city-select-ca"> Municipality / City </label>
                                     </div>
-                                    <select id="hperson-city-select-ca" class="input-txt-classes" required onchange="getLocations('city' , 'ca-city' , 'reg-pat')" name="province">
-                                        <option value="" class="">Select</option>
+                                    <select id="hperson-city-select-ca" class="input-txt-classes" required onchange="getLocations('city' , 'ca-city')" name="province">
+                                        <option value="" class="">Select </option>
                                     </select>
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-brgy-select-ca"> Barangay </label>
                                     </div>
@@ -460,14 +461,14 @@
                                     <div>
                                         <label for="hperson-home-phone-no-ca"> Home Phone No. </label>
                                     </div>
-                                    <input id="hperson-home-phone-no-ca" class="input-txt-classes-non" type="text" name="hperson-home-phone-no-ca" autocomplete="off">
+                                    <input id="hperson-home-phone-no-ca" class="input-txt-classes-non form-control" type="text" name="hperson-home-phone-no-ca" autocomplete="off">
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-mobile-no-ca"> Mobile Phone No. </label>
                                     </div>
-                                    <input id="hperson-mobile-no-ca" class="input-txt-classes" type="text" name="hperson-mobile-no-ca" autocomplete="off">
+                                    <input id="hperson-mobile-no-ca" class="input-txt-classes form-control" type="text" name="hperson-mobile-no-ca" autocomplete="off">
                                 </div>
                             </div>
 
@@ -476,7 +477,7 @@
                                     <div>
                                         <label for="hperson-email-ca"> Email Address </label>
                                     </div>
-                                    <input id="hperson-email-ca" class="input-txt-classes-non" type="email" name="hperson-email-ca" autocomplete="off">
+                                    <input id="hperson-email-ca" class="input-txt-classes-non form-control" type="email" name="hperson-email-ca" autocomplete="off">
                                 </div>
                             </div>
 
@@ -496,14 +497,14 @@
                                     <div>
                                         <label for="hperson-house-no-cwa"> House No./Lot/Bldg </label>
                                     </div>
-                                    <input id="hperson-house-no-cwa" class="input-txt-classes-non" type="text" name="hperson-house-no-cwa" autocomplete="off">
+                                    <input id="hperson-house-no-cwa" class="input-txt-classes-non form-control" type="text" name="hperson-house-no-cwa" autocomplete="off">
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-street-block-cwa"> Street/Block </label>
                                     </div>
-                                    <input id="hperson-street-block-cwa" class="input-txt-classes-non" type="text" name="hperson-street-block-cwa" autocomplete="off">
+                                    <input id="hperson-street-block-cwa" class="input-txt-classes-non form-control" type="text" name="hperson-street-block-cwa" autocomplete="off">
                                 </div>
                             </div>
 
@@ -512,8 +513,8 @@
                                     <div>
                                         <label for="hperson-region-select-cwa"> Region </label>
                                     </div>
-                                    <select id="hperson-region-select-cwa" class="input-txt-classes-non" required onchange="getLocations('region' , 'cwa-region' , 'reg-pat')" name="region" autocomplete="off">
-                                        <option value="" class="">Choose a Region</option>
+                                    <select id="hperson-region-select-cwa" class="input-txt-classes-non" required onchange="getLocations('region' , 'cwa-region')" name="region" autocomplete="off">
+                                        <option value="" class="">Select</option>
                                         <?php 
                                             $stmt = $pdo->query('SELECT region_code, region_description from region');
                                             while($data = $stmt->fetch(PDO::FETCH_ASSOC)){
@@ -523,12 +524,12 @@
                                     </select>
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-province-select-cwa"> Province </label>
                                     </div>
-                                    <select id="hperson-province-select-cwa" class="input-txt-classes-non" required onchange="getLocations('province' , 'cwa-province' , 'reg-pat')" name="province">
-                                        <option value="" class="">Choose a Province</option>
+                                    <select id="hperson-province-select-cwa" class="input-txt-classes-non" required onchange="getLocations('province' , 'cwa-province')" name="province">
+                                        <option value="" class="">Select</option>
                                     </select>
                                 </div>
                             </div>
@@ -538,17 +539,17 @@
                                     <div>
                                         <label for="hperson-city-select-cwa"> Municipality / City </label>
                                     </div>
-                                    <select id="hperson-city-select-cwa" class="input-txt-classes-non" required onchange="getLocations('city' , 'cwa-city' , 'reg-pat')" name="city">
-                                        <option value="" class="">Choose a Municipality</option>
+                                    <select id="hperson-city-select-cwa" class="input-txt-classes-non" required onchange="getLocations('city' , 'cwa-city')" name="city">
+                                        <option value="" class="">Select</option>
                                     </select>
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
                                         <label for="hperson-brgy-select-cwa"> Barangay </label>
                                     </div>
                                     <select id="hperson-brgy-select-cwa" class="input-txt-classes-non" name="brgy">
-                                        <option value="" class="">Choose a Barangay</option>
+                                        <option value="" class="">Select</option>
                                     </select>
                                 </div>
                             </div>
@@ -558,14 +559,14 @@
                                     <div>
                                         <label for="hperson-workplace-cwa"> Name of Workplace </label>
                                     </div>
-                                    <input id="hperson-workplace-cwa" class="input-txt-classes-non" type="text" name="hperson-workplace-cwa" autocomplete="off">
+                                    <input id="hperson-workplace-cwa" class="input-txt-classes-non form-control" type="text" name="hperson-workplace-cwa" autocomplete="off">
                                 </div>
                                 
-                                <div id="fifty" class="form-sub-divs-row-right">
+                                <div id="fifty" class="form-sub-divs-row-left">
                                     <div>
-                                        <label for="hperson-ll-mb-no-cwa"> Landline / Mobile No. </label>
+                                        <label for="hperson-ll-mb-no-cwa"> Landline/Mobile No. </label>
                                     </div>
-                                    <input id="hperson-ll-mb-no-cwa" class="input-txt-classes-non" type="text" name="hperson-ll-mb-no-cwa" autocomplete="off">
+                                    <input id="hperson-ll-mb-no-cwa" class="input-txt-classes-non form-control" type="text" name="hperson-ll-mb-no-cwa" autocomplete="off">
                                 </div>
                             </div>
 
@@ -574,7 +575,7 @@
                                     <div>
                                         <label for="hperson-email-cwa"> Email Address </label>
                                     </div>
-                                    <input id="hperson-email-cwa" class="input-txt-classes-non" type="text" name="hperson-email-cwa" autocomplete="off">
+                                    <input id="hperson-email-cwa" class="input-txt-classes-non form-control" type="text" name="hperson-email-cwa" autocomplete="off">
                                 </div>
                             </div>
 
@@ -591,7 +592,7 @@
                                     <div>
                                         <label for="hperson-emp-name-ofw"> Employers Name </label>
                                     </div>
-                                    <input id="hperson-emp-name-ofw" class="input-txt-classes-non" type="text" name="hperson-emp-name-ofw" autocomplete="off">
+                                    <input id="hperson-emp-name-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-emp-name-ofw" autocomplete="off">
                                 </div>
                             </div>
 
@@ -600,14 +601,14 @@
                                     <div>
                                         <label for="hperson-occupation-ofw"> Occupation </label>
                                     </div>
-                                    <input id="hperson-occupation-ofw" class="input-txt-classes-non" type="text" name="hperson-occupation-ofw" autocomplete="off">
+                                    <input id="hperson-occupation-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-occupation-ofw" autocomplete="off">
                                 </div>
                                 
                                 <div id="fifty" class="form-sub-divs-row-right">
                                     <div>
                                         <label for="hperson-place-work-ofw"> Place of Work </label>
                                     </div>
-                                    <input id="hperson-place-work-ofw" class="input-txt-classes-non" type="text" name="hperson-place-work-ofw" autocomplete="off">
+                                    <input id="hperson-place-work-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-place-work-ofw" autocomplete="off">
                                 </div>
                             </div>
 
@@ -616,14 +617,14 @@
                                     <div>
                                         <label for="hperson-house-no-ofw"> House No./Lot/Bldg </label>
                                     </div>
-                                    <input id="hperson-house-no-ofw" class="input-txt-classes-non" type="text" name="hperson-house-no-ofw" autocomplete="off">
+                                    <input id="hperson-house-no-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-house-no-ofw" autocomplete="off">
                                 </div>
                                 
                                 <div id="fifty" class="form-sub-divs-row-right">
                                     <div>
                                         <label for="hperson-street-ofw"> Street/Block </label>
                                     </div>
-                                    <input id="hperson-street-ofw" class="input-txt-classes-non" type="text" name="hperson-street-ofw" autocomplete="off">
+                                    <input id="hperson-street-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-street-ofw" autocomplete="off">
                                 </div>
                             </div>
 
@@ -632,14 +633,14 @@
                                     <div>
                                         <label for="hperson-region-select-ofw"> Region </label>
                                     </div>
-                                    <input id="hperson-region-select-ofw" class="input-txt-classes-non" type="text" name="hperson-region-select-ofw" autocomplete="off">
+                                    <input id="hperson-region-select-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-region-select-ofw" autocomplete="off">
                                 </div>
                                 
                                 <div id="fifty" class="form-sub-divs-row-right">
                                     <div>
                                         <label for="hperson-province-select-ofw"> Province </label>
                                     </div>
-                                    <input id="hperson-province-select-ofw" class="input-txt-classes-non" type="text" name="hperson-province-select-ofw" class="w-[90%] h-[40%] border-2 border-[#bfbfbf] rounded-lg outline-none p-2" autocomplete="off">
+                                    <input id="hperson-province-select-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-province-select-ofw" class="w-[90%] h-[40%] border-2 border-[#bfbfbf] rounded-lg outline-none p-2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -648,14 +649,14 @@
                                     <div>
                                         <label for="hperson-city-select-ofw"> Municipality / City </label>
                                     </div>
-                                    <input id="hperson-city-select-ofw" class="input-txt-classes-non" type="text" name="hperson-city-select-ofw" autocomplete="off">
+                                    <input id="hperson-city-select-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-city-select-ofw" autocomplete="off">
                                 </div>
                                 
                                 <div id="fifty" class="form-sub-divs-row-right">
                                     <div>
                                         <label for="hperson-country-select-ofw"> Country </label>
                                     </div>
-                                    <input id="hperson-country-select-ofw" class="input-txt-classes-non" type="text" name="hperson-country-select-ofw" class="w-[90%] h-[40%] border-2 border-[#bfbfbf] rounded-lg outline-none p-2" autocomplete="off">
+                                    <input id="hperson-country-select-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-country-select-ofw" class="w-[90%] h-[40%] border-2 border-[#bfbfbf] rounded-lg outline-none p-2" autocomplete="off">
                                 </div>
                             </div>
 
@@ -664,13 +665,13 @@
                                     <div>
                                         <label for="hperson-office-phone-no-ofw"> Office Phone No. </label>
                                     </div>
-                                    <input id="hperson-office-phone-no-ofw" class="input-txt-classes-non" type="text" name="hperson-office-phone-no-ofw" autocomplete="off">
+                                    <input id="hperson-office-phone-no-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-office-phone-no-ofw" autocomplete="off">
                                 </div>
                                 <div id="fifty" class="form-sub-divs-row-right">
                                     <div>
                                         <label for="hperson-mobile-no-ofw"> Mobile Phone No. </label>
                                     </div>
-                                    <input id="hperson-mobile-no-ofw" class="input-txt-classes-non" type="text" name="hperson-mobile-no-ofw" autocomplete="off">
+                                    <input id="hperson-mobile-no-ofw" class="input-txt-classes-non form-control" type="text" name="hperson-mobile-no-ofw" autocomplete="off">
                                 </div>
                             </div>
                         </div>

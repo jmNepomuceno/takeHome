@@ -5,15 +5,16 @@
 }
 
 .incoming-container{
-    width:95%;
-    height: 90%;
+    width:90%;
+    height: 85%;
     display:flex;
     flex-direction: column;
     justify-content:flex-start;
     align-items: center;
-    border-radius: 0.5rem;
     background: transparent;
-    /* border:2px solid red; */
+    padding: 20px;
+    border: none;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .incoming-container .search-main-div{
@@ -25,7 +26,7 @@
     align-items: center;
     /* margin-top: 2rem; */
 }
-
+      
 .incoming-container .search-main-div .refer-no-div,
 .incoming-container .search-main-div .lname-search-div,
 .incoming-container .search-main-div .fname-search-div,
@@ -115,6 +116,11 @@
     display: none; /* Hide the search input box */
 }
 
+/* background-color: #b0bec5 !important; */
+.incoming-container .incoming-table .text-center th{
+    background-color: #b0bec5 !important;
+}
+
 .incoming-container .incoming-table .text-center th:nth-child(1){
     width:20%;
     background: #e6e6e6;
@@ -155,14 +161,15 @@
 }
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming{
-    height: 61px;
+    /* height: 51px; */
+    height: 80px !important;
+    width: 100%;
 }
 
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-refer-no,
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-patname{
-    font-size: 0.9rem; 
-    
+    font-size: 11pt;
 }
 
 #dt-patname{
@@ -172,43 +179,54 @@
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-refer-no{
     border-left: 1px solid #b2b3b3;
+    font-size: 11pt;
 }
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-type{
     height: 100%;
     font-weight: bold;
     text-align: center;
+    font-size: 11pt;
+    overflow-y: auto;
+
 }
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-phone-no{
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-phone-no label{
-    font-size: 0.75rem; 
+.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-phone-no div{
+    width: 100%;
+    height: 80px;
+    overflow: scroll;
+}
+
+.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-phone-no div label{
+    font-size: 10pt;
     margin-left: 0.25rem;
 }
 
-.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-phone-no label{
-    font-size: 0.75rem; 
+.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-phone-no div label:nth-child(1){
+    margin-top:10px;
 }
+
 
 /* Hide scrollbar for webkit browsers */
 ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar width */
-    height: 0; /* Remove scrollbar height */
+    width: 0;  
+    height: 0; 
 }
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround{
-    height: 61px;
-    display:flex;
+    /* display:flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: left;
+    align-items: left; */
     position:relative;
-    overflow: hidden;
+    overflow: scroll;
     transition-property: all;
-    /* transition-delay: 150ms; */
-    transition-duration: 300ms;
-    transition-timing-function: ease;
+    transition-timing-function: ease !important;
 }
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround i{
@@ -231,12 +249,12 @@
 }
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround .breakdown-div{
-    /* display:none; */
+    display:none;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
     width:100%;
-    height: 250px;
+    height: 270px;
 }
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround label,
@@ -248,8 +266,15 @@
     /* margin-top: 0.25rem; */
 }
 
+.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround label{
+}
+
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround label:nth-child(1){
     margin-top: 0;
+}
+
+.referred-time-lbl, .reception-time-lbl, .sdn-proc-time-lbl{
+    margin-top:5px;
 }
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-stopwatch #stopwatch-sub-div{
@@ -257,6 +282,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    font-size: 11pt;
 }
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-status{
@@ -264,6 +290,12 @@
     text-align: center;
     background: #6b727f;    
     border-right: 1px solid #b2b3b3;
+    /* color:#cc9900; */
+    font-size: 11pt;
+}
+
+.incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-status label{
+    color:#b0bec5;
 }
 
 .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-status div{
@@ -794,3 +826,108 @@
     border:2px solid #bfbfbf;
 }
 
+@media only screen and (max-height: 750px){
+    .incoming-container{
+
+    }
+
+    .incoming-container .search-main-div{
+        width: 95%;
+    }
+
+    .incoming-container .search-main-div .refer-no-div label,
+    .incoming-container .search-main-div .lname-search-div label,
+    .incoming-container .search-main-div .fname-search-div label,
+    .incoming-container .search-main-div .mname-search-div label,
+    .incoming-container .search-main-div .caseType-search-div label,
+    .incoming-container .search-main-div .agency-search-div label,
+    .incoming-container .search-main-div .status-search-div label{
+        font-size: 10pt;
+    }
+
+    .incoming-container .search-main-div .refer-no-div input,
+    .incoming-container .search-main-div .lname-search-div input,
+    .incoming-container .search-main-div .fname-search-div input,
+    .incoming-container .search-main-div .mname-search-div input{
+        font-size: 10pt;
+    }
+
+    .incoming-container .search-main-div .caseType-search-div select,
+    .incoming-container .search-main-div .agency-search-div select,
+    .incoming-container .search-main-div .status-search-div select{
+        font-size: 10pt;
+    }
+
+    .incoming-container .search-main-div .search-clear-btns-div #incoming-clear-search-btn{
+        width:60px;
+    }
+
+    .incoming-container .search-main-div .search-clear-btns-div #incoming-search-btn{
+        width:60px;
+    }
+
+    /* #b0bec5 */
+    .incoming-container .incoming-table .text-center th{
+        background-color: #b0bec5 !important;
+        font-size: 10pt;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming{
+        height: 50px !important;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-refer-no,
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-patname{
+        font-size: 8pt;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-type{
+        font-size: 8pt;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-phone-no div label{
+        font-size: 8pt;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround label{
+        font-size: 8pt;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-stopwatch{
+        font-size: 8pt;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-status{
+        font-size: 8pt;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround{
+        padding:0;
+        margin:0;
+        height: 100%;
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: left;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround .breakdown-div{
+        display:none;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: left;
+        padding:0;
+        margin:0;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround label{
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-turnaround .breakdown-div label{
+        margin:0;
+    }
+
+    .incoming-container .incoming-table #incoming-tbody .tr-incoming #dt-phone-no div{
+        height: 50px;
+    }
+}

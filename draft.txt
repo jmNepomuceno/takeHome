@@ -1111,3 +1111,6 @@ Array
 
 dataTableLength
 https://www.pinterest.com/pin/678917712607931594/
+
+https://www.youtube.com/watch?v=xLOw7LeoBwo
+how to implement automatic backup database for MySQL

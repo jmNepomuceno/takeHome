@@ -60,49 +60,49 @@
 
     // ******************************************************************
 
-    // $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000023'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000023'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000024'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000024'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000025'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000025'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000026'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000026'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000027'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE incoming_referrals SET status='Pending', reception_time=null, final_progressed_timer=null, approved_time=null, approval_details=null, status_interdept=null, sent_interdept_time=null, last_update=null WHERE hpercode='PAT000027'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000023'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000023'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000024'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000024'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000025'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000025'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000026'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000026'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000027'";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "UPDATE hperson SET status='Pending' WHERE hpercode='PAT000027'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 
-    // $sql = "DELETE FROM incoming_interdept";
-    // $stmt = $pdo->prepare($sql);
-    // $stmt->execute();
+    $sql = "DELETE FROM incoming_interdept";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
     
     // echo $_SESSION['running_timer'] . "----";
     // echo $_SESSION['running_bool'] . "----";
@@ -222,7 +222,7 @@
 
         <section class="incoming-table">
 
-            <table id="myDataTable" class="display">
+            <table id="myDataTable" class="display table table-bordered custom-search-modal" style="width: 100%; border-spacing: -1px;">
                 <thead>
                     <tr class="text-center">
                         <th id="refer-no">Reference No. </th>
@@ -235,7 +235,7 @@
                     </tr>
                 </thead>
                 <tbody id="incoming-tbody">
-                    <?php
+                <?php
                         // get the classification names
                         $sql = "SELECT classifications FROM classifications";
                         $stmt = $pdo->prepare($sql);
@@ -391,9 +391,11 @@
                                         <td id="dt-patname">' . $pat_full_name . '</td>
                                         <td id="dt-type" style="background:' . $type_color . ' ">' . $row['type'] . '</td>
                                         <td id="dt-phone-no">
-                                            <label> Referred: ' . $row['referred_by'] . '  </label>
-                                            <label> Landline: ' . $row['landline_no'] . ' </label>
-                                            <label> Mobile: ' . $row['mobile_no'] . ' </label>
+                                            <div class="">
+                                                <label> Referred by: ' . $row['referred_by'] . '  </label>
+                                                <label> Landline: ' . $row['landline_no'] . ' </label>
+                                                <label> Mobile: ' . $row['mobile_no'] . ' </label>
+                                            </div>
                                         </td>
                                         <td id="dt-turnaround"> 
                                             <i class="accordion-btn fa-solid fa-plus"></i>
@@ -426,9 +428,9 @@
                                             <div> 
                                                 <label class="pat-status-incoming">' . $row['status'] . '</label>';
                                                 if ($row['sensitive_case'] === 'true') {
-                                                    echo '<i class="pencil-btn fa-solid fa-pencil" style="pointer-events:none; opacity:0.3"></i>';
+                                                    echo '<i class="pencil-btn fa-solid fa-pencil" style="pointer-events:none; opacity:0.3; color:#cc9900;"></i>';
                                                 }else{
-                                                    echo'<i class="pencil-btn fa-solid fa-pencil"></i>';
+                                                    echo'<i class="pencil-btn fa-solid fa-pencil" style="color:#cc9900;"></i>';
                                                 }
                                                 
                                                 echo '<input class="hpercode" type="hidden" name="hpercode" value= ' . $row['hpercode'] . '>
@@ -437,7 +439,8 @@
                                         </td>
                                     </tr>';
 
-                                $previous = $row['reference_num'];
+                               
+                                    $previous = $row['reference_num'];
                                 $loop += 1;
                             }
 

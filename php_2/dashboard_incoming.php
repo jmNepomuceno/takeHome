@@ -219,6 +219,11 @@
     $stmt->execute();
     $dataPatType = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $dataPatType_json = json_encode($dataPatType);
+
+    $sql = "SELECT COUNT(*) FROM incoming_referrals WHERE status='Pending' AND refer_to='". $_SESSION['hospital_name'] ."'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $incoming_num = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -235,22 +240,27 @@
     <input type="hidden" id="total-processed-refer-inp" value=<?php echo $data['COUNT(*)'] ?>>
     
     <header class="header-div">
-        <div class="header-sub-div-1">
-            <div id="side-bar-mobile-btn" class="side-bar-mobile-btn">
-                <i class="fa-solid fa-bars"></i> 
-            </div>
+        <div class="side-bar-title">
             <h1 id="sdn-title-h1"> Service Delivery Network</h1>
+            <div class="side-bar-mobile-btn">
+                <i id="navbar-icon" class="fa-solid fa-bars"></i>
+            </div>
         </div>
         <div class="account-header-div">
-
-            <div class="notification-sub-div">
+            <div class="notif-main-div">
                 <!-- <div class="w-[33.3%] h-full   flex flex-row justify-end items-center -mr-1">
                     <h1 class="text-center w-full rounded-full p-1 bg-yellow-500 font-bold">6</h1>
                 </div> -->
-                
+                                    
                     <div id="notif-div">
-                        <h1 id="notif-circle"><span id="notif-span" >33</span></h1>
-                        <i class="fa-solid fa-bell"></i>
+                        <?php 
+                            if($incoming_num['COUNT(*)'] > 0){
+                                echo '<h1 id="notif-circle" style="display:block;"><span id="notif-span"></span></h1>';
+                            }else{
+                                echo '<h1 id="notif-circle" style="display:none;"><span id="notif-span"></span></h1>';
+                            }
+                        ?>
+                        <i class="fa-solid fa-bell"></i> 
                         <audio id="notif-sound" preload='auto' muted loop>
                             <source src="../assets/sound/water_droplet.mp3" type="audio/mpeg">
                         </audio>
@@ -263,61 +273,70 @@
                             <!-- b3b3b3 -->
                         </div>
                     </div>
+
+                    <!-- <div class="w-[20px] h-full flex flex-col justify-center items-center">
+                        <i class="fa-solid fa-caret-down text-white text-xs mt-2"></i>
+                    </div> -->
             </div>
 
             <div id="nav-account-div" class="header-username-div">
                 <div class="user-icon-div">
                     <i class="fa-solid fa-user"></i>
                 </div>
-                <div id="" class="user-name-div">
-                    <!-- <h1 class="text-white text-lg hidden sm:block">John Marvin Nepomuceno</h1> --> 
+                <div class="user-name-div">
+                    <!-- <h1 class="text-white text-lg hidden sm:block">John Marvin Nepomuceno</h1> -->
                     <?php 
                         if($_SESSION['last_name'] === 'Administrator'){
-                            echo '<h1>' . $user_name . ' | ' . $_SESSION["last_name"] . '</h1>';
+                            echo '<h1 id="user_name-id">' . $user_name . ' | ' . $_SESSION["last_name"] . '</h1>';
                         }else{
-                            echo '<h1>' . $user_name . ' | ' . $_SESSION["last_name"] . ', ' . $_SESSION['first_name'] . ' ' . $_SESSION['middle_name'] . '</h1>';;
+                            echo '<h1 id="user_name-id">' . $user_name . ' | ' . $_SESSION["last_name"] . ', ' . $_SESSION['first_name'] . ' ' . $_SESSION['middle_name'] . '</h1>';;
+
                         }
                     ?>
+                    
                 </div>
-                <div class="caret-div">
+                <div class="username-caret-div">
                     <i class="fa-solid fa-caret-down"></i>
                 </div>
             </div>
         </div>
-    </header>  
+    </header>
 
     <div id="nav-drop-account-div">
-        <?php if($_SESSION["user_name"] == "admin") {?>
-            <div id="admin-module-div-id">
-                <h2 id="admin-module-id" class="">Admin</h2>
+        <div id="nav-drop-acc-sub-div">
+            
+            <?php if($_SESSION["user_name"] == "admin") {?>
+                <div id="admin-module-btn" class="nav-drop-btns">
+                    <h2 id="admin-module-id" class="nav-drop-btns-txt">Admin</h2>
+                </div>
+            <?php } ?>
+            <div id="dashboard-incoming-btn" class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Dashboard (Incoming)</h2>
             </div>
-        <?php } ?>
-        <div id="dashboard-incoming-btn">
-            <h2 class="">Dashboard (Incoming)</h2>
-        </div>
 
-        <div id="dashboard-outgoing-btn">
-            <h2 class="">Dashboard (Outgoing)</h2>
-        </div>
+            <div id="dashboard-outgoing-btn" class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Dashboard (Outgoing)</h2>
+            </div>
 
-        <div>
-            <h2 class="">Dashboard (ER/OPD)</h2>
-        </div>
+            <div class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Dashboard (ER/OPD)</h2>
+            </div>
 
-        <div id="history-log-btn">
-            <h2 class="">History Log</h2>
-        </div>
+            <div id="history-log-btn" class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">History Log</h2>
+            </div>
 
-        <div>
-            <h2 class="">Settings</h2>
-        </div>
+            <div class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Settings</h2>
+            </div>
 
-        <div>
-            <h2 class="">Help</h2>
-        </div>
+            <div class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Help</h2>
+            </div>
 
-        <div>
-            <h2 id='logout-btn' class="">Logout</h2>
+            <div class="nav-drop-btns">
+                <h2 id='logout-btn' class="nav-drop-btns-txt" data-bs-toggle="modal" data-bs-target="#myModal-main">Logout</h2>
+            </div>
         </div>
     </div>
 
@@ -333,7 +352,7 @@
         <div class="main-filter-div">
             <button id="filter-date-btn">Filter</button>
             <div>
-                <label>from <input type="date" id='from-date-inp'> to <input type="date" id='to-date-inp'></label>
+                <label>from: <input type="date" id='from-date-inp'> to: <input type="date" id='to-date-inp'></label>
             </div>
         </div>
 
@@ -416,7 +435,6 @@
                     </tr>   
 
                     <tr>
-                        
                         <?php 
                             for($i = 0; $i < count($pat_class_data); $i++){
                                 echo '
@@ -432,7 +450,6 @@
                                 <th>
                                     <label>Tertiary</label>
                                 </th>
-    
                                 ';
                             }
                         ?>

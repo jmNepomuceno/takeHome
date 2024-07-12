@@ -496,7 +496,6 @@ $(document).ready(function(){
 
     function saveTimeSession(){
         // look only for the status that is On-Process
-
         let curr_index = 0;
         let interdept_status
         // check if theres a pending status currently on the interdepartamental referral
@@ -517,17 +516,6 @@ $(document).ready(function(){
             }
         }
         
-
-
-        // getting the index for interdepartamental referral
-        console.log({
-            timer : elapsedTime / 1000,
-            running_bool : running,
-            startTime : running ? performance.now() : startTime,
-            hpercode: document.querySelectorAll('.hpercode')[curr_index].value,
-            index: curr_index // questionable)
-        })
-        
         $.ajax({
             url: '../php_2/fetch_onProcess.php',
             method: "POST", 
@@ -543,27 +531,25 @@ $(document).ready(function(){
                 // console.log(response)
             }
         })
+
     }
         
     window.addEventListener('beforeunload', function(event) {
         saveTimeSession()
-
-        // var message = "You have unsaved changes. Are you sure you want to leave?";
-        // event.returnValue = message;
-        // return message;
-
     });
 
-    $(document).on('saveTimeSession', saveTimeSession);
-
-
-
-
-
-
-
-
-
+    $.ajax({
+        url: '../php_2/session_navigation.php',
+        method: "POST", 
+        data : {
+            nav_path : ""
+        },
+        success: function(response){
+            if(response === '"true"'){
+                $(document).on('saveTimeSession', saveTimeSession);
+            }
+        }
+    })
 
     // search incoming patients
     $('#incoming-search-btn').on('click' , function(event){        
@@ -864,24 +850,19 @@ $(document).ready(function(){
         // Use regular expression to extract the number
 
         if(toggle_accordion_obj[accordion_index]){
-            console.log('up')
-            document.querySelectorAll('.tr-incoming #dt-turnaround')[accordion_index].style.height = "300px"
-            document.querySelectorAll('.tr-incoming #dt-turnaround')[accordion_index].style.overflow = "auto"
+            document.querySelectorAll('.tr-incoming #dt-turnaround .breakdown-div')[accordion_index].style.display = "flex"
             toggle_accordion_obj[accordion_index] = false
 
             // fa-solid fa-plus
             $('.accordion-btn').eq(accordion_index).removeClass('fa-plus')
             $('.accordion-btn').eq(accordion_index).addClass('fa-minus')
         }else{
-            document.querySelectorAll('.tr-incoming #dt-turnaround')[accordion_index].style.height = "61px"
-            document.querySelectorAll('.tr-incoming #dt-turnaround')[accordion_index].style.overflow = "hidden"
+            document.querySelectorAll('.tr-incoming #dt-turnaround .breakdown-div')[accordion_index].style.display = "none"
             toggle_accordion_obj[accordion_index] = true
 
             $('.accordion-btn').eq(accordion_index).addClass('fa-plus')
             $('.accordion-btn').eq(accordion_index).removeClass('fa-minus')
         }
-
-        
     })
 
     $('.pre-emp-text').on('click' , function(event){
@@ -1011,37 +992,20 @@ $(document).ready(function(){
         //reset the the buttons in modal after the previous transaction
         $('#ok-modal-btn-incoming').text('OK')
         $('#yes-modal-btn-incoming').css('display', 'none') 
-       
+
+        $('#modal-title-incoming').text('Verification')
+        $('#modal-body-incoming').text('')
+
         sensitive_case_btn_index = $('.sensitive-case-btn').index(this);
-        let sensitive_hpercode = document.querySelectorAll('.sensitive-hpercode')
-        console.log(sensitive_case_btn_index)
 
-        $.ajax({
-            url: '../php_2/fetch_sensitive_names.php',
-            method: "POST",
-            data : {
-                hpercode : sensitive_hpercode[sensitive_case_btn_index].value // sensitive_case_btn_index = should always be = 0
-            },
-            dataType:'JSON',
-            success: function(response){
-                console.log(response)
-                let fullNameLabel = `<label class='pat-full-name-lbl'>${response.patlast}, ${response.patfirst} ${response.patmiddle}</label>`;
-                $('.pat-full-name-div').eq(sensitive_case_btn_index).append(fullNameLabel);
+        let sensitive_btn = document.createElement('input')
+        sensitive_btn.id = 'sensitive-pw'
+        sensitive_btn.type = 'password'
+        sensitive_btn.placeholder = 'Input Password'
 
-                $('#modal-title-incoming').text('Verification')
-                // <input id="sensitive-pw" type="password" placeholder="Input Password">
-                $('#modal-body-incoming').text('')
-                let sensitive_btn = document.createElement('input')
-                sensitive_btn.id = 'sensitive-pw'
-                sensitive_btn.type = 'password'
-                sensitive_btn.placeholder = 'Input Password'
+        $('#modal-body-incoming').append(sensitive_btn)
 
-                $('#modal-body-incoming').append(sensitive_btn)
-
-                defaultMyModal.show()
-            }
-        })
-
+        defaultMyModal.show()
     })
 
     $('#ok-modal-btn-incoming').on('click' , function(event){
@@ -1060,18 +1024,39 @@ $(document).ready(function(){
             }
             
             if (mcc_passwords_validity) {
-                console.log(sensitive_case_btn_index)
+                let sensitive_hpercode = document.querySelectorAll('.sensitive-hpercode')
 
-                $('.sensitive-lock-icon').eq(sensitive_case_btn_index)
-                    .css('color', 'lightgreen')
-                    .removeClass('fa-solid fa-lock')
-                    .addClass('fa-solid fa-lock-open');
-            
-                $('.pencil-btn').eq(sensitive_case_btn_index)
-                    .css('pointer-events', 'auto')
-                    .css('opacity', '1');
-                
-                $('.sensitive-case-btn').eq(sensitive_case_btn_index).fadeOut(2000)
+               console.log(sensitive_case_btn_index)
+               console.log(sensitive_hpercode)
+
+               $.ajax({
+                    url: '../php_2/fetch_sensitive_names.php',
+                    method: "POST",
+                    data : {
+                        hpercode : sensitive_hpercode[sensitive_case_btn_index].value // sensitive_case_btn_index = should always be = 0
+                    },
+                    dataType:'JSON',
+                    success: function(response){
+                        let fullNameLabel = $('<label>')
+                            .addClass('pat-full-name-lbl')
+                            .text(`${response.patlast}, ${response.patfirst} ${response.patmiddle}`);
+                        fullNameLabel.hide(); 
+
+                        $('.sensitive-lock-icon').eq(sensitive_case_btn_index)
+                            .css('color', 'lightgreen')
+                            .removeClass('fa-solid fa-lock')
+                            .addClass('fa-solid fa-lock-open');
+                    
+                        $('.pencil-btn').eq(sensitive_case_btn_index)
+                            .css('pointer-events', 'auto')
+                            .css('opacity', '1');
+                        
+                        $('.sensitive-case-btn').eq(sensitive_case_btn_index).fadeOut(2000, function() {
+                            $('.pat-full-name-div').eq(sensitive_case_btn_index).append(fullNameLabel);
+                            fullNameLabel.show(); 
+                        });
+                    }
+                })
             } else {
                 // Change color to red
                 console.log(sensitive_btn_index)

@@ -3,9 +3,9 @@
 $(document).ready(function(){
   const myModal = new bootstrap.Modal(document.getElementById('myModal-dashboardIncoming'));
   
-  if(number_of_referrals === 0){
-    myModal.show()
-  }
+  // if(number_of_referrals === 0){
+  //   myModal.show()
+  // }
 
   $('#total-processed-refer').text($('#total-processed-refer-inp').val())
 
@@ -76,7 +76,8 @@ $(document).ready(function(){
                     labels: {
                         font: {
                             size: 13, // Set the font size for legend labels
-                            weight: 'bold' // Make legend labels bold
+                            weight: 'bold', // Make legend labels bold
+                            border: 'red'
                         },
                         boxWidth: 15,
                         padding: 20

@@ -163,12 +163,13 @@
     height: 50px;
     /* border:1px solid black; */
     z-index: 20;
-    margin-top:5%;
+    /* margin-top:1%; */
 
     display:flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+
 }
 
 .container .main-content .glass-div .query-signin-div label{
@@ -181,7 +182,7 @@
 
 .container .main-content .glass-div .query-signin-div label span{
     /* color:#597E52; */
-    font-weight: bold;
+    font-weight: 300;
 }
 
 .container .main-content .glass-div .query-signin-div span:hover{
@@ -692,18 +693,6 @@
     display:none;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .loader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
@@ -713,6 +702,11 @@
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
 }
+
+.form-control:focus {
+    border-color: #435646; /* Change border color on focus */
+    box-shadow: 0 0 0 0.2rem rgba(67, 86, 70); /* Change focus ring color */
+  }
 
 /* Safari */
 @-webkit-keyframes spin {
