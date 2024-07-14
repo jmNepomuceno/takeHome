@@ -1,8 +1,13 @@
 <?php
 
-  $dbHost = "192.168.42.222";
-  $dbUser = "sdn_user";
-  $dbPassword = "S3rv3r";
+  // $dbHost = "192.168.42.222";
+  // $dbUser = "sdn_user";
+  // $dbPassword = "S3rv3r";
+  // $dbName = "bghmc";
+
+  $dbHost = "localhost";
+  $dbUser = "root";
+  $dbPassword = "password";
   $dbName = "bghmc";
 
   try {

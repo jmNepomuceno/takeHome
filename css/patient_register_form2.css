@@ -1040,7 +1040,7 @@
     text-wrap: wrap;
 } */
 
-@media only screen and (max-height: 750px){
+@media only screen and (max-height: 800px){
     #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-title-div-1 h3,
     #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-2 #form-title-div-2 h3,
     #patient-reg-form-div #main-div form #patient-reg-form-div-2 #patient-form-sub-div-3 #form-title-div-3 h3,

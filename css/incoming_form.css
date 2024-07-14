@@ -826,7 +826,7 @@
     border:2px solid #bfbfbf;
 }
 
-@media only screen and (max-height: 750px){
+@media only screen and (max-height: 800px){
     .incoming-container{
 
     }
