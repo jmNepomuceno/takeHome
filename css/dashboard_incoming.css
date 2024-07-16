@@ -567,8 +567,55 @@ header .header-username-div .username-caret-div i{
     border:none;
 }
 
-.modal-footer #yes-modal-btn-main{
-    /* display:none; */
+#myModal-prompt .modal-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#myModal-prompt .modal-header div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#myModal-prompt .modal-header div h5{
+    margin:0;
+    padding:0;
+}
+
+#myModal-prompt .modal-header div i{
+    margin-left: 0.50rem;
+}
+
+#myModal-prompt .modal-header button{
+    font-size: 20pt;
+    border:none;
+    background: none;
+}
+
+#myModal-prompt #modal-body-incoming{
+    margin-left: 0.5rem;
+}
+
+#myModal-prompt .modal-footer button{
+    color:white;
+    font-weight: bold;
+    padding: 0.25rem 0.50rem .25rem .50rem;
+    border-radius: 10px;
+    margin-right: 0.5rem;
+    border:none;
+    /* #3b82f6 */
+    /* #ef4444 */
+}
+
+#myModal-prompt .modal-footer #ok-modal-btn-incoming{
+    background: #3b82f6;
+}
+
+#myModal-prompt .modal-footer #yes-modal-btn-incoming{
+    background: #3b82f6;
 }
 
 /* .main-graph-div div canvas {

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    let myModal = new bootstrap.Modal(document.getElementById('myModal-hospitalAndUsers'));
+    let myModal = new bootstrap.Modal(document.getElementById('myModal-prompt'));
     // myModal.show()
 
     let intervalHistoryLog;
@@ -105,24 +105,63 @@ $(document).ready(function(){
     
     function fetchMySQLData() {
       $.ajax({
-          url: '../php_2/fetch_interval.php',
-          method: "POST",
-          data : {
-              from_where : 'bell'
-          },
-          success: function(data) {
-              $('#notif-span').text(data);
-              if (parseInt(data) >= 1) {
-                  $('#notif-circle').removeClass('hidden');
-                  
-                  playAudio();
-              } else {
-                  $('#notif-circle').addClass('hidden');
-              }
-              
-              setTimeout(fetchMySQLData, 10000);
-          }
-      });
+        url: '../php_2/fetch_interval.php',
+        method: "POST",
+        data : {
+            from_where : 'bell'
+        },
+        success: function(response) {
+            response = JSON.parse(response);  
+            // console.log(response);
+            // console.log('pot')
+  
+            $('#notif-span').text(response.length);
+            $('#notif-circle').removeClass('hidden');
+                
+                // populate notif-sub-div
+                // document.querySelector('.notif-sub-div').innerHTML = 
+  
+                let type_counter = []
+                for(let i = 0; i < response.length; i++){
+  
+                    if(!type_counter.includes(response[i]['type'])){
+                        type_counter.push(response[i]['type'])
+                    }
+                }
+  
+                // console.log(type_counter)
+                
+                document.getElementById('notif-sub-div').innerHTML = '';
+                for(let i = 0; i < type_counter.length; i++){
+                    let type_var  = type_counter[i]
+                    let type_counts  = 0
+  
+                    for(let j = 0; j < response.length; j++){
+                        if(type_counter[i] ===  response[j]['type']){
+                            type_counts += 1
+                        }
+                    }
+  
+                    if(i % 2 === 0){
+                        document.getElementById('notif-sub-div').innerHTML += '\
+                        <div class="h-[30px] w-[90%] border border-black flex flex-row justify-evenly items-center mt-1 bg-transparent text-white opacity-30 hover:opacity-100">\
+                        <h4 class="font-bold text-lg">' + type_counts + '</h4>\
+                            <h4 class="font-bold text-lg">' + type_var + '</h4>\
+                        </div>\
+                    ';
+                    }else{
+                        document.getElementById('notif-sub-div').innerHTML += '\
+                        <div class="h-[30px] w-[90%] border border-black flex flex-row justify-evenly items-center mt-1 bg-white opacity-30 hover:opacity-100">\
+                        <h4 class="font-bold text-lg">' + type_counts + '</h4>\
+                            <h4 class="font-bold text-lg">' + type_var + '</h4>\
+                        </div>\
+                    ';
+                    }
+                }
+            
+            fetch_timer = setTimeout(fetchMySQLData, 5000);
+        }
+    });
     }
   
     fetchMySQLData(); 
@@ -180,7 +219,16 @@ $(document).ready(function(){
   
     $('#nav-account-div').on('click' , function(event){
       event.preventDefault();
-      document.querySelector('#nav-drop-account-div').classList.toggle('hidden');
+      if($("#nav-drop-account-div").css("display") === "none"){
+        $("#nav-drop-account-div").css("display", "flex")
+      }else{
+          $("#nav-drop-account-div").css("display", "none")
+      }
+    })
+
+    $('#admin-module-btn').on('click' , function(event){
+      event.preventDefault();
+      window.location.href = "../php_2/admin.php";
     })
   
     $('#dashboard-incoming-btn').on('click' , function(event){
@@ -249,6 +297,7 @@ $(document).ready(function(){
   attachInfoBtn();
 
   $('#add-classification-lbl').on('click' , function(event){
+      console.log('here')
       $.ajax({
         url: '../php_2/populate_pat_class.php',
         method: "POST",
@@ -263,7 +312,9 @@ $(document).ready(function(){
 
   $(document).on('click', '.classification-sub-div', function(event){
     // set the input fields to unclickabl
-    $('#delete-classification-btn').removeClass('opacity-50 pointer-events-none')
+    $('#delete-classification-btn').css('opacity' , '1')
+    $('#delete-classification-btn').css('pointer-events' , 'auto')
+
     single_classification_clicked = $('.classification-sub-div').eq(global_classification_divs_index).text()
   })
 
@@ -291,9 +342,13 @@ $(document).ready(function(){
 
 
   $(document).on('click', '#add-classification-icon', function(event){
-    $('#add-classification-icon').addClass('hidden')
-    $('#add-classification-input').removeClass('hidden')
-    $('#add-classification-btn').removeClass('opacity-50 pointer-events-none')
+    console.log('here')
+    // $('#add-classification-icon').addClass('hidden')
+    // $('#add-classification-input').removeClass('hidden')
+
+    $('#add-classification-btn').css('opacity' , '1')
+    $('#add-classification-btn').css('pointer-events' , 'auto')
+
 
     // Get the elements
     const dynamicWidthDiv = document.getElementById('dynamic-width-div');
@@ -334,21 +389,23 @@ $(document).ready(function(){
     console.log(global_breakdown_index)
     
       if(toggle_accordion_obj[global_breakdown_index]){
+          $('#hospital-user-td').css('width' , '600px')
           document.querySelectorAll('.table-tr')[global_breakdown_index].style.height = "350px"
           document.querySelectorAll('.breakdown-div')[global_breakdown_index].style.display = 'flex'
           document.querySelectorAll('.number_users')[global_breakdown_index].style.display = 'none'
 
-          $('.see-more-btn').eq(global_breakdown_index).removeClass('top-5')
-          $('.see-more-btn').eq(global_breakdown_index).addClass('top-[45%]')
+          $('.see-more-btn').eq(global_breakdown_index).css('top' , '180px')
+          $('.see-more-btn').eq(global_breakdown_index).css('right' , '10px')
 
           toggle_accordion_obj[global_breakdown_index] = false
       }else{
-          document.querySelectorAll('.table-tr')[global_breakdown_index].style.height = "70px"
+          $('#hospital-user-td').css('width' , '200px')
+          document.querySelectorAll('.table-tr')[global_breakdown_index].style.height = "50px"
           document.querySelectorAll('.breakdown-div')[global_breakdown_index].style.display = 'none'
           document.querySelectorAll('.number_users')[global_breakdown_index].style.display = 'flex'
 
-          $('.see-more-btn').eq(global_breakdown_index).addClass('top-5')
-          $('.see-more-btn').eq(global_breakdown_index).removeClass('top-[45%]')
+          $('.see-more-btn').eq(global_breakdown_index).css('top' , '20px')
+          $('.see-more-btn').eq(global_breakdown_index).css('right' , '20px')
 
           toggle_accordion_obj[global_breakdown_index] = true
       }
@@ -372,19 +429,18 @@ $(document).ready(function(){
       prev_info_arr = []
       for(let i = global_breakdown_index * 5; i <= (global_breakdown_index * 5) + 4; i++){
         prev_info_arr.push( $('.edit-users-info').eq(i).val())
-        $('.edit-users-info').eq(i).removeClass('pointer-events-none')
-        $('.edit-users-info').eq(i).addClass('border-b border-[#198754]')
+        $('.edit-users-info').eq(i).css('border-bottom' , '1px solid #198754')
+        $('.edit-users-info').eq(i).css('pointer-events' , 'auto')
       }
 
-      $('.cancel-info-btn').eq(global_breakdown_index).removeClass('hidden')
+      $('.cancel-info-btn').eq(global_breakdown_index).css('display' , 'block')
       $('.edit-info-btn').eq(global_breakdown_index).text('Save')
-      $('.edit-info-btn').eq(global_breakdown_index).removeClass('bg-[#0d6efd]')
-      $('.edit-info-btn').eq(global_breakdown_index).addClass('bg-[#198754]')
-  
+      $('.edit-info-btn').eq(global_breakdown_index).css('background' , '#198754')
+      
       for(let i = 0; i < $('.edit-info-btn').length; i++){
         if(i !== global_breakdown_index){
-          $('.edit-info-btn').eq(i).addClass('pointer-events-none')
-          $('.edit-info-btn').eq(i).addClass('opacity-30')
+          $('.edit-info-btn').eq(i).css('pointer-events' , 'none')
+          $('.edit-info-btn').eq(i).css('opacity' , '0.3')
         }
       }
     }else if($('.edit-info-btn').eq(global_breakdown_index).text() === 'Save'){
@@ -421,18 +477,19 @@ $(document).ready(function(){
 
             // set the input fields to unclickable
             for(let i = 0; i <= (global_breakdown_index * 5) + 4; i++){
-              $('.edit-users-info').eq(i).addClass('pointer-events-none')
-              $('.edit-users-info').eq(i).removeClass('border-b border-[#198754]')
+              $('.edit-users-info').eq(i).css('pointer-events' , 'none')
+              $('.edit-users-info').eq(i).css('border-bottom' , 'none')
             }
 
-            $('.cancel-info-btn').eq(global_breakdown_index).addClass('hidden')
-            $('.edit-info-btn').eq(global_breakdown_index).addClass('bg-[#0d6efd]')
-            $('.edit-info-btn').eq(global_breakdown_index).removeClass('bg-[#198754]')
+            $('.cancel-info-btn').eq(global_breakdown_index).css('display' , 'none')
+            $('.edit-info-btn').eq(global_breakdown_index).css('background' , '#0d6efd')
+
             $('.edit-info-btn').eq(global_breakdown_index).text('Edit')
 
             for(let i = 0; i < $('.edit-info-btn').length; i++){
-              $('.edit-info-btn').eq(i).removeClass('pointer-events-none')
-              $('.edit-info-btn').eq(i).removeClass('opacity-30')
+              $('.edit-info-btn').eq(i).css('pointer-events' , 'auto')
+              $('.edit-info-btn').eq(i).css('opacity' , '1')
+
             }
 
             $('#myModal-hospitalAndUsers').modal('hide');
@@ -523,13 +580,12 @@ $(document).ready(function(){
   $(document).on('click', '.cancel-info-btn', function(event){
     // set the input fields to unclickable
     for(let i = 0; i <= (global_breakdown_index * 5) + 4; i++){
-      $('.edit-users-info').eq(i).addClass('pointer-events-none')
-      $('.edit-users-info').eq(i).removeClass('border-b border-[#198754]')
+      $('.edit-users-info').eq(i).css('pointer-events' , 'none')
+      $('.edit-users-info').eq(i).css('border-bottom' , 'none')
     }
 
-    $('.cancel-info-btn').eq(global_breakdown_index).addClass('hidden')
-    $('.edit-info-btn').eq(global_breakdown_index).addClass('bg-[#0d6efd]')
-    $('.edit-info-btn').eq(global_breakdown_index).removeClass('bg-[#198754]')
+    $('.cancel-info-btn').eq(global_breakdown_index).css('display' , 'none')
+    $('.edit-info-btn').eq(global_breakdown_index).css('background' , '#0d6efd')
     $('.edit-info-btn').eq(global_breakdown_index).text('Edit')
 
     console.log(prev_info_arr)
@@ -540,9 +596,53 @@ $(document).ready(function(){
     }
 
     for(let i = 0; i < $('.edit-info-btn').length; i++){
-      $('.edit-info-btn').eq(i).removeClass('pointer-events-none')
-      $('.edit-info-btn').eq(i).removeClass('opacity-30')
+      $('.edit-info-btn').eq(i).css('pointer-events' , 'auto')
+      $('.edit-info-btn').eq(i).css('opacity' , '1')
     }
   })
+
+  $('#logout-btn').on('click' , function(event){
+    event.preventDefault(); 
+    $('#myModal-prompt #modal-title-incoming').text('Warning')
+    $('#myModal-prompt #ok-modal-btn-incoming').text('No')
+
+    $('#myModal-prompt #yes-modal-btn-incoming').text('Yes');
+    $("#myModal-prompt #yes-modal-btn-incoming").css("display", "flex")
+
+    // Are you sure you want to logout?
+    $('#myModal-prompt #modal-body-incoming').text('Are you sure you want to logout?');
+})
+
+$('#yes-modal-btn-incoming').on('click' , function(event){
+    document.querySelector('#nav-drop-account-div').classList.toggle('hidden');
+
+    let currentDate = new Date();
+
+    let year = currentDate.getFullYear();
+    let month = currentDate.getMonth() + 1;
+    let day = currentDate.getDate();
+
+    let hours = currentDate.getHours();
+    let minutes = currentDate.getMinutes();
+    let seconds = currentDate.getSeconds();
+
+    let final_date = year + "/" + month + "/" + day + " " + hours + ":" + minutes + ":" + seconds
+    $.ajax({
+        url: '../php_2/save_process_time.php',
+        data : {
+            what: 'save',
+            date : final_date,
+            sub_what: 'logout'
+        },                        
+        method: "POST",
+        success: function(response) {
+            // response = JSON.parse(response);
+            console.log(response , " here")
+            // window.location.href = "http://192.168.42.222:8035/index.php" 
+            // window.location.href = "http://10.10.90.14:8079/index.php" 
+            window.location.href = "https://sdnplus.bataanghmc.net/" 
+        }
+    });
+})
 
 })

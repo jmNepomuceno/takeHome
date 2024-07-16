@@ -19,7 +19,8 @@
         }catch(PDOException $e){
             echo $notif_value;
         }
-    }else if($_POST['from_where'] == 'incoming'){
+    }
+    else if($_POST['from_where'] == 'incoming'){
         // get the classification names
         $sql = "SELECT classifications FROM classifications";
         $stmt = $pdo->prepare($sql);
@@ -229,7 +230,8 @@
         catch(PDOException $e){
             echo "asdf";
         }
-    }else if($_POST['from_where'] == 'outgoing'){
+    }
+    else if($_POST['from_where'] == 'outgoing'){
         try{
             $sql = "SELECT * FROM incoming_referrals WHERE (status='Pending' OR status='On-Process') AND referred_by='". $_SESSION["hospital_name"] ."' ORDER BY date_time ASC";
             $stmt = $pdo->prepare($sql);

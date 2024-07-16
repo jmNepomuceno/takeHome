@@ -17,13 +17,13 @@
     // echo $finalJsonString;
     for($i = 0; $i < count($classification_arr) + 1; $i++){
         if($i < count($classification_arr)){
-            echo '<div class="classification-sub-div w-auto h-[40px] p-2 m-2 rounded-xl font-bold text-white bg-[#1f292e] tracking-widest cursor-pointer hover:border-4 border-red-600">'.$classification_arr[$i].'</div>';
+            echo '<div class="classification-sub-div form-control">'.$classification_arr[$i].'</div>';
         }else{
             echo 
             '
-                <div id="dynamic-width-div" class="h-[40px] p-2 m-2 rounded-xl font-bold text-white bg-[#1f292e] flex flex-row justify-center items-center overflow-hidden">
-                    <i id="add-classification-icon" class="fa-solid fa-circle-plus text-lg cursor-pointer"></i> 
-                    <input type="text" id="add-classification-input" class="hidden p-2 w-[90px] bg-transparent outline-none" placeholder="Input text" autocomplete="off" />
+                <div id="dynamic-width-div">
+                    <input type="text" id="add-classification-input" class="form-control" placeholder="Input New Classification" autocomplete="off" />
+                    <i id="add-classification-icon" class="fa-solid fa-circle-plus"></i> 
                 </div>
             ';
         }

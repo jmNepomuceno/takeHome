@@ -292,8 +292,7 @@
                             echo '<h1 id="user_name-id">' . $user_name . ' | ' . $_SESSION["last_name"] . ', ' . $_SESSION['first_name'] . ' ' . $_SESSION['middle_name'] . '</h1>';;
 
                         }
-                    ?>
-                    
+                    ?> 
                 </div>
                 <div class="username-caret-div">
                     <i class="fa-solid fa-caret-down"></i>
@@ -335,7 +334,7 @@
             </div>
 
             <div class="nav-drop-btns">
-                <h2 id='logout-btn' class="nav-drop-btns-txt" data-bs-toggle="modal" data-bs-target="#myModal-main">Logout</h2>
+                <h2 id='logout-btn' class="nav-drop-btns-txt" data-bs-toggle="modal" data-bs-target="#myModal-prompt">Logout</h2>
             </div>
         </div>
     </div>
@@ -560,6 +559,29 @@
                     <button id="ok-modal-btn-main" type="button" data-bs-dismiss="modal">OK</button>
                     <button id="yes-modal-btn-main" type="button" data-bs-dismiss="modal" style="display:none">Yes</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal-prompt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header flex flex-row justify-between items-center">
+                <div class="flex flex-row justify-between items-center">
+                    <h5 id="modal-title-incoming" class="modal-title-incoming" id="exampleModalLabel">Successed</h5>
+                    <i id="modal-icon" class="fa-solid fa-circle-check ml-2"></i>
+                </div>
+                <button type="button" class="close text-3xl" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modal-body-incoming" class="modal-body-incoming ml-2">
+                Edit Successfully
+            </div>
+            <div class="modal-footer">
+                <button id="ok-modal-btn-incoming" type="button" data-bs-toggle="modal" data-bs-target="#myModal-prompt">OK</button>
+                <button id="yes-modal-btn-incoming" type="button" data-bs-toggle="modal" data-bs-target="#myModal-prompt">OK</button>
+            </div>
             </div>
         </div>
     </div>

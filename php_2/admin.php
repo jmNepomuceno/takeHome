@@ -66,6 +66,11 @@
     $users_curr_hospitals = $stmt->fetchAll(PDO::FETCH_ASSOC);
     // print_r($users_curr_hospitals);
     // echo count($users_curr_hospitals);
+
+    $sql = "SELECT COUNT(*) FROM incoming_referrals WHERE status='Pending' AND refer_to='". $_SESSION['hospital_name'] ."'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $incoming_num = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -77,113 +82,134 @@
     
     <?php require "../header_link.php" ?>
     
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link rel="stylesheet" href="../css/admin.css">
     <style>
         .custom-modal-width {
             max-width: 80vw; /* Adjust the width as per your requirements */
             width: 100%;
         }
+
+        @media only screen and (max-height: 800px){
+            #myModal-hospitalAndUsers #modal-body-main{
+                height: 500px;
+            }
+
+            .custom-modal-width {
+                max-width: 90vw;
+                width: 100%;
+            }
+        }
     </style>
 </head>
-<body class="h-screen overflow-hidden">
-    <header class="header-div w-full h-[50px] flex flex-row justify-between items-center bg-[#1f292e]">
-        <div class="w-[30%] h-full flex flex-row justify-start items-center">
-            <div id="side-bar-mobile-btn" class="side-bar-mobile-btn w-[10%] h-full flex flex-row justify-center items-center cursor-pointer">
-                <i class="fa-solid fa-bars text-white text-4xl"></i>
+<body class="h-screen">
+    <header class="header-div">
+        <div class="side-bar-title">
+            <h1 id="sdn-title-h1"> Service Delivery Network</h1>
+            <div class="side-bar-mobile-btn">
+                <i id="navbar-icon" class="fa-solid fa-bars"></i>
             </div>
-            <h1 id="sdn-title-h1" class="text-white text-xl ml-2 cursor-pointer"> Service Delivery Network</h1>
         </div>
-        <div class="account-header-div w-[35%] h-full flex flex-row justify-end items-center mr-2">
-
-            <div class="w-auto h-5/6 flex flex-row justify-end items-center mr-2">
-                <!-- <div class="w-[33.3%] h-full   flex flex-row justify-end items-center -mr-1">
-                    <h1 class="text-center w-full rounded-full p-1 bg-yellow-500 font-bold">6</h1>
-                </div> -->
-                
-                    <div id="notif-div" class="w-[20px] h-full flex flex-col justify-center items-center cursor-pointer">
-                        <h1 id="notif-circle" class="absolute top-2 text-center w-[17px] h-[17px] rounded-full bg-red-600 ml-5 text-white text-xs "><span id="notif-span"></span></h1>
-                        <i class="fa-solid fa-bell text-white text-xl"></i>
+        <div class="account-header-div">
+            <div class="notif-main-div">
+               
+                    <div id="notif-div">
+                        <?php 
+                            if($incoming_num['COUNT(*)'] > 0){
+                                echo '<h1 id="notif-circle" style="display:block;"><span id="notif-span"></span></h1>';
+                            }else{
+                                echo '<h1 id="notif-circle" style="display:none;"><span id="notif-span"></span></h1>';
+                            }
+                        ?>
+                        <i class="fa-solid fa-bell"></i> 
                         <audio id="notif-sound" preload='auto' muted loop>
                             <source src="../assets/sound/water_droplet.mp3" type="audio/mpeg">
                         </audio>
-                    </div>
 
-                    <div class="w-[20px] h-full flex flex-col justify-center items-center">
-                        <i class="fa-solid fa-caret-down text-white text-xs mt-2"></i>
+                        <div id="notif-sub-div">
+                            <!-- <div class="h-[30px] w-full border border-black flex flex-row justify-evenly items-center">
+                                <h4 class="font-bold text-lg">3</h4>
+                                <h4 class="font-bold text-lg">OB</h4>
+                            </div> -->
+                        </div>
                     </div>
-                
             </div>
 
-            <div id="nav-account-div" class="header-username-div w-auto h-5/6 flex flex-row justify-end items-center mr-2">
-                <div class="w-[15%] h-full flex flex-row justify-end items-center mr-1">
-                    <i class="fa-solid fa-user text-white text-xl"></i>
+            <div id="nav-account-div" class="header-username-div">
+                <div class="user-icon-div">
+                    <i class="fa-solid fa-user"></i>
                 </div>
-                <div id="" class="w-auto h-full whitespace-nowrap flex flex-col justify-center items-center cursor-pointer">
+                <div class="user-name-div">
                     <!-- <h1 class="text-white text-lg hidden sm:block">John Marvin Nepomuceno</h1> -->
-                    <h1 class="text-white text-base hidden sm:block"><?php echo $user_name ?> |   <?php echo $_SESSION['last_name'] ?>  <?php echo $_SESSION['first_name']  ?> <?php echo $_SESSION['middle_name']  ?>
-                    </h1> 
+                    <?php 
+                        if($_SESSION['last_name'] === 'Administrator'){
+                            echo '<h1 id="user_name-id">' . $user_name . ' | ' . $_SESSION["last_name"] . '</h1>';
+                        }else{
+                            echo '<h1 id="user_name-id">' . $user_name . ' | ' . $_SESSION["last_name"] . ', ' . $_SESSION['first_name'] . ' ' . $_SESSION['middle_name'] . '</h1>';;
+
+                        }
+                    ?>
+                    
                 </div>
-                <div class="w-[5%] h-full flex flex-col justify-center items-center sm:m-1">
-                    <i class="fa-solid fa-caret-down text-white text-xs"></i>
+                <div class="username-caret-div">
+                    <i class="fa-solid fa-caret-down"></i>
                 </div>
             </div>
         </div>
-    </header>  
+    </header>
 
-    <div id="nav-drop-account-div" class="hidden z-10 absolute right-0 top-[45px] flex flex-col justify-start items-center bg-[#1f292e] text-white fixed w-[15%] h-[400px]">
-        <div class="w-full h-[350px] flex flex-col justify-around items-center">
+    <div id="nav-drop-account-div">
+        <div id="nav-drop-acc-sub-div">
+            
             <?php if($_SESSION["user_name"] == "admin") {?>
-                <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center cursor-pointer opacity-30 hover:opacity-100 duration-150">
-                    <h2 id="admin-module-id" class="">Admin</h2>
+                <div id="admin-module-btn" class="nav-drop-btns">
+                    <h2 id="admin-module-id" class="nav-drop-btns-txt">Admin</h2>
                 </div>
             <?php } ?>
-            <div id="dashboard-incoming-btn" class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center cursor-pointer opacity-30 hover:opacity-100 duration-150">
-                <h2 class="">Dashboard (Incoming)</h2>
+            <div id="dashboard-incoming-btn" class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Dashboard (Incoming)</h2>
             </div>
 
-            <div id="dashboard-outgoing-btn" class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center cursor-pointer opacity-30 hover:opacity-100 duration-150">
-                <h2 class="">Dashboard (Outgoing)</h2>
+            <div id="dashboard-outgoing-btn" class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Dashboard (Outgoing)</h2>
             </div>
 
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center cursor-pointer opacity-30 hover:opacity-100 duration-150">
-                <h2 class="">Dashboard (ER/OPD)</h2>
+            <div class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Dashboard (ER/OPD)</h2>
             </div>
 
-            <div id="history-log-btn" class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center cursor-pointer opacity-30 hover:opacity-100 duration-150">
-                <h2 class="">History Log</h2>
+            <div id="history-log-btn" class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">History Log</h2>
             </div>
 
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center cursor-pointer opacity-30 hover:opacity-100 duration-150">
-                <h2 class="">Settings</h2>
+            <div class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Settings</h2>
             </div>
 
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center cursor-pointer opacity-30 hover:opacity-100 duration-150">
-                <h2 class="">Help</h2>
+            <div class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Help</h2>
             </div>
 
-            <div class="w-2/3 h-[50px] border-b-2 border-[#29363d] flex flex-row justify-center items-center cursor-pointer opacity-30 hover:opacity-100 duration-150">
-                <h2 id='logout-btn' class="">Logout</h2>
+            <div class="nav-drop-btns">
+                <h2 id='logout-btn' class="nav-drop-btns-txt" data-bs-toggle="modal" data-bs-target="#myModal-prompt">Logout</h2>
             </div>
         </div>
     </div>
 
-    <div class="w-full h-full border border-black flex flex-wrap justify-start items-start">
-        <div class="hospital-users-div relative w-[250px] h-[200px] mt-[5%] ml-[5%] rounded-2xl bg-[#1f292e] flex flex-col justify-between items-center">
-            <i class="fa-solid fa-users text-white text-[5rem] mt-10"></i>
-            <label id="hospital-users-lbl" class="tile-title-div w-[90%] h-[50px] border mb-3 rounded-xl text-white text-center flex flex-col justify-center items-center p-2 m-2 text-[0.9rem] font-bold   cursor-pointer opacity-30 hover:opacity-100 delay-150 duration-150" data-bs-toggle="modal" data-bs-target="#myModal-hospitalAndUsers">
+    <div class="main-div">
+        <div class="hospital-users-div">
+            <i class="fa-solid fa-users"></i>
+            <label id="hospital-users-lbl" class="tile-title-div" data-bs-toggle="modal" data-bs-target="#myModal-hospitalAndUsers">
                 Hospitals and Users
             </label>
         </div>
 
-        <div class="add-classification-div relative w-[250px] h-[200px] mt-[5%] ml-[5%] rounded-2xl bg-[#1f292e] flex flex-col justify-between items-center">
-            <i class="fa-solid fa-file-import text-white text-[6rem] mr-4 mt-4"></i>
-            <label id="add-classification-lbl" class="tile-title-div w-[90%] h-[50px] border mb-3 rounded-xl text-white text-center flex flex-col justify-center items-center p-2 m-2 text-[0.9rem] font-bold   cursor-pointer opacity-30 hover:opacity-100 delay-150 duration-150" data-bs-toggle="modal" data-bs-target="#myModal-add-classification">
+        <div class="add-classification-div">
+            <i class="fa-solid fa-file-import"></i>
+            <label id="add-classification-lbl" class="tile-title-div" data-bs-toggle="modal" data-bs-target="#myModal-add-classification">
                 Add Patient's Classification
             </label>
         </div>
-
-        
     </div>
 
 
@@ -192,32 +218,32 @@
     <div class="modal fade" id="myModal-add-classification" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-            <div class="modal-header flex flex-row justify-between items-center">
-                <div class="flex flex-row justify-between items-center">
+            <div class="modal-header">
+                <div>
                     <h5 id="modal-title-main" class="modal-title-main" id="exampleModalLabel">Add New Patient's Classification</h5>
-                    <i id="modal-icon" class="fa-solid fa-triangle-exclamation ml-2"></i>
+                    <i id="modal-icon" class="fa-solid fa-triangle-exclamation"></i>
                     <!-- <i class="fa-solid fa-circle-check"></i> -->
                 </div>
-                <button type="button" class="close text-3xl" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="modal-body-main" class="modal-body-main h-auto">
-                <div class="add-classification-div w-full h-full">
+            <div id="modal-body-main" class="modal-body-main">
+                <div class="add-classification-div">
                     <!-- <input  type="text" id="add-classification-txt" class="border-2 border-black" placeholder="New Classification" /> -->
                     <!-- <button id="add-classification-btn" class="border-2 border-black">Add</button> -->
 
-                    <h2 class="w-full h-[40px] flex flex-row justify-start items-center ml-4 font-bold text-lg border-none">Current Patient's Classifications</h2>
-                    <div class="w-full flex flex-col justify-start items-center">
-                        <div id="populate-patclass-div" class="w-full h-auto flex flex-wrap justify-center items-center">
+                    <h2>Current Patient's Classifications</h2>
+                    <div>
+                        <div id="populate-patclass-div">
                             
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="delete-classification-btn" type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2 opacity-50 pointer-events-none" data-bs-dismiss="modal">Delete</button>
-                <button id="add-classification-btn" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2 opacity-50 pointer-events-none" data-bs-dismiss="modal">Add</button>
+                <button id="delete-classification-btn" type="button" data-bs-dismiss="modal">Delete</button>
+                <button id="add-classification-btn" type="button" data-bs-dismiss="modal">Add</button>
             </div>
             </div>
         </div>
@@ -226,28 +252,30 @@
     <div class="modal fade" id="myModal-hospitalAndUsers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered custom-modal-width" role="document">
             <div class="modal-content">
-            <div class="modal-header flex flex-row justify-between items-center">
-                <div class="w-full flex flex-row justify-start items-center">
+            <div class="modal-header">
+                <div>
                     <button id="modal-title-main" class="modal-title-main btn btn-success" id="exampleModalLabel">Hospitals/BHS/RHU</button>
                 </div>
-                <button type="button" class="close text-3xl" data-bs-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="modal-body-main" class="modal-body-main h-[750px]">
-                <div class="add-classification-div">
+
+            <div id="modal-body-main" class="modal-body-main">
+                <div id="scroll-div" class="add-classification-div">
                     <table id="main-table">
                         <thead class="">
+                            <!-- 727 1536 -->
                             <tr>
                                 <?php for($i = 0; $i < count($table_header_arr); $i++) { ?>
                                     <!-- <th class="border border-[#b3b3b3] p-3 bg-[#333333] text-white text-lg">  -->
-                                    <th class="border border-[#b3b3b3] p-3 bg-[#333333] text-white text-lg"> 
-                                        <div class="flex flex-row justify-center items-center w-full h-full">
+                                    <th> 
+                                        <div>
                                             <?php echo $table_header_arr[$i] ?>
                                             <?php if($i < 3){?>
-                                                <div class="flex flex-col justify-center items-center"> 
-                                                    <i id="sort-up-btn-id-<?php echo $i; ?>" class="sort-up-btn fa-solid fa-caret-up ml-2 mt-1 cursor-pointer opacity-30 hover:opacity-100"></i>
-                                                    <i id="sort-down-btn-id-<?php echo $i; ?>" class="sort-down-btn fa-solid fa-caret-down ml-2 -mt-2 cursor-pointer"></i>
+                                                <div> 
+                                                    <i id="sort-up-btn-id-<?php echo $i; ?>" class="sort-up-btn fa-solid fa-caret-up"></i>
+                                                    <i id="sort-down-btn-id-<?php echo $i; ?>" class="sort-down-btn fa-solid fa-caret-down"></i>
                                                 </div>
                                             <?php }?>
                                         </div>
@@ -256,7 +284,8 @@
                             </tr>
                         </thead>
                         <!-- Table body -->
-                        <tbody class="table-body border border-[#b3b3b3] w-full">
+                        <tbody>
+                            
                             <?php 
                                 $sql = "SELECT * FROM sdn_hospital ORDER BY hospital_name ASC";
                                 $stmt = $pdo->prepare($sql);
@@ -287,7 +316,7 @@
                                     $color_style = "#fffff";
                                     $sub_color_style = "#fffff";
                                     if($i % 2 == 0){
-                                        $color_style = "#999999";
+                                        $color_style = "#d3dbde";
                                         $sub_color_style = "#cccccc";   
                                     }
 
@@ -305,20 +334,20 @@
                                     // echo count($users_curr_hospitals);
                                     // echo $users_curr_hospitals[0]['user_firstname'];
                                 ?>
-                                <tr class="table-tr h-[70px] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
-                                    <td class="border-r border-[#b3b3b3] w-[450px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_name'] ?></td>
-                                    <td class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_code'] ?></td>
-                                    <td class="border-r border-[#b3b3b3] w-[130px] h-full"> <?php echo $hospital_isVerified ?></td>
+                                <tr class="table-tr" style="background: <?php echo $color_style ?>">
+                                    <td id="hospital-name-td"> <?php echo $data_sdn_hospitals[$i]['hospital_name'] ?></td>
+                                    <td id="hospital-code-td"> <?php echo $data_sdn_hospitals[$i]['hospital_code'] ?></td>
+                                    <td id="hospital-ver-td"> <?php echo $hospital_isVerified ?></td>
                                     <!-- <td class="w-[300px] border-r border"> <?php echo $hospital_mobile_number ?> </td>  -->
-                                    <td class="border-r border-[#b3b3b3] w-[130px] h-full text-center relative"> 
-                                        <div class="number_users w-[90%] h-full flex flex-row justify-center items-center"> <?php echo $number_users ?> </div>
+                                    <td id="hospital-user-td"> 
+                                        <div class="number_users"> <?php echo $number_users ?> </div>
                                         
-                                        <div class="hidden breakdown-div ml-4 w-[550px] h-[300px] bg-[<?php echo $sub_color_style ?>] rounded flex flex-row justify-center items-center overflow-hidden">
-                                            <table class="w-[97%] h-[95%] text-center rounded">
+                                        <div class="breakdown-div" style="background: <?php echo $sub_color_style ?>">
+                                            <table>
                                                 <thead>
                                                     <tr>
                                                     <?php for($j = 0; $j < count($sub_table_header_arr); $j++) { ?>
-                                                        <th class="border border-[#b3b3b3] p-3 bg-[#333333] text-white text-xs"> <?php echo $sub_table_header_arr[$j] ?></th>
+                                                        <th> <?php echo $sub_table_header_arr[$j] ?></th>
                                                     <?php } ?>
                                                     </tr>
                                                 </thead>
@@ -326,59 +355,59 @@
                                                     <?php if(count($users_curr_hospitals) === 2){?>
                                                         <?php for($x = 0; $x < 2; $x++) { ?>
                                                             <?php $user_firstName_var =$users_curr_hospitals[$x]['user_firstname']; ?>
-                                                            <tr class="h-[50%] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value="<?php echo $users_curr_hospitals[$x]['user_lastname'] ?>" />
+                                                            <tr style="background: <?php echo $sub_color_style ?>">
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info" value="<?php echo $users_curr_hospitals[$x]['user_lastname'] ?>" />
                                                                 </td>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] h-full outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none text-pretty" value="<?php echo $users_curr_hospitals[$x]['user_firstname']; ?>" />
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info" style="text-wrap:pretty" value="<?php echo $users_curr_hospitals[$x]['user_firstname']; ?>" />
                                                                 </td>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[$x]['user_middlename'] ?> />
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info" value= <?php echo $users_curr_hospitals[$x]['user_middlename'] ?> />
                                                                 </td>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[$x]['username'] ?> />
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info" value= <?php echo $users_curr_hospitals[$x]['username'] ?> />
                                                                 </td>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[$x]['password'] ?> />
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info" value= <?php echo $users_curr_hospitals[$x]['password'] ?> />
                                                                 </td>
                                                                 <?php if($users_curr_hospitals[$x]['user_isActive'] === 0) {?>
-                                                                    <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> Inactive</td>
+                                                                    <td> Inactive</td>
                                                                 <?php }else{ ?>
-                                                                    <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> Active</td>
+                                                                    <td> Active</td>
                                                                 <?php } ?>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm">
-                                                                    <button type="button" class="edit-info-btn bg-[#0d6efd] w-[90%] h-[35px] text-white rounded-md p-1">Edit</button>
-                                                                    <button type="button" class="hidden cancel-info-btn bg-[#6c757d] w-[90%] h-[35px] text-white rounded-md p-1 mt-2">Close</button>
+                                                                <td>
+                                                                    <button type="button" class="edit-info-btn">Edit</button>
+                                                                    <button type="button" class="hidden cancel-info-btn">Close</button>
                                                                 </td>
                                                                 <input class="hcode-edit-info" type="hidden" name="hcode-edit-info" value=<?php echo $users_curr_hospitals[$x]['hospital_code'] ?> />
                                                             </tr>
                                                         <?php }?>
                                                     <?php } else if(count($users_curr_hospitals) === 1){ ?>
-                                                        <tr class="h-[50%] w-full border border-[#b3b3b3] text-base bg-[<?php echo $color_style ?>] font-medium">
-                                                        <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[0]['user_lastname'] ?> />
+                                                            <tr style="background: <?php echo $color_style ?>">
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info" value= <?php echo $users_curr_hospitals[0]['user_lastname'] ?> />
                                                                 </td>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none text-pretty" value= <?php echo $users_curr_hospitals[0]['user_firstname'] ?> />
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info text-pretty" value= <?php echo $users_curr_hospitals[0]['user_firstname'] ?> />
                                                                 </td>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[0]['user_middlename'] ?> />
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info" value= <?php echo $users_curr_hospitals[0]['user_middlename'] ?> />
                                                                 </td>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[0]['username'] ?> />
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info" value= <?php echo $users_curr_hospitals[0]['username'] ?> />
                                                                 </td>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> 
-                                                                    <input type="text" class="edit-users-info w-[90%] outline-none h-[30px] text-center text-sm bg-transparent pointer-events-none" value= <?php echo $users_curr_hospitals[0]['password'] ?> />
+                                                                <td> 
+                                                                    <input type="text" class="edit-users-info" value= <?php echo $users_curr_hospitals[0]['password'] ?> />
                                                                 </td>
                                                             <?php if($users_curr_hospitals[0]['user_isActive'] === 0) {?>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> Inactive</td>
+                                                                <td> Inactive</td>
                                                             <?php }else{ ?>
-                                                                <td class="border-r border-[#b3b3b3] w-[100px] text-sm"> Active</td>
+                                                                <td> Active</td>
                                                             <?php } ?>
-                                                            <td class="border-r border-[#b3b3b3] w-[100px] text-sm">
-                                                                <button type="button" class="edit-info-btn bg-[#0d6efd] w-[90%] h-[35px] text-white rounded-md p-1">Edit</button>
-                                                                <button type="button" class="hidden cancel-info-btn bg-[#6c757d] w-[90%] h-[35px] text-white rounded-md p-1 mt-2">Close</button>
+                                                            <td>
+                                                                <button type="button" class="edit-info-btn">Edit</button>
+                                                                <button type="button" class="cancel-info-btn">Close</button>
                                                             </td>
                                                             <input class="hcode-edit-info" type="hidden" name="hcode-edit-info" value=<?php echo $users_curr_hospitals[0]['hospital_code'] ?> />
                                                         </tr>
@@ -388,18 +417,18 @@
                                             </table>
                                         </div>
 
-                                        <i class="see-more-btn absolute top-5 right-2 text-2xl fa-regular fa-square-caret-down cursor-pointer"></i>
+                                        <i class="see-more-btn fa-regular fa-square-caret-down"></i>
                                     </td>
                                     <!-- <td class="w-[50px]"></td>  -->
 
-                                    <td class="border-r border-[#b3b3b3] w-[300px] h-full">
+                                    <td id="hospital-num-td">
                                         <div class="w-full h-full flex flex-col justify-center items-center">
                                             <label>Landline: <?php echo $data_sdn_hospitals[$i]['hospital_landline'] ?></label>
                                             <label>Mobile: <?php echo $data_sdn_hospitals[$i]['hospital_mobile'] ?></label>
                                         </div>
                                     </td>
-                                    <td class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_director'] ?></td>
-                                    <td class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_point_person'] ?></td>
+                                    <td id="hospital-dir-td" class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_director'] ?></td>
+                                    <td id="hospital-pp-td" class="border-r border-[#b3b3b3] w-[200px] h-full"> <?php echo $data_sdn_hospitals[$i]['hospital_point_person'] ?></td>
 
                                     
                                     <!-- end rendering - sakto hahaha gl gl  -->
@@ -425,7 +454,6 @@
                 <div class="flex flex-row justify-between items-center">
                     <h5 id="modal-title-incoming" class="modal-title-incoming" id="exampleModalLabel">Successed</h5>
                     <i id="modal-icon" class="fa-solid fa-circle-check ml-2"></i>
-                    <!-- <i class="fa-solid fa-circle-check"></i> -->
                 </div>
                 <button type="button" class="close text-3xl" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -435,7 +463,8 @@
                 Edit Successfully
             </div>
             <div class="modal-footer">
-                <button id="ok-modal-btn-incoming" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" data-bs-toggle="modal" data-bs-target="#myModal-prompt">OK</button>
+                <button id="ok-modal-btn-incoming" type="button" data-bs-toggle="modal" data-bs-target="#myModal-prompt">OK</button>
+                <button id="yes-modal-btn-incoming" type="button" data-bs-toggle="modal" data-bs-target="#myModal-prompt">OK</button>
             </div>
             </div>
         </div>
@@ -445,20 +474,19 @@
      <div class="modal fade" id="myModal-success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <div class="modal-header flex flex-row justify-between items-center">
-                <div class="flex flex-row justify-between items-center">
+            <div class="modal-header">
+                <div>
                     <h5 id="modal-title-incoming" class="modal-title-incoming" id="exampleModalLabel">Successed</h5>
-                    <i id="modal-icon" class="fa-solid fa-circle-check ml-2"></i>
-                    <!-- <i class="fa-solid fa-circle-check"></i> -->
+                    <i id="modal-icon" class="fa-solid fa-circle-check"></i>
                 </div>
                 <button type="button" class="close text-3xl" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div id="modal-body-incoming-success" class="modal-body-incoming ml-2">
+            <div id="modal-body-incoming-success" class="modal-body-incoming">
             </div>
             <div class="modal-footer">
-                <button id="ok-modal-btn-incoming" type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" data-bs-toggle="modal" data-bs-target="#myModal-success">OK</button>
+                <button id="ok-modal-btn-incoming" type="button" data-bs-toggle="modal" data-bs-target="#myModal-success">OK</button>
             </div>
             </div>
         </div>

@@ -35,10 +35,7 @@
         </div>
         <div class="account-header-div">
             <div class="notif-main-div">
-                <!-- <div class="w-[33.3%] h-full   flex flex-row justify-end items-center -mr-1">
-                    <h1 class="text-center w-full rounded-full p-1 bg-yellow-500 font-bold">6</h1>
-                </div> -->
-                                    
+               
                     <div id="notif-div">
                         <?php 
                             if($incoming_num['COUNT(*)'] > 0){
@@ -57,13 +54,8 @@
                                 <h4 class="font-bold text-lg">3</h4>
                                 <h4 class="font-bold text-lg">OB</h4>
                             </div> -->
-                            <!-- b3b3b3 -->
                         </div>
                     </div>
-
-                    <!-- <div class="w-[20px] h-full flex flex-col justify-center items-center">
-                        <i class="fa-solid fa-caret-down text-white text-xs mt-2"></i>
-                    </div> -->
             </div>
 
             <div id="nav-account-div" class="header-username-div">
@@ -122,19 +114,136 @@
             </div>
 
             <div class="nav-drop-btns">
-                <h2 id='logout-btn' class="nav-drop-btns-txt" data-bs-toggle="modal" data-bs-target="#myModal-main">Logout</h2>
+                <h2 id='logout-btn' class="nav-drop-btns-txt" data-bs-toggle="modal" data-bs-target="#myModal-prompt">Logout</h2>
             </div>
         </div>
     </div>
 
     <div class="main-div">
         <div class="main-sub-div">
-            <div>
+            <div id="main-title-div">
                 <h1>Account History Log</h1>
+            </div>     
+
+            
+            <div class="search-div">
+                <div class="">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search by User">   
+                </div>
+
+                <div class="">
+                    <h1>Activity Type</h1>
+                    <select id="history-select" type="text" >
+                        <option value="">All Logs</option>
+                        <option value="login">Login</option>
+                        <option value="register">Register</option>
+                        <option value="incoming">Incoming</option>
+                        <option value="outgoing">Outgoing</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="icon-div">
+                <h1>Date <i class="fa-solid fa-arrow-down-short-wide"></i></h1>
+                <h1>Action <i class="fa-solid fa-arrow-down-short-wide"></i></h1>
+                <h1>User name <i class="fa-solid fa-arrow-down-short-wide"></i></h1>
             </div> 
 
+            <div class="history-container w-full h-full overflow-auto">
+                <?php 
+                    $sql = "SELECT * FROM sdn_users JOIN history_log ON sdn_users.username = history_log.username WHERE sdn_users.username='" . $_SESSION["user_name"] . "' ORDER BY history_log.date DESC";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute();   
+                    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    // echo '<pre>'; print_r($data); echo '</pre>';
 
+                    $temp_1 = "";
+                    $temp_2 = "";   
+                    $temp_3 = "";
+
+                    for($i = 0; $i < count($data); $i++){
+
+                        if($data[$i]['activity_type'] === 'user_login'){
+                            $name = $data[$i]['user_lastname'] . ', ' . $data[$i]['user_firstname'] . ' ' . $data[$i]['user_middlename'] . '. ';
+                            $originalDate = $data[$i]['user_lastLoggedIn'];
+                            $currentDate = date('Y-m-d H:i:s');
+                            $formattedDate = "";
+
+                            $dateTime = new DateTime($data[$i]['date']);
+                            $formattedDate = $dateTime->format('F j, Y g:ia');
+
+                            $temp_1 = $formattedDate;
+                            $temp_2 = "Online Status: " . $data[$i]['action'];
+                            $temp_3 = $name;
+                        }
+                        else {
+                            $name = $data[$i]['user_lastname'] . ', ' . $data[$i]['user_firstname'] . ' ' . $data[$i]['user_middlename'] . '. ';
+                            $originalDate = $data[$i]['date'];
+                            $currentDate = date('Y-m-d H:i:s');
+                            $formattedDate = "";
+
+                            $dateTime = new DateTime($originalDate);
+                            $formattedDate = $dateTime->format('F j, Y g:ia');
+
+                            $temp_1 = $formattedDate;
+                            $temp_2 = $data[$i]['action'] . ' ' . $data[$i]['pat_name'];
+                            $temp_3 = $name;
+                        }
+
+                        $style_color = "#ffffff";
+                        $text_color = "#1f292e";
+                        if($i % 2 == 1){
+                            $style_color = "#d3dbde"; 
+                            $text_color = "#ffffff";
+                        }
+
+                        echo '
+                            <div class="history-div" style="background: '. $style_color .'">
+                                <div>
+                                    <i class="fa-regular fa-calendar-days"></i>
+                                    <h3>'. $temp_1 .'</h3>
+                                </div>
+                
+                                <div>
+                                    <!-- <i class="fa-regular fa-calendar-days text-2xl "></i> -->
+                                    <h3 class="text-base"> <span id="status-login">'. $temp_2 .'</span></h3>
+                                </div>
+
+                                <div>
+                                    <h3> '. $temp_3 .' </h3>
+                                    <i class="fa-solid fa-user text-2xl "></i>
+                
+                                </div>
+                            </div>
+                        ';
+                    }
+                ?>
+            </div>
         </div>  
+    </div>
+
+    <div class="modal fade" id="myModal-prompt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header flex flex-row justify-between items-center">
+                <div class="flex flex-row justify-between items-center">
+                    <h5 id="modal-title-incoming" class="modal-title-incoming" id="exampleModalLabel">Successed</h5>
+                    <i id="modal-icon" class="fa-solid fa-circle-check ml-2"></i>
+                </div>
+                <button type="button" class="close text-3xl" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modal-body-incoming" class="modal-body-incoming ml-2">
+                Edit Successfully
+            </div>
+            <div class="modal-footer">
+                <button id="ok-modal-btn-incoming" type="button" data-bs-toggle="modal" data-bs-target="#myModal-prompt">OK</button>
+                <button id="yes-modal-btn-incoming" type="button" data-bs-toggle="modal" data-bs-target="#myModal-prompt">OK</button>
+            </div>
+            </div>
+        </div>
     </div>
 
     
