@@ -22,7 +22,7 @@ $(document).ready(function(){
     for (let i = 0; i < dataArray.length; i++) {
         switch (chart) {
             case "case_type": xValues.push(dataArray[i]['type']); break;
-            case "rhu": xValues.push(dataArray[i]['referred_by']); break;
+            case "rhu": xValues.push(dataArray[i]['refer_to']); break;
             case "case_category": xValues.push(dataArray[i]['pat_class']); break;
         }
     }
@@ -76,7 +76,8 @@ $(document).ready(function(){
                     labels: {
                         font: {
                             size: 13, // Set the font size for legend labels
-                            weight: 'bold' // Make legend labels bold
+                            weight: 'bold', // Make legend labels bold
+                            border: 'red'
                         },
                         boxWidth: 15,
                         padding: 20
@@ -108,18 +109,10 @@ $(document).ready(function(){
     });
 }
 
-
 renderPieChart("rhu" , dataReferFrom)
 renderPieChart("case_type" , dataPatType)
 renderPieChart("case_category" , dataPatClass)
 
-$('#notif-div').on('click' , function(event){
-//   if ($('#notif-sub-div').hasClass('hidden')) {
-//     $('#notif-sub-div').removeClass('hidden');
-// } else {
-//     $('#notif-sub-div').addClass('hidden');
-// }
-})
 
 $('#notif-sub-div').on('click' , function(event){
     if($('#notif-span').val() === 0){
@@ -216,25 +209,23 @@ $('#notif-sub-div').on('click' , function(event){
 
   fetchMySQLData(); 
 
-    $('#side-bar-mobile-btn').on('click' , function(event){
-      document.querySelector('#side-bar-div').classList.toggle('hidden');
-    })
-
-  $('#logout-btn').on('click' , function(event){
-    event.preventDefault(); // Prevent the default behavior (navigating to the link)
-    console.log('den')
-
-    $('#modal-title-main').text('Warning')
-    // $('#modal-body').text('Are you sure you want to logout?')
-    $('#ok-modal-btn-main').text('No')
-
-    $('#yes-modal-btn-main').text('Yes');
-    $('#yes-modal-btn-main').removeClass('hidden')
-
-    $('#myModal-dashboardIncoming').modal('show');
+  $('#side-bar-mobile-btn').on('click' , function(event){
+    document.querySelector('#side-bar-div').classList.toggle('hidden');
   })
 
-  $('#yes-modal-btn-main').on('click' , function(event){
+  $('#logout-btn').on('click' , function(event){
+    event.preventDefault(); 
+    $('#myModal-prompt #modal-title-incoming').text('Warning')
+    $('#myModal-prompt #ok-modal-btn-incoming').text('No')
+
+    $('#myModal-prompt #yes-modal-btn-incoming').text('Yes');
+    $("#myModal-prompt #yes-modal-btn-incoming").css("display", "flex")
+
+    // Are you sure you want to logout?
+    $('#myModal-prompt #modal-body-incoming').text('Are you sure you want to logout?');
+})
+
+  $('#yes-modal-btn-incoming').on('click' , function(event){
     console.log('here')
     document.querySelector('#nav-drop-account-div').classList.toggle('hidden');
 
@@ -251,7 +242,7 @@ $('#notif-sub-div').on('click' , function(event){
     let final_date = year + "/" + month + "/" + day + " " + hours + ":" + minutes + ":" + seconds
 
     $.ajax({
-        url: '../php/save_process_time.php',
+        url: '../php_2/save_process_time.php',
         data : {  
             what: 'save',
             date : final_date,
@@ -274,6 +265,37 @@ $('#notif-sub-div').on('click' , function(event){
     }else{
         $("#nav-drop-account-div").css("display", "none")
     }
+  })
+
+  $('#admin-module-btn').on('click' , function(event){
+      event.preventDefault();
+      window.location.href = "../php_2/admin.php";
+      
+      // // 
+      // let currentDate = new Date();
+
+      // let year = currentDate.getFullYear();
+      // let month = currentDate.getMonth() + 1; // Adding 1 to get the month in the human-readable format
+      // let day = currentDate.getDate();
+
+      // let hours = currentDate.getHours();
+      // let minutes = currentDate.getMinutes();
+      // let seconds = currentDate.getSeconds();
+
+      // let final_date = year + "/" + month + "/" + day + " " + hours + ":" + minutes + ":" + seconds
+
+      // $.ajax({
+      //     url: '../php_2/save_process_time.php',
+      //     data : {
+      //         what: 'save',
+      //         date : final_date,
+      //         sub_what: 'history_log'
+      //     },
+      //     method: "POST",
+      //     success: function(response) {
+      //         window.location.href = "../php_2/admin.php";
+      //     }
+      // });
   })
 
   $('#dashboard-incoming-btn').on('click' , function(event){

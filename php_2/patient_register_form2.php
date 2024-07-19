@@ -125,6 +125,7 @@
 
             </div>
             <div id="search-result-div">
+
                 <!-- <h1 id="no-pat-found">No Patient Found</h1> -->
                 <!-- <div id="search-sub-div">
                     <div id="upper-part-sub-div">
@@ -142,6 +143,8 @@
                 </div> -->
 
             </div>
+            <div id="pagination-div"></div>
+
         </div>
 
         <div id="main-div">

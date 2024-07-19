@@ -8,13 +8,14 @@
     // Format the DateTime object to get the year, month, and day
     $formattedDate = $dateTime->format('Y-m-d') . '%';
 
-    $sql = "SELECT COUNT(*) FROM incoming_referrals WHERE status='Approved' AND approved_time LIKE :proc_date AND refer_to = '" . $_SESSION["hospital_name"] . "'";
+    $sql = "SELECT COUNT(*) FROM incoming_referrals WHERE status='Approved' AND approved_time LIKE :proc_date AND referred_by = '" . $_SESSION["hospital_name"] . "'";
     // $sql = "SELECT COUNT(*) FROM incoming_referrals WHERE status='Approved' AND approved_time LIKE '2024-02-08%' AND refer_to = '" . $_SESSION["hospital_name"] . "'";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':proc_date', $formattedDate, PDO::PARAM_STR);
     $stmt->execute();
     $data = $stmt->fetch(PDO::FETCH_ASSOC);
     $number_of_referrals = $data['COUNT(*)'];
+    
 
     if ($_SESSION['user_name'] === 'admin'){
         $user_name = 'Bataan General Hospital and Medical Center';
@@ -35,7 +36,7 @@
     if($data['COUNT(*)'] > 0){
         
         // echo $currentDateTime;
-        $sql = "SELECT hpercode, reception_time, date_time, final_progressed_timer, sent_interdept_time FROM incoming_referrals WHERE status='Approved' AND refer_to = :hospital_name AND reception_time LIKE :current_date";
+        $sql = "SELECT hpercode, reception_time, date_time, final_progressed_timer, sent_interdept_time FROM incoming_referrals WHERE status='Approved' AND referred_by = :hospital_name AND reception_time LIKE :current_date";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':hospital_name', $_SESSION['hospital_name']); 
         $currentDateTime_param = "%$currentDateTime%";
@@ -92,7 +93,7 @@
         }
 
         // Calculate the average in seconds
-        $averageSeconds_interdept = (int) ($totalSeconds_interdept / count($dataRecep_interdept));
+        $averageSeconds_interdept = (int) ($totalSeconds_interdept / (count($dataRecep_interdept) === 0) ? 1 : count($dataRecep_interdept));
 
         // Optionally, convert the average back to hh:mm:ss format
         $averageTime_interdept = gmdate("H:i:s", $averageSeconds_interdept);
@@ -193,16 +194,16 @@
     $current_date_2 = date("F j, Y - h:ia");
 
     // get all the refer from hospitals
-    $sql = "SELECT referred_by FROM incoming_referrals WHERE refer_to = :hospital_name AND reception_time LIKE :current_date";
+    // $sql = "SELECT refer_to FROM incoming_referrals WHERE referred_by = :hospital_name AND reception_time LIKE :current_date";
+    $sql = "SELECT refer_to FROM incoming_referrals WHERE status='Approved' AND approved_time LIKE :current_date AND referred_by = '" . $_SESSION["hospital_name"] . "'";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':hospital_name', $_SESSION['hospital_name']); 
     $currentDateTime_param = "%$currentDateTime%";
     $stmt->bindParam(':current_date', $currentDateTime_param, PDO::PARAM_STR); 
     $stmt->execute();
     $dataReferFrom = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $dataReferFrom_json = json_encode($dataReferFrom);
 
-    $sql = "SELECT pat_class FROM incoming_referrals WHERE refer_to = :hospital_name AND reception_time LIKE :current_date";
+    $sql = "SELECT pat_class FROM incoming_referrals WHERE referred_by = :hospital_name AND reception_time LIKE :current_date";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':hospital_name', $_SESSION['hospital_name']); 
     $currentDateTime_param = "%$currentDateTime%";
@@ -211,7 +212,7 @@
     $dataPatClass = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $dataPatClass_json = json_encode($dataPatClass);
 
-    $sql = "SELECT type FROM incoming_referrals WHERE refer_to = :hospital_name AND reception_time LIKE :current_date";
+    $sql = "SELECT type FROM incoming_referrals WHERE referred_by = :hospital_name AND reception_time LIKE :current_date";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':hospital_name', $_SESSION['hospital_name']); 
     $currentDateTime_param = "%$currentDateTime%";
@@ -219,6 +220,11 @@
     $stmt->execute();
     $dataPatType = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $dataPatType_json = json_encode($dataPatType);
+
+    $sql = "SELECT COUNT(*) FROM incoming_referrals WHERE status='Pending' AND referred_by='". $_SESSION['hospital_name'] ."'";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $incoming_num = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -228,29 +234,34 @@
     <title>Document</title>
     
     <?php require "../header_link.php" ?>
-    <link rel="stylesheet" href="../css/dashboard_outgoing.css">
+    <link rel="stylesheet" href="../css/dashboard_incoming.css">
 </head>
 <body class="h-screen">
 
     <input type="hidden" id="total-processed-refer-inp" value=<?php echo $data['COUNT(*)'] ?>>
     
     <header class="header-div">
-        <div class="header-sub-div-1">
-            <div id="side-bar-mobile-btn" class="side-bar-mobile-btn">
-                <i class="fa-solid fa-bars"></i> 
-            </div>
+        <div class="side-bar-title">
             <h1 id="sdn-title-h1"> Service Delivery Network</h1>
+            <div class="side-bar-mobile-btn">
+                <i id="navbar-icon" class="fa-solid fa-bars"></i>
+            </div>
         </div>
         <div class="account-header-div">
-
-            <div class="notification-sub-div">
+            <div class="notif-main-div">
                 <!-- <div class="w-[33.3%] h-full   flex flex-row justify-end items-center -mr-1">
                     <h1 class="text-center w-full rounded-full p-1 bg-yellow-500 font-bold">6</h1>
                 </div> -->
-                
+                                    
                     <div id="notif-div">
-                        <h1 id="notif-circle"><span id="notif-span" >33</span></h1>
-                        <i class="fa-solid fa-bell"></i>
+                        <?php 
+                            if($incoming_num['COUNT(*)'] > 0){
+                                echo '<h1 id="notif-circle" style="display:block;"><span id="notif-span"></span></h1>';
+                            }else{
+                                echo '<h1 id="notif-circle" style="display:none;"><span id="notif-span"></span></h1>';
+                            }
+                        ?>
+                        <i class="fa-solid fa-bell"></i> 
                         <audio id="notif-sound" preload='auto' muted loop>
                             <source src="../assets/sound/water_droplet.mp3" type="audio/mpeg">
                         </audio>
@@ -263,61 +274,69 @@
                             <!-- b3b3b3 -->
                         </div>
                     </div>
+
+                    <!-- <div class="w-[20px] h-full flex flex-col justify-center items-center">
+                        <i class="fa-solid fa-caret-down text-white text-xs mt-2"></i>
+                    </div> -->
             </div>
 
             <div id="nav-account-div" class="header-username-div">
                 <div class="user-icon-div">
                     <i class="fa-solid fa-user"></i>
                 </div>
-                <div id="" class="user-name-div">
-                    <!-- <h1 class="text-white text-lg hidden sm:block">John Marvin Nepomuceno</h1> --> 
+                <div class="user-name-div">
+                    <!-- <h1 class="text-white text-lg hidden sm:block">John Marvin Nepomuceno</h1> -->
                     <?php 
                         if($_SESSION['last_name'] === 'Administrator'){
-                            echo '<h1>' . $user_name . ' | ' . $_SESSION["last_name"] . '</h1>';
+                            echo '<h1 id="user_name-id">' . $user_name . ' | ' . $_SESSION["last_name"] . '</h1>';
                         }else{
-                            echo '<h1>' . $user_name . ' | ' . $_SESSION["last_name"] . ', ' . $_SESSION['first_name'] . ' ' . $_SESSION['middle_name'] . '</h1>';;
+                            echo '<h1 id="user_name-id">' . $user_name . ' | ' . $_SESSION["last_name"] . ', ' . $_SESSION['first_name'] . ' ' . $_SESSION['middle_name'] . '</h1>';;
+
                         }
-                    ?>
+                    ?> 
                 </div>
-                <div class="caret-div">
+                <div class="username-caret-div">
                     <i class="fa-solid fa-caret-down"></i>
                 </div>
             </div>
         </div>
-    </header>  
+    </header>
 
     <div id="nav-drop-account-div">
-        <?php if($_SESSION["user_name"] == "admin") {?>
-            <div id="admin-module-div-id">
-                <h2 id="admin-module-id" class="">Admin</h2>
+        <div id="nav-drop-acc-sub-div">
+            
+            <?php if($_SESSION["user_name"] == "admin") {?>
+                <div id="admin-module-btn" class="nav-drop-btns">
+                    <h2 id="admin-module-id" class="nav-drop-btns-txt">Admin</h2>
+                </div>
+            <?php } ?>
+            <div id="dashboard-incoming-btn" class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Dashboard (Incoming)</h2>
             </div>
-        <?php } ?>
-        <div id="dashboard-incoming-btn">
-            <h2 class="">Dashboard (Incoming)</h2>
-        </div>
 
-        <div id="dashboard-outgoing-btn">
-            <h2 class="">Dashboard (Outgoing)</h2>
-        </div>
+            <div id="dashboard-outgoing-btn" class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Dashboard (Outgoing)</h2>
+            </div>
 
-        <div>
-            <h2 class="">Dashboard (ER/OPD)</h2>
-        </div>
+            <div class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Dashboard (ER/OPD)</h2>
+            </div>
 
-        <div id="history-log-btn">
-            <h2 class="">History Log</h2>
-        </div>
+            <div id="history-log-btn" class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">History Log</h2>
+            </div>
+ 
+            <div class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Settings</h2>
+            </div>
 
-        <div>
-            <h2 class="">Settings</h2>
-        </div>
+            <div class="nav-drop-btns">
+                <h2 class="nav-drop-btns-txt">Help</h2>
+            </div>
 
-        <div>
-            <h2 class="">Help</h2>
-        </div>
-
-        <div>
-            <h2 id='logout-btn' class="">Logout</h2>
+            <div class="nav-drop-btns">
+                <h2 id='logout-btn' class="nav-drop-btns-txt" data-bs-toggle="modal" data-bs-target="#myModal-prompt">Logout</h2>
+            </div>
         </div>
     </div>
 
@@ -333,7 +352,7 @@
         <div class="main-filter-div">
             <button id="filter-date-btn">Filter</button>
             <div>
-                <label>from <input type="date" id='from-date-inp'> to <input type="date" id='to-date-inp'></label>
+                <label>from: <input type="date" id='from-date-inp'> to: <input type="date" id='to-date-inp'></label>
             </div>
         </div>
 
@@ -346,17 +365,6 @@
                 <label id="average-reception-id" class="average-reception-lbl"><?php echo $averageDuration_reception ?></label>
                 <label>Average Reception Time</label>
             </div>
-
-            <div>
-                <label id="average-sdn-approve-id"><?php echo $formatted_average_sdn_average ?></label>
-                <label>Average SDN Approval Time</label>
-            </div>
-
-            <div>
-                <label id="average-interdept-approve-id"><?php echo $averageTime_interdept ?></label>
-                <label id="average-interdept-approve-lbl">Average Interdepartamental Approval Time</label>
-            </div>
-
 
             <div>
                 <label id="average-approve-id"><?php echo $averageDuration_approval ?></label>
@@ -416,7 +424,6 @@
                     </tr>   
 
                     <tr>
-                        
                         <?php 
                             for($i = 0; $i < count($pat_class_data); $i++){
                                 echo '
@@ -432,7 +439,6 @@
                                 <th>
                                     <label>Tertiary</label>
                                 </th>
-    
                                 ';
                             }
                         ?>
@@ -464,7 +470,7 @@
                         $formattedDate = $dateTime->format('Y-m-d') . '%';
                         // echo $formattedDate;
 
-                        $sql = "SELECT pat_class, type, referred_by FROM incoming_referrals WHERE status='Approved' AND approved_time LIKE :proc_date AND referred_by = '" . $_SESSION["hospital_name"] . "'";
+                        $sql = "SELECT pat_class, type, refer_to FROM incoming_referrals WHERE status='Approved' AND approved_time LIKE :proc_date AND referred_by = '" . $_SESSION["hospital_name"] . "'";
                         // $sql = "SELECT pat_class, type, referred_by FROM incoming_referrals WHERE (status='Approved' OR status='Checked' OR status='Arrived') AND refer_to = '" . $_SESSION["hospital_name"] . "'";
                         $stmt = $pdo->prepare($sql);
                         $stmt->bindParam(':proc_date', $formattedDate, PDO::PARAM_STR);
@@ -473,7 +479,7 @@
                         // echo '<pre>'; print_r($tr_data); echo '</pre>';
 
                         for($i = 0; $i < count($tr_data); $i++){
-                            echo '<input type="hidden" class="referred-by-class" value="' . $tr_data[$i]["referred_by"] . '">';
+                            echo '<input type="hidden" class="referred-by-class" value="' . $tr_data[$i]["refer_to"] . '">';
                         }
 
                         $in_table = [];
@@ -489,7 +495,7 @@
                         for($i = 0; $i < count($in_table); $i++){
                             foreach ($tr_data as $row){
                                 if($in_table[$i] === $row['refer_to']){
-                                    $refer_to = $row['refer_to'];
+                                    $referred_by = $row['refer_to'];
 
                                     // new logic for dynamic rendering of the classication of the patients case to be put on the table
                                     $lowercase_string = strtolower($row['pat_class']);
@@ -500,7 +506,7 @@
 
                             echo '
                             <tr class="tr-div text-center"> 
-                                <td class="border-2 border-slate-700 col-span-3">'.$refer_to.'</td>
+                                <td class="border-2 border-slate-700 col-span-3">'.$referred_by.'</td>
                             ';
                             foreach ($class_code as $key => $value) {
                                 echo '
@@ -537,12 +543,35 @@
                 </div>
                 <!-- <div id="modal-body-main" class="modal-body-main"> -->
                 <div id="modal-body" class="logout-modal">
-                    No outgoing referrals for today yet.
+                    No incoming referrals for today yet.
                 </div>
                 <div class="modal-footer">
                     <button id="ok-modal-btn-main" type="button" data-bs-dismiss="modal">OK</button>
                     <button id="yes-modal-btn-main" type="button" data-bs-dismiss="modal" style="display:none">Yes</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal-prompt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header flex flex-row justify-between items-center">
+                <div class="flex flex-row justify-between items-center">
+                    <h5 id="modal-title-incoming" class="modal-title-incoming" id="exampleModalLabel">Successed</h5>
+                    <i id="modal-icon" class="fa-solid fa-circle-check ml-2"></i>
+                </div>
+                <button type="button" class="close text-3xl" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modal-body-incoming" class="modal-body-incoming ml-2">
+                Edit Successfully
+            </div>
+            <div class="modal-footer">
+                <button id="ok-modal-btn-incoming" type="button" data-bs-toggle="modal" data-bs-target="#myModal-prompt">OK</button>
+                <button id="yes-modal-btn-incoming" type="button" data-bs-toggle="modal" data-bs-target="#myModal-prompt">OK</button>
+            </div>
             </div>
         </div>
     </div>

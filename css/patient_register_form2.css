@@ -90,6 +90,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+
 }
 
 #patient-reg-form-div #upper-part-div .important-btns .patient-form-btns #classification-dropdown{
@@ -1040,6 +1041,27 @@
     text-wrap: wrap;
 } */
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.pagination a, .pagination span {
+    margin: 0 5px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #759577;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+}
+.pagination .current-page {
+    font-weight: bold;
+    background-color: #759577;
+    color: white;
+}
+
+/* #759577 */
+
 @media only screen and (max-height: 800px){
     #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-1 #form-title-div-1 h3,
     #patient-reg-form-div #main-div form #patient-reg-form-div-1 #patient-form-sub-div-2 #form-title-div-2 h3,
@@ -1062,6 +1084,26 @@
     #patient-reg-form-div #main-div form #patient-reg-form-div-3 #patient-form-sub-div-6 #form-body-div-6 .form-sub-divs-row .form-sub-divs-row-right select{
         font-size: 10pt;
     }
+
+    #patient-reg-form-div #upper-part-div .important-btns{
+        width: 40%;
+    }
+
+    #patient-reg-form-div #upper-part-div .important-btns .patient-form-btns #classification-dropdown{
+        text-align: center;
+        height: 80%;
+        width:45%;
+
+    }
+    
+    #patient-reg-form-div #upper-part-div .important-btns .patient-form-btns #add-patform-btn-id,
+    #patient-reg-form-div #upper-part-div .important-btns .patient-form-btns #clear-patform-btn-id{
+        width:70px;
+        height: 80%;
+        text-align: center;
+        padding: 0;
+        font-size: 12pt;
+    } 
 }
 
 

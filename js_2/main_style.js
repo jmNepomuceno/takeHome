@@ -38,10 +38,10 @@ $(document).ready(function(){
     const myModal_main = new bootstrap.Modal(document.getElementById('myModal-main'));
 
     // BGHMC adheres to all satutatory mandatory and regulatory requirements to ensure standard implementation
-    // loadContent('../php_2/default_view2.php')
+    loadContent('../php_2/default_view2.php')
     // loadContent('../php_2/patient_register_form2.php')
     // loadContent('php/opd_referral_form.php?type=OB&code=BGHMC-0001')
-    loadContent('../php_2/incoming_form2.php')
+    // loadContent('../php_2/incoming_form2.php')
     // loadContent('../php_2/bucas_queue.php')
     // loadContent('../php_2/bucas_history.php')
     // loadContent('../php_2/outgoing_form2.php')

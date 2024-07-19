@@ -315,27 +315,43 @@ $(document).ready(function(){
         }else if(mname_has_value && search_mname.length < 2){
             insuf_input_h1.textContent = "Please input two(2) or more characters."
         }else{
-            $.ajax({
-                url: '../php_2/search_name_2.php',
-                method: "POST",
-                data:data,
-                success: function(response){
-                    // response = JSON.parse(response);
-                    // console.log(response)
+            function loadPage(page) {
+                data['page'] = page
+                console.log(data)
+                $.ajax({
+                    url: '../php_2/search_name_2.php',
+                    type: 'POST',
+                    data: data,
+                    dataType : 'JSON',
+                    success: function(response) {
+                        console.log(response)
 
-                    // SEARCH QUERY RESULT
-                    const search_query_result = document.querySelector('#search-result-div')
-                    while (search_query_result.hasChildNodes()) {
-                        search_query_result.removeChild(search_query_result.firstChild);
+                        if(response.results != ''){
+                            $('#search-result-div').html(response.results);
+                            $('#pagination-div').html(response.pagination);
+
+                            searchSubDiv();
+                        }else{
+                            $('#search-result-div').css('color' , 'white')
+                            $('#search-result-div').text(
+                                'No result found'
+                            );
+                        }
+                        
                     }
-
-                    search_query_result.innerHTML += response;
-                    search_query_result.style.color = 'white'
-                    search_query_result.style.fontWeight = 'bold'
-                    
-                    searchSubDiv();
-                }
-            })
+                });
+            }
+        
+            // Load the first page initially
+            loadPage(1);
+        
+            // Handle pagination link clicks
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                var page = $(this).data('page');
+                console.log(page)
+                loadPage(page);
+            });
         }
     })
 

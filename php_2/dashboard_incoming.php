@@ -324,7 +324,7 @@
             <div id="history-log-btn" class="nav-drop-btns">
                 <h2 class="nav-drop-btns-txt">History Log</h2>
             </div>
-
+ 
             <div class="nav-drop-btns">
                 <h2 class="nav-drop-btns-txt">Settings</h2>
             </div>

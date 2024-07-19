@@ -3,9 +3,9 @@
 $(document).ready(function(){
   const myModal = new bootstrap.Modal(document.getElementById('myModal-dashboardIncoming'));
   
-  // if(number_of_referrals === 0){
-  //   myModal.show()
-  // }
+  if(number_of_referrals === 0){
+    myModal.show()
+  }
 
   $('#total-processed-refer').text($('#total-processed-refer-inp').val())
 
@@ -109,7 +109,7 @@ $(document).ready(function(){
     });
 }
 
-
+console.log(dataReferFrom)
 renderPieChart("rhu" , dataReferFrom)
 renderPieChart("case_type" , dataPatType)
 renderPieChart("case_category" , dataPatClass)

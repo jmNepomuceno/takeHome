@@ -7,14 +7,11 @@
 body{
     width: 100%;
     height: 100vh;
-    overflow: hidden;
-    background: black;
-    /* color:white; */
 }
 
 .header-div{
     width:100%;
-    height: 50px;
+    height: 40px;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -22,35 +19,43 @@ body{
     background: #1f292e;
 }
 
-.header-div .header-sub-div-1{
-    width: 30%;
+.header-div .side-bar-title{
+    width: 250px;
     height: 100%;
-    display:flex;
+    display: flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 }
 
-.header-div .header-sub-div-1 #side-bar-mobile-btn{
-    width: 10%;
+.header-div .side-bar-title #sdn-title-h1{
+    color:white;
+    font-size: 10pt;
+    margin-left:1rem;
+    margin-right:1rem;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 4%;
+
+    /* width:50%; */
+}
+
+.header-div .side-bar-title .side-bar-mobile-btn{
+    /* width: 50%; */
     height: 100%;
     display:flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    cursor: pointer;
+    cursor:pointer;
+    background: #1f292e;
+    transition-delay: 150ms;
+    /* display: none; */
 }
 
-.header-div .header-sub-div-1 #side-bar-mobile-btn i{
+.header-div .side-bar-title .side-bar-mobile-btn i{
     color:white;
-    font-size: 2.25rem;
-}
-
-.header-div .header-sub-div-1 h1{
-    color:white;
-    font-size: 1.5rem;
-    margin-left: .5rem;
-    cursor: pointer;
+    font-size: 1.5rem; 
 }
 
 .header-div .account-header-div{
@@ -58,132 +63,148 @@ body{
     height: 100%;
     display:flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     margin-right: 0.5rem;
-
 }
 
-.header-div .account-header-div .notification-sub-div{
-    width:auto;
-    height: 83.333333%;
+.header-div .account-header-div .notif-main-div{
+    width: auto;
+    height:  83.333333%;
     display:flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
-    margin-right: 0.5rem;
-
+    margin-right: 1rem;
 }
 
-.header-div .account-header-div .notification-sub-div #notif-div{
-    width:30px;
+.header-div .account-header-div .notif-main-div #notif-div{
+    width: 20px;
     height: 100%;
     display:flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: center;
     align-items: center;
     cursor: pointer;
     position:relative;
-    margin-right:1.2rem;
+
 }
 
-.header-div .account-header-div .notification-sub-div #notif-div #notif-circle{
+.header-div .account-header-div .notif-main-div #notif-div #notif-circle{
     position: absolute;
-    top:0.2rem;
+    top:10%;
     text-align: center;
-    width:17px;
-    height: 17px;
+    width: 15px;
+    height: 15px;
     border-radius: 100%;
     background: red;
-    margin-left: 1.25rem;
+    margin-left: 1rem;
     color:white;
     font-size: 0.75rem;
-
 }
 
-.header-div .account-header-div .notification-sub-div #notif-div #notif-circle span{
-    z-index: 30;
+.header-div .account-header-div .notif-main-div #notif-div span{
+    font-size: 0.7rem;
+    font-weight: bold;
 }
 
-.header-div .account-header-div .notification-sub-div #notif-div i{
+.header-div .account-header-div .notif-main-div #notif-div i{
     color:white;
-    font-size: 1.4rem;
-    margin-bottom:10px;
+    font-size: 10pt; /* 20px */
+    line-height: 1.75rem; /* 28px */
+    opacity: 0.5;
 }
 
-.header-div .account-header-div .notification-sub-div #notif-div #notif-sub-div{
+.header-div .account-header-div .notif-main-div #notif-div #notif-sub-div{
+    display:none;
     position:absolute;
     top:85%;
-    width: 200px;
-    height: 90px;
+    width: 250px;
+    height: 200px;
     background: #1f292e;
-    border-radius: 0.25rem;
+    border:4px solid #7694a2;
+    border-radius: 15px; 
     overflow-y: scroll;
+    z-index: 10;
+
     display:none;
+    /* display:flex; */
+
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
 }
 
-.header-div .account-header-div .notification-sub-div #notif-div #notif-sub-div div:nth-child(even){
+::-webkit-scrollbar {
+    display: none;
+}
+
+.header-div .account-header-div .notif-main-div #notif-div #notif-sub-div div h4{
+    font-weight: bold;
+    font-size: 1.125rem;
+}
+
+#notif-sub-div div:nth-child(even) {
     height: 30px;
     width: 90%;
-    border:1px solid black;
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    margin-top: 0.25rem;
     background: transparent;
-    color:white;
+    color: white;
     opacity: 0.3;
+    margin-top:2%;
 }
 
-.header-div .account-header-div .notification-sub-div #notif-div #notif-sub-div div:nth-child(odd){
+#notif-sub-div div:nth-child(odd) {
     height: 30px;
     width: 90%;
-    border:1px solid black;
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    margin-top: 0.25rem;
-    background: transparent;
-    color:black;
+    background: white;
+    color: black;
     opacity: 0.3;
+    margin-top:2%;
+
 }
 
-.header-div .account-header-div .notification-sub-div #notif-div #notif-sub-div div:hover{
+#notif-sub-div div:hover {
     opacity: 1;
 }
 
-.header-div .account-header-div .header-username-div{
-    width: auto;
-    height: 83.333333%;
+header .header-username-div{
+    width:auto;
+    height: 83.33333%;
     display:flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
 }
 
-.header-div .account-header-div .header-username-div .user-icon-div{
+header .header-username-div .user-icon-div{
     width: 15%;
     height: 100%;
     display:flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
-    margin-right: 0.25rem;
+    margin-right: 0.5rem;
 }
 
-.header-div .account-header-div .header-username-div .user-icon-div i{
+header .header-username-div .user-icon-div i{
     color:white;
-    font-size: 1.25rem;
+    font-size: 10pt; /* 20px */
+    line-height: 1.75rem; /* 28px */
+    
+
 }
 
-.header-div .account-header-div .header-username-div .user-name-div{
-    width: auto;
+header .header-username-div .user-name-div{
+    width:auto;
     height: 100%;
     white-space: nowrap;
     display:flex;
@@ -193,51 +214,57 @@ body{
     cursor: pointer;
 }
 
-.header-div .account-header-div .header-username-div .user-name-div h1{
+header .header-username-div .user-name-div #user_name-id{
     color:white;
-    font-size: 1.2rem;
-    margin-top: 0.5rem;
-
+    font-size: 10pt; /* 16px */
+    margin-top: 2%;
+    font-weight: 400;
 }
 
-.header-div .account-header-div .header-username-div .caret-div{
-    width: 5%;
-    height: 100%;
+header .header-username-div .username-caret-div{
+    width: auto;
+    height: auto;
     display:flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin: 0.25rem;
+    align-items: left;
+    margin: 3px;
+    margin-top:2%;
 }
 
-.header-div .account-header-div .header-username-div .caret-div i{
-    font-size: 1.2rem;
-    margin-top: 10px;
-    cursor: pointer;
+header .header-username-div .username-caret-div i{
     color:white;
+    font-size: 10pt;
 }
 
 #nav-drop-account-div{
-    display:none;
     z-index: 10;
-    position: absolute;
+    position:absolute;
     right:0;
-    top:50px;
-    display:flex;
+    top:30px;
+    display:none;
     flex-direction: column;
-    justify-content: start;
+    justify-content: flex-start;
     align-items: center;
     background: #1f292e;
     color:white;
-    position:fixed;
-    width: 15%;
+    /* position: fixed; */
+    width:300px;
     height: 400px;
-
-    display:none;
-
+    border-bottom-left-radius: 10px;
 }
 
-#nav-drop-account-div div{
+#nav-drop-account-div #nav-drop-acc-sub-div{
+    width: 100%;
+    height: 350px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top:8%;
+}
+
+#nav-drop-account-div #nav-drop-acc-sub-div .nav-drop-btns{
     width: 66.666667%;
     height: 50px;
     border-bottom: 2px solid #29363d;
@@ -247,15 +274,14 @@ body{
     align-items: center;
     cursor: pointer;
     opacity: 0.3;
+}
+
+#nav-drop-account-div #nav-drop-acc-sub-div .nav-drop-btns:hover{
+    opacity: 100;
     transition-duration: 150ms;
-
 }
 
-#nav-drop-account-div div:hover{
-    opacity: 1;
-}
-
-#nav-drop-account-div div h2{
+#nav-drop-account-div #nav-drop-acc-sub-div .nav-drop-btns .nav-drop-btns-txt{
     font-size: 1rem;
 }
 
@@ -291,6 +317,7 @@ body{
     display: flex;
     flex-direction: column;
     margin-right: 3.5rem;
+    font-weight: bold;
 }
 
 .main-div .main-title-div div #curr-month-lbl{
@@ -303,7 +330,7 @@ body{
 }
 
 .main-div .main-filter-div{
-    width: 25%;
+    width: 500px;
     height: 5%;
     margin-left: 3%;
     margin-top: 2%;
@@ -314,13 +341,15 @@ body{
     padding: 5px;
     border-radius: 5px;
 
-    background: #1f292e;
+    /* background: #1f292e; */
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .main-div .main-filter-div label{
     font-size: 1.25rem;
     margin-left:2%;
-    color:#d1dbe0;
+    color:#1f292e;
+    font-weight: 600;
 }
 
 .main-div .main-filter-div div{
@@ -329,6 +358,7 @@ body{
     justify-content: space-between;
     align-items: center;
     width:90%;
+
 }
 
 .main-div .main-filter-div div label input{
@@ -340,13 +370,11 @@ body{
     border:none;
     background: transparent;
     border-bottom: 1px solid white;
-    color:#d1dbe0;
+    color:#1f292e;
     cursor: pointer;
+    font-weight: 600;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1); /* Invert the color to change icon color */
-  }
 
 .main-div .main-filter-div #filter-date-btn{
     width: 70px;
@@ -387,8 +415,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
     margin-left: 2%;
     background: #1f292e;
-    color:white;
+    color:#1f292e;
     border-radius: 15px;
+
+    margin: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .main-div .main-turnaround-div div #average-interdept-approve-lbl{
@@ -397,32 +433,41 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .main-div .main-turnaround-div div label:nth-child(1){
     font-weight: 600;
-    font-size: 1.875rem;
+    font-size: 2.5rem;
 }
 
 .main-div .main-turnaround-div div label:nth-child(2){
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 10pt;
 }
 
 .main-div .main-graph-div{
     display:flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
-    width: 93%;
-    height: 23%;
+    width: 90%;
+    height: 30%;
     margin-left: 3%;
     margin-top: 2%;
 }
 
 .main-div .main-graph-div div{
-    width: 20%;
+    width: 30%;
     height: 100%;
     display:flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    /* border:1px solid black; */
+
+    margin: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 
 .main-div .main-graph-div div label{
@@ -437,15 +482,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .main-div .main-graph-div div canvas{
-    width:100%;
-    height: 210px !important;
+    width:100% !important;
+    height:80% !important;
+    margin-top:10px;
+    /* height: 210px !important; */
     /* margin-bottom:3px; */
 }
 
 .main-div .main-data-div{
     width: 100%;
     height: auto !important;
-    margin-top: 1%;
+    margin-top: 2%;
     display:flex;
     flex-direction: row;
     justify-content: center;
@@ -473,6 +520,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: #1f292e;
     color:white;
 }
+
+.main-div .main-data-div table thead tr label{
+    font-weight: bold;
+    font-size: 10pt;
+} 
 
 .modal-header, .modal-title-div{
     display:flex;
@@ -515,6 +567,97 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border:none;
 }
 
-.modal-footer #yes-modal-btn-main{
-    /* display:none; */
+#myModal-prompt .modal-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#myModal-prompt .modal-header div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#myModal-prompt .modal-header div h5{
+    margin:0;
+    padding:0;
+}
+
+#myModal-prompt .modal-header div i{
+    margin-left: 0.50rem;
+}
+
+#myModal-prompt .modal-header button{
+    font-size: 20pt;
+    border:none;
+    background: none;
+}
+
+#myModal-prompt #modal-body-incoming{
+    margin-left: 0.5rem;
+}
+
+#myModal-prompt .modal-footer button{
+    color:white;
+    font-weight: bold;
+    padding: 0.25rem 0.50rem .25rem .50rem;
+    border-radius: 10px;
+    margin-right: 0.5rem;
+    border:none;
+    /* #3b82f6 */
+    /* #ef4444 */
+}
+
+#myModal-prompt .modal-footer #ok-modal-btn-incoming{
+    background: #3b82f6;
+}
+
+#myModal-prompt .modal-footer #yes-modal-btn-incoming{
+    background: #3b82f6;
+}
+
+/* .main-graph-div div canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto; 
+} */
+
+/* .main-graph-div div label {
+    margin-bottom: 10px;
+    display: block;
+} */
+
+@media only screen and (max-height: 800px){ 
+    .main-div .main-turnaround-div div label:nth-child(1){
+        font-weight: 600;
+        font-size: 22pt;
+    }
+
+    .main-div .main-turnaround-div div label:nth-child(2){
+        font-weight: 600;
+        font-size: 7pt;
+    }
+
+    .main-div .main-title-div > label{
+        font-size: 28pt;
+        color:#333333;
+        margin-left: 3.5rem;
+    }
+
+    .main-div .main-title-div div #curr-month-lbl{
+        font-size: 20pt;
+        font-weight: 600;
+    }
+    
+    .main-div .main-title-div div #curr-date-lbl{
+        font-weight: 600;
+    }
+
+    .main-div .main-graph-div div canvas{
+        height:70% !important;
+        margin-top:10px;
+    }
 }

@@ -498,7 +498,7 @@
                             <select id="approve-classification-select">
                                 <option value="">Select</option>
                                 <option value="Primary">Primary</option>
-                                <option value="Secondary">Secondary</option>
+                                <option value="Secondary">Secondary</option> 
                                 <option value="Tertiary">Tertiary</option>
                             </select>
 
