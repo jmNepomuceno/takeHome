@@ -10,7 +10,7 @@ $(document).ready(function(){
     $('#myDataTable thead th').removeClass('sorting sorting_asc sorting_desc');
     dataTable.search('').draw(); 
 
-    const inactivityInterval = 551000; 
+    const inactivityInterval = 1000; 
 
     const myModal = new bootstrap.Modal(document.getElementById('pendingModal'));
     const defaultMyModal = new bootstrap.Modal(document.getElementById('myModal-incoming'));

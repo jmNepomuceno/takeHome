@@ -1,11 +1,9 @@
 $(document).ready(function(){
     // window height
-    const height = window.innerHeight;
-
+    const screenHeight = window.innerHeight;
     // window width
-    const width = window.innerWidth;
+    const screenWidth = window.innerWidth;
 
-    console.log(height, width);
     // load the 4 web pages
     const loadContent = (url) => {
         let nav_path = false;
@@ -37,11 +35,10 @@ $(document).ready(function(){
 
     const myModal_main = new bootstrap.Modal(document.getElementById('myModal-main'));
 
-    // BGHMC adheres to all satutatory mandatory and regulatory requirements to ensure standard implementation
-    loadContent('../php_2/default_view2.php')
+    // loadContent('../php_2/default_view2.php')
     // loadContent('../php_2/patient_register_form2.php')
     // loadContent('php/opd_referral_form.php?type=OB&code=BGHMC-0001')
-    // loadContent('../php_2/incoming_form2.php')
+    loadContent('../php_2/incoming_form2.php')
     // loadContent('../php_2/bucas_queue.php')
     // loadContent('../php_2/bucas_history.php')
     // loadContent('../php_2/outgoing_form2.php')
@@ -407,22 +404,47 @@ $(document).ready(function(){
     });
 
     $('#navbar-icon').on('click' , function(event){
-        let  width = ((($("#side-bar-div").width() / $("#side-bar-div").parent().width()) * 100).toFixed(1)) + "%";
+        let side_bar_div_width;
 
-        if(width === "13.5%"){
+        if(screenHeight > 800){
+            side_bar_div_width = 250;
+        }else{
+            side_bar_div_width = 200;
+        }
+
+        let width = $("#side-bar-div").width()
+        if(width === 0){
+            $('#side-bar-div').css("width", "250px")
+            $('#main-side-bar-1-subdiv').css("display", "none")
+            $('#main-side-bar-2-subdiv').css("display", "none")
+
+            $('#main-div .aside-main-div #container').css("width", "87%")
+        }else{
+            console.log('asdf')
             $('#side-bar-div').css("width", "0")
-            $('#bgh-name').text('')
+
             $('#main-side-bar-1-subdiv').css("display", "none")
             $('#main-side-bar-2-subdiv').css("display", "none")
 
             $('#main-div .aside-main-div #container').css("width", "100%")
-        }else{
-            $('#side-bar-div').css("width", "13.5%")
-            $('#bgh-name').text('Bataan General Hospital and Medical Center')
-            $('#main-side-bar-1-subdiv').css("display", "flex")
-            $('#main-side-bar-2-subdiv').css("display", "flex")
-
-            $('#main-div .aside-main-div #container').css("width", "86.5%")
         }
+
+        // let  width = ((($("#side-bar-div").width() / $("#side-bar-div").parent().width()) * 100).toFixed(1)) + "%";
+
+        // if(width === "13.5%"){
+        //     $('#side-bar-div').css("width", "0")
+        //     $('#bgh-name').text('')
+        //     $('#main-side-bar-1-subdiv').css("display", "none")
+        //     $('#main-side-bar-2-subdiv').css("display", "none")
+
+        //     $('#main-div .aside-main-div #container').css("width", "100%")
+        // }else{
+        //     $('#side-bar-div').css("width", "13.5%")
+        //     $('#bgh-name').text('Bataan General Hospital and Medical Center')
+        //     $('#main-side-bar-1-subdiv').css("display", "flex")
+        //     $('#main-side-bar-2-subdiv').css("display", "flex")
+
+        //     $('#main-div .aside-main-div #container').css("width", "86.5%")
+        // }
     })
 })
